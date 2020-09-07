@@ -179,6 +179,12 @@ public class LoginController extends AbstractController {
             entity.setPassword(encode(entity.getPassword()));
             entity.setLastLoginIp(ip);
             entity.setSiteId(site.getId());
+            entity.setDisabled(false);
+            entity.setRoles(null);
+            entity.setSuperuserAccess(false);
+            entity.setLoginCount(0);
+            entity.setDeptId(null);
+            service.save(entity);
             service.save(entity);
             entity.setPassword(null);
             setUserToSession(request.getSession(), entity);
