@@ -1142,7 +1142,7 @@ INSERT INTO `sys_moudle` VALUES ('103', '删除', null, 'cmsContent/delete', nul
 INSERT INTO `sys_moudle` VALUES ('104', '刷新', null, 'cmsContent/refresh', null, '8', '1', '0');
 INSERT INTO `sys_moudle` VALUES ('105', '生成', null, 'cmsContent/publish', null, '8', '1', '0');
 INSERT INTO `sys_moudle` VALUES ('106', '推荐', 'cmsContent/push', 'cmsContent/push_content,cmsContent/push_content_list,cmsContent/push_to_content,cmsContent/push_page,cmsContent/push_page_list,cmsContent/push_to_place,cmsContent/related', null, '8', '1', '0');
-INSERT INTO `sys_moudle` VALUES ('107', '页面片段管理', 'cmsPlace/list', 'sysUser/lookup,cmsPlace/data_list', '<i class=\"icon-list-alt icon-large\"></i>', '30', '1', '0');
+INSERT INTO `sys_moudle` VALUES ('107', '页面片段管理', 'cmsPlace/list', 'sysUser/lookup,cmsPlace/dataList', '<i class=\"icon-list-alt icon-large\"></i>', '30', '1', '0');
 INSERT INTO `sys_moudle` VALUES ('108', '增加/修改', 'cmsLottery/add', NULL, NULL, '1007', '1', '0');
 INSERT INTO `sys_moudle` VALUES ('109', '运营管理', null, null, '<i class=\"icon-home icon-large\"></i>', '45', '1', '0');
 INSERT INTO `sys_moudle` VALUES ('110', '修改模板元数据', 'placeTemplate/metadata', 'cmsTemplate/savePlaceMetaData', NULL, '42', '1', '0');
