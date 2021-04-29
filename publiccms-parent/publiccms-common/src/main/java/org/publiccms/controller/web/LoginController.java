@@ -185,7 +185,6 @@ public class LoginController extends AbstractController {
             entity.setLoginCount(0);
             entity.setDeptId(null);
             service.save(entity);
-            service.save(entity);
             entity.setPassword(null);
             setUserToSession(request.getSession(), entity);
             String authToken = UUID.randomUUID().toString();
