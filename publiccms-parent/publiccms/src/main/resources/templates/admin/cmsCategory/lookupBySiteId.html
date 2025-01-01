@@ -36,6 +36,13 @@
                         </li>
                     </#list>
                 </@sys.siteList>
+                <@sys.siteList parentId=site.id pageSize=500>
+                    <#list page.list as a>
+                        <li _src="cmsCategory/lookupBySiteId?siteId=${a.id}&currentCategoryId=${currentCategoryId!}&field=${field!'categoryId'}">
+                            <a href="javascript:;" class="exclude-translate">${a.name!}</a>
+                        </li>
+                    </#list>
+                </@sys.siteList>
             </#if>
         </ul>
     </div>

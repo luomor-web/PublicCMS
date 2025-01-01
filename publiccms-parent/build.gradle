@@ -40,7 +40,7 @@ subprojects {
         // 3.0,3.1 for Java 17
         springBootVersion = "2.7.18"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-        junitVersion = "5.11.3"
+        junitVersion = "5.11.4"
         // http://mvnrepository.com/artifact/org.hibernate/hibernate-core
         // http://hibernate.org/orm/downloads/
         // 6 for jakarta
@@ -70,7 +70,7 @@ subprojects {
         // http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
         jacksonVersion = "2.18.2"
         // http://mvnrepository.com/artifact/org.freemarker/freemarker
-        freemarkerVersion = "2.3.33"
+        freemarkerVersion = "2.3.34"
         // https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers-smartcn
         luceneVersion = "8.11.2"
         // http://mvnrepository.com/artifact/redis.clients/jedis
@@ -103,13 +103,13 @@ subprojects {
         // http://mvnrepository.com/artifact/commons-io/commons-io
         ioVersion = "2.18.0"
         // https://mvnrepository.com/artifact/org.apache.commons/commons-text
-        textVersion = "1.12.0"
+        textVersion = "1.13.0"
         // https://mvnrepository.com/artifact/org.apache.commons/commons-compress
         compressVersion = "1.27.1"
         // http://mvnrepository.com/artifact/commons-codec/commons-codec
         codecVersion = "1.17.1"
         // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-        log4jVersion = "2.24.2"
+        log4jVersion = "2.24.3"
         // https://mvnrepository.com/artifact/com.drewnoakes/metadata-extractor
         extractorVersion = "2.19.0"
         // https://mvnrepository.com/artifact/org.sejda.imageio/webp-imageio
