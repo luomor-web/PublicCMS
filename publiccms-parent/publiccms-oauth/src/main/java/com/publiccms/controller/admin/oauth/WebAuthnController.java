@@ -262,7 +262,7 @@ public class WebAuthnController {
                         sysUserTokenService.save(new SysUserToken(authToken, site.getId(), user.getId(),
                                 LogLoginService.CHANNEL_WEB_MANAGER, now, DateUtils.addMinutes(now, expiryMinutes), ip));
                         logLoginService.save(new LogLogin(site.getId(), webauthnuser, user.getId(), ip,
-                                LogLoginService.CHANNEL_WEB_MANAGER, false, CommonUtils.getDate(), "fingerprint"));
+                                LogLoginService.CHANNEL_WEB_MANAGER, true, CommonUtils.getDate(), null));
                         session.removeAttribute("webauthnuser");
 
                         if (0 < authenticationData.getAuthenticatorData().getSignCount() || 0 < credentialRecord.getCounter()) {
