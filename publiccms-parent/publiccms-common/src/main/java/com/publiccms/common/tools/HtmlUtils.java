@@ -159,11 +159,6 @@ public class HtmlUtils {
             return null;
         }
     }
-    
-    public static void main(String[] args) {
-        String html = "<!-- pagebreak --><p></p>";
-       System.out.println( cleanUnsafeHtml(html, "http://www.baidu.com/"));;
-    }
 
     private static void clone(Element cloneParent, List<Node> nodeList, AtomicInteger counter) {
         for (int i = 0; i < nodeList.size(); i++) {
