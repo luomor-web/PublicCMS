@@ -80,8 +80,8 @@
                                 <@t.page 'array'/>:
                                 <input name="defaultValue" type="hidden"/>
                                 <input name="categoryName" readonly="readonly" type="text" size="10"/>
-                                <a class="btnLook hide defauleValueId" href="cmsCategory/lookup.html?field=defaultValue" lookupGroup=""></a>
-                                <a class="btnLook hide defauleValueCode" href="cmsCategory/lookup.html?field=defaultValue&useCode=true" lookupGroup=""></a>
+                                <a class="btnLook hide defaultValueId" href="cmsCategory/lookup.html?field=defaultValue" lookupGroup=""></a>
+                                <a class="btnLook hide defaultValueCode" href="cmsCategory/lookup.html?field=defaultValue&useCode=true" lookupGroup=""></a>
                             </label>
                             <a href="javascript:;" class="btnText green" onclick="addParameter($('input[name=\'parameterName\']',navTab.getCurrentPanel()).val(),$('input[name=\'array\']',navTab.getCurrentPanel()).prop('checked'),$('input[name=\'required\']',navTab.getCurrentPanel()).prop('checked'),$('select[name=\'parameterType\']',navTab.getCurrentPanel()).val(),$('select[name=\'parameterType\'] option:selected',navTab.getCurrentPanel()).text(),$('input[name=\'parameterAlias\']',navTab.getCurrentPanel()).val(),$('input[name=\'categoryName\']',navTab.getCurrentPanel()).val());return false;"><i class="icon-ok"></i><@t.page 'button.add'/></a>
                         </div>
@@ -179,7 +179,7 @@
             }
             $box.append($('<input type=\"hidden\"/>').attr("name","parameterTypeMap["+parameterName+"].name").val(parameterName)).append($('<input type=\"hidden\"/>').attr("name","parameterTypeMap["+parameterName+"].alias").val(alias));
             $box.append("<input type=\"hidden\" name=\"parameterTypeMap["+parameterName+"].type\" value=\""+parameterType+"\"/> <input type=\"hidden\" name=\"parameterTypeMap["+parameterName+"].array\" value=\""+array+"\"/> <input type=\"hidden\" name=\"parameterTypeMap["+parameterName+"].required\" value=\""+required+"\"/><a href=\"javascript:;\"><i class=\"icon-remove-sign\"></i></a>");
-            if( 'content' == parameterType || 'category.code' == parameterType && value){
+            if( ('category' == parameterType || 'category.code' == parameterType )&& value){
                 $box.append($('<input type=\"hidden\"/>').attr("name","parameterTypeMap["+parameterName+"].defaultValue").val(value)).append(':').append(value);
             }
             $('.parametersBox',navTab.getCurrentPanel()).append($box);
