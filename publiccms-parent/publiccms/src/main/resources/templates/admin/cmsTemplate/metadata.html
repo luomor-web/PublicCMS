@@ -222,16 +222,16 @@
             <textarea name="content" class="hide" escape="true"><@tools.fileContent path=path>${(object)!}</@tools.fileContent></textarea>
             <script>
         <#if site.useStatic&&(a.publishPath)?has_content>
-                $('input[name=useStatic]',navTab.getCurrentPanel()).click();
+                $('input[name=useStatic]',navTab.getCurrentPanel()).trigger("click");
         </#if>
         <#if (a.useDynamic)?has_content&&a.useDynamic>
-                $('input[name=useDynamic]',navTab.getCurrentPanel()).click();
+                $('input[name=useDynamic]',navTab.getCurrentPanel()).trigger("click");
         </#if>
         <#if (a.needLogin)?has_content&&a.needLogin>
-                $('input[name=needLogin]',navTab.getCurrentPanel()).click();
+                $('input[name=needLogin]',navTab.getCurrentPanel()).trigger("click");
         </#if>
         <#if (a.needBody)?has_content&&a.needBody>
-                $('input[name=needBody]',navTab.getCurrentPanel()).click();
+                $('input[name=needBody]',navTab.getCurrentPanel()).trigger("click");
         </#if>
             </script>
     <#elseif demo?has_content>
@@ -245,7 +245,7 @@
                 $('input[name=useDynamic]',navTab.getCurrentPanel()).prop('checked',true).trigger('change');
         </#if>
         <#if needLogin?has_content&&'true'=needLogin>
-            $('input[name=needLogin]',navTab.getCurrentPanel()).click();
+            $('input[name=needLogin]',navTab.getCurrentPanel()).trigger("click");
         </#if>
         <#switch demo>
             <#case "index.html">
@@ -290,7 +290,7 @@
     <#else>
             <textarea name="content" class="hide" escape="true"><@html_escape><#include "demo/default.html" parse=false/></@html_escape></textarea>
             <script>
-                $('input[name=useDynamic]',navTab.getCurrentPanel()).click();
+                $('input[name=useDynamic]',navTab.getCurrentPanel()).trigger("click");
             </script>
     </#if>
         </div>

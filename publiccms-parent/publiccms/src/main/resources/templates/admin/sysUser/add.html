@@ -81,7 +81,7 @@
                 </ul>
             </fieldset>
     <script>
-    $('input[name=superuser]',navTab.getCurrentPanel()).click(function(){
+    $('input[name=superuser]',navTab.getCurrentPanel()).on("click", (){
         if($(this).is(':checked')) {
             $('.superuser',navTab.getCurrentPanel()).show();
         } else {
@@ -89,7 +89,7 @@
         }
     });
 <#if a?has_content&&a.superuser>
-    $('input[name=superuser]',navTab.getCurrentPanel()).click();
+    $('input[name=superuser]',navTab.getCurrentPanel()).trigger("click");
     <#if a.roles?has_content>
         <#list a.roles?split(',') as role>
             $('.tree li a[tname=roleIds][tvalue=${role?js_string}]',navTab.getCurrentPanel()).attr('checked','true');

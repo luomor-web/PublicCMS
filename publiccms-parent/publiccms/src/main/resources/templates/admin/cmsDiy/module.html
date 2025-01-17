@@ -84,7 +84,7 @@
             });
             <#if (a.place)?has_content>$('input[name=place]',navTab.getCurrentPanel()).trigger("change");</#if>
             <#if (a.fragment)?has_content>$('input[name=fragment]',navTab.getCurrentPanel()).trigger("change");</#if>
-            $('input[name=clone]',navTab.getCurrentPanel()).click(function(){
+            $('input[name=clone]',navTab.getCurrentPanel()).on("click", (){
                 if($(this).is(':checked')) {
                     $('.clone',navTab.getCurrentPanel()).show();
                     $('.clone input[type=text]',navTab.getCurrentPanel()).addClass('required');
@@ -94,7 +94,7 @@
                 }
             });
             <#if (a.clone)?has_content && a.clone>
-                $('input[name=clone]',navTab.getCurrentPanel()).click();
+                $('input[name=clone]',navTab.getCurrentPanel()).trigger("click");
             </#if>
             </script>
         </div>

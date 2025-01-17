@@ -167,7 +167,7 @@
                     echartsProxy(echarts);
                 });
                 if($(window).width() < 1024 ){
-                    $(".navbar-toggler").not(".side-right").click();
+                    $(".navbar-toggler").not(".side-right").trigger("click");
                 }
             }
         });
