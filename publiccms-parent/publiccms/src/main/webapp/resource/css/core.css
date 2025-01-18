@@ -77,7 +77,7 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 #splitBar,#splitBarProxy{top:50px;}
 
 /* Accordion */
-.accordion{display:block;}
+.accordion{display:block;margin-bottom:50px;}
 .accordion .accordionHeader{display:block;overflow:hidden;cursor:pointer;}
 .accordion .accordionHeader h2{display:block;overflow:hidden;padding:0 10px 0 10px;height:40px;line-height:40px;font-weight:400;}
 .accordion .accordionHeader h2>i{display:inline-block;margin-left:5px;margin-right:5px;text-align:center;width:20px;}
