@@ -55,7 +55,7 @@
                     </li>
                 </ul>
     <script>
-    $('input[name=ownsAllRight]',navTab.getCurrentPanel()).on("click", (){
+    $('input[name=ownsAllRight]',navTab.getCurrentPanel()).on("click", function(){
         if($(this).is(':checked')) {
             $('.ownsAllRight',navTab.getCurrentPanel()).hide();
         } else {

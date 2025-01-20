@@ -249,7 +249,7 @@
         </div>
     </div>
 <script>
-$('input[name=onlyUrl]',navTab.getCurrentPanel()).on("click", (){
+$('input[name=onlyUrl]',navTab.getCurrentPanel()).on("click", function(){
     if($(this).is(':checked')){
         if(!$('input[name=customPath]',navTab.getCurrentPanel()).is(':checked')){
             $('input[name=customPath]',navTab.getCurrentPanel()).trigger("click");
@@ -260,21 +260,21 @@ $('input[name=onlyUrl]',navTab.getCurrentPanel()).on("click", (){
         $('.onlyUrl',navTab.getCurrentPanel()).show();
     }
 });
-$('input[name=customPath]',navTab.getCurrentPanel()).on("click", (){
+$('input[name=customPath]',navTab.getCurrentPanel()).on("click", function(){
     if($(this).is(':checked')){
         $('.customPath',navTab.getCurrentPanel()).show();
     } else {
         $('.customPath',navTab.getCurrentPanel()).hide();
     }
 });
-$('input[name=customContentPath]',navTab.getCurrentPanel()).on("click", (){
+$('input[name=customContentPath]',navTab.getCurrentPanel()).on("click", function(){
     if($(this).is(':checked')){
         $('.customContentPath',navTab.getCurrentPanel()).show().find("input[name=contentPath]").addClass("required");;
     } else {
         $('.customContentPath',navTab.getCurrentPanel()).hide().find("input[name=contentPath]").removeClass("required");;
     }
 });
-$('input[name$=\\.categoryModel\\.customContentPath]',navTab.getCurrentPanel()).on("click", (){
+$('input[name$=\\.categoryModel\\.customContentPath]',navTab.getCurrentPanel()).on("click", function(){
     checkCategoryModel();
     if($(this).is(':checked')){
         $(this).parent().parent().parent().find('.categoryModelCustomContentPath',navTab.getCurrentPanel()).show();

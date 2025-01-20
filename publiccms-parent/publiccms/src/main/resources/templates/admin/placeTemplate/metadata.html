@@ -134,7 +134,7 @@
                 <@extends 'metadataExtendList' metadataExtendList/>
             </fieldset>
     <script>
-    $('input[name=allowContribute]',navTab.getCurrentPanel()).on("click", (){
+    $('input[name=allowContribute]',navTab.getCurrentPanel()).on("click", function(){
         if($(this).is(':checked')) {
             $('.allowContribute',navTab.getCurrentPanel()).show();
         } else {
@@ -144,7 +144,7 @@
     $('.systemField dt [type=checkbox]',navTab.getCurrentPanel()).each(function(){
         var box = $(this).parent().parent().parent();
         box.find('dd').hide();
-        $(this).on("click", (){
+        $(this).on("click", function(){
             if( $(this).is(':checked') ) {
                 box.find('dd').show().find('input[type=text]').addClass('required');
             } else {

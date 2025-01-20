@@ -176,7 +176,7 @@
         });
     }
     $(function(){
-        $('input[name=showParameters]').on("click", (){
+        $('input[name=showParameters]').on("click", function(){
             if($(this).is(':checked')){
                 $('#sendData').val($('#sendData').val()+getSymbol($('#sendData').val())+'showParameters=true');
             }else{
@@ -184,7 +184,7 @@
             }
         });
         $('input:radio[name=api]').eq(0).trigger("click");
-        $('input[name=api]').on("click", (){
+        $('input[name=api]').on("click", function(){
             init();
         });
         init();

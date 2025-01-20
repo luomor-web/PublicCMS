@@ -57,7 +57,7 @@ $(".pageFormContent",$.pdialog.getCurrent()).on("change","input[type=file]",func
         }
     }
 });
-$('input[name=useIframe]',$.pdialog.getCurrent()).on("click", (){
+$('input[name=useIframe]',$.pdialog.getCurrent()).on("click", function(){
     if($(this).is(':checked')) {
         $('.iframeSize',$.pdialog.getCurrent()).show();
         $('.iframeSize input[data-required=true]',navTab.getCurrentPanel()).addClass('required');

@@ -81,7 +81,7 @@
                 </ul>
             </fieldset>
     <script>
-    $('input[name=superuser]',navTab.getCurrentPanel()).on("click", (){
+    $('input[name=superuser]',navTab.getCurrentPanel()).on("click", function(){
         if($(this).is(':checked')) {
             $('.superuser',navTab.getCurrentPanel()).show();
         } else {

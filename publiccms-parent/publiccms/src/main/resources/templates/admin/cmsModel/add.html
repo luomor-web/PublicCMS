@@ -252,7 +252,7 @@
                     var box = $(this).parent().parent().parent();
                     box.find('dd').hide();
                     $('.copied',navTab.getCurrentPanel()).hide();
-                    $(this).on("click", (){
+                    $(this).on("click", function(){
                         if( $(this).is(':checked') ) {
                             box.find('dd').show().find('input[type=text]').addClass('required');
                             if("copied"==$(this).val()){
@@ -266,7 +266,7 @@
                         }
                     });
                 });
-                $('input[name=onlyUrl]',navTab.getCurrentPanel()).on("click", (){
+                $('input[name=onlyUrl]',navTab.getCurrentPanel()).on("click", function(){
                     if($(this).is(':checked')) {
                         $('.onlyUrl',navTab.getCurrentPanel()).hide();
                         $('.urlText',navTab.getCurrentPanel()).show();
@@ -277,14 +277,14 @@
                         $('.urlText input[type=text]',navTab.getCurrentPanel()).removeClass('required');
                     }
                 });
-                $('input[name=hasChild],input[name=hasImages],input[name=hasFiles],input[name=hasProducts]',navTab.getCurrentPanel()).on("click", (){
+                $('input[name=hasChild],input[name=hasImages],input[name=hasFiles],input[name=hasProducts]',navTab.getCurrentPanel()).on("click", function(){
                     if($(this).is(':checked')) {
                         $('.'+$(this).attr('name'),navTab.getCurrentPanel()).show();
                     } else {
                         $('.'+$(this).attr('name'),navTab.getCurrentPanel()).hide();
                     }
                 });
-                $('input[name=searchableModel]',navTab.getCurrentPanel()).on("click", (){
+                $('input[name=searchableModel]',navTab.getCurrentPanel()).on("click", function(){
                     if($(this).is(':checked')) {
                         $('.searchable',navTab.getCurrentPanel()).show();
                     } else {
