@@ -1,5 +1,6 @@
 package com.publiccms.logic.component.site;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -106,12 +107,13 @@ public class FileUploadComponent {
         if (fileSize.isImage() && null != fileSize.getWidth() && null != fileSize.getHeight()) {
             Map<String, String> config = configDataComponent.getConfigData(siteId, SiteConfigComponent.CONFIG_CODE);
             Integer maxImageWidth = ConfigDataComponent.getInt(config.get(SiteConfigComponent.CONFIG_MAX_IMAGE_WIDTH));
-            if (null != maxImageWidth && maxImageWidth > fileSize.getWidth()) {
+            if (null != maxImageWidth && maxImageWidth < fileSize.getWidth()) {
                 int height = fileSize.getHeight() * maxImageWidth / fileSize.getWidth();
                 try {
                     ImageUtils.thumb(filepath, filepath, maxImageWidth, height, suffix);
                     fileSize.setWidth(maxImageWidth);
                     fileSize.setHeight(height);
+                    fileSize.setFileSize( new File(filepath).length());
                 } catch (IOException e) {
                 }
             }
