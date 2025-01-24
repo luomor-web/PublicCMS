@@ -67,10 +67,10 @@ public class GetDateMethod extends BaseMethod {
                 date = getLastSunday(date);
                 break;
             case "nextMonday":
-                date = getLastMonday(date);
+                date = getNextMonday(date);
                 break;
             case "nextSunday":
-                date = getLastSunday(date);
+                date = getNextSunday(date);
                 break;
             default:
             }

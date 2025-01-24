@@ -14,10 +14,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
-import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Safelist;
 
 import com.publiccms.common.constants.Constants;
+import com.publiccms.common.document.CustomCleaner;
 
 /**
  * HtmlUtils
@@ -141,7 +141,7 @@ public class HtmlUtils {
                 baseUri = CommonUtils.joinString("http:", baseUri);
             }
             Document dirty = Jsoup.parseBodyFragment(string, baseUri);
-            Cleaner cleaner = new Cleaner(SAFELIST);
+            CustomCleaner cleaner = new CustomCleaner(SAFELIST);
             Document clean = cleaner.clean(dirty);
             clean.outputSettings().prettyPrint(false);
             return clean.body().html();
