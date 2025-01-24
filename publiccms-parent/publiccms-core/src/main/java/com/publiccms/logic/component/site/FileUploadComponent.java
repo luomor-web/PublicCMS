@@ -28,8 +28,8 @@ import com.publiccms.entities.cms.CmsContent;
 import com.publiccms.entities.cms.CmsPlace;
 import com.publiccms.entities.sys.SysSite;
 import com.publiccms.logic.component.config.ConfigDataComponent;
+import com.publiccms.logic.component.config.ImageConfigComponent;
 import com.publiccms.logic.component.config.SafeConfigComponent;
-import com.publiccms.logic.component.config.SiteConfigComponent;
 import com.publiccms.views.pojo.entities.FileUploadResult;
 
 /**
@@ -105,8 +105,8 @@ public class FileUploadComponent {
 
     private FileUploadResult thumb(short siteId, FileUploadResult fileSize, String filepath, String suffix) {
         if (fileSize.isImage() && null != fileSize.getWidth() && null != fileSize.getHeight()) {
-            Map<String, String> config = configDataComponent.getConfigData(siteId, SiteConfigComponent.CONFIG_CODE);
-            Integer maxImageWidth = ConfigDataComponent.getInt(config.get(SiteConfigComponent.CONFIG_MAX_IMAGE_WIDTH));
+            Map<String, String> config = configDataComponent.getConfigData(siteId, ImageConfigComponent.CONFIG_CODE);
+            Integer maxImageWidth = ConfigDataComponent.getInt(config.get(ImageConfigComponent.CONFIG_MAX_IMAGE_WIDTH));
             if (null != maxImageWidth && maxImageWidth < fileSize.getWidth()) {
                 int height = fileSize.getHeight() * maxImageWidth / fileSize.getWidth();
                 try {
