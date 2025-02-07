@@ -243,6 +243,28 @@
                 </select>
             </#if>
             <#break>
+        <#case 'font'>
+            <#if 'view'=type>
+                ${(value)!}
+            <#else>
+                <select class="combox<#if extend.required> required</#if>" name="${inputName}">
+                    <#list getFontList() as font>
+                    <option value="${font}"${(value?has_content&&font=value)?then(' selected="true"','')?no_esc}>${font}</option>
+                    </#list>
+                </select>
+            </#if>
+            <#break>
+        <#case 'position'>
+            <#if 'view'=type>
+                ${(value)!}
+            <#else>
+                <select class="combox<#if extend.required> required</#if>" name="${inputName}">
+                    <#list ["rightBottom","center","leftTop","leftBottom","rightTop"] as s>
+                    <option value="${s}"${(value?has_content&&s=value)?then(' selected="true"','')?no_esc}><@t.page 'position.'+s/></option>
+                    </#list>
+                </select>
+            </#if>
+            <#break>
         <#default>
             <#include "extend/text.html"/>
     </#switch>
