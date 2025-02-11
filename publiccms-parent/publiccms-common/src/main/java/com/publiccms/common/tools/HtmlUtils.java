@@ -140,6 +140,13 @@ public class HtmlUtils {
             if (CommonUtils.notEmpty(baseUri) && baseUri.startsWith("//")) {
                 baseUri = CommonUtils.joinString("http:", baseUri);
             }
+            if (!baseUri.contains("://")) {
+                if (baseUri.startsWith(Constants.SEPARATOR)) {
+                    baseUri = CommonUtils.joinString("http://nousedomain", baseUri);
+                } else {
+                    baseUri = CommonUtils.joinString("http://nousedomain/", baseUri);
+                }
+            }
             Document dirty = Jsoup.parseBodyFragment(string, baseUri);
             CustomCleaner cleaner = new CustomCleaner(SAFELIST);
             Document clean = cleaner.clean(dirty);

@@ -23,6 +23,7 @@ public class CustomCleaner extends Cleaner {
         this.safelist = safelist;
     }
 
+    @Override
     public Document clean(Document dirtyDocument) {
         Validate.notNull(dirtyDocument);
         Document clean = Document.createShell(dirtyDocument.baseUri());
@@ -90,28 +91,28 @@ public class CustomCleaner extends Cleaner {
                                                     // pop destination stack
             }
         }
-    }
 
-    private ElementMeta createSafeElement(Element sourceEl) {
-        Element dest = sourceEl.shallowClone(); // reuses tag, clones attributes
-                                                // and preserves any user data
-        String sourceTag = sourceEl.tagName();
-        Attributes destAttrs = dest.attributes();
-        dest.clearAttributes(); // clear all non-internal attributes, ready for
-                                // safe copy
+        private ElementMeta createSafeElement(Element sourceEl) {
+            Element dest = sourceEl.shallowClone(); // reuses tag, clones attributes
+                                                    // and preserves any user data
+            String sourceTag = sourceEl.tagName();
+            Attributes destAttrs = dest.attributes();
+            dest.clearAttributes(); // clear all non-internal attributes, ready for
+                                    // safe copy
 
-        int numDiscarded = 0;
-        Attributes sourceAttrs = sourceEl.attributes();
-        for (Attribute sourceAttr : sourceAttrs) {
-            if (safelist.isSafeAttribute(sourceTag, sourceEl, sourceAttr))
-                destAttrs.put(sourceAttr);
-            else
-                numDiscarded++;
+            int numAttribsDiscarded = 0;
+            Attributes sourceAttrs = sourceEl.attributes();
+            for (Attribute sourceAttr : sourceAttrs) {
+                if (safelist.isSafeAttribute(sourceTag, sourceEl, sourceAttr))
+                    destAttrs.put(sourceAttr);
+                else
+                    numAttribsDiscarded++;
+            }
+            Attributes enforcedAttrs = safelist.getEnforcedAttributes(sourceTag);
+            destAttrs.addAll(enforcedAttrs);
+            dest.attributes().addAll(destAttrs); // re-attach, if removed in clear
+            return new ElementMeta(dest, numAttribsDiscarded);
         }
-        Attributes enforcedAttrs = safelist.getEnforcedAttributes(sourceTag);
-        destAttrs.addAll(enforcedAttrs);
-        dest.attributes().addAll(destAttrs); // re-attach, if removed in clear
-        return new ElementMeta(dest, numDiscarded);
     }
 
     private static class ElementMeta {

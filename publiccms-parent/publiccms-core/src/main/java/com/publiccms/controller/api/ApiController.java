@@ -224,9 +224,9 @@ public class ApiController {
                                 try {
                                     FileUploadResult uploadResult = null;
                                     if (CommonUtils.notEmpty(base64File)) {
-                                        uploadResult = fileUploadComponent.upload(site.getId(), VerificationUtils.base64Decode(base64File), privatefile, suffix, localeResolver.resolveLocale(request));
+                                        uploadResult = fileUploadComponent.upload(site.getId(), VerificationUtils.base64Decode(base64File), privatefile, user.getNickname(), suffix, localeResolver.resolveLocale(request));
                                     } else {
-                                        uploadResult = fileUploadComponent.upload(site.getId(), file, privatefile, suffix, localeResolver.resolveLocale(request));
+                                        uploadResult = fileUploadComponent.upload(site.getId(), file, privatefile, user.getNickname(), suffix, localeResolver.resolveLocale(request));
                                     }
                                     lockComponent.lock(site.getId(), privatefile ? LockComponent.ITEM_TYPE_FILEUPLOAD_PRIVATE_SIZE : LockComponent.ITEM_TYPE_FILEUPLOAD_SIZE,
                                             String.valueOf(authUserId), null, (int) uploadResult.getFileSize() / 1024);
