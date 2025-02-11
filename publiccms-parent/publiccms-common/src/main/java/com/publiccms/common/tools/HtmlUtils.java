@@ -142,9 +142,9 @@ public class HtmlUtils {
             }
             if (!baseUri.contains("://")) {
                 if (baseUri.startsWith(Constants.SEPARATOR)) {
-                    baseUri = CommonUtils.joinString("http://schema", baseUri);
+                    baseUri = CommonUtils.joinString("http://nousedomain", baseUri);
                 } else {
-                    baseUri = CommonUtils.joinString("http://schema/", baseUri);
+                    baseUri = CommonUtils.joinString("http://nousedomain/", baseUri);
                 }
             }
             Document dirty = Jsoup.parseBodyFragment(string, baseUri);
