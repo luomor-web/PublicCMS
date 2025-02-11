@@ -23,136 +23,136 @@ import com.publiccms.logic.service.sys.SysConfigDataService;
  */
 @Component
 public class ConfigDataComponent implements SiteCache {
-	@Resource
-	private SysConfigDataService service;
-	private CacheEntity<Short, Map<String, Map<String, String>>> cache;
+    @Resource
+    private SysConfigDataService service;
+    private CacheEntity<Short, Map<String, Map<String, String>>> cache;
 
-	/**
-	 * @param siteId
-	 * @param code
-	 * @return config data
-	 */
-	public Map<String, String> getConfigData(short siteId, String code) {
-		Map<String, Map<String, String>> siteMap = cache.get(siteId);
-		if (null == siteMap) {
-			siteMap = new HashMap<>();
-		}
-		Map<String, String> configMap = siteMap.get(code);
-		if (null == configMap) {
-			SysConfigData entity = service.getEntity(new SysConfigDataId(siteId, code));
-			if (null != entity && CommonUtils.notEmpty(entity.getData())) {
-				configMap = ExtendUtils.getExtendMap(entity.getData());
-			} else {
-				configMap = new HashMap<>();
-			}
-			siteMap.put(code, configMap);
-			cache.put(siteId, siteMap);
-		}
-		return configMap;
-	}
+    /**
+     * @param siteId
+     * @param code
+     * @return config data
+     */
+    public Map<String, String> getConfigData(short siteId, String code) {
+        Map<String, Map<String, String>> siteMap = cache.get(siteId);
+        if (null == siteMap) {
+            siteMap = new HashMap<>();
+        }
+        Map<String, String> configMap = siteMap.get(code);
+        if (null == configMap) {
+            SysConfigData entity = service.getEntity(new SysConfigDataId(siteId, code));
+            if (null != entity && CommonUtils.notEmpty(entity.getData())) {
+                configMap = ExtendUtils.getExtendMap(entity.getData());
+            } else {
+                configMap = new HashMap<>();
+            }
+            siteMap.put(code, configMap);
+            cache.put(siteId, siteMap);
+        }
+        return configMap;
+    }
 
-	public static Integer getInt(String value) {
-		if (CommonUtils.empty(value)) {
-			return null;
-		} else {
-			try {
-				return Integer.parseInt(value);
-			} catch (NumberFormatException e) {
-				return null;
-			}
-		}
-	}
+    public static Integer getInt(String value) {
+        if (CommonUtils.empty(value)) {
+            return null;
+        } else {
+            try {
+                return Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+    }
 
-	public static Float getFloat(String value) {
-		if (CommonUtils.empty(value)) {
-			return null;
-		} else {
-			try {
-				return Float.parseFloat(value);
-			} catch (NumberFormatException e) {
-				return null;
-			}
-		}
-	}
-	
-	public static Float getFloat(String value,float defaultValue) {
-		if (CommonUtils.empty(value)) {
-			return null;
-		} else {
-			try {
-				return Float.parseFloat(value);
-			} catch (NumberFormatException e) {
-				return defaultValue;
-			}
-		}
-	}
+    public static Float getFloat(String value) {
+        if (CommonUtils.empty(value)) {
+            return null;
+        } else {
+            try {
+                return Float.parseFloat(value);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+    }
+    
+    public static Float getFloat(String value,float defaultValue) {
+        if (CommonUtils.empty(value)) {
+            return null;
+        } else {
+            try {
+                return Float.parseFloat(value);
+            } catch (NumberFormatException e) {
+                return defaultValue;
+            }
+        }
+    }
 
-	public static int getInt(String value, int defaultValue) {
-		if (CommonUtils.empty(value)) {
-			return defaultValue;
-		} else {
-			try {
-				return Integer.parseInt(value);
-			} catch (NumberFormatException e) {
-				return defaultValue;
-			}
-		}
-	}
+    public static int getInt(String value, int defaultValue) {
+        if (CommonUtils.empty(value)) {
+            return defaultValue;
+        } else {
+            try {
+                return Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                return defaultValue;
+            }
+        }
+    }
 
-	public static long getLong(String value, long defaultValue) {
-		if (CommonUtils.empty(value)) {
-			return defaultValue;
-		} else {
-			try {
-				return Long.parseLong(value);
-			} catch (NumberFormatException e) {
-				return defaultValue;
-			}
-		}
-	}
+    public static long getLong(String value, long defaultValue) {
+        if (CommonUtils.empty(value)) {
+            return defaultValue;
+        } else {
+            try {
+                return Long.parseLong(value);
+            } catch (NumberFormatException e) {
+                return defaultValue;
+            }
+        }
+    }
 
-	public static boolean getBoolean(String value, boolean defaultValue) {
-		if (CommonUtils.empty(value)) {
-			return defaultValue;
-		} else {
-			return "true".equalsIgnoreCase(value);
-		}
-	}
+    public static boolean getBoolean(String value, boolean defaultValue) {
+        if (CommonUtils.empty(value)) {
+            return defaultValue;
+        } else {
+            return "true".equalsIgnoreCase(value);
+        }
+    }
 
-	/**
-	 * @param siteId
-	 * @param code
-	 */
-	public void removeCache(short siteId, String code) {
-		Map<String, Map<String, String>> map = cache.get(siteId);
-		if (CommonUtils.notEmpty(map)) {
-			map.remove(code);
-			cache.put(siteId, map);
-		}
-	}
+    /**
+     * @param siteId
+     * @param code
+     */
+    public void removeCache(short siteId, String code) {
+        Map<String, Map<String, String>> map = cache.get(siteId);
+        if (CommonUtils.notEmpty(map)) {
+            map.remove(code);
+            cache.put(siteId, map);
+        }
+    }
 
-	@Override
-	public void clear(short siteId) {
-		cache.remove(siteId);
-	}
+    @Override
+    public void clear(short siteId) {
+        cache.remove(siteId);
+    }
 
-	@Override
-	public void clear() {
-		cache.clear(false);
-	}
+    @Override
+    public void clear() {
+        cache.clear(false);
+    }
 
-	/**
-	 * @param cacheEntityFactory
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 * @throws ClassNotFoundException
-	 * @throws SecurityException
-	 * @throws IllegalArgumentException
-	 */
-	@Resource
-	public void initCache(CacheEntityFactory cacheEntityFactory) throws ClassNotFoundException, InstantiationException,
-			IllegalAccessException, IllegalArgumentException, SecurityException {
-		cache = cacheEntityFactory.createCacheEntity("config");
-	}
+    /**
+     * @param cacheEntityFactory
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws ClassNotFoundException
+     * @throws SecurityException
+     * @throws IllegalArgumentException
+     */
+    @Resource
+    public void initCache(CacheEntityFactory cacheEntityFactory) throws ClassNotFoundException, InstantiationException,
+            IllegalAccessException, IllegalArgumentException, SecurityException {
+        cache = cacheEntityFactory.createCacheEntity("config");
+    }
 
 }
