@@ -43,107 +43,107 @@ console.log(data);
 @Component
 public class GetDateMethod extends BaseMethod {
 
-	@Override
-	public Object execute(List<TemplateModel> arguments) throws TemplateModelException {
-		Date date;
-		if (arguments.size() >= 2) {
-			date = getDate(1, arguments);
-		} else {
-			date = CommonUtils.getDate();
-		}
-		if (!arguments.isEmpty()) {
-			String type = getString(0, arguments);
-			switch (type) {
-			case "yesterday":
-				date = DateUtils.addDays(date, -1);
-				break;
-			case "tomorrow":
-				date = DateUtils.addDays(date, 1);
-				break;
-			case "thisSunday":
-				date = getThisSunday(date);
-				break;
-			case "thisMonday":
-				date = getThisMonday(date);
-				break;
-			case "lastMonday":
-				date = getLastMonday(date);
-				break;
-			case "lastSunday":
-				date = getLastSunday(date);
-				break;
-			case "lastMonth":
-				date = DateUtils.addMonths(date, -1);
-			case "lastYear":
-				date = DateUtils.addYears(date, -1);
-				break;
-			case "nextMonday":
-				date = getNextMonday(date);
-				break;
-			case "nextSunday":
-				date = getNextSunday(date);
-				break;
-			case "nextMonth":
-				date = DateUtils.addMonths(date, 1);
-				break;
-			case "nextYear":
-				date = DateUtils.addYears(date, 1);
-				break;
-			default:
-			}
-		}
-		return date;
-	}
+    @Override
+    public Object execute(List<TemplateModel> arguments) throws TemplateModelException {
+        Date date;
+        if (arguments.size() >= 2) {
+            date = getDate(1, arguments);
+        } else {
+            date = CommonUtils.getDate();
+        }
+        if (!arguments.isEmpty()) {
+            String type = getString(0, arguments);
+            switch (type) {
+            case "yesterday":
+                date = DateUtils.addDays(date, -1);
+                break;
+            case "tomorrow":
+                date = DateUtils.addDays(date, 1);
+                break;
+            case "thisSunday":
+                date = getThisSunday(date);
+                break;
+            case "thisMonday":
+                date = getThisMonday(date);
+                break;
+            case "lastMonday":
+                date = getLastMonday(date);
+                break;
+            case "lastSunday":
+                date = getLastSunday(date);
+                break;
+            case "lastMonth":
+                date = DateUtils.addMonths(date, -1);
+            case "lastYear":
+                date = DateUtils.addYears(date, -1);
+                break;
+            case "nextMonday":
+                date = getNextMonday(date);
+                break;
+            case "nextSunday":
+                date = getNextSunday(date);
+                break;
+            case "nextMonth":
+                date = DateUtils.addMonths(date, 1);
+                break;
+            case "nextYear":
+                date = DateUtils.addYears(date, 1);
+                break;
+            default:
+            }
+        }
+        return date;
+    }
 
-	@Override
-	public boolean needAppToken() {
-		return false;
-	}
+    @Override
+    public boolean needAppToken() {
+        return false;
+    }
 
-	@Override
-	public int minParametersNumber() {
-		return 0;
-	}
+    @Override
+    public int minParametersNumber() {
+        return 0;
+    }
 
-	static Date getThisMonday(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(DateUtils.addDays(date, -1));
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		return calendar.getTime();
-	}
+    static Date getThisMonday(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.addDays(date, -1));
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        return calendar.getTime();
+    }
 
-	static Date getThisSunday(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(DateUtils.addDays(date, 6));
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		return calendar.getTime();
-	}
+    static Date getThisSunday(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.addDays(date, 6));
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        return calendar.getTime();
+    }
 
-	static Date getLastMonday(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(DateUtils.addDays(date, -8));
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		return calendar.getTime();
-	}
+    static Date getLastMonday(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.addDays(date, -8));
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        return calendar.getTime();
+    }
 
-	static Date getLastSunday(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(DateUtils.addDays(date, -1));
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		return calendar.getTime();
-	}
+    static Date getLastSunday(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.addDays(date, -1));
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        return calendar.getTime();
+    }
 
-	static Date getNextMonday(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(DateUtils.addDays(date, 7));
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		return calendar.getTime();
-	}
+    static Date getNextMonday(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.addDays(date, 7));
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        return calendar.getTime();
+    }
 
-	static Date getNextSunday(Date date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(DateUtils.addDays(date, 13));
-		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		return calendar.getTime();
-	}
+    static Date getNextSunday(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(DateUtils.addDays(date, 13));
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        return calendar.getTime();
+    }
 }

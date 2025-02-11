@@ -70,141 +70,141 @@ public class FileController {
     @Resource
     private LocaleResolver localeResolver;
 
-	/**
-	 * @param site
-	 * @param user
-	 * @param privatefile
-	 * @param captcha
-	 * @param file
-	 * @param base64File
-	 * @param originalFilename
-	 * @param request
-	 * @return view name
-	 */
-	@PostMapping("doUpload")
-	@Csrf
-	@ResponseBody
-	public Map<String, Object> upload(@RequestAttribute SysSite site, @SessionAttribute SysUser user,
-			boolean privatefile, String captcha, MultipartFile file, String base64File, String originalFilename,
-			HttpServletRequest request) {
-		ModelMap result = new ModelMap();
-		result.put("success", false);
-		if (CommonUtils.notEmpty(captcha)
-				|| safeConfigComponent.enableCaptcha(site.getId(), SafeConfigComponent.CAPTCHA_MODULE_UPLOAD)) {
-			String sessionCaptcha = (String) request.getSession().getAttribute("captcha");
-			request.getSession().removeAttribute("captcha");
-			if (ControllerUtils.errorCustom("captcha.error",
-					null == sessionCaptcha || !sessionCaptcha.equalsIgnoreCase(captcha), result)) {
-				return result;
-			}
-		}
-		boolean locked = lockComponent.isLocked(site.getId(), LockComponent.ITEM_TYPE_FILEUPLOAD,
-				String.valueOf(user.getId()), null);
-		boolean sizeLocked = lockComponent.isLocked(site.getId(),
-				privatefile ? LockComponent.ITEM_TYPE_FILEUPLOAD_PRIVATE_SIZE : LockComponent.ITEM_TYPE_FILEUPLOAD_SIZE,
-				String.valueOf(user.getId()), null);
-		if (ControllerUtils.errorCustom("locked.user", locked, result)) {
-			lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_FILEUPLOAD, String.valueOf(user.getId()), null,
-					true);
-			return result;
-		} else if (ControllerUtils.errorCustom("locked.user", sizeLocked, result)) {
-			return result;
-		}
-		lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_FILEUPLOAD, String.valueOf(user.getId()), null, true);
-		if (null != file && !file.isEmpty() || CommonUtils.notEmpty(base64File)) {
-			String originalName;
-			if (null != file && !file.isEmpty()) {
-				originalName = file.getOriginalFilename();
-			} else {
-				originalName = originalFilename;
-			}
-			String suffix = CmsFileUtils.getSuffix(originalName);
-			if (ArrayUtils.contains(
-					privatefile ? CmsFileUtils.IMAGE_FILE_SUFFIXS : safeConfigComponent.getSafeSuffix(site), suffix)) {
-				try {
-					FileUploadResult uploadResult = null;
-					if (CommonUtils.notEmpty(base64File)) {
-						uploadResult = fileUploadComponent.upload(site.getId(),
-								VerificationUtils.base64Decode(base64File), privatefile, user.getNickname(), suffix,
-								localeResolver.resolveLocale(request));
-					} else {
-						uploadResult = fileUploadComponent.upload(site.getId(), file, privatefile, user.getNickname(),
-								suffix, localeResolver.resolveLocale(request));
-					}
-					lockComponent.lock(site.getId(),
-							privatefile ? LockComponent.ITEM_TYPE_FILEUPLOAD_PRIVATE_SIZE
-									: LockComponent.ITEM_TYPE_FILEUPLOAD_SIZE,
-							String.valueOf(user.getId()), null, (int) uploadResult.getFileSize() / 1024);
-					result.put("success", true);
-					result.put("fileName", uploadResult.getFilename());
-					String fileType = CmsFileUtils.getFileType(suffix);
-					result.put("fileType", fileType);
-					result.put("fileSize", uploadResult.getFileSize());
-					logUploadService.save(new LogUpload(site.getId(), user.getId(), LogLoginService.CHANNEL_WEB,
-							originalName, privatefile, fileType, uploadResult.getFileSize(), uploadResult.getWidth(),
-							uploadResult.getHeight(), RequestUtils.getIpAddress(request), CommonUtils.getDate(),
-							uploadResult.getFilename()));
-				} catch (IOException e) {
-					log.error(e.getMessage(), e);
-					result.put(CommonConstants.ERROR, e.getMessage());
-				}
-			} else {
-				result.put(CommonConstants.ERROR, LanguagesUtils.getMessage(CommonConstants.applicationContext,
-						localeResolver.resolveLocale(request), "verify.custom.fileType"));
-			}
-		} else {
-			result.put(CommonConstants.ERROR, LanguagesUtils.getMessage(CommonConstants.applicationContext,
-					localeResolver.resolveLocale(request), "verify.notEmpty.file"));
-		}
-		return result;
-	}
+    /**
+     * @param site
+     * @param user
+     * @param privatefile
+     * @param captcha
+     * @param file
+     * @param base64File
+     * @param originalFilename
+     * @param request
+     * @return view name
+     */
+    @PostMapping("doUpload")
+    @Csrf
+    @ResponseBody
+    public Map<String, Object> upload(@RequestAttribute SysSite site, @SessionAttribute SysUser user,
+            boolean privatefile, String captcha, MultipartFile file, String base64File, String originalFilename,
+            HttpServletRequest request) {
+        ModelMap result = new ModelMap();
+        result.put("success", false);
+        if (CommonUtils.notEmpty(captcha)
+                || safeConfigComponent.enableCaptcha(site.getId(), SafeConfigComponent.CAPTCHA_MODULE_UPLOAD)) {
+            String sessionCaptcha = (String) request.getSession().getAttribute("captcha");
+            request.getSession().removeAttribute("captcha");
+            if (ControllerUtils.errorCustom("captcha.error",
+                    null == sessionCaptcha || !sessionCaptcha.equalsIgnoreCase(captcha), result)) {
+                return result;
+            }
+        }
+        boolean locked = lockComponent.isLocked(site.getId(), LockComponent.ITEM_TYPE_FILEUPLOAD,
+                String.valueOf(user.getId()), null);
+        boolean sizeLocked = lockComponent.isLocked(site.getId(),
+                privatefile ? LockComponent.ITEM_TYPE_FILEUPLOAD_PRIVATE_SIZE : LockComponent.ITEM_TYPE_FILEUPLOAD_SIZE,
+                String.valueOf(user.getId()), null);
+        if (ControllerUtils.errorCustom("locked.user", locked, result)) {
+            lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_FILEUPLOAD, String.valueOf(user.getId()), null,
+                    true);
+            return result;
+        } else if (ControllerUtils.errorCustom("locked.user", sizeLocked, result)) {
+            return result;
+        }
+        lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_FILEUPLOAD, String.valueOf(user.getId()), null, true);
+        if (null != file && !file.isEmpty() || CommonUtils.notEmpty(base64File)) {
+            String originalName;
+            if (null != file && !file.isEmpty()) {
+                originalName = file.getOriginalFilename();
+            } else {
+                originalName = originalFilename;
+            }
+            String suffix = CmsFileUtils.getSuffix(originalName);
+            if (ArrayUtils.contains(
+                    privatefile ? CmsFileUtils.IMAGE_FILE_SUFFIXS : safeConfigComponent.getSafeSuffix(site), suffix)) {
+                try {
+                    FileUploadResult uploadResult = null;
+                    if (CommonUtils.notEmpty(base64File)) {
+                        uploadResult = fileUploadComponent.upload(site.getId(),
+                                VerificationUtils.base64Decode(base64File), privatefile, user.getNickname(), suffix,
+                                localeResolver.resolveLocale(request));
+                    } else {
+                        uploadResult = fileUploadComponent.upload(site.getId(), file, privatefile, user.getNickname(),
+                                suffix, localeResolver.resolveLocale(request));
+                    }
+                    lockComponent.lock(site.getId(),
+                            privatefile ? LockComponent.ITEM_TYPE_FILEUPLOAD_PRIVATE_SIZE
+                                    : LockComponent.ITEM_TYPE_FILEUPLOAD_SIZE,
+                            String.valueOf(user.getId()), null, (int) uploadResult.getFileSize() / 1024);
+                    result.put("success", true);
+                    result.put("fileName", uploadResult.getFilename());
+                    String fileType = CmsFileUtils.getFileType(suffix);
+                    result.put("fileType", fileType);
+                    result.put("fileSize", uploadResult.getFileSize());
+                    logUploadService.save(new LogUpload(site.getId(), user.getId(), LogLoginService.CHANNEL_WEB,
+                            originalName, privatefile, fileType, uploadResult.getFileSize(), uploadResult.getWidth(),
+                            uploadResult.getHeight(), RequestUtils.getIpAddress(request), CommonUtils.getDate(),
+                            uploadResult.getFilename()));
+                } catch (IOException e) {
+                    log.error(e.getMessage(), e);
+                    result.put(CommonConstants.ERROR, e.getMessage());
+                }
+            } else {
+                result.put(CommonConstants.ERROR, LanguagesUtils.getMessage(CommonConstants.applicationContext,
+                        localeResolver.resolveLocale(request), "verify.custom.fileType"));
+            }
+        } else {
+            result.put(CommonConstants.ERROR, LanguagesUtils.getMessage(CommonConstants.applicationContext,
+                    localeResolver.resolveLocale(request), "verify.notEmpty.file"));
+        }
+        return result;
+    }
 
-	/**
-	 * @param site
-	 * @param expiry
-	 * @param sign
-	 * @param filePath
-	 * @param filename
-	 * @param request
-	 * @return response entity
-	 */
-	@RequestMapping("private")
-	public ResponseEntity<StreamingResponseBody> privatefile(@RequestAttribute SysSite site, long expiry, String sign,
-			String filePath, String filename, HttpServletRequest request) {
-		if (CommonUtils.notEmpty(sign) && expiry > System.currentTimeMillis()) {
-			String signKey = safeConfigComponent.getSignKey(site.getId());
-			String string = CmsFileUtils.getPrivateFileSignString(expiry, filePath);
-			if (string.equalsIgnoreCase(VerificationUtils.decryptAES(VerificationUtils.base64Decode(sign), signKey))) {
-				HttpHeaders headers = new HttpHeaders();
-				if (CommonUtils.notEmpty(filename)) {
-					headers.setContentDisposition(
-							ContentDisposition.attachment().filename(filename, StandardCharsets.UTF_8).build());
-				}
-				String sendfile = request.getHeader(CmsFileUtils.HEADERS_SEND_CTRL);
-				if (CmsFileUtils.HEADERS_SEND_NGINX.equalsIgnoreCase(sendfile)) {
-					headers.set(CmsFileUtils.HEADERS_SEND_NGINX,
-							CommonUtils.joinString(CmsFileUtils.NGINX_PRIVATEFILE_PREFIX, filePath));
-					return ResponseEntity.ok().headers(headers).body(null);
-				} else if (CmsFileUtils.HEADERS_SEND_APACHE.equalsIgnoreCase(sendfile)) {
-					headers.set(CmsFileUtils.HEADERS_SEND_APACHE,
-							SiteComponent.getFullFileName(site.getId(), filePath).substring(1));
-					return ResponseEntity.ok().headers(headers).body(null);
-				} else {
-					String privatefilePath = siteComponent.getPrivateFilePath(site.getId(), filePath);
-					if (CmsFileUtils.isFile(privatefilePath)) {
-						StreamingResponseBody body = new StreamingResponseBody() {
-							@Override
-							public void writeTo(OutputStream outputStream) throws IOException {
-								CmsFileUtils.copyFileToOutputStream(privatefilePath, outputStream);
-							}
-						};
-						return ResponseEntity.ok().headers(headers).body(body);
-					} else {
-						return ResponseEntity.notFound().build();
-					}
-				}
-			}
-		}
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-	}
+    /**
+     * @param site
+     * @param expiry
+     * @param sign
+     * @param filePath
+     * @param filename
+     * @param request
+     * @return response entity
+     */
+    @RequestMapping("private")
+    public ResponseEntity<StreamingResponseBody> privatefile(@RequestAttribute SysSite site, long expiry, String sign,
+            String filePath, String filename, HttpServletRequest request) {
+        if (CommonUtils.notEmpty(sign) && expiry > System.currentTimeMillis()) {
+            String signKey = safeConfigComponent.getSignKey(site.getId());
+            String string = CmsFileUtils.getPrivateFileSignString(expiry, filePath);
+            if (string.equalsIgnoreCase(VerificationUtils.decryptAES(VerificationUtils.base64Decode(sign), signKey))) {
+                HttpHeaders headers = new HttpHeaders();
+                if (CommonUtils.notEmpty(filename)) {
+                    headers.setContentDisposition(
+                            ContentDisposition.attachment().filename(filename, StandardCharsets.UTF_8).build());
+                }
+                String sendfile = request.getHeader(CmsFileUtils.HEADERS_SEND_CTRL);
+                if (CmsFileUtils.HEADERS_SEND_NGINX.equalsIgnoreCase(sendfile)) {
+                    headers.set(CmsFileUtils.HEADERS_SEND_NGINX,
+                            CommonUtils.joinString(CmsFileUtils.NGINX_PRIVATEFILE_PREFIX, filePath));
+                    return ResponseEntity.ok().headers(headers).body(null);
+                } else if (CmsFileUtils.HEADERS_SEND_APACHE.equalsIgnoreCase(sendfile)) {
+                    headers.set(CmsFileUtils.HEADERS_SEND_APACHE,
+                            SiteComponent.getFullFileName(site.getId(), filePath).substring(1));
+                    return ResponseEntity.ok().headers(headers).body(null);
+                } else {
+                    String privatefilePath = siteComponent.getPrivateFilePath(site.getId(), filePath);
+                    if (CmsFileUtils.isFile(privatefilePath)) {
+                        StreamingResponseBody body = new StreamingResponseBody() {
+                            @Override
+                            public void writeTo(OutputStream outputStream) throws IOException {
+                                CmsFileUtils.copyFileToOutputStream(privatefilePath, outputStream);
+                            }
+                        };
+                        return ResponseEntity.ok().headers(headers).body(body);
+                    } else {
+                        return ResponseEntity.notFound().build();
+                    }
+                }
+            }
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
 }
