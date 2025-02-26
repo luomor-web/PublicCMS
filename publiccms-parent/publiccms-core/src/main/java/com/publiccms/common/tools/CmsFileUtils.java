@@ -83,7 +83,7 @@ public class CmsFileUtils {
      * 
      */
     public static final String[] DOCUMENT_FILE_SUFFIXS = new String[] { ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf",
-            ".txt", ".md", ".xml", ".ofd" };
+            ".txt", ".md", ".ofd" };
     /**
      * 
      */
