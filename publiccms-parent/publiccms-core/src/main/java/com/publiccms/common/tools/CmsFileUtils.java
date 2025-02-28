@@ -142,6 +142,8 @@ public class CmsFileUtils {
 
     /**
      * 获取目录下文件列表
+     * Get file list in directory
+     * ディレクトリ内のファイルリストを取得します
      *
      * @param dirPath
      * @param orderField
@@ -153,6 +155,8 @@ public class CmsFileUtils {
 
     /**
      * 获取目录下文件列表
+     * Get file list in directory
+     * ディレクトリ内のファイルリストを取得します
      *
      * @param dirPath
      * @param parentPath
@@ -169,6 +173,8 @@ public class CmsFileUtils {
 
     /**
      * 获取目录下文件列表
+     * Get file list in directory
+     * ディレクトリ内のファイルリストを取得します
      *
      * @param dirPath
      * @param fileList
@@ -205,6 +211,8 @@ public class CmsFileUtils {
 
     /**
      * 获取目录下文件列表
+     * Get file list in directory
+     * ディレクトリ内のファイルリストを取得します
      *
      * @param dirPath
      * @param parentPath
@@ -248,6 +256,8 @@ public class CmsFileUtils {
 
     /**
      * 获取目录下文件列表
+     * Get file list in directory
+     * ディレクトリ内のファイルリストを取得します
      *
      * @param dirPath
      * @param useFilter
@@ -292,6 +302,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 将字节数组写入文件
+     * Write byte array to file
+     * バイト配列をファイルに書き込みます
+     *
      * @param filepath
      * @param data
      * @throws IOException
@@ -301,6 +315,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 获取文件大小
+     * Get file size
+     * ファイルサイズを取得します
+     *
      * @param filepath
      * @param filename
      * @param suffix
@@ -311,6 +329,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 获取文件大小
+     * Get file size
+     * ファイルサイズを取得します
+     *
      * @param file
      * @param suffix
      * @return uploadResult
@@ -338,6 +360,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 将输入流复制到文件
+     * Copy input stream to file
+     * 入力ストリームをファイルにコピーします
+     *
      * @param source
      * @param destination
      * @throws IOException
@@ -348,6 +374,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 将文件复制到文件
+     * Copy file to file
+     * ファイルをファイルにコピーします
+     *
      * @param source
      * @param destination
      * @throws IOException
@@ -357,6 +387,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 将文件复制到输出流
+     * Copy file to output stream
+     * ファイルを出力ストリームにコピーします
+     *
      * @param filepath
      * @param outputStream
      * @throws IOException
@@ -368,6 +402,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 创建目录
+     * Create directory
+     * ディレクトリを作成します
+     *
      * @param filepath
      */
     public static void mkdirs(String filepath) {
@@ -376,6 +414,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 创建父目录
+     * Create parent directory
+     * 親ディレクトリを作成します
+     *
      * @param filepath
      */
     public static void mkdirsParent(String filepath) {
@@ -384,6 +426,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 判断是否为目录
+     * Check if it is a directory
+     * ディレクトリであるかどうかを確認します
+     *
      * @param filepath
      * @return
      */
@@ -393,6 +439,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 判断是否为文件
+     * Check if it is a file
+     * ファイルであるかどうかを確認します
+     *
      * @param filepath
      * @return
      */
@@ -402,6 +452,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 判断文件是否存在
+     * Check if file exists
+     * ファイルが存在するかどうかを確認します
+     *
      * @param filepath
      * @return
      */
@@ -411,6 +465,8 @@ public class CmsFileUtils {
 
     /**
      * 写入文件
+     * Write to file
+     * ファイルに書き込みます
      *
      * @param filepath
      * @param content
@@ -428,6 +484,8 @@ public class CmsFileUtils {
 
     /**
      * 移动文件或目录
+     * Move file or directory
+     * ファイルまたはディレクトリを移動します
      *
      * @param filepath
      * @param backupFilePath
@@ -454,6 +512,10 @@ public class CmsFileUtils {
     }
 
     /**
+     * 获取安全的文件名
+     * Get safe file name
+     * セーフなファイル名を取得します
+     *
      * @param path
      * @return safe file path
      */
@@ -466,7 +528,9 @@ public class CmsFileUtils {
     }
 
     /**
-     * 移动文件或目录
+     * 删除文件或目录
+     * Delete file or directory
+     * ファイルまたはディレクトリを削除します
      *
      * @param filepath
      * @return whether to move successfully
@@ -482,6 +546,8 @@ public class CmsFileUtils {
 
     /**
      * 修改文件内容
+     * Update file content
+     * ファイルの内容を更新します
      * 
      * @param filepath
      * @param historyFilePath
@@ -506,7 +572,9 @@ public class CmsFileUtils {
     }
 
     /**
-     * 获取文件内容
+     * 判断文件是否安全
+     * Check if file is safe
+     * ファイルが安全であるかどうかを確認します
      *
      * @param filepath
      * @param suffix
@@ -551,8 +619,11 @@ public class CmsFileUtils {
 
     /**
      * 获取文件内容
+     * Get file content
+     * ファイルの内容を取得します
      *
      * @param filepath
+     * @param suffix
      * @return file content
      */
     public static String getFileContent(String filepath) {
@@ -568,7 +639,9 @@ public class CmsFileUtils {
     }
 
     /**
-     * 获取文件名
+     * 获取上传文件名
+     * Get upload file name
+     * アップロードファイル名を取得します
      *
      * @param suffix
      * @return upload file name
@@ -585,7 +658,9 @@ public class CmsFileUtils {
     }
 
     /**
-     * 获取私有文件前面字符串
+     * 获取私有文件签名字符串
+     * Get private file sign string
+     * 私有ファイルの署名文字列を取得します
      * 
      * @param expiry
      * @param filepath
@@ -597,6 +672,8 @@ public class CmsFileUtils {
 
     /**
      * 获取用户私有文件名
+     * Get user private file name
+     * ユーザーのプライベートファイル名を取得します
      * 
      * @param userId
      * @param filepath
@@ -608,7 +685,9 @@ public class CmsFileUtils {
 
     /**
      * 获取文件名
-     * 
+     * Get file name
+     * ファイル名を取得します
+     *
      * @param filePath
      * @return suffix
      */
@@ -624,6 +703,8 @@ public class CmsFileUtils {
 
     /**
      * 获取文件后缀
+     * Get file suffix
+     * ファイルのサフィックスを取得します
      *
      * @param originalFilename
      * @return suffix
@@ -639,6 +720,14 @@ public class CmsFileUtils {
         return null;
     }
 
+    /**
+     * 获取文件类型
+     * Get file type
+     * ファイルタイプを取得します
+     *
+     * @param suffix
+     * @return file type
+     */
     public static String getFileType(String suffix) {
         if (null != suffix && !suffix.startsWith(Constants.DOT)) {
             suffix = CommonUtils.joinString(Constants.DOT, suffix);
@@ -658,6 +747,8 @@ public class CmsFileUtils {
 
     /**
      * 上传文件
+     * Upload file
+     * ファイルをアップロードします
      *
      * @param data
      * @param fileName
@@ -671,6 +762,8 @@ public class CmsFileUtils {
 
     /**
      * 上传文件
+     * Upload file
+     * ファイルをアップロードします
      *
      * @param data
      * @param fileName
@@ -696,6 +789,8 @@ public class CmsFileUtils {
 
     /**
      * 上传文件
+     * Upload file
+     * ファイルをアップロードします
      *
      * @param file
      * @param fileName
@@ -793,7 +888,7 @@ public class CmsFileUtils {
     }
 
     /**
-     * FileSearchResult 文件查找结果
+     * FileSearchResult 文件查找結果
      * 
      */
     public static class FileSearchResult {
@@ -838,7 +933,7 @@ public class CmsFileUtils {
 
     /**
      *
-     * FileInfo 文件信息封装类
+     * FileInfo ファイル情報封装クラス
      *
      */
     public static class FileInfo {

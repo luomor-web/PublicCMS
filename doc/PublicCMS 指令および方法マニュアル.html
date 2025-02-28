@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-<title>PublicCMS Directive and Method Manual</title>
+<title>PublicCMS 指令および方法マニュアル</title>
 <style type="text/css">
 html,body{background-color:#ffffff;color:#353833;font-size:14px;margin:0;height:100%;}
 h1{text-align:center;margin:20px;}
@@ -24,7 +24,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
 <body>
 <div class="container">
     <div class="indexContainer">
-        <h3>Directive(namespace:task)</h3>
+        <h3>指令(名前空間:task)</h3>
         <ul>
             <li><a href="#task-clearLog">clearLog</a></li>
             <li><a href="#task-indexContent">indexContent</a></li>
@@ -33,7 +33,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#task-publishPage">publishPage</a></li>
             <li><a href="#task-publishPlace">publishPlace</a></li>
         </ul>
-        <h3>Directive(namespace:trade)</h3>
+        <h3>指令(名前空間:trade)</h3>
         <ul>
             <li><a href="#trade-account">account</a></li>
             <li><a href="#trade-accountHistory">accountHistory</a></li>
@@ -54,7 +54,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#trade-refund">refund</a></li>
             <li><a href="#trade-refundList">refundList</a></li>
         </ul>
-        <h3>Directive(namespace:log)</h3>
+        <h3>指令(名前空間:log)</h3>
         <ul>
             <li><a href="#log-loginList">loginList</a></li>
             <li><a href="#log-operate">operate</a></li>
@@ -63,7 +63,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#log-taskList">taskList</a></li>
             <li><a href="#log-uploadList">uploadList</a></li>
         </ul>
-        <h3>Directive(namespace:cms)</h3>
+        <h3>指令(名前空間:cms)</h3>
         <ul>
             <li><a href="#cms-category">category</a></li>
             <li><a href="#cms-categoryList">categoryList</a></li>
@@ -123,7 +123,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#cms-wordList">wordList</a></li>
             <li><a href="#cms-workload">workload</a></li>
         </ul>
-        <h3>Directive(namespace:visit)</h3>
+        <h3>指令(名前空間:visit)</h3>
         <ul>
             <li><a href="#visit-day">day</a></li>
             <li><a href="#visit-dayList">dayList</a></li>
@@ -136,7 +136,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#visit-url">url</a></li>
             <li><a href="#visit-urlList">urlList</a></li>
         </ul>
-        <h3>Directive(namespace:api)</h3>
+        <h3>指令(名前空間:api)</h3>
         <ul>
             <li><a href="#api-appClient">appClient</a></li>
             <li><a href="#api-appToken">appToken</a></li>
@@ -152,7 +152,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#api-unBindingUser">unBindingUser</a></li>
             <li><a href="#api-upload">upload</a></li>
         </ul>
-        <h3>Directive(namespace:sys)</h3>
+        <h3>指令(名前空間:sys)</h3>
         <ul>
             <li><a href="#sys-app">app</a></li>
             <li><a href="#sys-appClient">appClient</a></li>
@@ -191,7 +191,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#sys-userList">userList</a></li>
             <li><a href="#sys-userTokenList">userTokenList</a></li>
         </ul>
-        <h3>Directive(namespace:tools)</h3>
+        <h3>指令(名前空間:tools)</h3>
         <ul>
             <li><a href="#tools-createCategoryFile">createCategoryFile</a></li>
             <li><a href="#tools-createContentFile">createContentFile</a></li>
@@ -229,11 +229,11 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#tools-userAgent">userAgent</a></li>
             <li><a href="#tools-version">version</a></li>
         </ul>
-        <h3>Directive(namespace:oauth)</h3>
+        <h3>指令(名前空間:oauth)</h3>
         <ul>
             <li><a href="#oauth-list">list</a></li>
         </ul>
-        <h3>Method</h3>
+        <h3>方法</h3>
         <ul>
             <li><a href="#method-confuse">confuse</a></li>
             <li><a href="#method-confuseHtml">confuseHtml</a></li>
@@ -279,7 +279,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
         </ul>
     </div>
     <div class="doc">
-        <h1>PublicCMS Directive and Method Manual 202406</h1>
+        <h1>PublicCMS 指令および方法マニュアル 202406</h1>
         <div class="block" data-id="task-clearLog">clearLog 日志清理指令 
 <p>参数列表</p>
 <ul>
@@ -1641,10 +1641,10 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
    });
    &lt;/script&gt;
  </pre></div>
-        <div class="block" data-id="cms-content"><p lang="en">content query directive</p>
-<p lang="en">parameter list</p>
+        <div class="block" data-id="cms-content"><p lang="ja">コンテンツクエリーディレクティブ</p>
+<p lang="ja">パラメータリスト</p>
 <ul>
- <li lang="en"><code>id</code> content id, result returns <code>object</code>
+ <li lang="ja"><code>id</code> コンテンツID、結果は<code>object</code>
   <ul style="padding-left:20px;">
    <li><code>id</code> : id</li>
    <li><code>title</code> : title 标题</li>
@@ -1682,11 +1682,11 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
    <li><code>createDate</code> : create date 创建日期</li>
    <li><code>sort</code> : top 置顶级别</li>
    <li><code>status</code> : status(0:Draft,1:Published,2:Pending,3:Rejected) 状态(0:草稿,1:已发布,2:待审核,3:驳回)</li>
-  </ul></li>
- <li lang="en"><code>absoluteURL</code>:process url as absolute path, default is <code>true</code></li>
- <li lang="en"><code>absoluteId</code>:process id as referenced content id, default is <code>true</code></li>
- <li lang="en"><code>containsAttribute</code> default is <code>false</code>, advanced option for http requests, when true, <code>object.attribute</code> is content extended data <code>map</code>(field code, <code>value</code>)</li>
- <li lang="en"><code>ids</code>: multiple content ids, separated by commas or spaces, effective when id is empty, result returns <code>map</code>(id, <code>object</code>)</li>
+  </ul> を返します</li>
+ <li lang="ja"><code>absoluteURL</code>:URLを絶対パスに処理する、既定値は <code>true</code></li>
+ <li lang="ja"><code>absoluteId</code>:IDを参照コンテンツのIDに処理する、既定値は <code>true</code></li>
+ <li lang="ja"><code>containsAttribute</code> 既定値は <code>false</code>, HTTPリクエスト時の高度なオプション、trueの場合 <code>object.attribute</code> はコンテンツ拡張データ <code>map</code>(フィールドコード, <code>value</code>)</li>
+ <li lang="ja"><code>ids</code>: 複数のコンテンツID、カンマまたはスペースで区切る、IDが空のときに有効、結果は<code>map</code>(ID, <code>object</code>)を返します</li>
 </ul> zh:使用示例 en:usage example ja:使用例 
 <p>&lt;@cms.content id=1&gt;${object.title}&lt;/@cms.content&gt;</p>
 <p>&lt;@cms.content ids=1,2,3&gt;&lt;#list map as k,v&gt;${k}:${v.title}&lt;#sep&gt;,&lt;/#list&gt;&lt;/@cms.content&gt;</p>
@@ -1757,33 +1757,33 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
         <div class="block" data-id="cms-contentList">zh:contentList 内容列表查询指令 en:contentList content list directive ja:contentList コンテンツリストクエリーディレクティブ 
 <p>zh:参数列表 en:parameter list ja:パラメータリスト</p>
 <ul>
- <li lang="en"><code>categoryId</code>:category id, effective when parentId is empty</li>
- <li lang="en"><code>containChild</code>:whether to include subcategories, [true,false]</li>
- <li lang="en"><code>categoryIds</code>:multiple category ids, effective when categoryId is empty</li>
- <li lang="en"><code>modelId</code>:multiple model ids</li>
- <li lang="en"><code>parentId</code>:parent content id</li>
- <li lang="en"><code>onlyUrl</code>:external link, [true,false]</li>
- <li lang="en"><code>hasImages</code>:has image list, [true,false]</li>
- <li lang="en"><code>hasFiles</code>:has file list, [true,false]</li>
- <li lang="en"><code>hasProducts</code>:has product list, [true,false]</li>
- <li lang="en"><code>hasCover</code>:has cover image, [true,false]</li>
- <li lang="en"><code>userId</code>:publish user id</li>
- <li lang="en"><code>startPublishDate</code>:start publish date, [2020-01-01 23:59:59],[2020-01-01]</li>
- <li lang="en"><code>endPublishDate</code>:end publish date, cannot exceed now when advanced option is disabled, [2020-01-01 23:59:59],[2020-01-01]</li>
- <li lang="en"><code>advanced</code>:enable advanced options, default is <code>false</code></li>
- <li lang="en"><code>status</code>:advanced option: content status, [0:operation,1:published,2:pending review,3:rejected]</li>
- <li lang="en"><code>disabled</code>:advanced option: disabled status, default is <code>false</code></li>
- <li lang="en"><code>emptyParent</code>:advanced option: whether parent content id is empty, [true,false], effective when parentId is empty</li>
- <li lang="en"><code>title</code>:advanced option: title</li>
- <li lang="en"><code>absoluteURL</code>:process url as absolute path, default is <code>true</code></li>
- <li lang="en"><code>absoluteId</code>:process id as referenced content id, default is <code>true</code></li>
- <li lang="en"><code>containsAttribute</code>default is <code>false</code>, advanced option for http requests, when true, <code>content.attribute</code> is content extended data <code>map</code>(field code, <code>value</code>)</li>
- <li lang="en"><code>orderField</code> sort field, [score:rating,comments:number of comments,clicks:number of clicks,collections:number of collections,publishDate:publish date,updateDate:update date,checkDate:review date], default is descending order of top level, publish date sorted by orderType</li>
- <li lang="en"><code>orderType</code>:sort type, [asc:ascending,desc:descending], default is descending</li>
- <li lang="en"><code>firstResult</code>:start position, starts from 1</li>
- <li lang="en"><code>pageIndex</code>:page number, effective when firstResult does not exist</li>
- <li lang="en"><code>pageSize</code>:number of items per page</li>
- <li lang="en"><code>maxResults</code>:maximum number of results</li>
+ <li lang="ja"><code>categoryId</code>:親IDが空のときに有効なカテゴリID</li>
+ <li lang="ja"><code>containChild</code>:サブカテゴリを含めるかどうか, [true,false]</li>
+ <li lang="ja"><code>categoryIds</code>:categoryIdが空のときに有効な複数のカテゴリID</li>
+ <li lang="ja"><code>modelId</code>:複数のモデルID</li>
+ <li lang="ja"><code>parentId</code>:親コンテンツID</li>
+ <li lang="ja"><code>onlyUrl</code>:外部リンク, [true,false]</li>
+ <li lang="ja"><code>hasImages</code>:画像リストを持つ, [true,false]</li>
+ <li lang="ja"><code>hasFiles</code>:添付ファイルリストを持つ, [true,false]</li>
+ <li lang="ja"><code>hasProducts</code>:製品リストを持つ, [true,false]</li>
+ <li lang="ja"><code>hasCover</code>:カバー画像を持つ, [true,false]</li>
+ <li lang="ja"><code>userId</code>:公開ユーザーID</li>
+ <li lang="ja"><code>startPublishDate</code>:公開開始日, [2020-01-01 23:59:59],[2020-01-01]</li>
+ <li lang="ja"><code>endPublishDate</code>:高度なオプションが無効のときに現在を超えることはできない公開終了日, [2020-01-01 23:59:59],[2020-01-01]</li>
+ <li lang="ja"><code>advanced</code>:高度なオプションを有効にする, 既定値は <code>false</code></li>
+ <li lang="ja"><code>status</code>:高度なオプション: コンテンツステータス, [0:操作,1:公開,2:レビュー待ち,3:拒否]</li>
+ <li lang="ja"><code>disabled</code>:高度なオプション: 無効化ステータス, 既定値は <code>false</code></li>
+ <li lang="ja"><code>emptyParent</code>:高度なオプション: 親コンテンツIDが空かどうか, [true,false], parentIdが空のときに有効</li>
+ <li lang="ja"><code>title</code>:高度なオプション: タイトル</li>
+ <li lang="ja"><code>absoluteURL</code>:URLを絶対パスに処理する, 既定値は <code>true</code></li>
+ <li lang="ja"><code>absoluteId</code>:IDを参照コンテンツのIDに処理する, 既定値は <code>true</code></li>
+ <li lang="ja"><code>containsAttribute</code>既定値は <code>false</code>, HTTPリクエスト時の高度なオプション, trueの場合 <code>content.attribute</code> はコンテンツ拡張データ <code>map</code>(フィールドコード, <code>value</code>)</li>
+ <li lang="ja"><code>orderField</code> ソートフィールド, [score:評価,comments:コメント数,clicks:クリック数,collections:コレクション数,publishDate:公開日,updateDate:更新日,checkDate:レビュー日], 既定値はトップレベルの降順、orderTypeでソートされた公開日</li>
+ <li lang="ja"><code>orderType</code>:ソートタイプ, [asc:昇順,desc:降順], 既定値は降順</li>
+ <li lang="ja"><code>firstResult</code>:開始位置, 1から始める</li>
+ <li lang="ja"><code>pageIndex</code>:ページ番号, firstResultが存在しないときに有効</li>
+ <li lang="ja"><code>pageSize</code>:ページあたりのアイテム数</li>
+ <li lang="ja"><code>maxResults</code>:最大結果数</li>
 </ul>
 <p>返回结果 戻り値 : 戻り値</p>
 <ul>
@@ -1798,7 +1798,7 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
    <li><code>totalPage</code> : total page 总页数</li>
    <li><code>list</code> : result list 结果列表</li>
   </ul></li>
- <li lang="en"><code>page.list</code>:List type query result entity list 
+ <li lang="ja"><code>page.list</code>:リスト型 クエリ結果エンティティリスト 
   <ul style="padding-left:20px;">
    <li><code>id</code> : id</li>
    <li><code>title</code> : title 标题</li>
@@ -2535,31 +2535,31 @@ $.getJSON('${site.dynamicPath}api/directive/cms/dictionaryExcludeList?dictionary
         <div class="block" data-id="cms-search">zh:search 内容列表查询指令 en:search content list query directive ja:search コンテンツリストクエリーディレクティブ 
 <p>zh:参数列表 en:parameter list ja:パラメータリスト</p>
 <ul>
- <li lang="en"><code>word</code>:search word, take union result when multiple search words</li>
- <li lang="en"><code>exclude</code>:exclude words</li>
- <li lang="en"><code>tagIds</code>:multiple tag ids, take union result when multiple tags</li>
- <li lang="en"><code>userId</code>:user id</li>
- <li lang="en"><code>parentId</code>:parent content id</li>
- <li lang="en"><code>categoryId</code>:category id</li>
- <li lang="en"><code>containChild</code>:include subcategories, effective when categoryId is not empty</li>
- <li lang="en"><code>categoryIds</code>:multiple category ids, effective when categoryId is empty</li>
- <li lang="en"><code>modelIds</code>:multiple model ids</li>
- <li lang="en"><code>extendsValues</code> multiple full-text search field values, format: [field code]:field value], e.g.: extendsValues='isbn:value1,unicode:value2'</li>
- <li lang="en"><code>dictionaryValues</code> multiple dictionary search field values, include all child results when only data dictionary parent value, format: [field code]_[field value], e.g.: dictionaryValues='extend1_value1,extend1_value2'</li>
- <li lang="en"><code>dictionaryUnion</code> take union result of dictionary values, effective when dictionaryUnion is not empty, [true,false], default is intersection result</li>
- <li lang="en"><code>highlight</code>:highlight keywords, [true,false], default is false, after enabling highlight, title, author, editor, description fields should add ?no_esc to make highlight html effective, cms will automatically perform html safety escaping on the original value</li>
- <li lang="en"><code>preTag</code>:highlight prefix, effective when highlight is enabled, default is "&lt;B&gt;"</li>
- <li lang="en"><code>postTag</code>:highlight suffix, effective when highlight is enabled, default is "&lt;/B&gt;"</li>
- <li lang="en"><code>projection</code>:projection result, [true,false], default is false</li>
- <li lang="en"><code>phrase</code>:exact search, [true,false], default is false</li>
- <li lang="en"><code>fields</code>:search fields, [title:title, author:author, editor:editor, description:description, text:text,files:attachments]</li>
- <li lang="en"><code>containsAttribute</code>default is <code>false</code>, advanced option for http requests, when true, <code>content.attribute</code> is content extended data <code>map</code>(field code, <code>value</code>)</li>
- <li lang="en"><code>startPublishDate</code>:start publish date, [2000-01-01 23:59:59],[2000-01-01]</li>
- <li lang="en"><code>endPublishDate</code>:end publish date, [2000-01-01 23:59:59],[2000-01-01]</li>
- <li lang="en"><code>orderField</code> sort field, [clicks:clicks in descending order,score:score in descending order,publishDate:publish date in descending order,collections:collections in descending order,minPrice:min price,maxPrice:max price,extend.sort1-extend.sort10]:extended field sort flag], default is descending order of relevance</li>
- <li lang="en"><code>pageIndex</code>:page number</li>
- <li lang="en"><code>pageSize</code>:number of items per page</li>
- <li lang="en"><code>maxResults</code>:maximum number of results</li>
+ <li lang="ja"><code>word</code>:検索語、複数の検索語の場合は合併結果を取得</li>
+ <li lang="ja"><code>exclude</code>:除外語彙</li>
+ <li lang="ja"><code>tagIds</code>:複数のタグID、複数のタグの場合は合併結果を取得</li>
+ <li lang="ja"><code>userId</code>:ユーザーID</li>
+ <li lang="ja"><code>parentId</code>:親コンテンツID</li>
+ <li lang="ja"><code>categoryId</code>:カテゴリID</li>
+ <li lang="ja"><code>containChild</code>:categoryIdが空でないときにサブカテゴリを含める</li>
+ <li lang="ja"><code>categoryIds</code>:categoryIdが空のときに複数のカテゴリID</li>
+ <li lang="ja"><code>modelIds</code>:複数のモデルID</li>
+ <li lang="ja"><code>extendsValues</code> 複数の全文検索フィールド値、形式：[フィールドコード]:フィールド値],例:extendsValues='isbn:value1,unicode:value2'</li>
+ <li lang="ja"><code>dictionaryValues</code> 複数の辞書検索フィールド値、データ辞書親値のみの場合はすべての子結果を含む、形式：[フィールドコード]_[フィールド値],例:dictionaryValues='extend1_value1,extend1_value2'</li>
+ <li lang="ja"><code>dictionaryUnion</code> 辞書値の合併結果を取得、dictionaryUnionが空でないときに有効、[true,false]、既定値は交差結果</li>
+ <li lang="ja"><code>highlight</code>:キーワードのハイライト、[true,false]、既定値はfalse、ハイライトを有効にした後、 タイトル、著者、編集者、説明フィールドにはハイライトhtmlを有効にするために?no_escを追加する必要があります。cmsは元の値に対して自動的にhtmlセーフティエスケープを実行します</li>
+ <li lang="ja"><code>preTag</code>:ハイライトのプレフィックス、ハイライトが有効な場合に有効、既定値は"&lt;B&gt;"</li>
+ <li lang="ja"><code>postTag</code>:ハイライトのサフィックス、ハイライトが有効な場合に有効、既定値は"&lt;/B&gt;"</li>
+ <li lang="ja"><code>projection</code>:投影結果、[true,false]、既定値はfalse</li>
+ <li lang="ja"><code>phrase</code>:正確な検索、[true,false]、既定値はfalse</li>
+ <li lang="ja"><code>fields</code>:検索フィールド、[title:タイトル, author:著者, editor:編集者, description:説明, text:本文,files:添付ファイル]</li>
+ <li lang="ja"><code>containsAttribute</code>既定値は <code>false</code>, HTTPリクエスト時の高度なオプション、trueの場合 <code>content.attribute</code> はコンテンツ拡張データ <code>map</code>(フィールドコード, <code>value</code>)</li>
+ <li lang="ja"><code>startPublishDate</code>:公開開始日、[2000-01-01 23:59:59],[2000-01-01]</li>
+ <li lang="ja"><code>endPublishDate</code>:公開終了日、[2000-01-01 23:59:59],[2000-01-01]</li>
+ <li lang="ja"><code>orderField</code> ソートフィールド、[clicks:クリック数の降順、score:スコアの降順、publishDate:公開日の降順、collections:コレクション数の降順、minPrice:最低価格、maxPrice:最高価格、extend.sort1-extend.sort10]:拡張フィールドのソートフラグ]、既定値は関連性の降順</li>
+ <li lang="ja"><code>pageIndex</code>:ページ番号</li>
+ <li lang="ja"><code>pageSize</code>:ページあたりのアイテム数</li>
+ <li lang="ja"><code>maxResults</code>:最大結果数</li>
 </ul>
 <p>zh:返回结果 en:return result ja:戻り値</p>
 <ul>
@@ -2574,7 +2574,7 @@ $.getJSON('${site.dynamicPath}api/directive/cms/dictionaryExcludeList?dictionary
    <li><code>totalPage</code> : total page 总页数</li>
    <li><code>list</code> : result list 结果列表</li>
   </ul></li>
- <li lang="en"><code>page.list</code>:List type query result entity list 
+ <li lang="ja"><code>page.list</code>:リスト型 クエリ結果エンティティリスト 
   <ul style="padding-left:20px;">
    <li><code>id</code> : id</li>
    <li><code>title</code> : title 标题</li>

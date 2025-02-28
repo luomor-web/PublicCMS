@@ -60,8 +60,9 @@ import freemarker.template.TemplateException;
  *
  * contentCreate 内容创建接口
  *
- * <p>
- * 参数列表
+ * <p lang="zh">参数列表
+ * <p lang="en">parameter list
+ * <p lang="ja">パラメータリスト
  * <ul>
  * <li><code>id</code>:内容id,为空时新建内容
  * <li><code>categoryId</code>:分类id
@@ -87,16 +88,19 @@ import freemarker.template.TemplateException;
  * <li><code>imagePaths</code>:多个图片路径
  * <li><code>imageDescriptions</code>:多个图片描述
  * </ul>
- * <p>
- * 返回结果
+ * <p lang="zh">返回结果
+ * <p lang="en">return result
+ * <p lang="ja">戻り値
  * <ul>
  * <li><code>result</code>:结果【failed:失败,success:成功】
  * <li><code>contentId</code>:内容id,当result为success时有效
  * <li><code>error</code>:错误,当result为failed时有效
  * </ul>
- * 使用示例
+ * <p lang="zh">使用示例
+ * <p lang="en">usage example
+ * <p lang="ja">使用例
  * <p>
- * 
+ *
  * <pre>
 &lt;script&gt;
 $.getJSON('${site.dynamicPath!}api/contentCreate?categoryId=1&amp;modelId=article&amp;title=title&amp;text=%3Cdiv%3Econtent%3C/div%3E&amp;extendData.field1=value1&amp;extendData.field2=value2&amp;authToken=用户登录授权&amp;authUserId=1&amp;appToken=接口访问授权Token', function(data){

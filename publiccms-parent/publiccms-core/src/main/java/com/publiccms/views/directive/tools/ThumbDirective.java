@@ -16,8 +16,9 @@ import freemarker.template.TemplateException;
 
 /**
  * thumb 缩略图指令
- * <p>
- * 参数列表
+ * <p lang="zh">参数列表
+ * <p lang="en">parameter list
+ * <p lang="ja">パラメータリスト
  * <ul>
  * <li><code>path</code>:文件路径
  * <li><code>width</code>:宽度
@@ -25,14 +26,15 @@ import freemarker.template.TemplateException;
  * </ul>
  * <p>
  * 打印结果文件路径
- * <p>
- * 使用示例
+ * <p lang="zh">使用示例
+ * <p lang="en">usage example
+ * <p lang="ja">使用例
  * <p>
  * &lt;@tools.thumb path='images/logo.jpg' width=100 height=100/&gt;
- * 
+ *
  * <pre>
 &lt;script&gt;
- $.getJSON('${site.dynamicPath}api/directive/tools/thumb?path=images/logo.jpg&amp;width=100&amp;height=100&amp;appToken=接口访问授权Token', function(data){    
+ $.getJSON('${site.dynamicPath}api/directive/tools/thumb?path=images/logo.jpg&amp;width=100&amp;height=100&amp;appToken=接口访问授权Token', function(data){
    console.log(data.deviceType);
  });
  &lt;/script&gt;

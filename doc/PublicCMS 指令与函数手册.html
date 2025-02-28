@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
-<title>PublicCMS Directive and Method Manual</title>
+<title>PublicCMS 指令与函数手册</title>
 <style type="text/css">
 html,body{background-color:#ffffff;color:#353833;font-size:14px;margin:0;height:100%;}
 h1{text-align:center;margin:20px;}
@@ -24,7 +24,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
 <body>
 <div class="container">
     <div class="indexContainer">
-        <h3>Directive(namespace:task)</h3>
+        <h3>指令(命名空间:task)</h3>
         <ul>
             <li><a href="#task-clearLog">clearLog</a></li>
             <li><a href="#task-indexContent">indexContent</a></li>
@@ -33,7 +33,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#task-publishPage">publishPage</a></li>
             <li><a href="#task-publishPlace">publishPlace</a></li>
         </ul>
-        <h3>Directive(namespace:trade)</h3>
+        <h3>指令(命名空间:trade)</h3>
         <ul>
             <li><a href="#trade-account">account</a></li>
             <li><a href="#trade-accountHistory">accountHistory</a></li>
@@ -54,7 +54,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#trade-refund">refund</a></li>
             <li><a href="#trade-refundList">refundList</a></li>
         </ul>
-        <h3>Directive(namespace:log)</h3>
+        <h3>指令(命名空间:log)</h3>
         <ul>
             <li><a href="#log-loginList">loginList</a></li>
             <li><a href="#log-operate">operate</a></li>
@@ -63,7 +63,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#log-taskList">taskList</a></li>
             <li><a href="#log-uploadList">uploadList</a></li>
         </ul>
-        <h3>Directive(namespace:cms)</h3>
+        <h3>指令(命名空间:cms)</h3>
         <ul>
             <li><a href="#cms-category">category</a></li>
             <li><a href="#cms-categoryList">categoryList</a></li>
@@ -123,7 +123,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#cms-wordList">wordList</a></li>
             <li><a href="#cms-workload">workload</a></li>
         </ul>
-        <h3>Directive(namespace:visit)</h3>
+        <h3>指令(命名空间:visit)</h3>
         <ul>
             <li><a href="#visit-day">day</a></li>
             <li><a href="#visit-dayList">dayList</a></li>
@@ -136,7 +136,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#visit-url">url</a></li>
             <li><a href="#visit-urlList">urlList</a></li>
         </ul>
-        <h3>Directive(namespace:api)</h3>
+        <h3>指令(命名空间:api)</h3>
         <ul>
             <li><a href="#api-appClient">appClient</a></li>
             <li><a href="#api-appToken">appToken</a></li>
@@ -152,7 +152,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#api-unBindingUser">unBindingUser</a></li>
             <li><a href="#api-upload">upload</a></li>
         </ul>
-        <h3>Directive(namespace:sys)</h3>
+        <h3>指令(命名空间:sys)</h3>
         <ul>
             <li><a href="#sys-app">app</a></li>
             <li><a href="#sys-appClient">appClient</a></li>
@@ -191,7 +191,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#sys-userList">userList</a></li>
             <li><a href="#sys-userTokenList">userTokenList</a></li>
         </ul>
-        <h3>Directive(namespace:tools)</h3>
+        <h3>指令(命名空间:tools)</h3>
         <ul>
             <li><a href="#tools-createCategoryFile">createCategoryFile</a></li>
             <li><a href="#tools-createContentFile">createContentFile</a></li>
@@ -229,11 +229,11 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
             <li><a href="#tools-userAgent">userAgent</a></li>
             <li><a href="#tools-version">version</a></li>
         </ul>
-        <h3>Directive(namespace:oauth)</h3>
+        <h3>指令(命名空间:oauth)</h3>
         <ul>
             <li><a href="#oauth-list">list</a></li>
         </ul>
-        <h3>Method</h3>
+        <h3>函数</h3>
         <ul>
             <li><a href="#method-confuse">confuse</a></li>
             <li><a href="#method-confuseHtml">confuseHtml</a></li>
@@ -279,7 +279,7 @@ pre{background-color: #efefef;overflow: auto;padding: 10px;}
         </ul>
     </div>
     <div class="doc">
-        <h1>PublicCMS Directive and Method Manual 202406</h1>
+        <h1>PublicCMS 指令与函数手册 202406</h1>
         <div class="block" data-id="task-clearLog">clearLog 日志清理指令 
 <p>参数列表</p>
 <ul>
@@ -1641,10 +1641,10 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
    });
    &lt;/script&gt;
  </pre></div>
-        <div class="block" data-id="cms-content"><p lang="en">content query directive</p>
-<p lang="en">parameter list</p>
+        <div class="block" data-id="cms-content"><p lang="zh">content 内容查询指令</p>
+<p lang="zh">参数列表</p>
 <ul>
- <li lang="en"><code>id</code> content id, result returns <code>object</code>
+ <li lang="zh"><code>id</code> 内容id,结果返回<code>object</code>
   <ul style="padding-left:20px;">
    <li><code>id</code> : id</li>
    <li><code>title</code> : title 标题</li>
@@ -1683,10 +1683,10 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
    <li><code>sort</code> : top 置顶级别</li>
    <li><code>status</code> : status(0:Draft,1:Published,2:Pending,3:Rejected) 状态(0:草稿,1:已发布,2:待审核,3:驳回)</li>
   </ul></li>
- <li lang="en"><code>absoluteURL</code>:process url as absolute path, default is <code>true</code></li>
- <li lang="en"><code>absoluteId</code>:process id as referenced content id, default is <code>true</code></li>
- <li lang="en"><code>containsAttribute</code> default is <code>false</code>, advanced option for http requests, when true, <code>object.attribute</code> is content extended data <code>map</code>(field code, <code>value</code>)</li>
- <li lang="en"><code>ids</code>: multiple content ids, separated by commas or spaces, effective when id is empty, result returns <code>map</code>(id, <code>object</code>)</li>
+ <li lang="zh"><code>absoluteURL</code>:url处理为绝对路径 默认为<code> true</code></li>
+ <li lang="zh"><code>absoluteId</code>:id处理为引用内容的ID 默认为<code> true</code></li>
+ <li lang="zh"><code>containsAttribute</code> 默认为<code>false</code>,http请求时为高级选项,为true时<code>object.attribute</code>为内容扩展数据<code>map</code>(字段编码,<code>value</code>)</li>
+ <li lang="zh"><code>ids</code>: 多个内容id,逗号或空格间隔,当id为空时生效,结果返回<code>map</code>(id,<code>object</code>)</li>
 </ul> zh:使用示例 en:usage example ja:使用例 
 <p>&lt;@cms.content id=1&gt;${object.title}&lt;/@cms.content&gt;</p>
 <p>&lt;@cms.content ids=1,2,3&gt;&lt;#list map as k,v&gt;${k}:${v.title}&lt;#sep&gt;,&lt;/#list&gt;&lt;/@cms.content&gt;</p>
@@ -1757,33 +1757,33 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
         <div class="block" data-id="cms-contentList">zh:contentList 内容列表查询指令 en:contentList content list directive ja:contentList コンテンツリストクエリーディレクティブ 
 <p>zh:参数列表 en:parameter list ja:パラメータリスト</p>
 <ul>
- <li lang="en"><code>categoryId</code>:category id, effective when parentId is empty</li>
- <li lang="en"><code>containChild</code>:whether to include subcategories, [true,false]</li>
- <li lang="en"><code>categoryIds</code>:multiple category ids, effective when categoryId is empty</li>
- <li lang="en"><code>modelId</code>:multiple model ids</li>
- <li lang="en"><code>parentId</code>:parent content id</li>
- <li lang="en"><code>onlyUrl</code>:external link, [true,false]</li>
- <li lang="en"><code>hasImages</code>:has image list, [true,false]</li>
- <li lang="en"><code>hasFiles</code>:has file list, [true,false]</li>
- <li lang="en"><code>hasProducts</code>:has product list, [true,false]</li>
- <li lang="en"><code>hasCover</code>:has cover image, [true,false]</li>
- <li lang="en"><code>userId</code>:publish user id</li>
- <li lang="en"><code>startPublishDate</code>:start publish date, [2020-01-01 23:59:59],[2020-01-01]</li>
- <li lang="en"><code>endPublishDate</code>:end publish date, cannot exceed now when advanced option is disabled, [2020-01-01 23:59:59],[2020-01-01]</li>
- <li lang="en"><code>advanced</code>:enable advanced options, default is <code>false</code></li>
- <li lang="en"><code>status</code>:advanced option: content status, [0:operation,1:published,2:pending review,3:rejected]</li>
- <li lang="en"><code>disabled</code>:advanced option: disabled status, default is <code>false</code></li>
- <li lang="en"><code>emptyParent</code>:advanced option: whether parent content id is empty, [true,false], effective when parentId is empty</li>
- <li lang="en"><code>title</code>:advanced option: title</li>
- <li lang="en"><code>absoluteURL</code>:process url as absolute path, default is <code>true</code></li>
- <li lang="en"><code>absoluteId</code>:process id as referenced content id, default is <code>true</code></li>
- <li lang="en"><code>containsAttribute</code>default is <code>false</code>, advanced option for http requests, when true, <code>content.attribute</code> is content extended data <code>map</code>(field code, <code>value</code>)</li>
- <li lang="en"><code>orderField</code> sort field, [score:rating,comments:number of comments,clicks:number of clicks,collections:number of collections,publishDate:publish date,updateDate:update date,checkDate:review date], default is descending order of top level, publish date sorted by orderType</li>
- <li lang="en"><code>orderType</code>:sort type, [asc:ascending,desc:descending], default is descending</li>
- <li lang="en"><code>firstResult</code>:start position, starts from 1</li>
- <li lang="en"><code>pageIndex</code>:page number, effective when firstResult does not exist</li>
- <li lang="en"><code>pageSize</code>:number of items per page</li>
- <li lang="en"><code>maxResults</code>:maximum number of results</li>
+ <li lang="zh"><code>categoryId</code>:分类id,当parentId为空时有效</li>
+ <li lang="zh"><code>containChild</code>:是否包含子分类,【true,false】</li>
+ <li lang="zh"><code>categoryIds</code>:多个分类id,当categoryId为空时有效</li>
+ <li lang="zh"><code>modelId</code>:多个模型id</li>
+ <li lang="zh"><code>parentId</code>:父内容id</li>
+ <li lang="zh"><code>onlyUrl</code>:外链,【true,false】</li>
+ <li lang="zh"><code>hasImages</code>:拥有图片列表,【true,false】</li>
+ <li lang="zh"><code>hasFiles</code>:拥有附件列表,【true,false】</li>
+ <li lang="zh"><code>hasProducts</code>:拥有产品列表,【true,false】</li>
+ <li lang="zh"><code>hasCover</code>:拥有封面图,【true,false】</li>
+ <li lang="zh"><code>userId</code>:发布用户id</li>
+ <li lang="zh"><code>startPublishDate</code>:起始发布日期,【2020-01-01 23:59:59】,【2020-01-01】</li>
+ <li lang="zh"><code>endPublishDate</code>:终止发布日期,高级选项禁用时不能超过现在,【2020-01-01 23:59:59】,【2020-01-01】</li>
+ <li lang="zh"><code>advanced</code>:开启高级选项, 默认为<code>false</code></li>
+ <li lang="zh"><code>status</code>:高级选项:内容状态,【0:操作,1:已发布,2:待审核,3:驳回】</li>
+ <li lang="zh"><code>disabled</code>:高级选项:禁用状态,默认为<code>false</code></li>
+ <li lang="zh"><code>emptyParent</code>:高级选项:父内容id是否为空,【true,false】,当parentId为空时有效</li>
+ <li lang="zh"><code>title</code>:高级选项:标题</li>
+ <li lang="zh"><code>absoluteURL</code>:url处理为绝对路径 默认为<code>true</code></li>
+ <li lang="zh"><code>absoluteId</code>:id处理为引用内容的ID 默认为<code>true</code></li>
+ <li lang="zh"><code>containsAttribute</code>默认为<code>false</code>,http请求时为高级选项,为true时<code>content.attribute</code>为内容扩展数据<code>map</code>(字段编码,<code>value</code>)</li>
+ <li lang="zh"><code>orderField</code> 排序字段,【score:评分,comments:评论数,clicks:点击数,collections收藏数,publishDate:发布日期,updateDate:更新日期,checkDate:审核日期】,默认置顶级别倒序、发布日期按orderType排序</li>
+ <li lang="zh"><code>orderType</code>:排序类型,【asc:正序,desc:倒序】,默认为倒序</li>
+ <li lang="zh"><code>firstResult</code>:开始位置,从1开始</li>
+ <li lang="zh"><code>pageIndex</code>:页码,firstResult不存在时有效</li>
+ <li lang="zh"><code>pageSize</code>:每页条数</li>
+ <li lang="zh"><code>maxResults</code>:最大结果数</li>
 </ul>
 <p>返回结果 戻り値 : 戻り値</p>
 <ul>
@@ -1798,7 +1798,7 @@ $.getJSON('${site.dynamicPath}api/directive/log/task?id=1&amp;appToken=接口访
    <li><code>totalPage</code> : total page 总页数</li>
    <li><code>list</code> : result list 结果列表</li>
   </ul></li>
- <li lang="en"><code>page.list</code>:List type query result entity list 
+ <li lang="zh"><code>page.list</code>:List类型 查询结果实体列表 
   <ul style="padding-left:20px;">
    <li><code>id</code> : id</li>
    <li><code>title</code> : title 标题</li>
@@ -2535,31 +2535,31 @@ $.getJSON('${site.dynamicPath}api/directive/cms/dictionaryExcludeList?dictionary
         <div class="block" data-id="cms-search">zh:search 内容列表查询指令 en:search content list query directive ja:search コンテンツリストクエリーディレクティブ 
 <p>zh:参数列表 en:parameter list ja:パラメータリスト</p>
 <ul>
- <li lang="en"><code>word</code>:search word, take union result when multiple search words</li>
- <li lang="en"><code>exclude</code>:exclude words</li>
- <li lang="en"><code>tagIds</code>:multiple tag ids, take union result when multiple tags</li>
- <li lang="en"><code>userId</code>:user id</li>
- <li lang="en"><code>parentId</code>:parent content id</li>
- <li lang="en"><code>categoryId</code>:category id</li>
- <li lang="en"><code>containChild</code>:include subcategories, effective when categoryId is not empty</li>
- <li lang="en"><code>categoryIds</code>:multiple category ids, effective when categoryId is empty</li>
- <li lang="en"><code>modelIds</code>:multiple model ids</li>
- <li lang="en"><code>extendsValues</code> multiple full-text search field values, format: [field code]:field value], e.g.: extendsValues='isbn:value1,unicode:value2'</li>
- <li lang="en"><code>dictionaryValues</code> multiple dictionary search field values, include all child results when only data dictionary parent value, format: [field code]_[field value], e.g.: dictionaryValues='extend1_value1,extend1_value2'</li>
- <li lang="en"><code>dictionaryUnion</code> take union result of dictionary values, effective when dictionaryUnion is not empty, [true,false], default is intersection result</li>
- <li lang="en"><code>highlight</code>:highlight keywords, [true,false], default is false, after enabling highlight, title, author, editor, description fields should add ?no_esc to make highlight html effective, cms will automatically perform html safety escaping on the original value</li>
- <li lang="en"><code>preTag</code>:highlight prefix, effective when highlight is enabled, default is "&lt;B&gt;"</li>
- <li lang="en"><code>postTag</code>:highlight suffix, effective when highlight is enabled, default is "&lt;/B&gt;"</li>
- <li lang="en"><code>projection</code>:projection result, [true,false], default is false</li>
- <li lang="en"><code>phrase</code>:exact search, [true,false], default is false</li>
- <li lang="en"><code>fields</code>:search fields, [title:title, author:author, editor:editor, description:description, text:text,files:attachments]</li>
- <li lang="en"><code>containsAttribute</code>default is <code>false</code>, advanced option for http requests, when true, <code>content.attribute</code> is content extended data <code>map</code>(field code, <code>value</code>)</li>
- <li lang="en"><code>startPublishDate</code>:start publish date, [2000-01-01 23:59:59],[2000-01-01]</li>
- <li lang="en"><code>endPublishDate</code>:end publish date, [2000-01-01 23:59:59],[2000-01-01]</li>
- <li lang="en"><code>orderField</code> sort field, [clicks:clicks in descending order,score:score in descending order,publishDate:publish date in descending order,collections:collections in descending order,minPrice:min price,maxPrice:max price,extend.sort1-extend.sort10]:extended field sort flag], default is descending order of relevance</li>
- <li lang="en"><code>pageIndex</code>:page number</li>
- <li lang="en"><code>pageSize</code>:number of items per page</li>
- <li lang="en"><code>maxResults</code>:maximum number of results</li>
+ <li lang="zh"><code>word</code>:搜索词,多个搜索词时取并集结果</li>
+ <li lang="zh"><code>exclude</code>:排除词汇</li>
+ <li lang="zh"><code>tagIds</code>:多个标签id,多个标签时取并集结果</li>
+ <li lang="zh"><code>userId</code>:用户id</li>
+ <li lang="zh"><code>parentId</code>:父内容id</li>
+ <li lang="zh"><code>categoryId</code>:分类id</li>
+ <li lang="zh"><code>containChild</code>:包含子分类,当categoryId不为空时有效</li>
+ <li lang="zh"><code>categoryIds</code>:多个分类id,当categoryId为空时有效</li>
+ <li lang="zh"><code>modelIds</code>:多个模型id</li>
+ <li lang="zh"><code>extendsValues</code> 多个全文搜索字段値,格式：[字段编码]:字段値],例如:extendsValues='isbn:value1,unicode:value2'</li>
+ <li lang="zh"><code>dictionaryValues</code> 多个字典搜索字段値,只有数据字典父级値時包含所有子级结果,格式：[字段编码]_[字段値],例如:dictionaryValues='extend1_value1,extend1_value2'</li>
+ <li lang="zh"><code>dictionaryUnion</code> 取数据字典并集结果,dictionaryUnion不为空时有效,【true,false】,默认为交集结果</li>
+ <li lang="zh"><code>highlight</code>:高亮关键词,【true,false】,默认为false,启用高亮后, 标题、作者、编辑、描述字段应该加?no_esc以使高亮html生效,cms会自动对原值有进行html安全转义</li>
+ <li lang="zh"><code>preTag</code>:高亮前缀,启用高亮时有效,默认为"&lt;B&gt;"</li>
+ <li lang="zh"><code>postTag</code>:高亮后缀,启用高亮时有效,默认为"&lt;/B&gt;"</li>
+ <li lang="zh"><code>projection</code>:投影结果,【true,false】,默认为false</li>
+ <li lang="zh"><code>phrase</code>:精确搜索,【true,false】,默认为false</li>
+ <li lang="zh"><code>fields</code>:搜索字段,【title:标题, author:作者, editor:编辑, description:描述, text:正文,files:附件】</li>
+ <li lang="zh"><code>containsAttribute</code>默认为<code>false</code>,http请求时为高级选项,为true时<code>content.attribute</code>为内容扩展数据<code>map</code>(字段编码,<code>value</code>)</li>
+ <li lang="zh"><code>startPublishDate</code>:起始发布日期,【2000-01-01 23:59:59】,【2000-01-01】</li>
+ <li lang="zh"><code>endPublishDate</code>:终止发布日期,【2000-01-01 23:59:59】,【2000-01-01】</li>
+ <li lang="zh"><code>orderField</code> 排序字段,【clicks:点击数倒序,score:分数倒序,publishDate:发布日期倒序,collections:收藏数倒叙,minPrice:最低价格,maxPrice:最高价格,extend.sort1-extend.sort10]:扩展字段排序标志】,默认相关度倒序</li>
+ <li lang="zh"><code>pageIndex</code>:页码</li>
+ <li lang="zh"><code>pageSize</code>:每页条数</li>
+ <li lang="zh"><code>maxResults</code>:最大结果数</li>
 </ul>
 <p>zh:返回结果 en:return result ja:戻り値</p>
 <ul>
@@ -2574,7 +2574,7 @@ $.getJSON('${site.dynamicPath}api/directive/cms/dictionaryExcludeList?dictionary
    <li><code>totalPage</code> : total page 总页数</li>
    <li><code>list</code> : result list 结果列表</li>
   </ul></li>
- <li lang="en"><code>page.list</code>:List type query result entity list 
+ <li lang="zh"><code>page.list</code>:List类型 查询结果实体列表 
   <ul style="padding-left:20px;">
    <li><code>id</code> : id</li>
    <li><code>title</code> : title 标题</li>
