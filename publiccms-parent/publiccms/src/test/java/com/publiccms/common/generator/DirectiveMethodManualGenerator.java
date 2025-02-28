@@ -52,6 +52,13 @@ public class DirectiveMethodManualGenerator {
         String basePackage = "com.publiccms.views";// 基础包名
         {
             Map<String, String> message = new HashMap<>();
+            message.put("zh", "zh-Hans");
+            message.put("ja", "ja");
+            message.put("en", "en");
+            messages.put("lang", message);
+        }
+        {
+            Map<String, String> message = new HashMap<>();
             message.put("zh", "指令与函数手册");
             message.put("ja", "指令および方法マニュアル");
             message.put("en", "Directive and Method Manual");
