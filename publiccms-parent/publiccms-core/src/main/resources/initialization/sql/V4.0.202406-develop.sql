@@ -23,3 +23,6 @@ UPDATE `sys_module` SET parent_id = 'vote_list' WHERE parent_id = 'content_vote'
 -- 2024-11-28 --
 DELETE FROM sys_module WHERE id IN ('log_login_delete','log_operate_delete');
 DELETE FROM sys_module_lang WHERE module_id IN ('log_login_delete','log_operate_delete');
+-- 2025-03-03 --
+UPDATE sys_module SET parent_id = 'tag_list',sort=0, attached=NULL WHERE id = 'tag_type_list';
+UPDATE sys_module SET parent_id = 'content_list',sort=0, attached=NULL WHERE id = 'content_recycle_list';

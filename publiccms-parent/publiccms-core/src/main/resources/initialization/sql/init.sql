@@ -898,7 +898,7 @@ INSERT INTO `sys_module` VALUES ('content_move', 'cmsContent/moveParameters', 'c
 INSERT INTO `sys_module` VALUES ('content_publish', NULL, 'cmsContent/publish', NULL, 'content_list', 0, 0);
 INSERT INTO `sys_module` VALUES ('content_push', 'cmsContent/push', 'cmsPlace/push,cmsPlace/add,cmsPlace/save,cmsContent/push_content,cmsContent/push_content_list,cmsContent/push_to_content,cmsContent/push_to_relation,cmsContent/related,cmsContent/unrelated,cmsPlace/delete', NULL, 'content_list', 0, 0);
 INSERT INTO `sys_module` VALUES ('content_recycle_delete', NULL, 'cmsContent/realDelete', NULL, 'content_recycle_list', 0, 0);
-INSERT INTO `sys_module` VALUES ('content_recycle_list', 'cmsRecycleContent/list', NULL, 'icon-trash', 'content', 1, 11);
+INSERT INTO `sys_module` VALUES ('content_recycle_list', 'cmsRecycleContent/list', NULL, NULL, 'content_list', 1, 0);
 INSERT INTO `sys_module` VALUES ('content_recycle_recycle', NULL, 'cmsContent/recycle', NULL, 'content_recycle_list', 0, 0);
 INSERT INTO `sys_module` VALUES ('content_refresh', NULL, 'cmsContent/refresh', NULL, 'content_list', 0, 0);
 INSERT INTO `sys_module` VALUES ('content_search', 'cmsContent/search', 'cmsContent/view', 'icon-search', 'content', 1, 2);
@@ -1016,7 +1016,7 @@ INSERT INTO `sys_module` VALUES ('tag_add', 'cmsTag/add', 'cmsTag/save', NULL, '
 INSERT INTO `sys_module` VALUES ('tag_delete', NULL, 'cmsTag/delete', NULL, 'tag_list', 0, 0);
 INSERT INTO `sys_module` VALUES ('tag_list', 'cmsTag/list', NULL, 'icon-tag', 'content', 1, 5);
 INSERT INTO `sys_module` VALUES ('tag_type_delete', NULL, 'cmsTagType/delete', NULL, 'tag_type_list', 0, 0);
-INSERT INTO `sys_module` VALUES ('tag_type_list', 'cmsTagType/list', NULL, 'icon-tags', 'content', 1, 6);
+INSERT INTO `sys_module` VALUES ('tag_type_list', 'cmsTagType/list', NULL, NULL, 'tag_list', 1, 0);
 INSERT INTO `sys_module` VALUES ('tag_type_save', 'cmsTagType/add', 'cmsTagType/save', NULL, 'tag_type_list', 0, 0);
 INSERT INTO `sys_module` VALUES ('task_add', 'sysTask/add', 'sysTask/save,sysTask/example,taskTemplate/lookup', NULL, 'task_list', 0, 0);
 INSERT INTO `sys_module` VALUES ('task_delete', NULL, 'sysTask/delete', NULL, 'task_list', 0, 0);
