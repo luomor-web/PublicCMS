@@ -243,30 +243,31 @@ public class ImageUtils {
             g = resultImage.createGraphics();
         }
         Image scaledImage;
-        if (angle == 90 || angle == 270) {
+        if (90 == angle || 270 == angle) {
             scaledImage = sourceImage.getScaledInstance(height, width, Image.SCALE_SMOOTH);
+        } else {
+            scaledImage = sourceImage.getScaledInstance(height, width, Image.SCALE_SMOOTH);
+        }
+        if (90 == angle || 180 == angle || 270 == angle) {
             AffineTransform at = new AffineTransform();
-            at.rotate(Math.toRadians(angle), height / 2, width / 2);
-            if (angle == 270) {
-                at.translate((width - height) / 2, (width - height) / 2);
-            }else {
-                at.translate((height - width) / 2, (height - width) / 2);
+            if (180 == angle) {
+                at.rotate(Math.toRadians(angle), width / 2, height / 2);
+            } else {
+                at.rotate(Math.toRadians(angle), height / 2, width / 2);
+                if (angle == 270) {
+                    at.translate((width - height) / 2, (width - height) / 2);
+                } else {
+                    at.translate((height - width) / 2, (height - width) / 2);
+                }
             }
             g.setTransform(at);
-        } else {
-            scaledImage = sourceImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            if (180 == angle) {
-                AffineTransform at = new AffineTransform();
-                at.rotate(Math.toRadians(angle), width / 2, height / 2);
-                g.setTransform(at);
-            }
         }
         g.drawImage(scaledImage, 0, 0, null);
         g.dispose();
         return resultImage;
     }
 
-    public static void thumb(String sourceFilePath, String thumbFilePath, int width, int height, String suffix) throws IOException {
+    public static void thumb(String sourceFilePath, String thumbFilePath, int width, int height, String suffix) throws IOException, ImageProcessingException {
         File file = new File(sourceFilePath);
         BufferedImage sourceImage = ImageIO.read(file);
         if (width > sourceImage.getWidth()) {
@@ -285,24 +286,21 @@ public class ImageUtils {
         }
     }
 
-    private static int getAngle(File file) {
-        try {
-            Metadata metadata = ImageMetadataReader.readMetadata(file);
-            for (Directory d : metadata.getDirectoriesOfType(ExifIFD0Directory.class)) {
-                for (Tag tag : d.getTags()) {
-                    if ("Orientation".equals(tag.getTagName())) {
-                        String desc = tag.getDescription();
-                        if (desc.contains("90")) {
-                            return 90;
-                        } else if (desc.contains("270")) {
-                            return 270;
-                        } else if (desc.contains("180")) {
-                            return 180;
-                        }
+    public static int getAngle(File file) throws ImageProcessingException, IOException {
+        Metadata metadata = ImageMetadataReader.readMetadata(file);
+        for (Directory d : metadata.getDirectoriesOfType(ExifIFD0Directory.class)) {
+            for (Tag tag : d.getTags()) {
+                if ("Orientation".equals(tag.getTagName())) {
+                    String desc = tag.getDescription();
+                    if (desc.contains("90")) {
+                        return 90;
+                    } else if (desc.contains("270")) {
+                        return 270;
+                    } else if (desc.contains("180")) {
+                        return 180;
                     }
                 }
             }
-        } catch (ImageProcessingException | IOException e) {
         }
         return 0;
     }

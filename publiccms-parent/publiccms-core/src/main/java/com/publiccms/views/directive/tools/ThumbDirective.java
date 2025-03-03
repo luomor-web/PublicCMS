@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Component;
 
+import com.drew.imaging.ImageProcessingException;
 import com.publiccms.common.base.AbstractTemplateDirective;
 import com.publiccms.common.constants.Constants;
 import com.publiccms.common.handler.RenderHandler;
@@ -69,7 +70,7 @@ public class ThumbDirective extends AbstractTemplateDirective {
                     try {
                         ImageUtils.thumb(sourceFilePath, thumbFilePath, width, height, suffix);
                         handler.print(CommonUtils.joinString(site.getSitePath(), thumbPath));
-                    } catch (IOException e) {
+                    } catch (IOException | ImageProcessingException e) {
                         handler.print(path);
                         log.error(e.getMessage());
                     }

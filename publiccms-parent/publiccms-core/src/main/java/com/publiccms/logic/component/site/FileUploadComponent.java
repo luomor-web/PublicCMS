@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.drew.imaging.ImageProcessingException;
 import com.publiccms.common.api.FileUploader;
 import com.publiccms.common.constants.CommonConstants;
 import com.publiccms.common.constants.Constants;
@@ -114,7 +115,7 @@ public class FileUploadComponent {
                     fileSize.setWidth(maxImageWidth);
                     fileSize.setHeight(height);
                     fileSize.setFileSize(new File(filepath).length());
-                } catch (IOException e) {
+                } catch (IOException | ImageProcessingException e) {
                 }
             }
         }
