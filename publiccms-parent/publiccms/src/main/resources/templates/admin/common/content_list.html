@@ -15,7 +15,7 @@
             modelId=modelIds parentId=parentId emptyParent=true title=title userId=userId deptId=deptId
             startPublishDate=startPublishDate endPublishDate=endPublishDate absoluteId=false
             orderField=orderField orderType=orderType pageIndex=pageNum pageSize=numPerPage>
-<@sys.authorized roleIds=admin.roles urls='cmsContent/add,cmsContent/delete,cmsContent/check,cmsContent/reject,cmsContent/uncheck,cmsContent/push,cmsCategory/lookupBySiteId,cmsContent/refresh,cmsContent/publish,cmsContent/moveParameters,cmsContent/changeModelParameters,cmsContent/export,cmsContent/import,cmsContent/workload,cmsComment/list,cmsContent/sortParameters,cmsCategory/add'><#assign authorizedMap=map/></@sys.authorized>
+<@sys.authorized roleIds=admin.roles urls='cmsContent/add,cmsContent/delete,cmsContent/check,cmsContent/reject,cmsContent/uncheck,cmsContent/push,cmsCategory/lookupBySiteId,cmsContent/refresh,cmsContent/publish,cmsContent/moveParameters,cmsContent/changeModelParameters,cmsContent/export,cmsContent/import,cmsContent/workload,cmsRecycleContent/list,cmsComment/list,cmsContent/sortParameters,cmsCategory/add'><#assign authorizedMap=map/></@sys.authorized>
 <div class="pageHeader card">
     <form class="pagerForm" action="common/content_list.html" autocomplete="off" onsubmit="return divSearch(this,'contentBox');" method="post">
         <#include "../include_page/parameters.html"/>
@@ -134,7 +134,7 @@
             <li><a href="cmsContent/workload" target="navTab" rel="cmsContent/workload"><i class="bi bi-calendar-heart"></i> <@t.page 'workload'/></a></li>
         </#if>
         <#if authorizedMap['cmsRecycleContent/list']>
-            <li><a class="button" href="cmsRecycleContent/list.html" target="navTab" rel="cmsRecycleContent/list"><@t.page 'recycle_bin'/></a></li>
+            <li><a class="button" href="cmsRecycleContent/list.html" target="navTab" rel="cmsRecycleContent/list"><i class="bi bi-recycle"></i><@t.page 'recycle_bin'/></a></li>
         </#if>
         </ul>
     </div>
