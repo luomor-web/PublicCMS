@@ -242,22 +242,26 @@ public class ImageUtils {
             resultImage = g.getDeviceConfiguration().createCompatibleImage(resultImage.getWidth(), resultImage.getHeight(), Transparency.TRANSLUCENT);
             g = resultImage.createGraphics();
         }
-
+        Image scaledImage;
         if (angle == 90 || angle == 270) {
-            Image scaledImage = sourceImage.getScaledInstance(height, width, Image.SCALE_SMOOTH);
+            scaledImage = sourceImage.getScaledInstance(height, width, Image.SCALE_SMOOTH);
             AffineTransform at = new AffineTransform();
             at.rotate(Math.toRadians(angle), height / 2, width / 2);
+            if (angle == 270) {
+                at.translate((width - height) / 2, (width - height) / 2);
+            }else {
+                at.translate((height - width) / 2, (height - width) / 2);
+            }
             g.setTransform(at);
-            g.drawImage(scaledImage, (width - height) / 2, (width - height) / 2, null);
         } else {
-            Image scaledImage = sourceImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            scaledImage = sourceImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             if (180 == angle) {
                 AffineTransform at = new AffineTransform();
                 at.rotate(Math.toRadians(angle), width / 2, height / 2);
                 g.setTransform(at);
             }
-            g.drawImage(scaledImage, 0, 0, null);
         }
+        g.drawImage(scaledImage, 0, 0, null);
         g.dispose();
         return resultImage;
     }
