@@ -912,6 +912,9 @@ public class CmsContentService extends BaseService<CmsContent> {
             if (siteId == entity.getSiteId() && entity.isDisabled()) {
                 delete(entity.getId());
                 attributeService.delete(entity.getId());
+                contentFileService.deleteByContentId(entity.getId());
+                contentProductService.deleteByContentId(entity.getId());
+                cmsContentRelatedService.deleteByContentId(entity.getId());
             }
         }
     }
