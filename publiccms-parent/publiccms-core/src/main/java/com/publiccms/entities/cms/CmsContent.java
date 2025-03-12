@@ -56,7 +56,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private short siteId;
     /**
      * title
-
+     * 
      * 标题
      */
     @GeneratorColumn(title = "标题", condition = true, like = true, or = true)
@@ -66,7 +66,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private String title;
     /**
      * user id
-
+     * 
      * 发布用户ID
      */
     @GeneratorColumn(title = "发布用户", condition = true)
@@ -74,21 +74,21 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private long userId;
     /**
      * dept id
-
+     * 
      * 发布用户部门ID
      */
     @GeneratorColumn(title = "发布部门", condition = true)
     private Integer deptId;
     /**
      * check user id
-
+     * 
      * 审核用户ID
      */
     @GeneratorColumn(title = "审核用户", condition = true)
     private Long checkUserId;
     /**
      * category id
-
+     * 
      * 分类ID
      */
     @GeneratorColumn(title = "分类", condition = true)
@@ -96,7 +96,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private int categoryId;
     /**
      * model id
-
+     * 
      * 模型ID
      */
     @GeneratorColumn(title = "模型", condition = true)
@@ -106,7 +106,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private String modelId;
     /**
      * parent id
-
+     * 
      * 父内容ID
      */
     @GeneratorColumn(title = "父内容", condition = true)
@@ -114,7 +114,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private Long parentId;
     /**
      * quote content id
-
+     * 
      * 引用内容ID
      */
     @GeneratorColumn(title = "引用内容", condition = true)
@@ -122,14 +122,14 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private Long quoteContentId;
     /**
      * copied
-
+     * 
      * 转载
      */
     @GeneratorColumn(title = "是否转载")
     private boolean copied;
     /**
      * author
-
+     * 
      * 作者
      */
     @GeneratorColumn(title = "作者")
@@ -137,7 +137,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private String author;
     /**
      * editor
-
+     * 
      * 编辑
      */
     @GeneratorColumn(title = "编辑")
@@ -145,7 +145,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private String editor;
     /**
      * external link
-
+     * 
      * 外链
      */
     @GeneratorColumn(title = "外链")
@@ -153,7 +153,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private boolean onlyUrl;
     /**
      * has images
-
+     * 
      * 拥有图片列表
      */
     @GeneratorColumn(title = "有图片列表", condition = true)
@@ -161,7 +161,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private boolean hasImages;
     /**
      * has files
-
+     * 
      * 拥有附件列表
      */
     @GeneratorColumn(title = "有附件列表", condition = true)
@@ -169,7 +169,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private boolean hasFiles;
     /**
      * has products
-
+     * 
      * 拥有产品列表
      */
     @GeneratorColumn(title = "有产品列表", condition = true)
@@ -177,7 +177,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private boolean hasProducts;
     /**
      * has static file
-
+     * 
      * 静态化
      */
     @GeneratorColumn(title = "有静态化")
@@ -185,7 +185,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private boolean hasStatic;
     /**
      * url
-
+     * 
      * 链接地址
      */
     @GeneratorColumn(title = "地址")
@@ -193,9 +193,12 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     @Length(max = 1000)
     private String url;
     /**
+     * <p lang="en">
      * description
-
+     * <p lang="zh">
      * 描述
+     * <p lang="ja">
+     * 説明
      */
     @GeneratorColumn(title = "描述")
     @FullTextField(analyzer = "cms", projectable = Projectable.YES)
@@ -203,7 +206,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private String description;
     /**
      * tag ids
-
+     * 
      * 多个标签id
      */
     @GeneratorColumn(title = "标签")
@@ -211,35 +214,35 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private String tagIds;
     /**
      * cover
-
+     * 
      * 封面图
      */
     @GeneratorColumn(title = "封面")
     private String cover;
     /**
      * childs
-
+     * 
      * 子内容数
      */
     @GeneratorColumn(title = "子内容数")
     private int childs;
     /**
      * total scores
-
+     * 
      * 总分数
      */
     @GeneratorColumn(title = "总分数")
     private int scores;
     /**
      * score users
-
+     * 
      * 评分用户数
      */
     @GeneratorColumn(title = "评分用户数")
     private int scoreUsers;
     /**
      * score
-
+     * 
      * 分数
      */
     @GeneratorColumn(title = "分数", order = true)
@@ -247,14 +250,14 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private BigDecimal score;
     /**
      * comments
-
+     * 
      * 评论数
      */
     @GeneratorColumn(title = "评论数", order = true)
     private int comments;
     /**
      * clicks
-
+     * 
      * 点击数
      */
     @GeneratorColumn(title = "点击数", order = true)
@@ -262,7 +265,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private int clicks;
     /**
      * collections
-
+     * 
      * 收藏数
      */
     @GeneratorColumn(title = "收藏数", order = true)
@@ -270,7 +273,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private int collections;
     /**
      * publish date
-
+     * 
      * 发布日期
      */
     @GeneratorColumn(title = "发布日期", condition = true, order = true)
@@ -279,7 +282,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private Date publishDate;
     /**
      * expiry date
-
+     * 
      * 过期日期
      *
      */
@@ -289,35 +292,35 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private Date expiryDate;
     /**
      * check date
-
+     * 
      * 审核日期
      */
     @GeneratorColumn(title = "审核日期", order = true)
     private Date checkDate;
     /**
      * update user id
-
+     * 
      * 更新用户id
      */
     @GeneratorColumn(title = "更新用户")
     private Long updateUserId;
     /**
      * update date
-
+     * 
      * 更新日期
      */
     @GeneratorColumn(title = "更新日期", order = true)
     private Date updateDate;
     /**
      * create date
-
+     * 
      * 创建日期
      */
     @GeneratorColumn(title = "创建日期")
     private Date createDate;
     /**
      * top
-
+     * 
      * 置顶级别
      */
     @GeneratorColumn(title = "排序")
@@ -325,7 +328,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     private int sort;
     /**
      * status(0:Draft,1:Published,2:Pending,3:Rejected)
-
+     * 
      * 状态(0:草稿,1:已发布,2:待审核,3:驳回)
      */
     @GeneratorColumn(title = "状态", condition = true)
@@ -337,17 +340,16 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
     public CmsContent() {
     }
 
-    public CmsContent(short siteId, String title, long userId, int categoryId, String modelId, boolean onlyUrl,
-            boolean hasImages, boolean hasFiles, boolean hasProducts, int childs, Date publishDate, Date createDate,
-            int sort, int status) {
-        this(siteId, title, userId, categoryId, modelId, false, onlyUrl, hasImages, hasFiles, hasProducts, false,
-                childs, 0, 0, BigDecimal.ZERO, 0, 0, 0, publishDate, createDate, sort, status, false);
+    public CmsContent(short siteId, String title, long userId, int categoryId, String modelId, boolean onlyUrl, boolean hasImages,
+            boolean hasFiles, boolean hasProducts, int childs, Date publishDate, Date createDate, int sort, int status) {
+        this(siteId, title, userId, categoryId, modelId, false, onlyUrl, hasImages, hasFiles, hasProducts, false, childs, 0, 0,
+                BigDecimal.ZERO, 0, 0, 0, publishDate, createDate, sort, status, false);
     }
 
-    public CmsContent(short siteId, String title, long userId, int categoryId, String modelId, boolean copied,
-            boolean onlyUrl, boolean hasImages, boolean hasFiles, boolean hasProducts, boolean hasStatic, int childs,
-            int scores, int scoreUsers, BigDecimal score, int comments, int clicks, int collections, Date publishDate,
-            Date createDate, int sort, int status, boolean disabled) {
+    public CmsContent(short siteId, String title, long userId, int categoryId, String modelId, boolean copied, boolean onlyUrl,
+            boolean hasImages, boolean hasFiles, boolean hasProducts, boolean hasStatic, int childs, int scores, int scoreUsers,
+            BigDecimal score, int comments, int clicks, int collections, Date publishDate, Date createDate, int sort, int status,
+            boolean disabled) {
         this.siteId = siteId;
         this.title = title;
         this.userId = userId;

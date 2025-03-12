@@ -51,6 +51,12 @@ ol.vote>li:nth-child(3n+2) .progress-bar {background-color:green;}
 ol.vote>li:nth-child(3n) .progress-bar {background-color:blue;}
 
 .iframe-box{position:relative;}
+
+.workflow{display:flex;justify-content:space-around;flex-wrap:wrap;}
+.workflow .step,.workflow .sortDragPlaceholder{width:200px;border-style:solid;border-width:1px;border-color:#ccc;line-height:60px;}
+.workflow .step.current{border-color:#99CC00;}
+.workflow .step.processed{border-color:#ded;}
+
 .diy-border{visibility:hidden;}
 .diy-border-top,.diy-border-right,.diy-border-bottom,.diy-border-left{box-sizing:border-box;position:absolute;border-width:0px;border-style:dashed;border-color:#666;background-color:#fff;}
 .diy-border-top,.diy-border-bottom{border-top-width:1px;height:1px;}

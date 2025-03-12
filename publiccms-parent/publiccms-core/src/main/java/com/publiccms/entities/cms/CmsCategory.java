@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.publiccms.common.database.CmsUpgrader;
 import com.publiccms.common.generator.annotation.GeneratorColumn;
+import com.publiccms.common.tools.CommonUtils;
 import com.publiccms.views.pojo.entities.EntityAttribute;
 
 /**
@@ -38,45 +39,46 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     @JsonIgnore
     private short siteId;
     /**
+     * <p lang="en">
      * name
-
+     * <p lang="zh">
      * 名称
+     * <p lang="ja">
+     * 名前
      */
     @GeneratorColumn(title = "名称")
     @NotNull
     @Length(max = 50)
     private String name;
     /**
-     * parent id
-
-     * 父id
+     * parent id 父id
      */
     @GeneratorColumn(title = "父分类", condition = true)
     private Integer parentId;
     /**
      * type id
-
+     * 
      * 分类类型id
      */
     @GeneratorColumn(title = "分类类型", condition = true)
     private String typeId;
     /**
      * child ids
-
+     * 
      * 子分类id
      */
     @GeneratorColumn(title = "子分类")
     private String childIds;
     /**
      * tag type ids
-
+     * 
      * 标签类型id
      */
     @GeneratorColumn(title = "标签")
     private String tagTypeIds;
     /**
      * code
-
+     * 
      * 编码
      */
     @GeneratorColumn(title = "编码")
@@ -86,7 +88,7 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
 
     /**
      * custom path
-
+     * 
      * 自定义访问路径
      */
     private boolean customPath;
@@ -96,21 +98,21 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     private String path;
     /**
      * extend link
-
+     * 
      * 外链
      */
     @GeneratorColumn(title = "外链")
     private boolean onlyUrl;
     /**
      * has static file
-
+     * 
      * 有静态化文件
      */
     @GeneratorColumn(title = "有静态化")
     private boolean hasStatic;
     /**
      * url
-
+     * 
      * 链接地址
      */
     @GeneratorColumn(title = "地址")
@@ -118,7 +120,7 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     private String url;
     /**
      * custom content path
-
+     * 
      * 自定义内容访问路径
      */
     private boolean customContentPath;
@@ -126,35 +128,35 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     private String contentPath;
     /**
      * contain child content
-
+     * 
      * 包含子分类内容
      */
     @GeneratorColumn(title = "包含子分类内容")
     private boolean containChild;
     /**
      * content page size
-
+     * 
      * 内容分页大小
      */
     @GeneratorColumn(title = "每页数据")
     private Integer pageSize;
     /**
      * allow contribute
-
+     * 
      * 允许投稿
      */
     @GeneratorColumn(title = "允许投稿", condition = true)
     private boolean allowContribute;
     /**
      * sort
-
+     * 
      * 排序
      */
     @GeneratorColumn(title = "排序")
     private int sort;
     /**
      * hidden
-
+     * 
      * 前台隐藏
      */
     @GeneratorColumn(title = "是否隐藏", condition = true)
@@ -164,7 +166,7 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     private boolean disabled;
     /**
      * workflow
-
+     * 
      * 工作流
      */
     @GeneratorColumn(title = "工作流")
@@ -196,7 +198,7 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     public CmsCategory(short siteId, String name, Integer parentId, String typeId, String childIds, String tagTypeIds,
             String code, boolean customPath, String templatePath, String path, boolean onlyUrl, boolean hasStatic, String url,
             boolean customContentPath, String contentPath, boolean containChild, Integer pageSize, boolean allowContribute,
-            int sort, boolean hidden, boolean disabled,Integer workflowId, Integer extendId) {
+            int sort, boolean hidden, boolean disabled, Integer workflowId, Integer extendId) {
         this.siteId = siteId;
         this.name = name;
         this.parentId = parentId;
@@ -273,6 +275,10 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     @Column(name = "child_ids", length = 65535)
     public String getChildIds() {
         return this.childIds;
+    }
+
+    public boolean isHasChild() {
+        return CommonUtils.notEmpty(this.childIds);
     }
 
     public void setChildIds(String childIds) {
@@ -421,6 +427,15 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+
+    @Column(name = "workflow_id")
+    public Integer getWorkflowId() {
+        return this.workflowId;
+    }
+
+    public void setWorkflowId(Integer workflowId) {
+        this.workflowId = workflowId;
     }
 
     @Column(name = "extend_id")

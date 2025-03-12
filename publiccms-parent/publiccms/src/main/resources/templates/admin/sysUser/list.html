@@ -2,7 +2,7 @@
 <ul>
     <@sys.deptList parentId=parentId pageSize=500>
         <#list page.list as a>
-            <li _src="sysUser/list.html?parentId=${a.id}">
+            <li<#if a.hasChild> _src="sysUser/list.html?parentId=${a.id}"</#if>>
                 <a href="common/user_list.html?deptId=${a.id}" class="exclude-translate" target="ajax" rel="userBox">${a.name!}</a>
             </li>
         </#list>
@@ -18,7 +18,7 @@
                     <ul>
                 <@sys.deptList pageSize=500>
                     <#list page.list as a>
-                        <li _src="sysUser/list.html?parentId=${a.id}">
+                        <li<#if a.hasChild> _src="sysUser/list.html?parentId=${a.id}"</#if>>
                             <a href="common/user_list.html?deptId=${a.id}" class="exclude-translate" target="ajax" rel="userBox">${(a.name)!}</a>
                         </li>
                     <#else>

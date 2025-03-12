@@ -58,6 +58,9 @@ import com.publiccms.entities.sys.SysDept;
 import com.publiccms.entities.sys.SysDeptItemId;
 import com.publiccms.entities.sys.SysSite;
 import com.publiccms.entities.sys.SysUser;
+import com.publiccms.entities.sys.SysWorkflowProcess;
+import com.publiccms.entities.sys.SysWorkflowProcessItem;
+import com.publiccms.entities.sys.SysWorkflowProcessItemId;
 import com.publiccms.logic.component.config.ConfigDataComponent;
 import com.publiccms.logic.component.config.SiteConfigComponent;
 import com.publiccms.logic.component.exchange.ContentExchangeComponent;
@@ -76,6 +79,8 @@ import com.publiccms.logic.service.sys.SysDeptItemService;
 import com.publiccms.logic.service.sys.SysDeptService;
 import com.publiccms.logic.service.sys.SysSiteService;
 import com.publiccms.logic.service.sys.SysUserService;
+import com.publiccms.logic.service.sys.SysWorkflowProcessItemService;
+import com.publiccms.logic.service.sys.SysWorkflowProcessService;
 import com.publiccms.views.pojo.entities.CmsModel;
 import com.publiccms.views.pojo.model.CmsContentParameters;
 import com.publiccms.views.pojo.query.CmsContentQuery;
@@ -119,6 +124,10 @@ public class CmsContentAdminController {
     private ContentExchangeComponent exchangeComponent;
     @Resource
     private ContentExportComponent exportComponent;
+    @Resource
+    private SysWorkflowProcessItemService workflowProcessItemService;
+    @Resource
+    private SysWorkflowProcessService workflowProcessService;
 
     /**
      * 保存内容
@@ -183,11 +192,29 @@ public class CmsContentAdminController {
                 operate, RequestUtils.getIpAddress(request), now,
                 JsonUtils.getString(new Object[] { entity, contentParameters })));
 
-        if (null != checked && checked) {
-            entity = service.check(site.getId(), admin, entity.getId());
+        if (null != category.getWorkflowId()) {
+            SysWorkflowProcessItem item = workflowProcessItemService.getEntity(
+                    new SysWorkflowProcessItemId(SysWorkflowProcessService.ITEM_TYPE_CONTENT, String.valueOf(entity.getId())));
+            if (null == item) {
+                SysWorkflowProcess process = workflowProcessService.createProcess(site.getId(), category.getWorkflowId(),
+                        SysWorkflowProcessService.ITEM_TYPE_CONTENT, String.valueOf(entity.getId()));
+                if (null != process) {
+                    checked = null;
+                }
+            }
         }
+
         try {
-            templateComponent.createContentFile(site, entity, category, categoryModel); // 静态化
+            if (null != checked && checked) {
+                entity = service.check(site.getId(), admin, entity.getId());
+                templateComponent.createContentFile(site, entity, category, categoryModel); // 静态化
+                templateComponent.createCategoryFile(site, category, null, null);
+                if (null != parent) {
+                    publish(site, parent, admin);
+                }
+            } else if (CmsContentService.STATUS_PEND == entity.getStatus()) {
+
+            }
             if (null == entity.getParentId() && null == entity.getQuoteContentId()) {
                 Set<Serializable> categoryIdsSet = service.updateQuote(entity.getId(), contentParameters);
                 if (CommonUtils.notEmpty(contentParameters.getCategoryIds())) {
@@ -202,12 +229,6 @@ public class CmsContentAdminController {
                             templateComponent.createCategoryFile(site, c, null, null);
                         }
                     }
-                }
-            }
-            if (null != checked && checked) {
-                templateComponent.createCategoryFile(site, category, null, null);
-                if (null != parent) {
-                    publish(site, parent, admin);
                 }
             }
         } catch (IOException | TemplateException e) {
