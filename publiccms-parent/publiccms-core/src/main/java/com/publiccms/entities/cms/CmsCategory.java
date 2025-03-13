@@ -15,7 +15,6 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.publiccms.common.database.CmsUpgrader;
 import com.publiccms.common.generator.annotation.GeneratorColumn;
-import com.publiccms.common.tools.CommonUtils;
 import com.publiccms.views.pojo.entities.EntityAttribute;
 
 /**
@@ -275,10 +274,6 @@ public class CmsCategory extends EntityAttribute implements java.io.Serializable
     @Column(name = "child_ids", length = 65535)
     public String getChildIds() {
         return this.childIds;
-    }
-
-    public boolean isHasChild() {
-        return CommonUtils.notEmpty(this.childIds);
     }
 
     public void setChildIds(String childIds) {

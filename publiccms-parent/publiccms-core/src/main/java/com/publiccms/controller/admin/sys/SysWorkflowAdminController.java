@@ -97,7 +97,10 @@ public class SysWorkflowAdminController {
                             for (Map<String, Object> data : items) {
                                 SysWorkflowStep entity = new SysWorkflowStep();
                                 if (null != data.get("id")) {
-                                    entity.setId(Long.parseLong((String) data.get("id").toString()));
+                                    entity.setId(Long.parseLong(data.get("id").toString()));
+                                }
+                                if (null != data.get("name")) {
+                                    entity.setName(data.get("name").toString());
                                 }
                                 if (null != data.get("roleId")) {
                                     entity.setRoleId(Integer.parseInt((String) data.get("roleId")));

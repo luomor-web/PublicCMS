@@ -5,16 +5,16 @@
             superuser=superuser emailChecked=emailChecked name=name advanced=true disabled=disabled
             orderField=orderField orderType=orderType pageIndex=pageNum pageSize=numPerPage>
 <div class="pageHeader card">
-    <form class="pagerForm" autocomplete="off" onsubmit="return divSearch(this,'userListBox');" method="post">
+    <form class="pagerForm" action="myself/dept/userList.html" autocomplete="off" onsubmit="return divSearch(this,'userListBox');" method="post">
         <input name="deptId" type="hidden" value="${(dept.id)!}"/>
-        <#include "../include_page/parameters.html"/>
+        <#include "../../include_page/parameters.html"/>
         <div class="searchBar">
             <ul class="searchContent">
                 <li>
                     <label><@t.page 'name'/>:</label>
                     <input type="text" name="name" value="${(name)!}"/>
                 </li>
-                <#include "../include_page/disabled.html"/>
+                <#include "../../include_page/disabled.html"/>
                 <li>
                     <select class="combox" name="superuser">
                         <option value><@t.page 'user.type'/></option>
@@ -60,7 +60,7 @@
 <div class="card">
     <div class="panelBar">
         <ul class="toolBar">
-        <#if authorizedMap['myself/dept/addUser'] && dept?has_content && dept.userId=admin.id>
+        <#if authorizedMap['myself/dept/addUser'] && (dept.userId)?has_content && dept.userId=admin.id>
             <li><a href="myself/dept/addUser.html?deptId=${deptId!}" target="navTab" rel="myself/dept/addUser"><i class="icon-plus-sign-alt icon-large"></i><@t.page 'user.add'/></a></li>
         </#if>
         </ul>
@@ -112,7 +112,7 @@
                     <#if authorizedMap['myself/dept/addUser']>
                         <a href="myself/dept/addUser.html?id=${a.id}" class="edit btnText blue" target="navTab" rel="myself/dept/editUser"><i class="icon-edit"></i><@t.page 'user.edit'/></a>
                     </#if>
-                    <#if dept?has_content && dept.userId=admin.id>
+                    <#if (dept.userId)?has_content && dept.userId=admin.id>
                         <#if a.disabled && authorizedMap['sysDept/enableUser']>
                             <a href="sysDept/enableUser?id=${a.id}&_csrf=<@tools.csrfToken admin=true/>" class="btnText green" title="<@t.page 'confirm.enable'/>" target="ajaxTodo"><i class="icon-circle"></i><@t.page 'button.enable'/></a>
                         <#elseif !a.disabled && authorizedMap['sysDept/disableUser']>
@@ -130,6 +130,7 @@
             </#list>
         </tbody>
     </table>
-    <#include "../include_page/page.html"/>
+    <#assign rel='userListBox'/>
+    <#include "../../include_page/page.html"/>
 </div>
 </@sys.userList>
