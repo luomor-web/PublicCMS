@@ -246,7 +246,7 @@ public class ImageUtils {
         if (90 == angle || 270 == angle) {
             scaledImage = sourceImage.getScaledInstance(height, width, Image.SCALE_SMOOTH);
         } else {
-            scaledImage = sourceImage.getScaledInstance(height, width, Image.SCALE_SMOOTH);
+            scaledImage = sourceImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         }
         if (90 == angle || 180 == angle || 270 == angle) {
             AffineTransform at = new AffineTransform();
