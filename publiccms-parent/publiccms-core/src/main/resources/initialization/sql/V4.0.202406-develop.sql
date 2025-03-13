@@ -30,15 +30,15 @@ UPDATE sys_module SET parent_id = 'content_list',sort=0, attached=NULL WHERE id 
 ALTER TABLE `sys_site` 
     ADD COLUMN `has_child` tinyint(1) NOT NULL COMMENT '拥有子站点' AFTER `dynamic_path`,
     ADD COLUMN `multiple` tinyint(1) NOT NULL COMMENT '站点群' AFTER `has_child`;
-update sys_site s1, sys_site s2 SET s1.has_child = 1 WHERE s1.id = s2.parent_id;
-update sys_site SET multiple = 1 WHERE id in(SELECT site_id FROM sys_domain WHERE multiple = 1);
+UPDATE sys_site s1, sys_site s2 SET s1.has_child = 1 WHERE s1.id = s2.parent_id;
+UPDATE sys_site SET multiple = 1 WHERE id in(SELECT site_id FROM sys_domain WHERE multiple = 1);
 ALTER TABLE `sys_domain` DROP COLUMN `multiple`;
 ALTER TABLE `sys_dept` 
     ADD COLUMN `has_child` tinyint(1) NOT NULL COMMENT '拥有子部门' AFTER `user_id`;
 UPDATE sys_dept d1,sys_dept d2 SET d1.has_child = 1 WHERE d1.id = d2.parent_id;
 ALTER TABLE `sys_module` 
     ADD COLUMN `has_child` tinyint(1) NOT NULL COMMENT '拥有子模块' AFTER `menu`;
-update sys_module m1,sys_module m2 SET m1.has_child = 1 WHERE m1.id = m2.parent_id;
+UPDATE sys_module m1,sys_module m2 SET m1.has_child = 1 WHERE m1.id = m2.parent_id;
 -- 2025-03-12 --
 UPDATE sys_module SET parent_id = 'myself_profile',sort=0, attached=NULL WHERE id = 'myself_password';
 INSERT INTO `sys_module` VALUES ('category_add_more', 'cmsCategory/addMore', NULL, NULL, 'category_list', 0, 0, 0);
@@ -210,3 +210,29 @@ CREATE TABLE `trade_freight` (
   KEY `trade_freight_site_id` (`site_id`,`country`,`province`,`city`)
 ) COMMENT='运费';
 
+INSERT INTO `sys_module` VALUES ('user_list_view', 'sysUser/user_list', NULL, NULL, 'user_list', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('content_list_view', 'cmsContent/content_list', NULL, NULL, 'content_list', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('category_list_view', 'cmsCategory/category_list', NULL, NULL, 'category_list', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('myself_dept', 'myself/myDept', NULL, NULL, 'myself', 1, 1, 0);
+INSERT INTO `sys_module` VALUES ('myself_dept_user_list', 'myself/dept/userList', 'sysDept/enableUser,sysDept/disableUser', NULL, 'myself_dept', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('myself_dept_user_add', 'myself/dept/addUser', 'sysDept/saveUser', NULL, 'myself_dept', 0, 0, 0);
+DELETE FROM sys_module WHERE id IN 'dept_user_list';
+DELETE FROM sys_module_lang WHERE module_id IN 'dept_user_list';
+INSERT INTO `sys_module_lang` VALUES ('myself_dept', 'en', 'My department');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept', 'ja', '私の部署');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept', 'zh', '我的部门');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept_user_list', 'en', 'Department user management');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept_user_list', 'ja', '人事管理');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept_user_list', 'zh', '人员管理');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept_user_add', 'en', 'Department user add');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept_user_add', 'ja', '人事追加');
+INSERT INTO `sys_module_lang` VALUES ('myself_dept_user_add', 'zh', '人员增加');
+INSERT INTO `sys_module_lang` VALUES ('user_list_view', 'en', 'List view');
+INSERT INTO `sys_module_lang` VALUES ('user_list_view', 'ja', 'リスト表示');
+INSERT INTO `sys_module_lang` VALUES ('user_list_view', 'zh', '列表查看');
+INSERT INTO `sys_module_lang` VALUES ('content_list_view', 'en', 'List view');
+INSERT INTO `sys_module_lang` VALUES ('content_list_view', 'ja', 'リスト表示');
+INSERT INTO `sys_module_lang` VALUES ('content_list_view', 'zh', '列表查看');
+INSERT INTO `sys_module_lang` VALUES ('category_list_view', 'en', 'List view');
+INSERT INTO `sys_module_lang` VALUES ('category_list_view', 'ja', 'リスト表示');
+INSERT INTO `sys_module_lang` VALUES ('category_list_view', 'zh', '列表查看');
