@@ -63,6 +63,7 @@ CREATE TABLE `cms_category_model` (
   PRIMARY KEY  (`category_id`, `model_id`),
   KEY `cms_category_model_site_id`(`site_id`, `model_id`)
 ) COMMENT='分类模型';
+
 -- ----------------------------
 -- Table structure for cms_comment
 -- ----------------------------
@@ -89,6 +90,7 @@ CREATE TABLE `cms_comment` (
   KEY `cms_comment_reply_id` (`site_id`, `reply_user_id`, `reply_id`),
   KEY `cms_comment_user_id` (`site_id`, `user_id`, `status`, `disabled`)
 ) COMMENT='评论';
+
 -- ----------------------------
 -- Table structure for cms_content
 -- ----------------------------
@@ -139,6 +141,7 @@ CREATE TABLE `cms_content` (
   KEY `cms_content_category_id` (`site_id`, `category_id`, `parent_id`, `disabled`),
   KEY `cms_content_quote_content_id` (`site_id`, `quote_content_id`)
 ) COMMENT='内容';
+
 -- ----------------------------
 -- Table structure for cms_content_attribute
 -- ----------------------------
@@ -180,6 +183,7 @@ CREATE TABLE `cms_content_file` (
   KEY `cms_content_file_file_size` (`file_size`),
   KEY `cms_content_file_clicks` (`clicks`)
 ) COMMENT='内容附件';
+
 -- ----------------------------
 -- Table structure for cms_content_product
 -- ----------------------------
@@ -203,6 +207,7 @@ CREATE TABLE `cms_content_product` (
   KEY `cms_content_product_inventory` (`site_id`, `inventory`),
   KEY `cms_content_product_price` (`site_id`, `price`)
 ) COMMENT='内容商品';
+
 -- ----------------------------
 -- Table structure for cms_content_related
 -- ----------------------------
@@ -222,6 +227,7 @@ CREATE TABLE `cms_content_related` (
   KEY `cms_content_related_content_id`(`content_id`, `relation_type`, `relation`,  `sort`),
   KEY `cms_content_related_related_content_id` (`related_content_id`,`relation_type`, `relation` )
 ) COMMENT='推荐推荐';
+
 -- ----------------------------
 -- Table structure for cms_dictionary
 -- ----------------------------
@@ -249,6 +255,7 @@ CREATE TABLE `cms_dictionary_data` (
   PRIMARY KEY  (`dictionary_id`, `site_id`, `value`),
   KEY `cms_dictionary_parent_value`(`dictionary_id`, `site_id`, `parent_value`)
 ) COMMENT='字典数据';
+
 -- ----------------------------
 -- Table structure for cms_dictionary_exclude
 -- ----------------------------
@@ -260,6 +267,7 @@ CREATE TABLE `cms_dictionary_exclude` (
   PRIMARY KEY (`dictionary_id`, `site_id`, `exclude_dictionary_id`),
   KEY `cms_dictionary_exclude_dictionary_id` (`dictionary_id`, `site_id`)
 ) COMMENT='字典数据排除规则';
+
 -- ----------------------------
 -- Table structure for cms_dictionary_exclude_value
 -- ----------------------------
@@ -273,6 +281,7 @@ CREATE TABLE `cms_dictionary_exclude_value` (
   PRIMARY KEY (`dictionary_id`, `site_id`, `exclude_dictionary_id`, `value`),
   KEY `cms_dictionary_exclude_value_dictionary_id` (`dictionary_id`, `site_id`)
 )COMMENT='字典数据排除规则值';
+
 -- ----------------------------
 -- Table structure for cms_editor_history
 -- ----------------------------
@@ -289,6 +298,7 @@ CREATE TABLE `cms_editor_history` (
   PRIMARY KEY (`id`),
   KEY `cms_editor_history_item_id` (`site_id`, `item_type`, `item_id`, `field_name`, `create_date`)
 ) COMMENT='内容扩展';
+
 -- ----------------------------
 -- Table structure for cms_place
 -- ----------------------------
@@ -385,6 +395,7 @@ CREATE TABLE `cms_survey_question_item` (
   KEY `cms_survey_question_item_question_id` (`question_id`, `sort`),
   KEY `cms_survey_question_item_votes` (`question_id`, `votes`)
 ) COMMENT='问卷调查选项';
+
 -- ----------------------------
 -- Table structure for cms_tag
 -- ----------------------------
@@ -621,6 +632,7 @@ CREATE TABLE `log_upload` (
   KEY `log_upload_channel` (`site_id`, `channel`, `create_date`),
   KEY `log_upload_file_type` (`site_id`, `privatefile`, `file_type`, `file_size`)
 ) COMMENT='上传日志';
+
 -- ----------------------------
 -- Table structure for sys_app
 -- ----------------------------
@@ -699,6 +711,7 @@ CREATE TABLE `sys_config_data` (
   `data` longtext NOT NULL COMMENT '值',
   PRIMARY KEY  (`site_id`, `code`)
 ) COMMENT='站点配置';
+
 -- ----------------------------
 -- Table structure for sys_dept
 -- ----------------------------
@@ -718,7 +731,8 @@ CREATE TABLE `sys_dept` (
   `owns_all_config` tinyint(1) NOT NULL DEFAULT '1' COMMENT '拥有全部配置权限',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `sys_dept_code`(`site_id`, `code`),
-  KEY `sys_dept_site_id` (`site_id`)
+  KEY `sys_dept_site_id` (`site_id`,`parent_id`),
+  KEY `sys_dept_user_id` (`site_id`,`user_id`)
 ) AUTO_INCREMENT=2 COMMENT='部门';
 
 -- ----------------------------
@@ -809,6 +823,7 @@ CREATE TABLE `sys_extend_field` (
   KEY `sys_extend_field_input_type` (`extend_id`, `input_type`, `searchable`),
   KEY `sys_extend_field_sort` (`sort`)
 ) COMMENT='扩展字段';
+
 -- ----------------------------
 -- Table structure for sys_lock
 -- ----------------------------
@@ -823,6 +838,7 @@ CREATE TABLE `sys_lock` (
   PRIMARY KEY (`site_id`, `item_type`, `item_id`),
   KEY `sys_lock_item_type` (`site_id`, `item_type`, `create_date`)
 ) COMMENT='锁';
+
 -- ----------------------------
 -- Table structure for sys_module
 -- ----------------------------
@@ -1776,6 +1792,7 @@ INSERT INTO `sys_module_lang` VALUES ('webfile_zip', 'zh', '压缩');
 INSERT INTO `sys_module_lang` VALUES ('word_list', 'en', 'Search word management');
 INSERT INTO `sys_module_lang` VALUES ('word_list', 'ja', '検索ワード管理');
 INSERT INTO `sys_module_lang` VALUES ('word_list', 'zh', '搜索词管理');
+
 -- ----------------------------
 -- Table structure for sys_record
 -- ----------------------------
@@ -1789,6 +1806,7 @@ CREATE TABLE `sys_record` (
   PRIMARY KEY  (`site_id`, `code`),
   KEY `sys_record_site_id` (`site_id`,`create_date`)
 ) COMMENT='自定义记录';
+
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
@@ -1877,6 +1895,7 @@ CREATE TABLE `sys_site` (
 -- Records of sys_site
 -- ----------------------------
 INSERT INTO `sys_site` VALUES ('1', null ,null ,'PublicCMS', '0', '//dev.publiccms.com:8080/webfile/', '0', '//dev.publiccms.com:8080/', '0', '0');
+
 -- ----------------------------
 -- Table structure for sys_task
 -- ----------------------------
@@ -1962,6 +1981,82 @@ CREATE TABLE `sys_user_token` (
 ) COMMENT='用户令牌';
 
 -- ----------------------------
+-- Table structure for sys_workflow
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_workflow`;
+CREATE TABLE `sys_workflow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `description` varchar(300) DEFAULT NULL COMMENT '描述',
+  `start_step_id` bigint(20) DEFAULT NULL COMMENT '开始步骤',
+  `disabled` tinyint(1) NOT NULL COMMENT '已禁用',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_disabled` (`site_id`,`disabled`)
+) COMMENT='工作流';
+
+-- ----------------------------
+-- Table structure for sys_workflow_process
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_workflow_process`;
+CREATE TABLE `sys_workflow_process` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `item_type` varchar(50) NOT NULL COMMENT '项目类型',
+  `item_id` varchar(100) NOT NULL COMMENT '项目',
+  `step_id` int(11) NOT NULL COMMENT '当前步骤',
+  `closed` tinyint(1) NOT NULL COMMENT '已关闭',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_process_item_id` (`site_id`,`item_type`,`item_id`,`create_date`)
+) COMMENT='工作流流程';
+
+-- ----------------------------
+-- Table structure for sys_workflow_process_history
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_workflow_process_history`;
+CREATE TABLE `sys_workflow_process_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `process_id` bigint(20) NOT NULL COMMENT '流程',
+  `step_id` bigint(20) NOT NULL COMMENT '步骤',
+  `user_id` bigint(20) NOT NULL COMMENT '用户',
+  `operate` varchar(20) NOT NULL COMMENT '操作(check:审核,reject:驳回)',
+  `reason` varchar(255) DEFAULT NULL COMMENT '理由',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_process_content_id` (`process_id`,`create_date`)
+) COMMENT='工作流流程步骤';
+
+-- ----------------------------
+-- Table structure for sys_workflow_process_item
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_workflow_process_item`;
+CREATE TABLE `sys_workflow_process_item` (
+  `item_type` varchar(50) NOT NULL COMMENT '项目类型',
+  `item_id` varchar(100) NOT NULL COMMENT '项目',
+  `process_id` bigint(20) NOT NULL COMMENT '流程',
+  PRIMARY KEY (`item_type`,`item_id`)
+) COMMENT='工作流流程项目';
+
+-- ----------------------------
+-- Table structure for sys_workflow_step
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_workflow_step`;
+CREATE TABLE `sys_workflow_step` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `workflow_id` int(11) NOT NULL COMMENT '工作流',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `role_id` int(11) DEFAULT NULL COMMENT '角色',
+  `dept_id` int(11) DEFAULT NULL COMMENT '部门',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
+  `next_step_id` bigint(20) DEFAULT NULL COMMENT '下一步',
+  `sort` int(11) NOT NULL COMMENT '排序',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_step_workflow_id` (`workflow_id`)
+) COMMENT='工作流步骤';
+
+-- ----------------------------
 -- Table structure for trade_account
 -- ----------------------------
 DROP TABLE IF EXISTS `trade_account`;
@@ -2011,6 +2106,146 @@ CREATE TABLE `trade_address` (
 ) COMMENT='用户地址';
 
 -- ----------------------------
+-- Table structure for trade_cart
+-- ----------------------------
+DROP TABLE IF EXISTS `trade_cart`;
+CREATE TABLE `trade_cart` (
+  `id` bigint(100) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
+  `session_id` varchar(50) DEFAULT NULL COMMENT '会话',
+  `content_id` bigint(20) NOT NULL COMMENT '内容',
+  `product_id` bigint(20) NOT NULL COMMENT '商品',
+  `price` decimal(10,2) NOT NULL COMMENT '价格',
+  `counts` int(11) NOT NULL COMMENT '数量',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `trade_cart_user_id` (`site_id`,`user_id`,`create_date`),
+  KEY `trade_cart_session_id` (`site_id`,`session_id`,`create_date`)
+) COMMENT='购物车';
+
+-- ----------------------------
+-- Table structure for trade_coupon
+-- ----------------------------
+DROP TABLE IF EXISTS `trade_coupon`;
+CREATE TABLE `trade_coupon` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `category_id` int(11) DEFAULT NULL COMMENT '分类',
+  `content_id` bigint(20) DEFAULT NULL COMMENT '内容',
+  `start_date` datetime NOT NULL COMMENT '开始时间',
+  `expiry_date` datetime DEFAULT NULL COMMENT '结束时间',
+  `starting_amount` decimal(10,2) DEFAULT NULL COMMENT '起始金额',
+  `discount` decimal(10,1) DEFAULT NULL COMMENT '折扣优惠',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '优惠券价格',
+  `type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
+  `redeem_code` varchar(255) DEFAULT NULL COMMENT '兑换码',
+  `duration` int(11) NOT NULL COMMENT '有效天数',
+  `quantity` int(11) NOT NULL COMMENT '优惠券数量',
+  `create_date` varchar(255) DEFAULT NULL COMMENT '开始时间',
+  `disabled` tinyint(1) NOT NULL COMMENT '已禁用',
+  PRIMARY KEY (`id`),
+  KEY `trade_coupon_category_id` (`site_id`,`category_id`,`start_date`,`expiry_date`,`disabled`),
+  KEY `trade_coupon_content_id` (`site_id`,`content_id`,`start_date`,`expiry_date`,`disabled`)
+) COMMENT='优惠券';
+
+-- ----------------------------
+-- Table structure for trade_express
+-- ----------------------------
+DROP TABLE IF EXISTS `trade_express`;
+CREATE TABLE `trade_express` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `code` varchar(50) NOT NULL COMMENT '编码',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `sort` int(11) NOT NULL COMMENT '排序',
+  PRIMARY KEY (`id`),
+  KEY `trade_express_sort` (`site_id`,`sort`)
+) COMMENT='物流';
+
+-- ----------------------------
+-- Table structure for trade_freight
+-- ----------------------------
+DROP TABLE IF EXISTS `trade_freight`;
+CREATE TABLE `trade_freight` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `country` varchar(40) DEFAULT NULL COMMENT '国家',
+  `province` varchar(40) DEFAULT NULL COMMENT '省份',
+  `city` varchar(40) DEFAULT NULL COMMENT '所在城市',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '运费价格',
+  `free_price` decimal(10,2) DEFAULT NULL COMMENT '免邮价格',
+  PRIMARY KEY (`id`),
+  KEY `trade_freight_site_id` (`site_id`,`country`,`province`,`city`)
+) COMMENT='运费';
+
+-- ----------------------------
+-- Table structure for trade_order
+-- ----------------------------
+DROP TABLE IF EXISTS `trade_order`;
+CREATE TABLE `trade_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `user_id` bigint(20) NOT NULL COMMENT '用户',
+  `title` varchar(255) NOT NULL COMMENT '标题',
+  `amount` decimal(10,2) NOT NULL COMMENT '总金额',
+  `payment_id` bigint(20) DEFAULT NULL COMMENT '支付订单',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `addressee` varchar(100) DEFAULT NULL COMMENT '收件人',
+  `telephone` varchar(100) DEFAULT NULL COMMENT '电话',
+  `ip` varchar(130) NOT NULL COMMENT 'IP地址',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `status` int(11) NOT NULL COMMENT '状态:0待确认,1无效订单,2已付款,3已退款,4已关闭',
+  `confirmed` tinyint(1) NOT NULL COMMENT '已确认',
+  `processed` tinyint(1) NOT NULL COMMENT '已处理',
+  `process_user_id` bigint(20) NULL COMMENT '处理用户',
+  `process_info` varchar(255) DEFAULT NULL COMMENT '处理信息',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  `process_date` datetime DEFAULT NULL COMMENT '处理日期',
+  `payment_date` datetime DEFAULT NULL COMMENT '支付日期',
+  PRIMARY KEY (`id`),
+  KEY `trade_order_site_id` (`site_id`, `user_id`, `status`),
+  KEY `trade_order_create_date` (`site_id`, `create_date`),
+  KEY `trade_order_payment_id` (`site_id`, `payment_id`)
+) COMMENT='产品订单';
+
+-- ----------------------------
+-- Table structure for trade_order_history
+-- ----------------------------
+DROP TABLE IF EXISTS `trade_order_history`;
+CREATE TABLE `trade_order_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `order_id` bigint(20) NOT NULL COMMENT '订单',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  `operate` varchar(100) NOT NULL COMMENT '操作',
+  `content` text COMMENT '内容',
+  PRIMARY KEY (`id`),
+  KEY `trade_order_history_site_id` (`site_id`, `order_id`, `operate`),
+  KEY `trade_order_history_create_date` (`site_id`, `create_date`)
+) COMMENT='订单流水';
+
+-- ----------------------------
+-- Table structure for trade_order_product
+-- ----------------------------
+DROP TABLE IF EXISTS `trade_order_product`;
+CREATE TABLE `trade_order_product` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `order_id` bigint(20) NOT NULL COMMENT '用户',
+  `content_id` bigint(20) NOT NULL COMMENT '内容',
+  `product_id` bigint(20) NOT NULL COMMENT '产品',
+  `price` decimal(10,2) NOT NULL COMMENT '价格',
+  `quantity` int(11) NOT NULL COMMENT '数量',
+  `amount` decimal(10,2) NOT NULL COMMENT '总金额',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`),
+  KEY `trade_order_product_site_id` (`site_id`, `order_id`)
+) COMMENT='产品订单';
+
+-- ----------------------------
 -- Table structure for trade_payment
 -- ----------------------------
 DROP TABLE IF EXISTS `trade_payment`;
@@ -2054,68 +2289,7 @@ CREATE TABLE `trade_payment_history`  (
   KEY `trade_payment_history_site_id` (`site_id`, `payment_id`, `operate`),
   KEY `trade_payment_history_create_date` (`site_id`, `create_date`)
 ) COMMENT = '支付订单流水';
--- ----------------------------
--- Table structure for trade_order
--- ----------------------------
-DROP TABLE IF EXISTS `trade_order`;
-CREATE TABLE `trade_order` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `site_id` smallint(6) NOT NULL COMMENT '站点',
-  `user_id` bigint(20) NOT NULL COMMENT '用户',
-  `title` varchar(255) NOT NULL COMMENT '标题',
-  `amount` decimal(10,2) NOT NULL COMMENT '总金额',
-  `payment_id` bigint(20) DEFAULT NULL COMMENT '支付订单',
-  `address` varchar(255) DEFAULT NULL COMMENT '地址',
-  `addressee` varchar(100) DEFAULT NULL COMMENT '收件人',
-  `telephone` varchar(100) DEFAULT NULL COMMENT '电话',
-  `ip` varchar(130) NOT NULL COMMENT 'IP地址',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `status` int(11) NOT NULL COMMENT '状态:0待确认,1无效订单,2已付款,3已退款,4已关闭',
-  `confirmed` tinyint(1) NOT NULL COMMENT '已确认',
-  `processed` tinyint(1) NOT NULL COMMENT '已处理',
-  `process_user_id` bigint(20) NULL COMMENT '处理用户',
-  `process_info` varchar(255) DEFAULT NULL COMMENT '处理信息',
-  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
-  `create_date` datetime NOT NULL COMMENT '创建日期',
-  `process_date` datetime DEFAULT NULL COMMENT '处理日期',
-  `payment_date` datetime DEFAULT NULL COMMENT '支付日期',
-  PRIMARY KEY (`id`),
-  KEY `trade_order_site_id` (`site_id`, `user_id`, `status`),
-  KEY `trade_order_create_date` (`site_id`, `create_date`),
-  KEY `trade_order_payment_id` (`site_id`, `payment_id`)
-) COMMENT='产品订单';
--- ----------------------------
--- Table structure for trade_order_history
--- ----------------------------
-DROP TABLE IF EXISTS `trade_order_history`;
-CREATE TABLE `trade_order_history` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `site_id` smallint(6) NOT NULL COMMENT '站点',
-  `order_id` bigint(20) NOT NULL COMMENT '订单',
-  `create_date` datetime NOT NULL COMMENT '创建日期',
-  `operate` varchar(100) NOT NULL COMMENT '操作',
-  `content` text COMMENT '内容',
-  PRIMARY KEY (`id`),
-  KEY `trade_order_history_site_id` (`site_id`, `order_id`, `operate`),
-  KEY `trade_order_history_create_date` (`site_id`, `create_date`)
-) COMMENT='订单流水';
--- ----------------------------
--- Table structure for trade_order_product
--- ----------------------------
-DROP TABLE IF EXISTS `trade_order_product`;
-CREATE TABLE `trade_order_product` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `site_id` smallint(6) NOT NULL COMMENT '站点',
-  `order_id` bigint(20) NOT NULL COMMENT '用户',
-  `content_id` bigint(20) NOT NULL COMMENT '内容',
-  `product_id` bigint(20) NOT NULL COMMENT '产品',
-  `price` decimal(10,2) NOT NULL COMMENT '价格',
-  `quantity` int(11) NOT NULL COMMENT '数量',
-  `amount` decimal(10,2) NOT NULL COMMENT '总金额',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`),
-  KEY `trade_order_product_site_id` (`site_id`, `order_id`)
-) COMMENT='产品订单';
+
 -- ----------------------------
 -- Table structure for trade_refund
 -- ----------------------------
@@ -2138,6 +2312,7 @@ CREATE TABLE `trade_refund` (
   KEY `trade_refund_create_date` (`site_id`, `create_date`),
   KEY `trade_refund_user_id` (`site_id`, `user_id`, `status`)
 ) COMMENT='退款申请';
+
 -- ----------------------------
 -- Table structure for visit_day
 -- ----------------------------

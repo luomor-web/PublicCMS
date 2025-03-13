@@ -80,3 +80,133 @@ INSERT INTO `sys_module_lang` VALUES ('system_workflow_delete', 'zh', '删除');
 UPDATE sys_module SET sort=8 WHERE id ='file';
 UPDATE sys_module SET parent_id = 'report_visit', attached=NULL WHERE id in ('visit_day','visit_history','visit_item','visit_session','visit_url');
 UPDATE sys_module SET parent_id = 'operation', sort=0 WHERE id = 'report_user';
+-- 2025-03-13 --
+ALTER TABLE `sys_dept`
+    DROP INDEX `sys_dept_site_id`,
+    ADD INDEX `sys_dept_site_id` (`site_id`,`parent_id`),
+    ADD INDEX `sys_dept_user_id` (`site_id`,`user_id`);
+
+DROP TABLE IF EXISTS `sys_workflow`;
+CREATE TABLE `sys_workflow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `description` varchar(300) DEFAULT NULL COMMENT '描述',
+  `start_step_id` bigint(20) DEFAULT NULL COMMENT '开始步骤',
+  `disabled` tinyint(1) NOT NULL COMMENT '已禁用',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_disabled` (`site_id`,`disabled`)
+) COMMENT='工作流';
+
+DROP TABLE IF EXISTS `sys_workflow_process`;
+CREATE TABLE `sys_workflow_process` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `item_type` varchar(50) NOT NULL COMMENT '项目类型',
+  `item_id` varchar(100) NOT NULL COMMENT '项目',
+  `step_id` int(11) NOT NULL COMMENT '当前步骤',
+  `closed` tinyint(1) NOT NULL COMMENT '已关闭',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_process_item_id` (`site_id`,`item_type`,`item_id`,`create_date`)
+) COMMENT='工作流流程';
+
+DROP TABLE IF EXISTS `sys_workflow_process_history`;
+CREATE TABLE `sys_workflow_process_history` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `process_id` bigint(20) NOT NULL COMMENT '流程',
+  `step_id` bigint(20) NOT NULL COMMENT '步骤',
+  `user_id` bigint(20) NOT NULL COMMENT '用户',
+  `operate` varchar(20) NOT NULL COMMENT '操作(check:审核,reject:驳回)',
+  `reason` varchar(255) DEFAULT NULL COMMENT '理由',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_process_content_id` (`process_id`,`create_date`)
+) COMMENT='工作流流程步骤';
+
+DROP TABLE IF EXISTS `sys_workflow_process_item`;
+CREATE TABLE `sys_workflow_process_item` (
+  `item_type` varchar(50) NOT NULL COMMENT '项目类型',
+  `item_id` varchar(100) NOT NULL COMMENT '项目',
+  `process_id` bigint(20) NOT NULL COMMENT '流程',
+  PRIMARY KEY (`item_type`,`item_id`)
+) COMMENT='工作流流程项目';
+
+DROP TABLE IF EXISTS `sys_workflow_step`;
+CREATE TABLE `sys_workflow_step` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `workflow_id` int(11) NOT NULL COMMENT '工作流',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `role_id` int(11) DEFAULT NULL COMMENT '角色',
+  `dept_id` int(11) DEFAULT NULL COMMENT '部门',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
+  `next_step_id` bigint(20) DEFAULT NULL COMMENT '下一步',
+  `sort` int(11) NOT NULL COMMENT '排序',
+  PRIMARY KEY (`id`),
+  KEY `sys_workflow_step_workflow_id` (`workflow_id`)
+) COMMENT='工作流步骤';
+
+DROP TABLE IF EXISTS `trade_cart`;
+CREATE TABLE `trade_cart` (
+  `id` bigint(100) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
+  `session_id` varchar(50) DEFAULT NULL COMMENT '会话',
+  `content_id` bigint(20) NOT NULL COMMENT '内容',
+  `product_id` bigint(20) NOT NULL COMMENT '商品',
+  `price` decimal(10,2) NOT NULL COMMENT '价格',
+  `counts` int(11) NOT NULL COMMENT '数量',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `trade_cart_user_id` (`site_id`,`user_id`,`create_date`),
+  KEY `trade_cart_session_id` (`site_id`,`session_id`,`create_date`)
+) COMMENT='购物车';
+
+DROP TABLE IF EXISTS `trade_coupon`;
+CREATE TABLE `trade_coupon` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `category_id` int(11) DEFAULT NULL COMMENT '分类',
+  `content_id` bigint(20) DEFAULT NULL COMMENT '内容',
+  `start_date` datetime NOT NULL COMMENT '开始时间',
+  `expiry_date` datetime DEFAULT NULL COMMENT '结束时间',
+  `starting_amount` decimal(10,2) DEFAULT NULL COMMENT '起始金额',
+  `discount` decimal(10,1) DEFAULT NULL COMMENT '折扣优惠',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '优惠券价格',
+  `type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
+  `redeem_code` varchar(255) DEFAULT NULL COMMENT '兑换码',
+  `duration` int(11) NOT NULL COMMENT '有效天数',
+  `quantity` int(11) NOT NULL COMMENT '优惠券数量',
+  `create_date` varchar(255) DEFAULT NULL COMMENT '开始时间',
+  `disabled` tinyint(1) NOT NULL COMMENT '已禁用',
+  PRIMARY KEY (`id`),
+  KEY `trade_coupon_category_id` (`site_id`,`category_id`,`start_date`,`expiry_date`,`disabled`),
+  KEY `trade_coupon_content_id` (`site_id`,`content_id`,`start_date`,`expiry_date`,`disabled`)
+) COMMENT='优惠券';
+
+DROP TABLE IF EXISTS `trade_express`;
+CREATE TABLE `trade_express` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `code` varchar(50) NOT NULL COMMENT '编码',
+  `name` varchar(100) NOT NULL COMMENT '名称',
+  `sort` int(11) NOT NULL COMMENT '排序',
+  PRIMARY KEY (`id`),
+  KEY `trade_express_sort` (`site_id`,`sort`)
+) COMMENT='物流';
+
+DROP TABLE IF EXISTS `trade_freight`;
+CREATE TABLE `trade_freight` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `country` varchar(40) DEFAULT NULL COMMENT '国家',
+  `province` varchar(40) DEFAULT NULL COMMENT '省份',
+  `city` varchar(40) DEFAULT NULL COMMENT '所在城市',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '运费价格',
+  `free_price` decimal(10,2) DEFAULT NULL COMMENT '免邮价格',
+  PRIMARY KEY (`id`),
+  KEY `trade_freight_site_id` (`site_id`,`country`,`province`,`city`)
+) COMMENT='运费';
+
