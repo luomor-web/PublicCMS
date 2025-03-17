@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.publiccms.common.generator.annotation.GeneratorColumn;
 
 /**
@@ -26,9 +25,6 @@ public class SysUserAttribute implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     @GeneratorColumn(title = "用户")
     private long userId;
-    @GeneratorColumn(title = "设置数据")
-    @JsonIgnore
-    private String settings;
     @GeneratorColumn(title = "扩展数据")
     private String data;
 
@@ -52,15 +48,6 @@ public class SysUserAttribute implements java.io.Serializable {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    @Column(name = "settings")
-    public String getSettings() {
-        return this.settings;
-    }
-
-    public void setSettings(String settings) {
-        this.settings = settings;
     }
 
     @Column(name = "data")

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -91,6 +92,7 @@ public class SysTask implements java.io.Serializable {
      * 更新日期
      */
     @GeneratorColumn(title = "更新日期", condition = true)
+    @Version
     private Date updateDate;
 
     public SysTask() {

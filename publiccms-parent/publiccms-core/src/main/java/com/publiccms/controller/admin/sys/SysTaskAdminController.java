@@ -1,10 +1,8 @@
 package com.publiccms.controller.admin.sys;
 
-import java.util.Date;
-
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -58,13 +56,11 @@ public class SysTaskAdminController {
     @Csrf
     public String save(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, SysTask entity,
             HttpServletRequest request, ModelMap model) {
-        entity.setUpdateDate(CommonUtils.getDate());
         if (null != entity.getId()) {
             SysTask oldEntity = service.getEntity(entity.getId());
             if (null == oldEntity || ControllerUtils.errorNotEquals("siteId", site.getId(), oldEntity.getSiteId(), model)) {
                 return CommonConstants.TEMPLATE_ERROR;
             }
-            entity.setUpdateDate(new Date());
             entity = service.update(entity.getId(), entity, ignoreProperties);
             if (null != entity) {
                 logOperateService.save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(),

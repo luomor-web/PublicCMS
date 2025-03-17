@@ -321,6 +321,7 @@ CREATE TABLE `cms_place` (
   `status` int(11) NOT NULL COMMENT '状态：0、草稿 1、已发布 2、待审核 3、已下架',
   `clicks` int(11) NOT NULL COMMENT '点击数',
   `max_clicks` int(11) NOT NULL COMMENT '最大点击数',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   `disabled` tinyint(1) NOT NULL COMMENT '已禁用',
   PRIMARY KEY  (`id`),
   KEY `cms_place_clicks` (`clicks`),
@@ -709,6 +710,8 @@ CREATE TABLE `sys_config_data` (
   `site_id` smallint(6) NOT NULL COMMENT '站点',
   `code` varchar(50) NOT NULL COMMENT '配置项编码',
   `data` longtext NOT NULL COMMENT '值',
+  `create_date` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY  (`site_id`, `code`)
 ) COMMENT='站点配置';
 
@@ -835,6 +838,7 @@ CREATE TABLE `sys_lock` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
   `count` int(11) NOT NULL COMMENT '锁定次数',
   `create_date` datetime NOT NULL COMMENT '创建日期',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`site_id`, `item_type`, `item_id`),
   KEY `sys_lock_item_type` (`site_id`, `item_type`, `create_date`)
 ) COMMENT='锁';
@@ -1963,6 +1967,7 @@ CREATE TABLE `sys_user` (
   `last_login_ip` varchar(130) default NULL COMMENT '最后登录ip',
   `login_count` int(11) NOT NULL COMMENT '登录次数',
   `registered_date` datetime default NULL COMMENT '注册日期',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `sys_user_name`(`site_id`, `name`),
   KEY `sys_user_email`(`site_id`, `email`, `email_checked`),
@@ -1973,7 +1978,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '1', 'admin', '0123456789.2134b56595c73a647716b0a8e33f9d50243fb1c1a088597ba5aa6d9ccadacbd8fc8307bda2adfc8362abe611420bd48263bdcfd91c1c26566ad3a29d79cffd9c', 1, 'admin', NULL, '1', '1', '1', 'master@sanluan.com', '0', '1', '0', '2019-01-01 00:00:00', '127.0.0.1', '0', '2019-01-01 00:00:00');
+INSERT INTO `sys_user` VALUES ('1', '1', 'admin', '0123456789.2134b56595c73a647716b0a8e33f9d50243fb1c1a088597ba5aa6d9ccadacbd8fc8307bda2adfc8362abe611420bd48263bdcfd91c1c26566ad3a29d79cffd9c', 1, 'admin', NULL, '1', '1', '1', 'master@sanluan.com', '0', '1', '0', '2019-01-01 00:00:00', '127.0.0.1', '0', '2019-01-01 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_attribute
@@ -1981,10 +1986,24 @@ INSERT INTO `sys_user` VALUES ('1', '1', 'admin', '0123456789.2134b56595c73a6477
 DROP TABLE IF EXISTS `sys_user_attribute`;
 CREATE TABLE `sys_user_attribute` (
   `user_id` bigint(20) NOT NULL,
-  `settings` text NULL COMMENT '扩展文本字段',
   `data` longtext COMMENT '数据JSON',
+  `create_date` datetime(0) NULL COMMENT '创建日期',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY  (`user_id`)
 ) COMMENT='用户扩展';
+
+-- ----------------------------
+-- Table structure for sys_user_setting
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_setting`;
+CREATE TABLE `sys_user_setting` (
+  `user_id` bigint(20) NOT NULL COMMENT '用户',
+  `code` varchar(50) NOT NULL COMMENT '编码',
+  `data` longblob NOT NULL COMMENT '值',
+  `create_date` datetime(0) NULL COMMENT '创建日期',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
+  PRIMARY KEY (`user_id`,`code`)
+);
 
 -- ----------------------------
 -- Table structure for sys_user_token

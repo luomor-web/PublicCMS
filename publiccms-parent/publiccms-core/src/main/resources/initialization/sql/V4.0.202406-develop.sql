@@ -240,3 +240,26 @@ INSERT INTO sys_module VALUES ('visit_overview', 'visit/overview', NULL, NULL, '
 INSERT INTO sys_module_lang VALUES ('visit_overview', 'en', 'Visit report');
 INSERT INTO sys_module_lang VALUES ('visit_overview', 'ja', 'アクセス監視');
 INSERT INTO sys_module_lang VALUES ('visit_overview', 'zh', '用户访问监控');
+-- 2025-03-17 --
+DROP TABLE IF EXISTS `sys_user_setting`;
+CREATE TABLE `sys_user_setting` (
+  `user_id` bigint(20) NOT NULL COMMENT '用户',
+  `code` varchar(50) NOT NULL COMMENT '编码',
+  `data` longblob NOT NULL COMMENT '值',
+  `create_date` datetime(0) NULL COMMENT '创建日期',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
+  PRIMARY KEY (`user_id`,`code`)
+);
+ALTER TABLE `sys_user_attribute`
+    DROP COLUMN `settings`,
+    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`;
+    ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
+ALTER TABLE `sys_config_data` 
+    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`;
+    ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
+ALTER TABLE `cms_place` 
+    ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `max_clicks`;
+ALTER TABLE `sys_lock` 
+    ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
+ALTER TABLE `sys_user` 
+    ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `registered_date`;

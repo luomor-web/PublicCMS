@@ -10,8 +10,8 @@ import java.util.Map;
 // Generated 2021-6-26 22:16:13 by com.publiccms.common.generator.SourceGenerator
 
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.publiccms.common.base.BaseService;
@@ -55,7 +55,6 @@ public class TradeOrderProductService extends BaseService<TradeOrderProduct> {
         return dao.getList(siteId, orderId);
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
     public BigDecimal create(short siteId, long orderId, List<TradeOrderProduct> tradeOrderProductList) {
         BigDecimal amount = BigDecimal.ZERO;
         if (null != tradeOrderProductList && !tradeOrderProductList.isEmpty()) {

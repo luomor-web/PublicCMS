@@ -1,24 +1,23 @@
 package com.publiccms.logic.dao.sys;
 
-import com.publiccms.entities.sys.SysConfigData;
-
-// Generated 2016-7-16 11:54:15 by com.publiccms.common.generator.SourceGenerator
+// Generated 2025-03-17 09:19:15 by com.publiccms.common.generator.SourceGenerator
 
 import org.springframework.stereotype.Repository;
 
 import com.publiccms.common.base.BaseDao;
 import com.publiccms.common.tools.CommonUtils;
+import com.publiccms.entities.sys.SysUserSetting;
 
 /**
  *
- * SysConfigDataDao
+ * SysUserSettingDao
  * 
  */
 @Repository
-public class SysConfigDataDao extends BaseDao<SysConfigData> {
+public class SysUserSettingDao extends BaseDao<SysUserSetting> {
 
     @Override
-    protected SysConfigData init(SysConfigData entity) {
+    protected SysUserSetting init(SysUserSetting entity) {
         if (null == entity.getCreateDate()) {
             entity.setCreateDate(CommonUtils.getDate());
         }

@@ -21,7 +21,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.publiccms.common.api.Config;
@@ -241,8 +240,6 @@ public class CmsContentService extends BaseService<CmsContent> {
     public CmsContent saveTagAndAttribute(SysSite site, Long userId, Integer deptId, CmsContent entity,
             CmsContentParameters contentParameters, CmsModel cmsModel, Integer extendId, CmsContentAttribute attribute) {
         if (null != entity.getId()) {
-            Date now = CommonUtils.getDate();
-            entity.setUpdateDate(now);
             entity.setUpdateUserId(userId);
             entity = update(entity.getId(), entity, entity.isOnlyUrl() ? ignoreProperties : ignorePropertiesWithUrl);
         } else {
@@ -633,7 +630,6 @@ public class CmsContentService extends BaseService<CmsContent> {
     /**
      * @param entitys
      */
-    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void updateStatistics(Collection<ClickStatistics> entitys) {
         for (ClickStatistics entityStatistics : entitys) {
             CmsContent entity = getEntity(entityStatistics.getId());
@@ -649,7 +645,6 @@ public class CmsContentService extends BaseService<CmsContent> {
      * @param comments
      * @return
      */
-    @Transactional(isolation = Isolation.READ_COMMITTED)
     public CmsContent updateComments(short siteId, Serializable id, int comments) {
         CmsContent entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId()) {
@@ -665,7 +660,6 @@ public class CmsContentService extends BaseService<CmsContent> {
      * @param scores
      * @return
      */
-    @Transactional(isolation = Isolation.READ_COMMITTED)
     public CmsContent updateScores(short siteId, Serializable id, int scoreUsers, int scores) {
         CmsContent entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId()) {
@@ -686,7 +680,6 @@ public class CmsContentService extends BaseService<CmsContent> {
      * @param collections
      * @return
      */
-    @Transactional(isolation = Isolation.READ_COMMITTED)
     public CmsContent updateCollections(short siteId, Serializable id, int collections) {
         CmsContent entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId()) {
@@ -715,7 +708,6 @@ public class CmsContentService extends BaseService<CmsContent> {
      * @param num
      * @return result
      */
-    @Transactional(isolation = Isolation.READ_COMMITTED)
     public CmsContent updateChilds(Serializable id, int num) {
         CmsContent entity = getEntity(id);
         if (null != entity) {

@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.search.engine.backend.analysis.AnalyzerNames;
 import org.hibernate.search.engine.backend.types.Aggregable;
 import org.hibernate.search.engine.backend.types.Projectable;
@@ -27,8 +29,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.publiccms.common.generator.annotation.GeneratorColumn;
-import com.publiccms.common.search.CmsContentStatusRoutingBinder;
 import com.publiccms.common.search.CmsContentAttributeBinder;
+import com.publiccms.common.search.CmsContentStatusRoutingBinder;
 import com.publiccms.views.pojo.entities.EntityAttribute;
 
 /**
@@ -232,6 +234,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
      * 总分数
      */
     @GeneratorColumn(title = "总分数")
+    @OptimisticLock( excluded = true )
     private int scores;
     /**
      * score users
@@ -239,6 +242,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
      * 评分用户数
      */
     @GeneratorColumn(title = "评分用户数")
+    @OptimisticLock( excluded = true )
     private int scoreUsers;
     /**
      * score
@@ -247,6 +251,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
      */
     @GeneratorColumn(title = "分数", order = true)
     @GenericField(sortable = Sortable.YES, projectable = Projectable.YES)
+    @OptimisticLock( excluded = true )
     private BigDecimal score;
     /**
      * comments
@@ -254,6 +259,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
      * 评论数
      */
     @GeneratorColumn(title = "评论数", order = true)
+    @OptimisticLock( excluded = true )
     private int comments;
     /**
      * clicks
@@ -262,6 +268,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
      */
     @GeneratorColumn(title = "点击数", order = true)
     @GenericField(sortable = Sortable.YES, projectable = Projectable.YES)
+    @OptimisticLock( excluded = true )
     private int clicks;
     /**
      * collections
@@ -270,6 +277,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
      */
     @GeneratorColumn(title = "收藏数", order = true)
     @GenericField(sortable = Sortable.YES, projectable = Projectable.YES)
+    @OptimisticLock( excluded = true )
     private int collections;
     /**
      * publish date
@@ -310,6 +318,7 @@ public class CmsContent extends EntityAttribute implements java.io.Serializable 
      * 更新日期
      */
     @GeneratorColumn(title = "更新日期", order = true)
+    @Version
     private Date updateDate;
     /**
      * create date

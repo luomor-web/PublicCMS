@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -55,6 +56,7 @@ public class SysRecord implements java.io.Serializable {
      * 更新日期
      */
     @GeneratorColumn(title = "更新日期", order = true)
+    @Version
     private Date updateDate;
 
     public SysRecord() {
