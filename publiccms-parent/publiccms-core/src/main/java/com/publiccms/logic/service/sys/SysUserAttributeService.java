@@ -33,7 +33,7 @@ public class SysUserAttributeService extends BaseService<SysUserAttribute> {
         if (null != attribute) {
             attribute.setData(data);
         } else if (CommonUtils.notEmpty(data)) {
-            attribute = new SysUserAttribute(userId, data);
+            attribute = new SysUserAttribute(userId, data, CommonUtils.getDate());
             save(attribute);
         }
     }

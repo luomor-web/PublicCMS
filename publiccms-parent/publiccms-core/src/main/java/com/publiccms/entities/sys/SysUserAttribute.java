@@ -1,11 +1,16 @@
 package com.publiccms.entities.sys;
 
+import java.util.Date;
+
 // Generated 2023-8-4 9:34:06 by Hibernate Tools 4.3.1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -27,6 +32,21 @@ public class SysUserAttribute implements java.io.Serializable {
     private long userId;
     @GeneratorColumn(title = "扩展数据")
     private String data;
+    /**
+     * create date
+     * 
+     * 创建日期
+     */
+    @GeneratorColumn(title = "创建日期")
+    private Date createDate;
+    /**
+     * update date
+     * 
+     * 更新日期
+     */
+    @GeneratorColumn(title = "更新日期")
+    @Version
+    private Date updateDate;
 
     public SysUserAttribute() {
     }
@@ -35,9 +55,17 @@ public class SysUserAttribute implements java.io.Serializable {
         this.userId = userId;
     }
 
-    public SysUserAttribute(long userId, String data) {
+    public SysUserAttribute(long userId, String data, Date createDate) {
         this.userId = userId;
         this.data = data;
+        this.createDate = createDate;
+    }
+
+    public SysUserAttribute(long userId, String data, Date createDate, Date updateDate) {
+        this.userId = userId;
+        this.data = data;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
     }
 
     @Id
@@ -57,6 +85,26 @@ public class SysUserAttribute implements java.io.Serializable {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", nullable = false, length = 19)
+    public Date getCreateDate() {
+        return this.createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date", length = 19)
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
 }

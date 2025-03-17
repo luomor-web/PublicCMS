@@ -20,7 +20,14 @@ import com.publiccms.logic.dao.sys.SysWorkflowProcessHistoryDao;
 @Service
 @Transactional
 public class SysWorkflowProcessHistoryService extends BaseService<SysWorkflowProcessHistory> {
-
+    /**
+     * 
+     */
+    public static final String OPERATE_ACCEPT = "accept";
+    /**
+     * 
+     */
+    public static final String OPERATE_REJECT = "reject";
     /**
      * @param processId
      * @param userId

@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.publiccms.common.database.CmsUpgrader;
@@ -21,6 +22,7 @@ import com.publiccms.common.generator.annotation.GeneratorColumn;
  */
 @Entity
 @Table(name = "sys_workflow_process_history")
+@DynamicUpdate
 public class SysWorkflowProcessHistory implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;

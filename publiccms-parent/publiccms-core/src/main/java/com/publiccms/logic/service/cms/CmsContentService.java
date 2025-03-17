@@ -232,8 +232,7 @@ public class CmsContentService extends BaseService<CmsContent> {
         }
         if (null != attribute.getText() && base64) {
             attribute.setText(HtmlUtils.cleanUnsafeHtml(
-                    new String(VerificationUtils.base64Decode(attribute.getText()), StandardCharsets.UTF_8),
-                    site.getSitePath()));
+                    new String(VerificationUtils.base64Decode(attribute.getText()), StandardCharsets.UTF_8), site.getSitePath()));
         }
     }
 
@@ -479,9 +478,21 @@ public class CmsContentService extends BaseService<CmsContent> {
      * @param siteId
      * @param user
      * @param id
+     * @param checkPermissions
      * @return result
      */
     public CmsContent check(short siteId, SysUser user, Serializable id) {
+        return check(siteId, user, id, true);
+    }
+
+    /**
+     * @param siteId
+     * @param user
+     * @param id
+     * @param checkPermissions
+     * @return result
+     */
+    public CmsContent check(short siteId, SysUser user, Serializable id, boolean checkPermissions) {
         CmsContent entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId() && STATUS_DRAFT != entity.getStatus()
                 && STATUS_NORMAL != entity.getStatus() && ControllerUtils.hasContentPermissions(user, entity)) {
@@ -510,6 +521,22 @@ public class CmsContentService extends BaseService<CmsContent> {
             }
         }
         return entityList;
+    }
+
+    /**
+     * @param siteId
+     * @param user
+     * @param id
+     * @return results list
+     */
+    public CmsContent reject(short siteId, SysUser user, Serializable id) {
+        CmsContent entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()) {
+            entity.setStatus(STATUS_REJECT);
+            entity.setCheckUserId(user.getId());
+            entity.setCheckDate(CommonUtils.getDate());
+        }
+        return entity;
     }
 
     /**

@@ -464,7 +464,7 @@
                         if($dragItem.data("id")){
                             itemData["id"]=$dragItem.data("id");
                         }
-                        $dragItem.find(">.ctl-label>:input").each(function() {
+                        $dragItem.find(":input").each(function() {
                             var $lable = $(this), lableName = $lable.attr("name")||$lable.data("name");
                             if (lableName) {
                                 if ("checkbox" == $lable.attr("type")) {

@@ -479,8 +479,10 @@ a.btnUp:before,a.btnDown:before{line-height:14px;}
 .miscSortDrag dd .sortDrag .dragItem .close{width:14px;height:14px;line-height:14px;font-size:12px;border-radius:50%;text-align:center;color:#fff;background-color:#ccc;cursor:pointer;position:absolute;top:3px;right:5px;display:none;}
 .miscSortDrag dd .sortDrag .dragItem:hover>.close{display:block;}
 .miscSortDrag dd .sortDrag .dragItem .ctl-label{text-align:center;margin-left:18px;}
+.miscSortDrag dd .sortDrag .dragItem span{display:inline-block;}
 .miscSortDrag dd .sortDrag .dragItem .ctl-label .button{height:24px;line-height:24px;}
 .miscSortDrag dd .sortDrag .dragItem .ctl-label:after{display:block;content:".";height:0;clear:both;visibility:hidden;}
+
 .icons label{width:200px;}
 /* custom icon */
 .icon-backward:before, .icon-chevron-down:before, .icon-chevron-up:before, .icon-forward:before, .icon-rubbish:before{font-family:iconfont;vertical-align:unset;}

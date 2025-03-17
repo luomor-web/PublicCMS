@@ -9,7 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,6 +23,7 @@ import com.publiccms.common.generator.annotation.GeneratorColumn;
  */
 @Entity
 @Table(name = "sys_workflow_process")
+@DynamicUpdate
 public class SysWorkflowProcess implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,21 +61,21 @@ public class SysWorkflowProcess implements java.io.Serializable {
      * <p>
      * 角色
      */
-    @GeneratorColumn(title = "角色")
+    @GeneratorColumn(title = "角色", condition = true)
     private Integer roleId;
     /**
      * dept
      * <p>
      * 部门
      */
-    @GeneratorColumn(title = "部门")
+    @GeneratorColumn(title = "部门", condition = true)
     private Integer deptId;
     /**
      * user
      * <p>
      * 用户
      */
-    @GeneratorColumn(title = "人员")
+    @GeneratorColumn(title = "人员", condition = true)
     private Long userId;
     /**
      * closed
@@ -88,6 +91,14 @@ public class SysWorkflowProcess implements java.io.Serializable {
      */
     @GeneratorColumn(title = "创建日期")
     private Date createDate;
+    /**
+     * update date
+     * 
+     * 更新日期
+     */
+    @GeneratorColumn(title = "更新日期")
+    @Version
+    private Date updateDate;
 
     public SysWorkflowProcess() {
     }
@@ -100,8 +111,9 @@ public class SysWorkflowProcess implements java.io.Serializable {
         this.closed = closed;
         this.createDate = createDate;
     }
-    
-    public SysWorkflowProcess(short siteId, String itemType, String itemId, long stepId,Integer roleId, Integer deptId, Long userId,  boolean closed, Date createDate) {
+
+    public SysWorkflowProcess(short siteId, String itemType, String itemId, long stepId, Integer roleId, Integer deptId,
+            Long userId, boolean closed, Date createDate, Date updateDate) {
         this.siteId = siteId;
         this.itemType = itemType;
         this.itemId = itemId;
@@ -111,6 +123,7 @@ public class SysWorkflowProcess implements java.io.Serializable {
         this.userId = userId;
         this.closed = closed;
         this.createDate = createDate;
+        this.updateDate = updateDate;
     }
 
     @Id
@@ -161,6 +174,33 @@ public class SysWorkflowProcess implements java.io.Serializable {
         this.stepId = stepId;
     }
 
+    @Column(name = "role_id")
+    public Integer getRoleId() {
+        return this.roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    @Column(name = "dept_id")
+    public Integer getDeptId() {
+        return this.deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    @Column(name = "user_id")
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     @Column(name = "closed", nullable = false)
     public boolean isClosed() {
         return this.closed;
@@ -180,4 +220,13 @@ public class SysWorkflowProcess implements java.io.Serializable {
         this.createDate = createDate;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date", length = 19)
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 }
