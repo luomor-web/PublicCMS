@@ -1,5 +1,7 @@
 package com.publiccms.entities.sys;
 
+import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 
@@ -9,6 +11,9 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -32,18 +37,42 @@ public class SysConfigData implements java.io.Serializable {
     @GeneratorColumn(title = "ID")
     private SysConfigDataId id;
     /**
-     * config data<p>
+     * config data
+     * <p>
      * 配置数据
      */
     @GeneratorColumn(title = "值")
     private String data;
+    /**
+     * create date
+     * 
+     * 创建日期
+     */
+    @GeneratorColumn(title = "创建日期")
+    private Date createDate;
+    /**
+     * update date
+     * 
+     * 更新日期
+     */
+    @GeneratorColumn(title = "更新日期")
+    @Version
+    private Date updateDate;
 
     public SysConfigData() {
     }
 
-    public SysConfigData(SysConfigDataId id, String data) {
+    public SysConfigData(SysConfigDataId id, String data, Date createDate) {
         this.id = id;
         this.data = data;
+        this.createDate = createDate;
+    }
+
+    public SysConfigData(SysConfigDataId id, String data, Date createDate, Date updateDate) {
+        this.id = id;
+        this.data = data;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
     }
 
     @EmbeddedId
@@ -67,4 +96,23 @@ public class SysConfigData implements java.io.Serializable {
         this.data = data;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", nullable = false, length = 19)
+    public Date getCreateDate() {
+        return this.createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date", length = 19)
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 }

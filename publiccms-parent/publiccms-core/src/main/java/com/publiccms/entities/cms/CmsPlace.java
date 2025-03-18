@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -43,7 +45,7 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
     private short siteId;
     /**
      * place path
-
+     * 
      * 推荐位路径
      */
     @GeneratorColumn(title = "路径", condition = true)
@@ -52,35 +54,35 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
     private String path;
     /**
      * user id
-
+     * 
      * 创建用户id
      */
     @GeneratorColumn(title = "推荐用户", condition = true)
     private Long userId;
     /**
      * check user id
-
+     * 
      * 审核用户id
      */
     @GeneratorColumn(title = "审核用户", condition = true)
     private Long checkUserId;
     /**
      * item type
-
+     * 
      * 数据项类型
      */
     @GeneratorColumn(title = "项目类型", condition = true)
     private String itemType;
     /**
      * item id
-
+     * 
      * 数据项id
      */
     @GeneratorColumn(title = "项目", condition = true)
     private Long itemId;
     /**
      * title
-
+     * 
      * 标题
      */
     @GeneratorColumn(title = "标题")
@@ -89,23 +91,26 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
     private String title;
     /**
      * url
-
+     * 
      * 地址
      */
     @GeneratorColumn(title = "地址")
     @Length(max = 1000)
     private String url;
     /**
+     * <p lang="en">
      * description
-
+     * <p lang="zh">
      * 描述
+     * <p lang="ja">
+     * 説明
      */
     @GeneratorColumn(title = "描述")
     @Length(max = 300)
     private String description;
     /**
      * cover
-
+     * 
      * 封面图
      */
     @GeneratorColumn(title = "封面图")
@@ -113,14 +118,14 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
     private String cover;
     /**
      * create date
-
+     * 
      * 创建日期
      */
     @GeneratorColumn(title = "创建日期", order = true)
     private Date createDate;
     /**
      * publish date
-
+     * 
      * 发布日期
      */
     @GeneratorColumn(title = "发布日期", condition = true, order = true)
@@ -128,7 +133,7 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
     private Date publishDate;
     /**
      * expiry date
-
+     * 
      * 过期日期
      */
     @GeneratorColumn(title = "过期日期", condition = true, order = true)
@@ -136,25 +141,34 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
     private Date expiryDate;
     /**
      * status(0:Draft,1:Published,2:Pending)
-
+     * 
      * 状态(0:草稿,1:已发布,2:待审核,3:已下架)
      */
     @GeneratorColumn(title = "状态", condition = true)
     private int status;
     /**
      * clicks
-
+     * 
      * 点击数
      */
     @GeneratorColumn(title = "点击数", order = true)
+    @OptimisticLock( excluded = true )
     private int clicks;
     /**
      * max clicks
-
+     * 
      * 最大点击数
      */
     @GeneratorColumn(title = "最大点击数")
     private int maxClicks;
+    /**
+     * update date
+     * <p>
+     * 更新日期
+     */
+    @GeneratorColumn(title = "更新日期")
+    @Version
+    private Date updateDate;
     @GeneratorColumn(title = "已删除", condition = true)
     @JsonIgnore
     private boolean disabled;
@@ -177,7 +191,7 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
 
     public CmsPlace(short siteId, String path, Long userId, Long checkUserId, String itemType, Long itemId, String title,
             String url, String cover, Date createDate, Date publishDate, Date expiryDate, int status, int clicks, int maxClicks,
-            boolean disabled) {
+            Date updateDate, boolean disabled) {
         this.siteId = siteId;
         this.path = path;
         this.userId = userId;
@@ -193,6 +207,7 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
         this.status = status;
         this.clicks = clicks;
         this.maxClicks = maxClicks;
+        this.updateDate = updateDate;
         this.disabled = disabled;
     }
 
@@ -354,6 +369,17 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
     public void setMaxClicks(int maxClicks) {
         this.maxClicks = maxClicks;
     }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date", length = 19)
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
     @Column(name = "disabled", nullable = false)
     public boolean isDisabled() {
         return this.disabled;

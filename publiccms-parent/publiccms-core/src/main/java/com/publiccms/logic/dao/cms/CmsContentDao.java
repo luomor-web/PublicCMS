@@ -134,9 +134,8 @@ public class CmsContentDao extends BaseDao<CmsContent> {
      * @param orderType
      * @return results list
      */
-    @SuppressWarnings("unchecked")
     public List<CmsContent> getList(CmsContentQuery queryEntitry, String orderField, String orderType) {
-        return (List<CmsContent>) getList(getQueryHandler(queryEntitry, orderField, orderType));
+        return getEntityList(getQueryHandler(queryEntitry, orderField, orderType));
     }
 
     private static QueryHandler getQueryHandler(CmsContentQuery queryEntitry, String orderField, String orderType) {

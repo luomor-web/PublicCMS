@@ -5,8 +5,8 @@ import java.util.Date;
 // Generated 2015-7-3 16:18:22 by com.publiccms.common.generator.SourceGenerator
 
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.publiccms.common.base.BaseService;
@@ -41,12 +41,10 @@ public class SysTaskService extends BaseService<SysTask> {
      * @param status
      * @return 
      */
-    @Transactional(isolation = Isolation.READ_COMMITTED)
     public boolean updateStatus(Integer id, int status) {
         SysTask entity = getEntity(id);
         if (null != entity && status != entity.getStatus()) {
             entity.setStatus(status);
-            entity.setUpdateDate(new Date());
             return true;
         }
         return false;

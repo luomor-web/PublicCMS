@@ -28,7 +28,7 @@ import freemarker.template.TemplateException;
  * <ul>
  * <li><code>code</code>:配置编码,结果返回<code>object</code>
  * {@link com.publiccms.entities.sys.SysConfigData}
- * <li><code>codes</code>:多个配置编码,结果返回<code>map</code>(id,<code>object</code>)
+ * <li><code>codes</code>:多个配置编码,结果返回<code>map</code>(code,<code>object</code>)
  * </ul>
  * <p lang="zh">使用示例
  * <p lang="en">usage example

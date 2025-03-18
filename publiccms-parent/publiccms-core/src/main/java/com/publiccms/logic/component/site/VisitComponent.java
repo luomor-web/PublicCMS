@@ -124,7 +124,7 @@ public class VisitComponent implements Cache {
                 visit.setMaxIpviews(entity.getIpviews());
                 visit.setMaxIpviewsDate(entity.getId().getVisitDate());
             }
-            recordService.saveOrUpdate(recordId, JsonUtils.getString(visit));
+            recordService.getOrCreateOrUpdate(entity.getId().getSiteId(), "visit", JsonUtils.getString(visit));
         }
     }
 
