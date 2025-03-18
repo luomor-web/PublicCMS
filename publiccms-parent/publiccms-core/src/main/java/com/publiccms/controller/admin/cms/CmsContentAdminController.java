@@ -178,10 +178,14 @@ public class CmsContentAdminController {
             entity.setQuoteContentId(null == parent.getParentId() ? parent.getId() : parent.getQuoteContentId());
         }
         String operate = null != entity.getId() ? "update.content" : "save.content";
+        CmsContent oldEntity = null;
         if (null != entity.getId()) {
-            CmsContent oldEntity = service.getEntity(entity.getId());
+            oldEntity = service.getEntity(entity.getId());
             if (null == oldEntity || ControllerUtils.errorNotEquals("siteId", site.getId(), oldEntity.getSiteId(), model)
                     || ControllerUtils.errorCustom("noright", !ControllerUtils.hasContentPermissions(admin, oldEntity), model)) {
+                return CommonConstants.TEMPLATE_ERROR;
+            }
+            if (ControllerUtils.errorCustom("statusError", CmsContentService.STATUS_CHECKING == oldEntity.getStatus(), model)) {
                 return CommonConstants.TEMPLATE_ERROR;
             }
         }
@@ -195,11 +199,12 @@ public class CmsContentAdminController {
         if (null != category.getWorkflowId()) {
             SysWorkflowProcessItem item = workflowProcessItemService.getEntity(
                     new SysWorkflowProcessItemId(SysWorkflowProcessService.ITEM_TYPE_CONTENT, String.valueOf(entity.getId())));
-            if (null == item) {
+            if (null == item || CmsContentService.STATUS_NORMAL == oldEntity.getStatus()) {
                 SysWorkflowProcess process = workflowProcessService.createProcess(site.getId(), category.getWorkflowId(),
-                        SysWorkflowProcessService.ITEM_TYPE_CONTENT, String.valueOf(entity.getId()));
+                        entity.getTitle(), SysWorkflowProcessService.ITEM_TYPE_CONTENT, String.valueOf(entity.getId()));
                 if (null != process) {
                     checked = null;
+                    service.checking(site.getId(), entity.getId());
                 }
             }
         }
@@ -212,8 +217,6 @@ public class CmsContentAdminController {
                 if (null != parent) {
                     publish(site, parent, admin);
                 }
-            } else if (CmsContentService.STATUS_PEND == entity.getStatus()) {
-
             }
             if (null == entity.getParentId() && null == entity.getQuoteContentId()) {
                 Set<Serializable> categoryIdsSet = service.updateQuote(entity.getId(), contentParameters);

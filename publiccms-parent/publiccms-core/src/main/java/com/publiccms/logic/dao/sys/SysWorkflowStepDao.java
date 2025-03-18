@@ -22,14 +22,18 @@ public class SysWorkflowStepDao extends BaseDao<SysWorkflowStep> {
 
     /**
      * @param workflowId
+     * @param sort 
      * @param pageIndex
      * @param pageSize
      * @return results page
      */
-    public List<SysWorkflowStep> getList(Integer workflowId) {
+    public List<SysWorkflowStep> getList(Integer workflowId, Integer sort) {
         if (CommonUtils.notEmpty(workflowId)) {
             QueryHandler queryHandler = getQueryHandler("from SysWorkflowStep bean");
             queryHandler.condition("bean.workflowId = :workflowId").setParameter("workflowId", workflowId);
+            if (null != sort) {
+                queryHandler.condition("bean.sort >= :sort").setParameter("sort", sort);
+            }
             queryHandler.order("bean.sort asc");
             return getEntityList(queryHandler);
         }

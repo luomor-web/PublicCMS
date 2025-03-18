@@ -17,21 +17,30 @@ import freemarker.template.TemplateException;
 /**
  *
  * sysWorkflowStepListDirective
- * <p lang="zh">流程步骤列表查询指令
- * <p lang="en">workflow step list query directive
- * <p lang="ja">ワークフローステップリストクエリ指令
+ * <p lang="zh">
+ * 流程步骤列表查询指令
+ * <p lang="en">
+ * workflow step list query directive
+ * <p lang="ja">
+ * ワークフローステップリストクエリ指令
  * 
- * <p lang="zh">参数列表
- * <p lang="en">parameter list
- * <p lang="ja">パラメータリスト
+ * <p lang="zh">
+ * 参数列表
+ * <p lang="en">
+ * parameter list
+ * <p lang="ja">
+ * パラメータリスト
  * <ul>
  * <li lang="zh"><code>workflowId</code>:流程id
  * <li lang="en"><code>workflowId</code>:workflow id
  * <li lang="ja"><code>workflowId</code>:ワークフロー id
  * </ul>
- * <p lang="zh">返回结果
- * <p lang="en">return result
- * <p lang="ja">戻り値
+ * <p lang="zh">
+ * 返回结果
+ * <p lang="en">
+ * return result
+ * <p lang="ja">
+ * 戻り値
  * <ul>
  * <li lang="zh"><code>list</code>:List类型 查询结果实体列表
  * {@link com.publiccms.entities.sys.SysExtendField}
@@ -40,9 +49,12 @@ import freemarker.template.TemplateException;
  * <li lang="ja"><code>page.list</code>:リスト型 クエリ結果エンティティリスト
  * {@link com.publiccms.entities.sys.SysExtendField}
  * </ul>
- * <p lang="zh">使用示例
- * <p lang="en">usage example
- * <p lang="ja">使用例
+ * <p lang="zh">
+ * 使用示例
+ * <p lang="en">
+ * usage example
+ * <p lang="ja">
+ * 使用例
  * <p>
  * &lt;@sys.extendFieldList deptId=1 pageSize=10&gt;&lt;#list list as
  * a&gt;${a.name}&lt;#sep&gt;,&lt;/#list&gt;&lt;/@sys.extendFieldList&gt;
@@ -60,7 +72,7 @@ public class SysWorkflowStepListDirective extends AbstractTemplateDirective {
 
     @Override
     public void execute(RenderHandler handler) throws IOException, TemplateException {
-        handler.put("list", service.getList(handler.getInteger("workflowId"))).render();
+        handler.put("list", service.getList(handler.getInteger("workflowId"), handler.getInteger("sort"))).render();
     }
 
     @Resource

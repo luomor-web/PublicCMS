@@ -60,8 +60,8 @@
                     <fieldset>
                         <legend><@t.page 'workflow'/></legend>
                         <div class="workflow">
-                            <div class="text-center step">
-                                <i class="bi bi-record-circle"></i> <@t.page 'start'/>
+                            <div class="text-center step current">
+                                <i class="bi bi-record-circle"></i><br><@t.page 'start'/>
                             </div>
                         </div>
                         <div class="sortDrag workflow" data-over-sort="true" data-accept="step" data-parent="step">
@@ -92,8 +92,8 @@
                             </#if>
                         </div>
                         <div class="workflow">
-                            <div class="text-center step">
-                                <i class="bi bi-stop-circle"></i> <@t.page 'end'/>
+                            <div class="text-center step current">
+                                <i class="bi bi-stop-circle"></i><br><@t.page 'end'/>
                             </div>
                         </div>
                         <textarea name="stepdata" class="hide"></textarea>

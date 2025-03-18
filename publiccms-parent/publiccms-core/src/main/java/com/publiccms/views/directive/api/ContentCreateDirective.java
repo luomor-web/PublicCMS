@@ -286,7 +286,7 @@ public class ContentCreateDirective extends AbstractAppDirective {
                         contentFileService.update(entity.getId(), user.getId(), files, images);// 更新保存图集,附件
                     }
                     if (null != checked && checked) {
-                        service.check(site.getId(), user, new Long[] { entity.getId() });
+                        service.check(site.getId(), user, entity.getId());
                         templateComponent.createContentFile(site, entity, category, categoryModel);
                         templateComponent.createCategoryFile(site, category, null, null);
                     }

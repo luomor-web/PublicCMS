@@ -22,16 +22,17 @@ public class SysWorkflowProcessDao extends BaseDao<SysWorkflowProcess> {
      * @param siteId
      * @param itemType
      * @param itemId
-     * @param roleId 
-     * @param deptId 
-     * @param userId 
+     * @param title
+     * @param roleIds
+     * @param deptId
+     * @param userId
      * @param closed
      * @param pageIndex
      * @param pageSize
      * @return results page
      */
-    public PageHandler getPage(Short siteId, String itemType, String itemId, Integer roleId, Integer deptId, Long userId,
-            Boolean closed, Integer pageIndex, Integer pageSize) {
+    public PageHandler getPage(Short siteId, String itemType, String itemId, String title, Integer[] roleIds, Integer deptId,
+            Long userId, Boolean closed, Integer pageIndex, Integer pageSize) {
         QueryHandler queryHandler = getQueryHandler("from SysWorkflowProcess bean");
         if (null != siteId) {
             queryHandler.condition("bean.siteId = :siteId").setParameter("siteId", siteId);
@@ -42,14 +43,34 @@ public class SysWorkflowProcessDao extends BaseDao<SysWorkflowProcess> {
         if (CommonUtils.notEmpty(itemId)) {
             queryHandler.condition("bean.itemId = :itemId").setParameter("itemId", itemId);
         }
-        if (null != roleId) {
-            queryHandler.condition("bean.roleId = :roleId or bean.roleId is null").setParameter("roleId", roleId);
+        if (CommonUtils.notEmpty(title)) {
+            queryHandler.condition("bean.title like :title").setParameter("title", like(title));
         }
-        if (null != deptId) {
-            queryHandler.condition("bean.deptId = :deptId or bean.deptId is null").setParameter("deptId", deptId);
+        if (null != roleIds || null != deptId || null != userId) {
+            queryHandler.condition("(");
+            boolean hasCondition = false;
+            if (null != roleIds) {
+                queryHandler.append("bean.roleId in (:roleId)").setParameter("roleId", roleIds);
+                hasCondition = true;
+            }
+            if (null != deptId) {
+                if (hasCondition) {
+                    queryHandler.append("or");
+                }
+                queryHandler.append("bean.deptId = :deptId").setParameter("deptId", deptId);
+                hasCondition = true;
+            }
+            if (null != userId) {
+                if (hasCondition) {
+                    queryHandler.append("or");
+                }
+                queryHandler.append("bean.userId = :userId").setParameter("userId", userId);
+            }
+            queryHandler.append(")");
         }
-        if (null != userId) {
-            queryHandler.condition("bean.userId = :userId or bean.userId is null").setParameter("userId", userId);
+
+        if (null != closed) {
+            queryHandler.condition("bean.closed = :closed").setParameter("closed", closed);
         }
         queryHandler.order("bean.id desc");
         return getPage(queryHandler, pageIndex, pageSize);

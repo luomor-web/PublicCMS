@@ -103,13 +103,20 @@ DROP TABLE IF EXISTS `sys_workflow_process`;
 CREATE TABLE `sys_workflow_process` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `site_id` smallint(6) NOT NULL COMMENT '站点',
+  `workflow_id` int(11) NOT NULL COMMENT '工作流',
+  `title` varchar(255) NOT NULL COMMENT '标题',
   `item_type` varchar(50) NOT NULL COMMENT '项目类型',
   `item_id` varchar(100) NOT NULL COMMENT '项目',
   `step_id` int(11) NOT NULL COMMENT '当前步骤',
+  `role_id` int(11) DEFAULT NULL COMMENT '角色',
+  `dept_id` int(11) DEFAULT NULL COMMENT '部门',
+  `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
   `closed` tinyint(1) NOT NULL COMMENT '已关闭',
   `create_date` datetime NOT NULL COMMENT '创建日期',
+  `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`id`),
-  KEY `sys_workflow_process_item_id` (`site_id`,`item_type`,`item_id`,`create_date`)
+  KEY `sys_workflow_process_item_id` (`site_id`,`item_type`,`item_id`,`create_date`),
+  KEY `sys_workflow_process_user_id` (`site_id`,`role_id`,`dept_id`,`user_id` , `closed`)
 ) COMMENT='工作流流程';
 
 DROP TABLE IF EXISTS `sys_workflow_process_history`;
@@ -122,7 +129,8 @@ CREATE TABLE `sys_workflow_process_history` (
   `reason` varchar(255) DEFAULT NULL COMMENT '理由',
   `create_date` datetime NOT NULL COMMENT '创建日期',
   PRIMARY KEY (`id`),
-  KEY `sys_workflow_process_content_id` (`process_id`,`create_date`)
+  KEY `sys_workflow_process_content_id` (`process_id`),
+  KEY `sys_workflow_process_user_id` (`user_id`)
 ) COMMENT='工作流流程步骤';
 
 DROP TABLE IF EXISTS `sys_workflow_process_item`;
@@ -144,7 +152,7 @@ CREATE TABLE `sys_workflow_step` (
   `next_step_id` bigint(20) DEFAULT NULL COMMENT '下一步',
   `sort` int(11) NOT NULL COMMENT '排序',
   PRIMARY KEY (`id`),
-  KEY `sys_workflow_step_workflow_id` (`workflow_id`)
+  KEY `sys_workflow_step_workflow_id` (`workflow_id`,`sort`)
 ) COMMENT='工作流步骤';
 
 DROP TABLE IF EXISTS `trade_cart`;
@@ -246,7 +254,7 @@ CREATE TABLE `sys_user_setting` (
   `user_id` bigint(20) NOT NULL COMMENT '用户',
   `code` varchar(50) NOT NULL COMMENT '编码',
   `data` longblob NOT NULL COMMENT '值',
-  `create_date` datetime(0) NULL COMMENT '创建日期',
+  `create_date` datetime NOT NULL COMMENT '创建日期',
   `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`user_id`,`code`)
 );
@@ -263,3 +271,25 @@ ALTER TABLE `sys_lock`
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
 ALTER TABLE `sys_user` 
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `registered_date`;
+-- 2025-03-18 --
+UPDATE sys_module SET sort=sort+1 WHERE id in ('content_search','comment_list','category_list','tag_list');
+INSERT INTO sys_module VALUES ('myself_content_view', 'cmsContent/view', NULL, NULL, 'myself_content', 1, 0, 0);
+INSERT INTO sys_module VALUES ('myself_process_view', 'sysWorkflowProcess/view', NULL, NULL, 'myself_content', 1, 0, 0);
+INSERT INTO sys_module VALUES ('process_handle', 'sysWorkflowProcess/processParameters', 'sysWorkflowProcess/handle', NULL, 'process_list', 1, 0, 0);
+INSERT INTO sys_module VALUES ('process_list', 'sysWorkflowProcess/list', NULL, 'bi bi-ui-checks', 'content', 1, 1, 2);
+INSERT INTO sys_module VALUES ('process_view', 'sysWorkflowProcess/view', NULL, NULL, 'process_list', 1, 0, 0);
+INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'en', 'View');
+INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'ja', '見る');
+INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'zh', '查看');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'en', 'View');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'ja', '見る');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'zh', '查看');
+INSERT INTO `sys_module_lang` VALUES ('process_handle', 'en', 'Handle');
+INSERT INTO `sys_module_lang` VALUES ('process_handle', 'ja', 'ハンドル');
+INSERT INTO `sys_module_lang` VALUES ('process_handle', 'zh', '处理');
+INSERT INTO `sys_module_lang` VALUES ('process_list', 'en', 'Review Process');
+INSERT INTO `sys_module_lang` VALUES ('process_list', 'ja', 'レビュープロセス');
+INSERT INTO `sys_module_lang` VALUES ('process_list', 'zh', '审核流程');
+INSERT INTO `sys_module_lang` VALUES ('process_view', 'en', 'View');
+INSERT INTO `sys_module_lang` VALUES ('process_view', 'ja', '見る');
+INSERT INTO `sys_module_lang` VALUES ('process_view', 'zh', '查看');

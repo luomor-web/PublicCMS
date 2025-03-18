@@ -32,27 +32,7 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
     /**
      * 
      */
-    public static final String ITEM_TYPE_CUSTOM = "custom";
-    /**
-     * 
-     */
     public static final String ITEM_TYPE_CONTENT = "content";
-    /**
-     * 
-     */
-    public static final String ITEM_TYPE_PLACE = "place";
-    /**
-     * 
-     */
-    public static final String ITEM_TYPE_CERTIFICATION = "certification";
-    /**
-     * 
-     */
-    public static final String ITEM_TYPE_REFUND = "refund";
-    /**
-     * 
-     */
-    public static final String ITEM_TYPE_ORDER = "order";
     @Resource
     private SysWorkflowService workflowService;
     @Resource
@@ -68,7 +48,8 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
      * @param siteId
      * @param itemType
      * @param itemId
-     * @param roleId
+     * @param title
+     * @param roleIds
      * @param deptId
      * @param userId
      * @param closed
@@ -77,16 +58,16 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
      * @return results page
      */
     @Transactional(readOnly = true)
-    public PageHandler getPage(Short siteId, String itemType, String itemId, Integer roleId, Integer deptId, Long userId,
-            Boolean closed, Integer pageIndex, Integer pageSize) {
-        return dao.getPage(siteId, itemType, itemId, roleId, deptId, userId, closed, pageIndex, pageSize);
+    public PageHandler getPage(Short siteId, String itemType, String itemId, String title, Integer[] roleIds, Integer deptId,
+            Long userId, Boolean closed, Integer pageIndex, Integer pageSize) {
+        return dao.getPage(siteId, itemType, itemId, title, roleIds, deptId, userId, closed, pageIndex, pageSize);
     }
 
-    public SysWorkflowProcess createProcess(short siteId, int workflowId, String itemType, String itemId) {
+    public SysWorkflowProcess createProcess(short siteId, int workflowId, String title, String itemType, String itemId) {
         SysWorkflow workflow = workflowService.getEntity(workflowId);
         if (null != workflow && siteId == workflow.getSiteId() && null != workflow.getStartStepId()) {
             SysWorkflowStep step = workflowStepService.getEntity(workflow.getStartStepId());
-            SysWorkflowProcess entity = new SysWorkflowProcess(siteId, itemType, itemId, step.getId(), false,
+            SysWorkflowProcess entity = new SysWorkflowProcess(siteId, workflowId, title, itemType, itemId, step.getId(), false,
                     CommonUtils.getDate());
             entity.setRoleId(step.getRoleId());
             entity.setDeptId(step.getDeptId());
@@ -100,22 +81,36 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
         return null;
     }
 
-    public SysWorkflowProcess dealProcess(short siteId, SysWorkflowProcessHistory history, SysUser user) {
+    public SysWorkflowProcess handleProcess(short siteId, SysWorkflowProcessHistory history, SysUser user) {
         SysWorkflowProcess entity = getEntity(history.getProcessId());
-        if (null != entity && siteId == entity.getSiteId() && !entity.isClosed() && entity.getStepId() == history.getStepId()
+        if (null != entity && siteId == entity.getSiteId() && !entity.isClosed()
                 && (null != entity.getRoleId()
-                        && ArrayUtils.contains(StringUtils.split(user.getRoles(), Constants.COMMA), entity.getRoleId())
+                        && ArrayUtils.contains(StringUtils.split(user.getRoles(), Constants.COMMA), String.valueOf(entity.getRoleId()))
                         || null != entity.getDeptId() && user.getDeptId() == entity.getDeptId()
                         || null != entity.getUserId() && user.getId() == entity.getUserId())) {
-            SysWorkflowStep step = workflowStepService.getEntity(entity.getStepId());
-            if (null == step.getNextStepId()) {
-                entity.setClosed(true);
-                processComponent.process(entity, user, history);
-            } else {
-                entity.setStepId(step.getNextStepId());
-                entity.setRoleId(step.getRoleId());
-                entity.setDeptId(step.getDeptId());
-                entity.setUserId(step.getUserId());
+            history.setId(null);
+            history.setStepId(entity.getStepId());
+            history.setUserId(user.getId());
+            history.setCreateDate(null);
+            if (SysWorkflowProcessHistoryService.OPERATE_AGREE.equalsIgnoreCase(history.getOperate())) {
+                SysWorkflowStep step = workflowStepService.getEntity(entity.getStepId());
+                if (null == step) {
+                    entity.setClosed(true);
+                    entity = createProcess(siteId, entity.getWorkflowId(), entity.getTitle(), entity.getItemType(),
+                            entity.getItemId());
+                } else {
+                    if (null == step.getNextStepId()) {
+                        entity.setClosed(true);
+                        processComponent.finishProcess(entity, user, history);
+                    } else {
+                        entity.setStepId(step.getNextStepId());
+                        entity.setRoleId(step.getRoleId());
+                        entity.setDeptId(step.getDeptId());
+                        entity.setUserId(step.getUserId());
+                    }
+                }
+            } else if (SysWorkflowProcessHistoryService.OPERATE_REJECT.equalsIgnoreCase(history.getOperate())) {
+                processComponent.reject(entity, user, history);
             }
             historyService.save(history);
             return entity;

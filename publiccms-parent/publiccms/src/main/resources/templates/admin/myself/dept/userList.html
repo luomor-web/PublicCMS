@@ -109,14 +109,16 @@
                 <td>${a.loginCount!}</td>
                 <td>${a.registeredDate!}</td>
                 <td class="wrap">
-                    <#if authorizedMap['myself/dept/addUser']>
-                        <a href="myself/dept/addUser.html?id=${a.id}" class="edit btnText blue" target="navTab" rel="myself/dept/editUser"><i class="icon-edit"></i><@t.page 'user.edit'/></a>
-                    </#if>
-                    <#if (dept.userId)?has_content && dept.userId=admin.id>
-                        <#if a.disabled && authorizedMap['sysDept/enableUser']>
-                            <a href="sysDept/enableUser?id=${a.id}&_csrf=<@tools.csrfToken admin=true/>" class="btnText green" title="<@t.page 'confirm.enable'/>" target="ajaxTodo"><i class="icon-circle"></i><@t.page 'button.enable'/></a>
-                        <#elseif !a.disabled && authorizedMap['sysDept/disableUser']>
-                            <a href="sysDept/disableUser?id=${a.id}&_csrf=<@tools.csrfToken admin=true/>" class="btnText red" title="<@t.page 'confirm.disable'/>" target="ajaxTodo"><i class="icon-ban-circle"></i><@t.page 'button.disable'/></a>
+                    <#if a.id!=admin.id>
+                        <#if authorizedMap['myself/dept/addUser']>
+                            <a href="myself/dept/addUser.html?id=${a.id}" class="edit btnText blue" target="navTab" rel="myself/dept/editUser"><i class="icon-edit"></i><@t.page 'user.edit'/></a>
+                        </#if>
+                        <#if (dept.userId)?has_content && dept.userId=admin.id>
+                            <#if a.disabled && authorizedMap['sysDept/enableUser']>
+                                <a href="sysDept/enableUser?id=${a.id}&_csrf=<@tools.csrfToken admin=true/>" class="btnText green" title="<@t.page 'confirm.enable'/>" target="ajaxTodo"><i class="icon-circle"></i><@t.page 'button.enable'/></a>
+                            <#elseif !a.disabled && authorizedMap['sysDept/disableUser']>
+                                <a href="sysDept/disableUser?id=${a.id}&_csrf=<@tools.csrfToken admin=true/>" class="btnText red" title="<@t.page 'confirm.disable'/>" target="ajaxTodo"><i class="icon-ban-circle"></i><@t.page 'button.disable'/></a>
+                            </#if>
                         </#if>
                     </#if>
                     <#if authorizedMap['log/login']>

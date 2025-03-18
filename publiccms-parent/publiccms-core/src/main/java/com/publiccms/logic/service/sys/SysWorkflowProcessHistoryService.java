@@ -23,7 +23,7 @@ public class SysWorkflowProcessHistoryService extends BaseService<SysWorkflowPro
     /**
      * 
      */
-    public static final String OPERATE_ACCEPT = "accept";
+    public static final String OPERATE_AGREE = "agree";
     /**
      * 
      */

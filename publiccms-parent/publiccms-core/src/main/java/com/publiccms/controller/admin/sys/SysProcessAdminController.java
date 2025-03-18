@@ -34,10 +34,10 @@ public class SysProcessAdminController {
      * @param model
      * @return operate result
      */
-    @RequestMapping("save")
+    @RequestMapping("handle")
     @Csrf
-    public String save(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, SysWorkflowProcessHistory entity) {
-        service.dealProcess(site.getId(), entity, admin);
+    public String handle(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, SysWorkflowProcessHistory entity) {
+        service.handleProcess(site.getId(), entity, admin);
         return CommonConstants.TEMPLATE_DONE;
     }
 

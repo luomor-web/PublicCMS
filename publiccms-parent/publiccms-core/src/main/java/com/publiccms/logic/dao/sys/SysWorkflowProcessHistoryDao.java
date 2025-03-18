@@ -33,7 +33,7 @@ public class SysWorkflowProcessHistoryDao extends BaseDao<SysWorkflowProcessHist
         if (CommonUtils.notEmpty(userId)) {
             queryHandler.condition("bean.userId = :userId").setParameter("userId", userId);
         }
-        queryHandler.order("bean.id desc");
+        queryHandler.order("bean.id asc");
         return getPage(queryHandler, pageIndex, pageSize);
     }
 

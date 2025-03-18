@@ -9,7 +9,7 @@ public interface WorkflowHandler<T> {
 
     public T getItemId(String value);
 
-    public void accept(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, T itemId);
+    public void finish(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, T itemId);
 
-    public void reject(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, T itemId);
+    public void interrupt(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, T itemId);
 }

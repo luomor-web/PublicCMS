@@ -89,6 +89,10 @@ public class CmsContentService extends BaseService<CmsContent> {
      *
      */
     public static final int STATUS_REJECT = 3;
+    /**
+    *
+    */
+    public static final int STATUS_CHECKING = 4;
 
     /**
      *
@@ -481,8 +485,45 @@ public class CmsContentService extends BaseService<CmsContent> {
      * @param checkPermissions
      * @return result
      */
-    public CmsContent check(short siteId, SysUser user, Serializable id) {
-        return check(siteId, user, id, true);
+    public CmsContent checkInProcess(short siteId, SysUser user, Serializable id) {
+        CmsContent entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_CHECKING == entity.getStatus()) {
+            entity.setStatus(STATUS_NORMAL);
+            entity.setCheckUserId(user.getId());
+            entity.setCheckDate(CommonUtils.getDate());
+        }
+        return entity;
+    }
+
+    /**
+     * @param siteId
+     * @param user
+     * @param id
+     * @return results list
+     */
+    public CmsContent rejectInProcess(short siteId, SysUser user, Serializable id) {
+        CmsContent entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_CHECKING == entity.getStatus()) {
+            entity.setStatus(STATUS_REJECT);
+            entity.setCheckUserId(user.getId());
+            entity.setCheckDate(CommonUtils.getDate());
+        }
+        return entity;
+    }
+    
+    /**
+     * @param siteId
+     * @param user
+     * @param id
+     * @param checkPermissions
+     * @return result
+     */
+    public CmsContent checking(short siteId, Serializable id) {
+        CmsContent entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()) {
+            entity.setStatus(STATUS_CHECKING);
+        }
+        return entity;
     }
 
     /**
@@ -492,10 +533,10 @@ public class CmsContentService extends BaseService<CmsContent> {
      * @param checkPermissions
      * @return result
      */
-    public CmsContent check(short siteId, SysUser user, Serializable id, boolean checkPermissions) {
+    public CmsContent check(short siteId, SysUser user, Serializable id) {
         CmsContent entity = getEntity(id);
-        if (null != entity && siteId == entity.getSiteId() && STATUS_DRAFT != entity.getStatus()
-                && STATUS_NORMAL != entity.getStatus() && ControllerUtils.hasContentPermissions(user, entity)) {
+        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()
+                && ControllerUtils.hasContentPermissions(user, entity)) {
             entity.setStatus(STATUS_NORMAL);
             entity.setCheckUserId(user.getId());
             entity.setCheckDate(CommonUtils.getDate());
@@ -512,8 +553,8 @@ public class CmsContentService extends BaseService<CmsContent> {
     public List<CmsContent> check(short siteId, SysUser user, Serializable[] ids) {
         List<CmsContent> entityList = new ArrayList<>();
         for (CmsContent entity : getEntitys(ids)) {
-            if (null != entity && siteId == entity.getSiteId() && STATUS_DRAFT != entity.getStatus()
-                    && STATUS_NORMAL != entity.getStatus() && ControllerUtils.hasContentPermissions(user, entity)) {
+            if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()
+                    && ControllerUtils.hasContentPermissions(user, entity)) {
                 entity.setStatus(STATUS_NORMAL);
                 entity.setCheckUserId(user.getId());
                 entity.setCheckDate(CommonUtils.getDate());
@@ -531,7 +572,8 @@ public class CmsContentService extends BaseService<CmsContent> {
      */
     public CmsContent reject(short siteId, SysUser user, Serializable id) {
         CmsContent entity = getEntity(id);
-        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()) {
+        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()
+                && ControllerUtils.hasContentPermissions(user, entity)) {
             entity.setStatus(STATUS_REJECT);
             entity.setCheckUserId(user.getId());
             entity.setCheckDate(CommonUtils.getDate());

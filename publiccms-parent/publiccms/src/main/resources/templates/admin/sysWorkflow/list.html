@@ -45,8 +45,8 @@
             <#list page.list as a>
             <tr target="sid" rel="${a.id}">
                 <td class="center"><input name="ids" value="${a.id}" type="checkbox"></td>
-                <td>${a.name!}</td>
-                <td>${a.description!}</td>
+                <td><a href="sysWorkflow/view.html?id=${a.id}" class="exclude-translate" target="dialog" rel="viewWorkflow${a.id}" width="1200" height="500">${(a.name)!}</a></td>
+                <td class="exclude-translate">${a.description!}</td>
                 <td>${a.createDate!}</td>
                 <td>
                 <#if authorizedMap['sysWorkflow/add']>

@@ -73,7 +73,7 @@ public class SysDept implements java.io.Serializable {
     /**
      * has child
      * <p>
-     * 拥有子模型
+     * 拥有子部门
      */
     private boolean hasChild;
     /**

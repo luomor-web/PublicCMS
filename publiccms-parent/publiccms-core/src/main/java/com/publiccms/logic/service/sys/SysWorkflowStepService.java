@@ -28,37 +28,34 @@ public class SysWorkflowStepService extends BaseService<SysWorkflowStep> {
 
     /**
      * @param workflowId
+     * @param sort
      * @param pageIndex
      * @param pageSize
      * @return results page
      */
     @Transactional(readOnly = true)
-    public List<SysWorkflowStep> getList(Integer workflowId) {
-        return dao.getList(workflowId);
+    public List<SysWorkflowStep> getList(Integer workflowId, Integer sort) {
+        return dao.getList(workflowId, sort);
     }
 
-    
     /**
      * @param workflowId
      * @param entityList
      * @return first step id
      */
     public Long save(int workflowId, List<SysWorkflowStep> entityList) {
-        Long firstStepId = null;
+        Long lastStepId = null;
         if (CommonUtils.notEmpty(entityList)) {
-            SysWorkflowStep entity = null;
             ListIterator<SysWorkflowStep> iterator = entityList.listIterator(entityList.size());
             while (iterator.hasPrevious()) {
-                entity = iterator.previous();
+                SysWorkflowStep entity = iterator.previous();
                 entity.setWorkflowId(workflowId);
-                entity.setNextStepId(null == entity ? null : entity.getId());
+                entity.setNextStepId(lastStepId);
                 save(entity);
-                if(null==firstStepId) {
-                    firstStepId = entity.getId();
-                }
+                lastStepId = entity.getId();
             }
         }
-        return firstStepId;
+        return lastStepId;
     }
 
     /**
@@ -69,35 +66,35 @@ public class SysWorkflowStepService extends BaseService<SysWorkflowStep> {
      */
     public Long update(int workflowId, List<SysWorkflowStep> entitys, String[] ignoreProperties) {
         Set<Long> idList = new HashSet<>();
-        Long firstStepId = null;
+        Long lastStepId = null;
         if (CommonUtils.notEmpty(entitys)) {
-            SysWorkflowStep entity = null;
+            SysWorkflowStep last = null;
             ListIterator<SysWorkflowStep> iterator = entitys.listIterator(entitys.size());
             while (iterator.hasPrevious()) {
-                entity = iterator.previous();
+                SysWorkflowStep entity = iterator.previous();
                 if (null != entity.getId()) {
                     SysWorkflowStep oldEntity = getEntity(entity.getId());
                     if (workflowId == oldEntity.getWorkflowId()) {
-                        entity.setNextStepId(null == entity ? null : entity.getId());
+                        entity.setNextStepId(lastStepId);
                         update(entity.getId(), entity, ignoreProperties);
+                        lastStepId = entity.getId();
+                        idList.add(entity.getId());
                     }
                 } else {
                     entity.setWorkflowId(workflowId);
-                    entity.setNextStepId(null == entity ? null : entity.getId());
+                    entity.setNextStepId(null == last ? null : last.getId());
                     save(entity);
+                    lastStepId = entity.getId();
+                    idList.add(entity.getId());
                 }
-                if(null==firstStepId) {
-                    firstStepId = entity.getId();
-                }
-                idList.add(entity.getId());
             }
         }
-        for (SysWorkflowStep step : getList(workflowId)) {
+        for (SysWorkflowStep step : getList(workflowId, null)) {
             if (!idList.contains(step.getId())) {
                 delete(step.getId());
             }
         }
-        return firstStepId;
+        return lastStepId;
     }
 
     /**

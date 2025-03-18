@@ -25,8 +25,9 @@ public class SysWorkflowProcessListDirective extends AbstractTemplateDirective {
     @Override
     public void execute(RenderHandler handler) throws IOException, TemplateException {
         PageHandler page = service.getPage(getSite(handler).getId(), handler.getString("itemType"), handler.getString("itemId"),
-                handler.getInteger("roleId"), handler.getInteger("deptId"), handler.getLong("userId"),
-                handler.getBoolean("closed", false), handler.getInteger("pageIndex", 1), handler.getInteger("pageSize", 30));
+                handler.getString("title"), handler.getIntegerArray("roleIds"), handler.getInteger("deptId"),
+                handler.getLong("userId"), handler.getBoolean("closed", false), handler.getInteger("pageIndex", 1),
+                handler.getInteger("pageSize", 30));
         handler.put("page", page).render();
     }
 

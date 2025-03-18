@@ -18,7 +18,7 @@
                         <@sys.siteList parentId=(parentSite!site).id pageSize=100>
                         <optgroup label="<@t.page 'site.child_management'/>">
                             <#list page.list as a>
-                        <option value="${a.id}"<#if a.id==site.id> selected="true"</#if>>${a.name}</option>
+                        <option value="${a.id}"<#if a.id = site.id> selected="true"</#if>>${a.name}</option>
                             </#list>
                         </optgroup>
                         </@sys.siteList>

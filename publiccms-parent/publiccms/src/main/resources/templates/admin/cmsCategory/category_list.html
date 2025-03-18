@@ -14,8 +14,8 @@
                 <li>
                     <select class="combox" name="allowContribute">
                         <option value><@t.page 'contribute'/></option>
-                        <option value="true"${(allowContribute?has_content&&"true"==allowContribute)?then(' selected="true"','')?no_esc}><@t.page 'allow_contribute'/></option>
-                        <option value="false"${(allowContribute?has_content&&"false"==allowContribute)?then(' selected="true"','')?no_esc}><@t.page 'forbid_contribute'/></option>
+                        <option value="true"${(allowContribute?has_content&&"true"=allowContribute)?then(' selected="true"','')?no_esc}><@t.page 'allow_contribute'/></option>
+                        <option value="false"${(allowContribute?has_content&&"false"=allowContribute)?then(' selected="true"','')?no_esc}><@t.page 'forbid_contribute'/></option>
                     </select>
                 </li>
             </ul>
@@ -117,7 +117,7 @@
                 <td>
                     <span class="exclude-translate">${a.code!}</span>
                     <br/>
-                    <a href="common/category_list.html?parentId=${a.id}" target="ajax" rel="categoryBox"><@t.page 'category.child_management'/></a>
+                    <a href="cmsCategory/category_list.html?parentId=${a.id}" target="ajax" rel="categoryBox"><@t.page 'category.child_management'/></a>
                 </td>
                 <td>
                     <#if lockMap?has_content && lockMap[a.id?string]?has_content>

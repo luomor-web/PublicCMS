@@ -2,6 +2,8 @@ package com.publiccms.logic.component.workflow;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Component;
+
 import com.publiccms.common.api.Config;
 import com.publiccms.common.base.AbstractLongWorkflowHandler;
 import com.publiccms.entities.sys.SysUser;
@@ -9,6 +11,7 @@ import com.publiccms.entities.sys.SysWorkflowProcess;
 import com.publiccms.entities.sys.SysWorkflowProcessHistory;
 import com.publiccms.logic.service.cms.CmsContentService;
 
+@Component
 public class ContentWorkflowHandler extends AbstractLongWorkflowHandler {
 
     @Override
@@ -17,13 +20,13 @@ public class ContentWorkflowHandler extends AbstractLongWorkflowHandler {
     }
 
     @Override
-    public void accept(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, Long itemId) {
-        service.check(entity.getSiteId(), user, itemId, false);
+    public void finish(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, Long itemId) {
+        service.checkInProcess(entity.getSiteId(), user, itemId);
     }
 
     @Override
-    public void reject(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, Long itemId) {
-        service.reject(entity.getSiteId(), user, itemId);
+    public void interrupt(SysWorkflowProcess entity, SysUser user, SysWorkflowProcessHistory history, Long itemId) {
+        service.rejectInProcess(entity.getSiteId(), user, itemId);
     }
 
     @Resource

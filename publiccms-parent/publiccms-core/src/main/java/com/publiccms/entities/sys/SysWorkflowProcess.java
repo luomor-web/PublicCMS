@@ -2,6 +2,7 @@ package com.publiccms.entities.sys;
 // Generated 2023-8-7 21:42:23 by Hibernate Tools 5.6.15.Final
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +11,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.publiccms.common.database.CmsUpgrader;
@@ -35,6 +38,22 @@ public class SysWorkflowProcess implements java.io.Serializable {
     @GeneratorColumn(title = "站点", condition = true)
     @JsonIgnore
     private short siteId;
+    /**
+     * workflow
+     * <p>
+     * 流程
+     */
+    @GeneratorColumn(title = "流程")
+    private int workflowId;
+    /**
+     * title
+     * 
+     * 标题
+     */
+    @GeneratorColumn(title = "标题", condition = true, like = true, or = true)
+    @NotBlank
+    @Length(max = 255)
+    private String title;
     /**
      * item type
      * <p>
@@ -103,8 +122,10 @@ public class SysWorkflowProcess implements java.io.Serializable {
     public SysWorkflowProcess() {
     }
 
-    public SysWorkflowProcess(short siteId, String itemType, String itemId, long stepId, boolean closed, Date createDate) {
+    public SysWorkflowProcess(short siteId, int workflowId, String title, String itemType, String itemId, long stepId, boolean closed, Date createDate) {
         this.siteId = siteId;
+        this.workflowId = workflowId;
+        this.title = title;
         this.itemType = itemType;
         this.itemId = itemId;
         this.stepId = stepId;
@@ -112,9 +133,11 @@ public class SysWorkflowProcess implements java.io.Serializable {
         this.createDate = createDate;
     }
 
-    public SysWorkflowProcess(short siteId, String itemType, String itemId, long stepId, Integer roleId, Integer deptId,
+    public SysWorkflowProcess(short siteId, int workflowId, String title, String itemType, String itemId, long stepId, Integer roleId, Integer deptId,
             Long userId, boolean closed, Date createDate, Date updateDate) {
         this.siteId = siteId;
+        this.workflowId = workflowId;
+        this.title = title;
         this.itemType = itemType;
         this.itemId = itemId;
         this.stepId = stepId;
@@ -141,6 +164,24 @@ public class SysWorkflowProcess implements java.io.Serializable {
     @Column(name = "site_id", nullable = false)
     public short getSiteId() {
         return this.siteId;
+    }
+
+    @Column(name = "workflow_id", nullable = false)
+    public int getWorkflowId() {
+        return this.workflowId;
+    }
+
+    public void setWorkflowId(int workflowId) {
+        this.workflowId = workflowId;
+    }
+
+    @Column(name = "title", nullable = false)
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setSiteId(short siteId) {
