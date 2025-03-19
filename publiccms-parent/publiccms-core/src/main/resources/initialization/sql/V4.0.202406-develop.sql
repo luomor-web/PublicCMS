@@ -260,10 +260,10 @@ CREATE TABLE `sys_user_setting` (
 );
 ALTER TABLE `sys_user_attribute`
     DROP COLUMN `settings`,
-    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`;
+    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`,
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
 ALTER TABLE `sys_config_data` 
-    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`;
+    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`,
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
 ALTER TABLE `cms_place` 
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `max_clicks`;
