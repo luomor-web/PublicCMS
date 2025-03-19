@@ -283,15 +283,17 @@ INSERT INTO sys_module VALUES ('process_view', 'sysWorkflowProcess/view', NULL, 
 INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'en', 'View');
 INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'ja', '見る');
 INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'zh', '查看');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'en', 'View');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'ja', '見る');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'zh', '查看');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'en', 'Process view');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'ja', 'プロセスビューイング');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'zh', '流程查看');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'en', 'Handle');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'ja', 'ハンドル');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'zh', '处理');
-INSERT INTO `sys_module_lang` VALUES ('process_list', 'en', 'Review Process');
+INSERT INTO `sys_module_lang` VALUES ('process_list', 'en', 'Review process');
 INSERT INTO `sys_module_lang` VALUES ('process_list', 'ja', 'レビュープロセス');
 INSERT INTO `sys_module_lang` VALUES ('process_list', 'zh', '审核流程');
 INSERT INTO `sys_module_lang` VALUES ('process_view', 'en', 'View');
 INSERT INTO `sys_module_lang` VALUES ('process_view', 'ja', '見る');
-INSERT INTO `sys_module_lang` VALUES ('process_view', 'zh', '查看');
+INSERT INTO `sys_module_lang` VALUES ('process_view', 'zh', '流查看');
+-- 2025-03-19 --
+UPDATE sys_module SET parent_id = 'content_list',sort=0,attached=NULL WHERE id = 'content_check';

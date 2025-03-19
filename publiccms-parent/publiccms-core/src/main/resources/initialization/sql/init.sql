@@ -910,7 +910,7 @@ INSERT INTO `sys_module` VALUES ('config_list', 'sysConfig/list', NULL, 'icon-co
 INSERT INTO `sys_module` VALUES ('content', NULL, NULL, 'bi bi-file-post', NULL, 1, 1, 2);
 INSERT INTO `sys_module` VALUES ('content_add', 'cmsContent/add', 'cmsContent/addMore,cmsContent/save', NULL, 'content_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('content_change_model', 'cmsContent/changeModelParameters', 'cmsContent/changeModel', NULL, 'content_list', 0, 0, 0);
-INSERT INTO `sys_module` VALUES ('content_check', 'cmsContent/uncheck_list', 'cmsContent/check,cmsContent/reject', 'icon-check-sign', 'content', 1, 0, 1);
+INSERT INTO `sys_module` VALUES ('content_check', 'cmsContent/uncheck_list', 'cmsContent/check,cmsContent/reject', NULL, 'content_list', 0, 0, 1);
 INSERT INTO `sys_module` VALUES ('content_delete', NULL, 'cmsContent/delete', NULL, 'content_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('content_distribute', 'cmsCategory/lookupBySiteId', 'cmsContent/distribute', NULL, 'content_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('content_export', 'cmsContent/export', 'cmsContent/exportExcel,cmsContent/exportData', NULL, 'content_list', 0, 0, 0);
@@ -1444,9 +1444,9 @@ INSERT INTO `sys_module_lang` VALUES ('myself_log_operate', 'zh', '我的操作�
 INSERT INTO `sys_module_lang` VALUES ('myself_password', 'en', 'Change password');
 INSERT INTO `sys_module_lang` VALUES ('myself_password', 'ja', 'パスワードを変更');
 INSERT INTO `sys_module_lang` VALUES ('myself_password', 'zh', '修改密码');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'en', 'View');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'ja', '見る');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'zh', '查看');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'en', 'Process view');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'ja', 'プロセスビューイング');
+INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'zh', '流程查看');
 INSERT INTO `sys_module_lang` VALUES ('myself_profile', 'en', 'Modify personal information');
 INSERT INTO `sys_module_lang` VALUES ('myself_profile', 'ja', '個人情報を変更する');
 INSERT INTO `sys_module_lang` VALUES ('myself_profile', 'zh', '修改个人信息');

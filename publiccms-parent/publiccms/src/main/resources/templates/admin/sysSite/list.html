@@ -1,5 +1,5 @@
 <@sys.siteList parentId=parentId name=name pageIndex=pageNum pageSize=numPerPage>
-<#if parentId?has_content><@sys.site id=parentId><#assign parent=object/></@sys.site>
+<#if parentId?has_content><@sys.site id=parentId><#assign parent=object/></@sys.site></#if>
 <div class="pageHeader card">
     <form class="pagerForm" autocomplete="off" onsubmit="return navTabSearch(this);" method="post">
         <#include "../include_page/parameters.html"/>
@@ -65,7 +65,7 @@
                     <a href="sysDomain/add.html?siteId=${a.id!}" class="btnText blue" target="navTab" rel="sysDomain/add"><@t.page 'domain.add'/></a>
                     <a href="sysDomain/list.html?siteId=${a.id!}" class="btnText" target="navTab" rel="sysDomain/list"><@t.page 'domain.list'/></a>
                     <a href="sysSite/export?id=${a.id!}&_csrf=<@tools.csrfToken admin=true/>" class="btnText" target="dwzExport"><@t.page 'button.export'/></a>
-                <#if parent?has_content && parent.hasChild>
+                <#if a.hasChild>
                     <a href="sysSite/list.html?parentId=${a.id!}" class="btnText" target="navTab" rel="sysSite/list"><@t.page 'site.child_management'/></a>
                 </#if>
                 <#if !(parent?has_content && parent.hasChild && parent.multiple)>
