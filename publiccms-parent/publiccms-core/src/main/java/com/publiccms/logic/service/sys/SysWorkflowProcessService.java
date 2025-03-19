@@ -79,11 +79,20 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
         return null;
     }
 
+    public SysWorkflowProcess reopenProcess(short siteId, Long processId) {
+        SysWorkflowProcess entity = getEntity(processId);
+        if (null != entity && siteId == entity.getSiteId() && entity.isClosed()) {
+            entity.setClosed(false);
+        }
+        return entity;
+    }
+
     public SysWorkflowProcess handleProcess(short siteId, SysWorkflowProcessHistory history, SysUser user) {
         SysWorkflowProcess entity = getEntity(history.getProcessId());
         if (null != entity && siteId == entity.getSiteId() && !entity.isClosed()
                 && (null != entity.getRoleId()
-                        && ArrayUtils.contains(StringUtils.split(user.getRoles(), Constants.COMMA), String.valueOf(entity.getRoleId()))
+                        && ArrayUtils.contains(StringUtils.split(user.getRoles(), Constants.COMMA),
+                                String.valueOf(entity.getRoleId()))
                         || null != entity.getDeptId() && user.getDeptId() == entity.getDeptId()
                         || null != entity.getUserId() && user.getId() == entity.getUserId())) {
             history.setId(null);
@@ -97,17 +106,19 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
                     entity = createProcess(siteId, entity.getWorkflowId(), entity.getTitle(), entity.getItemType(),
                             entity.getItemId());
                 } else {
-                    if (null == step.getNextStepId()) {
+                    SysWorkflowStep nextStep = workflowStepService.getEntity(step.getNextStepId());
+                    if (null == nextStep) {
                         entity.setClosed(true);
                         processComponent.finishProcess(entity, user, history);
                     } else {
                         entity.setStepId(step.getNextStepId());
-                        entity.setRoleId(step.getRoleId());
-                        entity.setDeptId(step.getDeptId());
-                        entity.setUserId(step.getUserId());
+                        entity.setRoleId(nextStep.getRoleId());
+                        entity.setDeptId(nextStep.getDeptId());
+                        entity.setUserId(nextStep.getUserId());
                     }
                 }
             } else if (SysWorkflowProcessHistoryService.OPERATE_REJECT.equalsIgnoreCase(history.getOperate())) {
+                entity.setClosed(true);
                 processComponent.reject(entity, user, history);
             }
             historyService.save(history);
