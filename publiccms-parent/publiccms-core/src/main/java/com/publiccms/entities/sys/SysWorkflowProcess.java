@@ -104,6 +104,13 @@ public class SysWorkflowProcess implements java.io.Serializable {
     @GeneratorColumn(title = "关闭", condition = true)
     private boolean closed;
     /**
+     * create user
+     * <p>
+     * 创建用户
+     */
+    @GeneratorColumn(title = "创建用户")
+    private long createUserId;
+    /**
      * create date
      * <p>
      * 创建日期
@@ -122,7 +129,8 @@ public class SysWorkflowProcess implements java.io.Serializable {
     public SysWorkflowProcess() {
     }
 
-    public SysWorkflowProcess(short siteId, int workflowId, String title, String itemType, String itemId, long stepId, boolean closed, Date createDate) {
+    public SysWorkflowProcess(short siteId, int workflowId, String title, String itemType, String itemId, long stepId,
+            boolean closed, long createUserId, Date createDate) {
         this.siteId = siteId;
         this.workflowId = workflowId;
         this.title = title;
@@ -130,11 +138,12 @@ public class SysWorkflowProcess implements java.io.Serializable {
         this.itemId = itemId;
         this.stepId = stepId;
         this.closed = closed;
+        this.createUserId = createUserId;
         this.createDate = createDate;
     }
 
-    public SysWorkflowProcess(short siteId, int workflowId, String title, String itemType, String itemId, long stepId, Integer roleId, Integer deptId,
-            Long userId, boolean closed, Date createDate, Date updateDate) {
+    public SysWorkflowProcess(short siteId, int workflowId, String title, String itemType, String itemId, long stepId,
+            Integer roleId, Integer deptId, Long userId, boolean closed, long createUserId, Date createDate, Date updateDate) {
         this.siteId = siteId;
         this.workflowId = workflowId;
         this.title = title;
@@ -145,6 +154,7 @@ public class SysWorkflowProcess implements java.io.Serializable {
         this.deptId = deptId;
         this.userId = userId;
         this.closed = closed;
+        this.createUserId = createUserId;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
@@ -249,6 +259,16 @@ public class SysWorkflowProcess implements java.io.Serializable {
 
     public void setClosed(boolean closed) {
         this.closed = closed;
+    }
+    
+
+    @Column(name = "create_user_id", nullable = false)
+    public long getCreateUserId() {
+        return this.createUserId;
+    }
+
+    public void setCreateUserId(long createUserId) {
+        this.createUserId = createUserId;
     }
 
     @Temporal(TemporalType.TIMESTAMP)

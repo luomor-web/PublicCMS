@@ -63,12 +63,13 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
         return dao.getPage(siteId, itemType, itemId, title, roleIds, deptId, userId, closed, pageIndex, pageSize);
     }
 
-    public SysWorkflowProcess createProcess(short siteId, int workflowId, String title, String itemType, String itemId) {
+    public SysWorkflowProcess createProcess(short siteId, int workflowId, long userId, String title, String itemType,
+            String itemId) {
         SysWorkflow workflow = workflowService.getEntity(workflowId);
         if (null != workflow && siteId == workflow.getSiteId() && null != workflow.getStartStepId()) {
             SysWorkflowStep step = workflowStepService.getEntity(workflow.getStartStepId());
             SysWorkflowProcess entity = new SysWorkflowProcess(siteId, workflowId, title, itemType, itemId, step.getId(), false,
-                    CommonUtils.getDate());
+                    userId, CommonUtils.getDate());
             entity.setRoleId(step.getRoleId());
             entity.setDeptId(step.getDeptId());
             entity.setUserId(step.getUserId());
@@ -105,7 +106,7 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
                 SysWorkflowStep step = workflowStepService.getEntity(entity.getStepId());
                 if (null == step) {
                     entity.setClosed(true);
-                    entity = createProcess(siteId, entity.getWorkflowId(), entity.getTitle(), entity.getItemType(),
+                    entity = createProcess(siteId, entity.getWorkflowId(), user.getId(), entity.getTitle(), entity.getItemType(),
                             entity.getItemId());
                 } else {
                     SysWorkflowStep nextStep = workflowStepService.getEntity(step.getNextStepId());
@@ -116,7 +117,11 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
                         entity.setStepId(step.getNextStepId());
                         entity.setRoleId(nextStep.getRoleId());
                         entity.setDeptId(nextStep.getDeptId());
-                        entity.setUserId(nextStep.getUserId());
+                        if (nextStep.isUseCreateUser()) {
+                            entity.setUserId(entity.getCreateUserId());
+                        } else {
+                            entity.setUserId(nextStep.getUserId());
+                        }
                     }
                 }
             } else if (SysWorkflowProcessHistoryService.OPERATE_REJECT.equalsIgnoreCase(history.getOperate())) {
