@@ -112,10 +112,11 @@ CREATE TABLE `sys_workflow_process` (
   `dept_id` int(11) DEFAULT NULL COMMENT '部门',
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
   `closed` tinyint(1) NOT NULL COMMENT '已关闭',
+  `create_user_id` bigint(20) NOT NULL COMMENT '创建用户',
   `create_date` datetime NOT NULL COMMENT '创建日期',
   `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`id`),
-  KEY `sys_workflow_process_item_id` (`site_id`,`item_type`,`item_id`,`create_date`),
+  KEY `sys_workflow_process_item_id` (`site_id`,`item_type`,`item_id`,`create_user_id`,`create_date`),
   KEY `sys_workflow_process_user_id` (`site_id`,`role_id`,`dept_id`,`user_id` , `closed`)
 ) COMMENT='工作流流程';
 
@@ -149,6 +150,7 @@ CREATE TABLE `sys_workflow_step` (
   `role_id` int(11) DEFAULT NULL COMMENT '角色',
   `dept_id` int(11) DEFAULT NULL COMMENT '部门',
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户',
+  `use_create_user` tinyint(1) NOT NULL COMMENT '使用创建用户',
   `next_step_id` bigint(20) DEFAULT NULL COMMENT '下一步',
   `sort` int(11) NOT NULL COMMENT '排序',
   PRIMARY KEY (`id`),
@@ -260,10 +262,10 @@ CREATE TABLE `sys_user_setting` (
 );
 ALTER TABLE `sys_user_attribute`
     DROP COLUMN `settings`,
-    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`;
+    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`,
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
 ALTER TABLE `sys_config_data` 
-    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`;
+    ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`,
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `create_date`;
 ALTER TABLE `cms_place` 
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `max_clicks`;
