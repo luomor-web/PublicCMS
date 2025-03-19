@@ -47,8 +47,9 @@ public class SysWorkflowStepService extends BaseService<SysWorkflowStep> {
         Long lastStepId = null;
         if (CommonUtils.notEmpty(entityList)) {
             ListIterator<SysWorkflowStep> iterator = entityList.listIterator(entityList.size());
+            SysWorkflowStep entity;
             while (iterator.hasPrevious()) {
-                SysWorkflowStep entity = iterator.previous();
+                entity = iterator.previous();
                 entity.setWorkflowId(workflowId);
                 entity.setNextStepId(lastStepId);
                 save(entity);
@@ -68,10 +69,10 @@ public class SysWorkflowStepService extends BaseService<SysWorkflowStep> {
         Set<Long> idList = new HashSet<>();
         Long lastStepId = null;
         if (CommonUtils.notEmpty(entitys)) {
-            SysWorkflowStep last = null;
             ListIterator<SysWorkflowStep> iterator = entitys.listIterator(entitys.size());
+            SysWorkflowStep entity;
             while (iterator.hasPrevious()) {
-                SysWorkflowStep entity = iterator.previous();
+                entity = iterator.previous();
                 if (null != entity.getId()) {
                     SysWorkflowStep oldEntity = getEntity(entity.getId());
                     if (workflowId == oldEntity.getWorkflowId()) {
@@ -82,7 +83,7 @@ public class SysWorkflowStepService extends BaseService<SysWorkflowStep> {
                     }
                 } else {
                     entity.setWorkflowId(workflowId);
-                    entity.setNextStepId(null == last ? null : last.getId());
+                    entity.setNextStepId(lastStepId);
                     save(entity);
                     lastStepId = entity.getId();
                     idList.add(entity.getId());
