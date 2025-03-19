@@ -39,8 +39,7 @@
             <tr>
                 <th width="20"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
                 <th><@t.page 'title'/></th>
-                <th><@t.page 'workflow'/></th>
-                <th><@t.page 'step'/></th>
+                <th><@t.page 'workflow'/>:<@t.page 'step'/></th>
                 <th orderField="createDate"><@t.page 'create_date'/></th>
                 <th><@t.page 'update_date'/></th>
                 <th><@t.page 'operate'/></th>
@@ -58,9 +57,8 @@
             <#list page.list as a>
             <tr target="sid" rel="${a.id}">
                 <td class="center"><input name="ids" value="${a.id}" type="checkbox"></td>
-                <td><a href="sysWorkflowProcess/view.html?id=${a.id}" class="exclude-translate" target="dialog" rel="viewProcess${a.id}" width="1200" height="500">${a.title!}</a></td>
-                <td>${(workflowMap[a.workflowId?string].name)!t.pageMessage('page.disabled')}</td>
-                <td>${(stepMap[a.stepId?string].name)!t.pageMessage('page.disabled')}</td>
+                <td><a href="<#if a.itemType="content">cmsContent/view.html?id=${a.itemId}</#if>" class="exclude-translate" target="dialog" rel="viewProcess${a.id}" width="1200" height="500">${a.title!}</a></td>
+                <td><a href="sysWorkflowProcess/view.html?id=${a.id}" class="exclude-translate" target="dialog" rel="viewProcess${a.id}" width="1200" height="500">${(workflowMap[a.workflowId?string].name)!t.pageMessage('page.disabled')} : ${(stepMap[a.stepId?string].name)!t.pageMessage('page.disabled')}</a></td>
                 <td>${a.createDate!}</td>
                 <td>${a.updateDate!}</td>
                 <td>
