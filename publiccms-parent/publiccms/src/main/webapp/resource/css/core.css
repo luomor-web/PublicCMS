@@ -162,9 +162,9 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .tree a, .tree a:hover{text-decoration:none;}
 .tree .indent{background:none;}
 .tree .collapsable,.tree .end_collapsable,.tree .end_expandable,.tree .expandable,.tree .file,.tree .folder_collapsable,.tree .folder_expandable,.tree .last_collapsable,.tree .last_expandable, .tree .first_collapsable, .tree .first_expandable{font-family:iconfont;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:30px;width:22px;}
-.tree .folder_collapsable:before{content:"\e67d";}
+.tree .folder_collapsable:before{content:"\e668";}
 .tree .collapsable:before,.tree .end_collapsable:before,.tree .last_collapsable:before, .tree .first_collapsable:before{content:"\e668";}
-.tree .folder_expandable:before{content:"\e60f";}
+.tree .folder_expandable:before{content:"\e603";}
 .tree .file:before{content:"\e686";}
 .tree .end_expandable:before,.tree .expandable:before,.tree .last_expandable:before, .tree .first_expandable:before{content:"\e603";}
 .treeForm{height:200px;border:1px solid;overflow:auto;width:200px;}
