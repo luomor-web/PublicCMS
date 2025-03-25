@@ -467,6 +467,14 @@ JUI.regPlugins.push(function($p){
         }
     });
 });
+JUI.regPlugins.push(function($p){
+    $("[data-todo]", $p).each(function (){
+        var $todo = $(this);
+        if($todo.data("todo-type") ){
+            $("#menu .todoNumber[data-type="+$.escapeSelector($todo.data("todo-type"))+"]").text($todo.data("todo"));
+        }
+    });
+});
 $(document).keydown(function(e){
     if(e.keyCode == JUI.keyCode.ESC && $("#background,#progressBar").is(":visible")){
         $("#background,#progressBar").hide();

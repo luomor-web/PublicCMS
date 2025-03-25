@@ -1,9 +1,6 @@
 <#if siteId?has_content || parentId?has_content>
 <ul>
     <#list page.list as a>
-        <@t.merge 'categoryIds' a.id!/>
-    </#list>
-    <#list page.list as a>
         <li<#if a.childIds?has_content> _src="cmsCategory/lookupBySiteId?siteId=${siteId!}&currentCategoryId=${currentCategoryId!}&parentId=${a.id}&field=${field!'categoryId'}"</#if>>
             <a<#if (!currentCategoryId?has_content||a.id?string!=currentCategoryId)> tname="categoryIds" tvalue="${a.id}"</#if> class="exclude-translate">${a.name!}</a>
         </li>

@@ -92,7 +92,7 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .accordion .accordionContent .tree a>i{margin-right:5px;width:16px;font-size:13px;display:inline-block;text-align:center;}
 .accordion .accordionContent .tree.treeFolder a{line-height:30px;}
 .accordion .accordionContent .tree.treeFolder div div{height:30px;}
-#menu .menuNumber{padding:0 5px;color:red;}
+.todoNumber{padding:0 5px;color:red;}
 
 .panelBar{display:block;overflow:hidden;height:auto;line-height:30px;}
 .panelBar ul{overflow:hidden;}

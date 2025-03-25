@@ -15,7 +15,7 @@
             modelId=modelIds parentId=parentId emptyParent=true title=title userId=userId deptId=deptId
             startPublishDate=startPublishDate endPublishDate=endPublishDate absoluteId=false
             orderField=orderField orderType=orderType pageIndex=pageNum pageSize=numPerPage>
-<@sys.authorized roleIds=admin.roles urls='cmsContent/add,cmsContent/delete,cmsContent/check,cmsContent/reject,cmsContent/uncheck,cmsContent/push,cmsCategory/lookupBySiteId,cmsContent/refresh,cmsContent/publish,cmsContent/moveParameters,cmsContent/changeModelParameters,cmsContent/export,cmsContent/import,cmsContent/workload,cmsRecycleContent/list,cmsComment/list,cmsContent/sortParameters,cmsCategory/add'><#assign authorizedMap=map/></@sys.authorized>
+<@sys.authorized roleIds=admin.roles urls='cmsContent/add,cmsContent/delete,cmsContent/check,cmsContent/reject,cmsContent/uncheck,cmsContent/uncheck_list,cmsContent/push,cmsCategory/lookupBySiteId,cmsContent/refresh,cmsContent/publish,cmsContent/moveParameters,cmsContent/changeModelParameters,cmsContent/export,cmsContent/import,cmsRecycleContent/list,cmsComment/list,cmsContent/sortParameters,cmsCategory/add'><#assign authorizedMap=map/></@sys.authorized>
 <div class="pageHeader card">
     <form class="pagerForm" action="cmsContent/content_list.html" autocomplete="off" onsubmit="return divSearch(this,'contentBox');" method="post">
         <#include "../include_page/parameters.html"/>
@@ -88,7 +88,7 @@
                 <#list page.list as a>
                     <#if categoryModelMap?has_content&&categoryModelMap[a.id]?has_content>
                         <#assign size++/>
-                        <li><a href="cmsContent/add.html?categoryId=${(parent.categoryId)!categoryId!}&modelId=${a.id}&parentId=${parentId!}" target="navTab" rel="cmsContent/add"><i class="icon-plus icon-large"></i><@t.page 'button.add_some_things' a.name/></a></li>
+                        <li><a href="cmsContent/add.html?categoryId=${(parent.categoryId)!categoryId!}&modelId=${a.id}&parentId=${parentId!}" target="navTab" rel="cmsContent/add"><i class="bi bi-plus-circle-dotted"></i><@t.page 'button.add_some_things' a.name/></a></li>
                     </#if>
                 </#list>
                 <@cms.category id=categoryId>
@@ -101,7 +101,7 @@
                 </#if>
             <#elseif !parent?has_content>
                 <#list page.list as a>
-                    <li><a href="cmsContent/addMore.html?modelId=${a.id}" target="dialog" mask="true"><i class="icon-plus icon-large"></i><@t.page 'button.add_some_things' a.name/></a></li>
+                    <li><a href="cmsContent/addMore.html?modelId=${a.id}" target="dialog" mask="true"><i class="bi bi-plus-circle-dotted"></i><@t.page 'button.add_some_things' a.name/></a></li>
                 </#list>
             </#if>
                 </ul>
@@ -129,9 +129,15 @@
             <li class="line">line</li>
             <li><a href="cmsContent/delete?_csrf=<@tools.csrfToken admin=true/>" title="<@t.page 'confirm.batch_delete'/>" target="selectedTodo" rel="ids"><i class="icon-trash icon-large"></i><@t.page 'button.batch_delete'/></a></li>
         </#if>
-        <#if authorizedMap['cmsContent/workload']>
-            <li class="line">line</li>
-            <li><a href="cmsContent/workload" target="navTab" rel="cmsContent/workload"><i class="bi bi-calendar-heart"></i> <@t.page 'workload'/></a></li>
+        <#if authorizedMap['cmsContent/uncheck_list']>
+            <#if 0=admin.contentPermissions><#assign uncheckUserId=admin.id/></#if>
+            <#if 2=admin.contentPermissions><#assign uncheckDeptId=admin.deptId/></#if>
+            <@cms.contentList advanced=true status=2 categoryId=categoryId userId=uncheckUserId deptId=uncheckDeptId containChild=containChild absoluteId=false pageSize=0>
+                <#if page.totalCount gt 0>
+                    <li class="line">line</li>
+                    <li><a href="cmsContent/uncheck_list.html?categoryId=${categoryId!}&containChild=${containChild!}" target="ajax" rel="contentBox"><i class="icon-check-sign icon-large"></i><@t.page 'status.content.2'/><span class="todoNumber">${page.totalCount}</span></a></li>
+                </#if>
+            </@cms.contentList>
         </#if>
         <#if authorizedMap['cmsRecycleContent/list']>
             <li><a class="button" href="cmsRecycleContent/list.html" target="navTab" rel="cmsRecycleContent/list"><i class="bi bi-recycle"></i><@t.page 'recycle_bin'/></a></li>

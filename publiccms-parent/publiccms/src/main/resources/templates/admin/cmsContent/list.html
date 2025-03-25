@@ -26,9 +26,9 @@
                         <#assign dept=object/>
                     </@sys.dept>
                     <#if dept?has_content&&dept.ownsAllCategory>
-                        <a href="cmsContent/content_list.html" target="ajax" rel="contentBox"><@t.page 'category'/></a>
+                        <a href="cmsContent/content_list.html" target="ajax" rel="contentBox"><@t.page 'status.content.1'/></a>
                     <#else>
-                        <a href="javascript:;" onclick="return false;"><@t.page 'category'/></a>
+                        <a href="javascript:;" onclick="return false;"><@t.page 'status.content.1'/></a>
                     </#if>
                     <ul>
                         <@cms.categoryList advanced=true pageSize=500>

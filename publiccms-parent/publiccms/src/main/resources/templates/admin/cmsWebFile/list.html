@@ -28,7 +28,6 @@
         <thead>
             <tr>
                 <th width="20"><input type="checkbox" group="paths" class="checkboxCtrl"></th>
-                <th width="30"></th>
                 <th orderField="fileName"><@t.page 'name'/></th>
                 <th orderField="modifiedDate"><@t.page 'modified_date'/></th>
                 <th orderField="createDate"><@t.page 'create_date'/></th>
@@ -41,8 +40,8 @@
         <#if path?has_content>
             <tr>
                 <td></td>
-                <td class="tree"><div class="folder_expandable"></div></td>
                 <td>
+                    <span class="bi bi-folder2-open"></span>
                     <a href="cmsWebFile/list.html?path=${path?contains('/')?then(path?keep_before_last('/'),'')?url}" target="navTab" rel="cmsWebFile/list">
                         <@t.page 'button.return'/>
                     </a>
@@ -67,9 +66,9 @@
             <#assign filePath=path?has_content?then(path+'/','')+a.fileName/>
             <tr>
                 <td><input name="paths" value="${filePath}" type="checkbox"></td>
-                <td class="tree"><div class="${a.directory?then('folder_expandable','file')}" style="width:30px;"></div></td>
                 <td>
                     <#if a.directory>
+                        <span class="bi bi-folder"></span>
                         <a href="cmsWebFile/list.html?path=${filePath?url}" target="navTab" rel="cmsWebFile/list">
                             ${a.fileName}
                         </a>
@@ -78,7 +77,7 @@
                             <#assign lockUser=(userMap[lockMap[filePath].userId?string].nickname)!''/>
                             <i class="icon-lock icon-large" title="<@t.page 'lock.message' lockUser/> ${lockMap[filePath].createDate}"></i>
                         </#if>
-                        ${a.fileName}
+                        <span class="bi bi-file-text"></span> ${a.fileName}
                     </#if>
                 </td>
                 <td>${a.lastModifiedTime?datetime}</td>
