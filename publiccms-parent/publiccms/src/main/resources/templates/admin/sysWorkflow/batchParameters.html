@@ -3,7 +3,7 @@
     <@cms.categoryList advanced=true parentId=parentId pageSize=500>
         <#list page.list as a>
     <li<#if a.childIds?has_content> _src="cmsCategory/batchParameters.html?parentId=${a.id}"</#if>>
-        <a tname="categoryIds" tvalue="${a.id}" class="exclude-translate">${a.name!}</a>
+        <a href="javascript:;" class="exclude-translate"<#if !(a.workflowId?has_content && a.workflowId?string = id)> tname="categoryIds" tvalue="${a.id}"</#if>>${a.name!}</a>
     </li>
         <#else>
     <li><a><@t.page 'empty_directory'/></a></li>
@@ -19,7 +19,7 @@
             <@cms.categoryList advanced=true parentId=parentId pageSize=500>
                 <#list page.list as a>
             <li<#if a.childIds?has_content> _src="cmsCategory/batchParameters.html?parentId=${a.id}"</#if>>
-                <a href="javascript:;" class="exclude-translate">${a.name!}</a>
+                <a href="javascript:;" class="exclude-translate"<#if !(a.workflowId?has_content && a.workflowId?string = id)> tname="categoryIds" tvalue="${a.id}"</#if>>${a.name!}</a>
             </li>
                 </#list>
             </@cms.categoryList>
@@ -27,7 +27,7 @@
     </div>
     <div class="formBar">
         <ul>
-            <li><button type="submit" class="buttonActive" title="ctrl+s"><@t.page 'button.distribute'/></button></li>
+            <li><button type="submit" class="buttonActive" title="ctrl+s"><@t.page 'button.save'/></button></li>
             <li><button type="button" class="button close"><@t.page 'button.close'/></button></li>
         </ul>
     </div>

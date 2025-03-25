@@ -38,7 +38,7 @@
 </div>
 <@sys.authorized roleIds=admin.roles urls='tradeRefund/refundParameters,tradeRefund/refuseParameters'><#assign authorizedMap=map/></@sys.authorized>
 <div class="card">
-    <table class="table" width="100%" layoutH orderField="${orderField!}" orderType="${orderType!}">
+    <table class="table" width="100%" layoutH orderField="${orderField!}" orderType="${orderType!}"<@trade.refundList status=0 pageSize=0> data-todo="${(page.totalCount gt 0)?then(page.totalCount,'')}" data-todo-type="refund_list"</@trade.refundList>>
         <thead>
             <tr>
                 <th><@t.page 'id'/></th>

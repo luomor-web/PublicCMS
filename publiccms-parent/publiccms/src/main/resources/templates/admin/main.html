@@ -81,7 +81,7 @@
                         <p><@t.page 'comment.uncheck'/></p>
                         <a href="cmsComment/list.html?status=2" title="<@t.page 'comment.management'/>" target="navTab" rel="cmsComment/list">
                             <@cms.commentList advanced=true status=2 pageSize=0>
-                                <h3>${page.totalCount}</h3>
+                                <h3 data-todo="${(page.totalCount gt 0)?then(page.totalCount,'')}" data-todo-type="comment_list">${page.totalCount}</h3>
                             </@cms.commentList>
                         </a>
                     </div>
@@ -149,7 +149,7 @@ commentChart.setOption({
                         <p><@t.page 'order.toprocess'/></p>
                         <a href="tradeOrder/list.html?status=2&processed=false" title="<@t.page 'order'/>" target="navTab" rel="tradeOrder/list">
                             <@trade.orderList processed=false status=2 pageSize=0>
-                                <h3>${page.totalCount}</h3>
+                                <h3 data-todo="${(page.totalCount gt 0)?then(page.totalCount,'')}" data-todo-type="order_list">${page.totalCount}</h3>
                             </@trade.orderList>
                         </a>
                     </div>
@@ -182,7 +182,7 @@ commentChart.setOption({
                         <p><@t.page 'status.refund.0'/></p>
                         <a href="tradeRefund/list.html?status=0" title="<@t.page 'refund'/>" target="navTab" rel="tradeRefund/list">
                             <@trade.refundList status=0 pageSize=0>
-                                <h3>${page.totalCount}</h3>
+                                <h3 data-todo="${(page.totalCount gt 0)?then(page.totalCount,'')}" data-todo-type="refund_list">${page.totalCount}</h3>
                             </@trade.refundList>
                         </a>
                     </div>
