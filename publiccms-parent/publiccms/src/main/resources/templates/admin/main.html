@@ -6,6 +6,17 @@
             <ul>
                 <li>
                     <div class="card">
+                        <i class="bi bi-ui-checks icon-large icon"></i>
+                        <p><@t.page 'process.pending'/></p>
+                        <a href="sysWorkflowProcess/list.html" title="<@t.page 'process.pending'/>" target="navTab" rel="sysWorkflowProcess/list">
+                            <@sys.workflowProcessList roleIds=admin.roles deptId=admin.deptId userId=admin.id pageSize=0>
+                                <h3 data-todo="${(page.totalCount gt 0)?then(page.totalCount,'')}" data-todo-type="process_list">${page.totalCount}</h3>
+                            </@sys.workflowProcessList>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="card">
                         <i class="icon-book icon-large icon"></i>
                         <p><@t.page 'myself.my_pending_content'/></p>
                         <a href="myself/contentList.html?status=2" title="<@t.page 'my_content'/>" target="navTab" rel="myself/contentList">
