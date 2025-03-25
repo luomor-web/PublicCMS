@@ -1048,6 +1048,7 @@ INSERT INTO `sys_module` VALUES ('system', NULL, NULL, 'icon-cogs', NULL, 1, 1, 
 INSERT INTO `sys_module` VALUES ('system_workflow', 'sysWorkflow/list', NULL, 'bi bi-diagram-3', 'system', 1, 1, 0);
 INSERT INTO `sys_module` VALUES ('system_workflow_add', 'sysWorkflow/add', 'sysWorkflow/save', NULL, 'system_workflow', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('system_workflow_delete', NULL, 'sysWorkflow/delete', NULL, 'system_workflow', 1, 0, 0);
+INSERT INTO `sys_module` VALUES ('system_workflow_use', 'sysWorkflow/batchParameters', 'cmsCategory/saveWorkflow', NULL, 'system_workflow', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('tag_add', 'cmsTag/add', 'cmsTag/save', NULL, 'tag_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('tag_delete', NULL, 'cmsTag/delete', NULL, 'tag_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('tag_list', 'cmsTag/list', NULL, 'icon-tag', 'content', 1, 1, 6);
@@ -1672,6 +1673,9 @@ INSERT INTO `sys_module_lang` VALUES ('system_workflow_add', 'zh', '增加');
 INSERT INTO `sys_module_lang` VALUES ('system_workflow_delete', 'en', 'Delete');
 INSERT INTO `sys_module_lang` VALUES ('system_workflow_delete', 'ja', '削除');
 INSERT INTO `sys_module_lang` VALUES ('system_workflow_delete', 'zh', '删除');
+INSERT INTO `sys_module_lang` VALUES ('system_workflow_use', 'en', 'Batch use');
+INSERT INTO `sys_module_lang` VALUES ('system_workflow_use', 'ja', 'バッチ使用');
+INSERT INTO `sys_module_lang` VALUES ('system_workflow_use', 'zh', '批量应用');
 INSERT INTO `sys_module_lang` VALUES ('tag_add', 'en', 'Add/edit');
 INSERT INTO `sys_module_lang` VALUES ('tag_add', 'ja', '追加/変更');
 INSERT INTO `sys_module_lang` VALUES ('tag_add', 'zh', '增加/修改');

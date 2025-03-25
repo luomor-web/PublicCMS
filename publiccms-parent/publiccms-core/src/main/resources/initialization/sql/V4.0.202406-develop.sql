@@ -297,3 +297,8 @@ INSERT INTO `sys_module_lang` VALUES ('process_view', 'ja', '見る');
 INSERT INTO `sys_module_lang` VALUES ('process_view', 'zh', '流查看');
 -- 2025-03-19 --
 UPDATE sys_module SET parent_id = 'content_list',sort=0,attached=NULL WHERE id = 'content_check';
+-- 2025-03-25 --
+INSERT INTO sys_module VALUES ('system_workflow_use', 'sysWorkflow/batchParameters', 'cmsCategory/saveWorkflow', NULL, 'system_workflow', 0, 0, 0);
+INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'en', 'Batch use');
+INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'ja', 'バッチ使用');
+INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'zh', '批量应用');
