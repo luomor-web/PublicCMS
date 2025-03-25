@@ -2,7 +2,7 @@
 <div class="pageHeader card">
     <form class="pagerForm" autocomplete="off" onsubmit="return navTabSearch(this);" method="post">
         <#include "../include_page/parameters.html"/>
-        <div class="searchBar">
+        <div class="searchBar" data-todo="${(page.totalCount gt 0)?then(page.totalCount,'')}" data-todo-type="process_list">
             <ul class="searchContent">
                 <li>
                     <label><@t.page 'item_type'/>:</label>
@@ -41,7 +41,7 @@
 </div>
 <@_sysAuthorized roleIds=admin.roles urls='sysWorkflowProcess/processParameters'><#assign authorizedMap=map/></@_sysAuthorized>
 <div class="pageContent card">
-    <table class="table" width="100%" layoutH "${orderField!}" orderType="${orderType!}" data-todo="${(page.totalCount gt 0)?then(page.totalCount,'')}" data-todo-type="process_list">
+    <table class="table" width="100%" layoutH orderField="${orderField!}" orderType="${orderType!}">
         <thead>
             <tr>
                 <th width="20"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
