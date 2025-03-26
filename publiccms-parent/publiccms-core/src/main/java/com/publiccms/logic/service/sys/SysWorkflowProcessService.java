@@ -13,6 +13,7 @@ import com.publiccms.common.base.BaseService;
 import com.publiccms.common.constants.Constants;
 import com.publiccms.common.handler.PageHandler;
 import com.publiccms.common.tools.CommonUtils;
+import com.publiccms.entities.sys.SysSite;
 import com.publiccms.entities.sys.SysUser;
 import com.publiccms.entities.sys.SysWorkflow;
 import com.publiccms.entities.sys.SysWorkflowProcess;
@@ -90,9 +91,9 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
         return entity;
     }
 
-    public SysWorkflowProcess handleProcess(short siteId, SysWorkflowProcessHistory history, SysUser user) {
+    public SysWorkflowProcess handleProcess(SysSite site, SysWorkflowProcessHistory history, SysUser user) {
         SysWorkflowProcess entity = getEntity(history.getProcessId());
-        if (null != entity && siteId == entity.getSiteId() && !entity.isClosed()
+        if (null != entity && site.getId() == entity.getSiteId() && !entity.isClosed()
                 && (null != entity.getRoleId()
                         && ArrayUtils.contains(StringUtils.split(user.getRoles(), Constants.COMMA),
                                 String.valueOf(entity.getRoleId()))
@@ -106,13 +107,13 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
                 SysWorkflowStep step = workflowStepService.getEntity(entity.getStepId());
                 if (null == step) {
                     entity.setClosed(true);
-                    entity = createProcess(siteId, entity.getWorkflowId(), user.getId(), entity.getTitle(), entity.getItemType(),
+                    entity = createProcess(site.getId(), entity.getWorkflowId(), user.getId(), entity.getTitle(), entity.getItemType(),
                             entity.getItemId());
                 } else {
                     SysWorkflowStep nextStep = workflowStepService.getEntity(step.getNextStepId());
                     if (null == nextStep) {
                         entity.setClosed(true);
-                        processComponent.finishProcess(entity, user, history);
+                        processComponent.finishProcess(site, entity, user, history);
                     } else {
                         entity.setStepId(step.getNextStepId());
                         entity.setRoleId(nextStep.getRoleId());
@@ -126,7 +127,7 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
                 }
             } else if (SysWorkflowProcessHistoryService.OPERATE_REJECT.equalsIgnoreCase(history.getOperate())) {
                 entity.setClosed(true);
-                processComponent.reject(entity, user, history);
+                processComponent.reject(site, entity, user, history);
             }
             historyService.save(history);
             return entity;

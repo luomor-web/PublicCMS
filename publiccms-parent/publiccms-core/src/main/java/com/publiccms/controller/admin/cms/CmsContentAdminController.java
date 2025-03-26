@@ -218,7 +218,7 @@ public class CmsContentAdminController {
                 templateComponent.createContentFile(site, entity, category, categoryModel); // 静态化
                 templateComponent.createCategoryFile(site, category, null, null);
                 if (null != parent) {
-                    publish(site, parent, admin);
+                    templateComponent.createContentFile(site, parent, category, null);
                 }
             }
             if (null == entity.getParentId() && null == entity.getQuoteContentId()) {
@@ -312,12 +312,16 @@ public class CmsContentAdminController {
                         if (CommonUtils.notEmpty(entity.getParentId())) {
                             parentIdSet.add(entity.getParentId());
                         }
-                        publish(site, entity, admin);
+                        if (uncheck) {
+                            deleteFile(site, entity, siteComponent);
+                        } else {
+                            templateComponent.createContentFile(site, entity, null, null);
+                        }
                         categoryIdSet.add(entity.getCategoryId());
                     }
                 }
                 for (CmsContent parent : service.getEntitys(parentIdSet)) {
-                    publish(site, parent, admin);
+                    templateComponent.createContentFile(site, parent, null, null);
                 }
                 for (CmsCategory category : categoryService.getEntitys(categoryIdSet)) {
                     templateComponent.createCategoryFile(site, category, null, null);
@@ -398,7 +402,7 @@ public class CmsContentAdminController {
             entity.setUserId(admin.getId());
             cmsContentRelatedService.save(entity);
             try {
-                publish(site, content, admin);
+                templateComponent.createContentFile(site, content, null, null);
             } catch (IOException | TemplateException e) {
                 model.addAttribute(CommonConstants.ERROR, e.getMessage());
                 log.error(e.getMessage(), e);
@@ -432,7 +436,7 @@ public class CmsContentAdminController {
                 }
                 cmsContentRelatedService.delete(id);
                 try {
-                    publish(site, content, admin);
+                    templateComponent.createContentFile(site, content, null, null);
                 } catch (IOException | TemplateException e) {
                     model.addAttribute(CommonConstants.ERROR, e.getMessage());
                     log.error(e.getMessage(), e);
@@ -762,6 +766,20 @@ public class CmsContentAdminController {
         return exportComponent.exportWorkload(site, status, startCreateDate, endCreateDate, workloadType, dateField, locale);
     }
 
+    public static void deleteFile(SysSite site, CmsContent entity, SiteComponent siteComponent) {
+        if (!entity.isOnlyUrl() && entity.isHasStatic() && null == entity.getQuoteContentId()
+                && CommonUtils.notEmpty(entity.getUrl())) {
+            String filepath = siteComponent.getWebFilePath(site.getId(), entity.getUrl());
+            if (entity.getUrl().endsWith(Constants.SEPARATOR)) {
+                filepath = CommonUtils.joinString(filepath, CommonConstants.getDefaultPage());
+            }
+            if (CmsFileUtils.isFile(filepath)) {
+                String backupFilePath = siteComponent.getWebBackupFilePath(site.getId(), entity.getUrl());
+                CmsFileUtils.moveFile(filepath, backupFilePath);
+            }
+        }
+    }
+
     /**
      * @param site
      * @param admin
@@ -778,17 +796,7 @@ public class CmsContentAdminController {
             Set<Serializable> categoryIdSet = new HashSet<>();
             for (CmsContent entity : service.delete(site.getId(), admin, ids)) {
                 categoryIdSet.add(entity.getCategoryId());
-                if (!entity.isOnlyUrl() && entity.isHasStatic() && null == entity.getQuoteContentId()
-                        && CommonUtils.notEmpty(entity.getUrl())) {
-                    String filepath = siteComponent.getWebFilePath(site.getId(), entity.getUrl());
-                    if (entity.getUrl().endsWith(Constants.SEPARATOR)) {
-                        filepath = CommonUtils.joinString(filepath, CommonConstants.getDefaultPage());
-                    }
-                    if (CmsFileUtils.isFile(filepath)) {
-                        String backupFilePath = siteComponent.getWebBackupFilePath(site.getId(), entity.getUrl());
-                        CmsFileUtils.moveFile(filepath, backupFilePath);
-                    }
-                }
+                deleteFile(site, entity, siteComponent);
             }
             logOperateService.save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(),
                     LogLoginService.CHANNEL_WEB_MANAGER, "delete.content", RequestUtils.getIpAddress(request),

@@ -37,7 +37,7 @@ public class SysProcessAdminController {
     @RequestMapping("handle")
     @Csrf
     public String handle(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, SysWorkflowProcessHistory entity) {
-        service.handleProcess(site.getId(), entity, admin);
+        service.handleProcess(site, entity, admin);
         return CommonConstants.TEMPLATE_DONE;
     }
 
