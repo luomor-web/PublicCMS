@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -161,7 +160,6 @@ public class SysUser extends EntityAttribute implements java.io.Serializable {
      * 更新日期
      */
     @GeneratorColumn(title = "更新日期")
-    @Version
     private Date updateDate;
 
     public SysUser() {

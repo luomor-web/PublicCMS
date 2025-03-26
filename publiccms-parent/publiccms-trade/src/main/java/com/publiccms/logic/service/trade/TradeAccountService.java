@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.publiccms.common.base.BaseService;
@@ -43,6 +44,7 @@ public class TradeAccountService extends BaseService<TradeAccount> {
         return dao.getPage(siteId, orderField, orderType, pageIndex, pageSize);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public TradeAccount getOrCreate(short siteId, long accountId) {
         TradeAccount entity = getEntity(accountId);
         if (null == entity) {
@@ -57,6 +59,7 @@ public class TradeAccountService extends BaseService<TradeAccount> {
         return null;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public TradeAccountHistory change(short siteId, String serialNumber, long accountId, Long userId, int status,
             BigDecimal change, String description) {
         if (null != change) {
@@ -69,6 +72,7 @@ public class TradeAccountService extends BaseService<TradeAccount> {
                             account.getAmount(), balance, status, description, now);
                     historyDao.save(history);
                     account.setAmount(balance);
+                    account.setUpdateDate(now);
                     return history;
                 }
             }

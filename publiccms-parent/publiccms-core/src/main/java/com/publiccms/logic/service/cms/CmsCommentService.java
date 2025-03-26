@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.publiccms.common.base.BaseService;
@@ -128,6 +129,7 @@ public class CmsCommentService extends BaseService<CmsComment> {
      * @param replies
      * @return
      */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public CmsComment updateReplies(short siteId, Serializable id, int replies) {
         CmsComment entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId()) {
@@ -142,6 +144,7 @@ public class CmsCommentService extends BaseService<CmsComment> {
      * @param scores
      * @return
      */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public CmsComment updateScores(short siteId, Serializable id, int scores) {
         CmsComment entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId()) {

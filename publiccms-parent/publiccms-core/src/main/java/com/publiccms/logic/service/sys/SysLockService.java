@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.publiccms.common.base.BaseService;
@@ -66,10 +67,12 @@ public class SysLockService extends BaseService<SysLock> {
      * @param counter 
      * @return entity
      */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public SysLock updateCount(Serializable id,int counter) {
         SysLock entity = getEntity(id);
         if (null != entity) {
             entity.setCount(entity.getCount() + counter);
+            entity.setUpdateDate(CommonUtils.getDate());
         }
         return entity;
     }
@@ -80,12 +83,14 @@ public class SysLockService extends BaseService<SysLock> {
      * @param userId
      * @return entity
      */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public SysLock updateCreateDate(Serializable id, int count, Long userId) {
         SysLock entity = getEntity(id);
         if (null != entity) {
             entity.setCreateDate(CommonUtils.getDate());
             entity.setUserId(userId);
             entity.setCount(count);
+            entity.setUpdateDate(CommonUtils.getDate());
         }
         return entity;
     }

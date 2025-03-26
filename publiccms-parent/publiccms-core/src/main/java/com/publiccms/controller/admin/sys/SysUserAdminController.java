@@ -104,6 +104,7 @@ public class SysUserAdminController {
             if (CommonUtils.empty(entity.getEmail()) || !entity.getEmail().equals(oldEntity.getEmail())) {
                 entity.setEmailChecked(false);
             }
+            entity.setUpdateDate(CommonUtils.getDate());
             entity = service.update(entity.getId(), entity, ignoreProperties);
             if (null != entity) {
                 roleUserService.dealRoleUsers(entity.getId(), roleIds);

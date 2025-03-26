@@ -9,12 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -152,7 +150,6 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
      * 点击数
      */
     @GeneratorColumn(title = "点击数", order = true)
-    @OptimisticLock( excluded = true )
     private int clicks;
     /**
      * max clicks
@@ -167,7 +164,6 @@ public class CmsPlace extends EntityAttribute implements java.io.Serializable {
      * 更新日期
      */
     @GeneratorColumn(title = "更新日期")
-    @Version
     private Date updateDate;
     @GeneratorColumn(title = "已删除", condition = true)
     @JsonIgnore
