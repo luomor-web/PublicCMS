@@ -47,7 +47,6 @@ public class SysTaskService extends BaseService<SysTask> {
         SysTask entity = getEntity(id);
         if (null != entity && status != entity.getStatus()) {
             entity.setStatus(status);
-            entity.setUpdateDate(new Date());
             return true;
         }
         return false;
