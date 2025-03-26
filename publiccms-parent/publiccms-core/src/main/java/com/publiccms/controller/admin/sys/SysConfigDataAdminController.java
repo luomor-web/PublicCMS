@@ -130,6 +130,7 @@ public class SysConfigDataAdminController {
             Map<String, String> map = extendDataParameters.getExtendData();
             entity.setData(ExtendUtils.getExtendString(map, site.getSitePath(), fieldList));
             if (null != oldEntity) {
+                entity.setUpdateDate(CommonUtils.getDate());
                 entity = service.update(oldEntity.getId(), entity, ignoreProperties);
                 if (null != entity) {
                     logOperateService.save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(),

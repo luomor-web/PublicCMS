@@ -17,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotBlank;
 
 /**
@@ -122,7 +121,6 @@ public class SysWorkflowProcess implements java.io.Serializable {
      * 更新日期
      */
     @GeneratorColumn(title = "更新日期")
-    @Version
     private Date updateDate;
 
     public SysWorkflowProcess() {

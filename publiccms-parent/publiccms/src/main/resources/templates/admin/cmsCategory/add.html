@@ -232,7 +232,7 @@
                     <dt><@t.page 'workflow.check'/>:</dt>
                     <dd>
                         <input name="workflowId" type="hidden" value="${a.workflowId!}"/>
-                        <input name="workflowName" type="text" value="<@sys.workflow id=a.workflowId;workflow>${workflow.name}</@sys.workflow>"/>
+                        <input name="workflowName" type="text" value="<#if a?has_content><@sys.workflow id=a.workflowId;workflow>${workflow.name}</@sys.workflow></#if>"/>
                         <a class="btnLook" href="sysWorkflow/lookup.html" width="920" lookupGroup=""><@t.page 'select'/></a>
                     </dd>
                 </dl>

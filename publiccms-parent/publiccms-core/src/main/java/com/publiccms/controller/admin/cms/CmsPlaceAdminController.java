@@ -132,6 +132,7 @@ public class CmsPlaceAdminController {
                 if (ControllerUtils.errorNotEquals("siteId", site.getId(), oldEntity.getSiteId(), model)) {
                     return CommonConstants.TEMPLATE_ERROR;
                 }
+                entity.setUpdateDate(CommonUtils.getDate());
                 entity = service.update(entity.getId(), entity, ignoreProperties);
                 if (null != entity) {
                     if (CmsPlaceService.STATUS_OFFSHELF == entity.getStatus()
