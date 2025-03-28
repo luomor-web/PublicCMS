@@ -104,8 +104,8 @@
             <li>
                 <div class="tabs chart">
                     <div class="tabsHeader">
-                        <ul>
-                            <h2 class="float-right"><@t.page 'report.content.hot'/></h2>
+                        <ul class="right">
+                            <h2 class="float-left"><@t.page 'report.content.hot'/></h2>
                             <#assign today=.now?string("yyyy-MM-dd")/>
                             <#assign thisMonth=.now?string("yyyy-MM-01")/>
                             <li><a href="common/hotContent.html?startVisitDate=${today}" class="j-ajax"><@t.page 'report.today'/></a></li>
