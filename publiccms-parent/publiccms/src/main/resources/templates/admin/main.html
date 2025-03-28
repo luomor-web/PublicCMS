@@ -80,8 +80,6 @@
             </ul>
         </div>
     </fieldset>
-    <#assign today=.now?string("yyyy-MM-dd")/>
-    <#assign thisMonth=.now?string("yyyy-MM-01")/>
     <fieldset>
         <legend><@t.page 'content'/></legend>
         <ul class="report clearfix">
@@ -108,6 +106,8 @@
                     <div class="tabsHeader">
                         <ul>
                             <h2 class="float-right"><@t.page 'report.content.hot'/></h2>
+                            <#assign today=.now?string("yyyy-MM-dd")/>
+                            <#assign thisMonth=.now?string("yyyy-MM-01")/>
                             <li><a href="common/hotContent.html?startVisitDate=${today}" class="j-ajax"><@t.page 'report.today'/></a></li>
                             <li><a href="common/hotContent.html?startVisitDate=${getDate('yesterday',getDate('yesterday',today))?date}&endVisitDate=${getDate('yesterday',today)?date}" class="j-ajax"><@t.page 'report.yesterday'/></a></li>
                             <li><a href="common/hotContent.html?startVisitDate=${getDate('lastSunday',today)?date}&dayAnalytics=false" class="j-ajax"><@t.page 'report.this_week'/></a></li>
