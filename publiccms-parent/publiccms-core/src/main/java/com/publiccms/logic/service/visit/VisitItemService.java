@@ -47,7 +47,7 @@ public class VisitItemService extends BaseService<VisitItem> {
         Date now = CommonUtils.getMinuteDate();
         if (dayAnalytics && null != page.getList() && (null == pageIndex || 1 == pageIndex)
                 && (null == endVisitDate || DateUtils.isSameDay(now, endVisitDate))) {
-            ((List<VisitItem>) page.getList()).addAll(0, visitHistoryService.getItemList(siteId, now, itemType, itemId));
+            ((List<VisitItem>) page.getList()).addAll(0, visitHistoryService.getItemList(siteId, now, itemType, itemId, pageSize));
         }
         return page;
     }

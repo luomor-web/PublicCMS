@@ -128,7 +128,7 @@ public class QueryHandler {
      * @param firstResult
      * @return query handler
      */
-    public QueryHandler setFirstResult(int firstResult) {
+    public QueryHandler setFirstResult(Integer firstResult) {
         this.firstResult = firstResult;
         return this;
     }
@@ -137,7 +137,7 @@ public class QueryHandler {
      * @param maxResults
      * @return query handler
      */
-    public QueryHandler setMaxResults(int maxResults) {
+    public QueryHandler setMaxResults(Integer maxResults) {
         this.maxResults = maxResults;
         return this;
     }
@@ -146,7 +146,7 @@ public class QueryHandler {
      * @param cacheable
      * @return query handler
      */
-    public QueryHandler setCacheable(boolean cacheable) {
+    public QueryHandler setCacheable(Boolean cacheable) {
         this.cacheable = cacheable;
         return this;
     }
