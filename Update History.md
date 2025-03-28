@@ -6,6 +6,9 @@ new feature:
 1. add watermark config
 1. add fingerprint login
 1. add workflow
+1. add user setting
+1. add todo number
+1. add my dept
 
 ## 202406.f
 

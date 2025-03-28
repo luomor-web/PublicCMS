@@ -74,6 +74,7 @@ public class GetDateMethod extends BaseMethod {
                 break;
             case "lastMonth":
                 date = DateUtils.addMonths(date, -1);
+                break;
             case "lastYear":
                 date = DateUtils.addYears(date, -1);
                 break;
