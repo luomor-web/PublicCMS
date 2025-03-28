@@ -67,10 +67,10 @@ public class GetDateMethod extends BaseMethod {
                 date = getMonday(date);
                 break;
             case "lastMonday":
-                date = getMonday(DateUtils.addDays(date, -7));
+                date = getMonday(DateUtils.addWeeks(date, -1));
                 break;
             case "lastSunday":
-                date = getSunday(DateUtils.addDays(date, -7));
+                date = getSunday(DateUtils.addWeeks(date, -1));
                 break;
             case "lastMonth":
                 date = DateUtils.addMonths(date, -1);
@@ -79,10 +79,10 @@ public class GetDateMethod extends BaseMethod {
                 date = DateUtils.addYears(date, -1);
                 break;
             case "nextMonday":
-                date = getMonday(DateUtils.addDays(date, 7));
+                date = getMonday(DateUtils.addWeeks(date, 1));
                 break;
             case "nextSunday":
-                date = getSunday(DateUtils.addDays(date, 7));
+                date = getSunday(DateUtils.addWeeks(date, 1));
                 break;
             case "nextMonth":
                 date = DateUtils.addMonths(date, 1);
