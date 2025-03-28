@@ -8,7 +8,7 @@
     <#list page.list as a>
         <p class="ellipsis">
             <#assign content=contentMap[a.id.itemId?string]/>
-            <span class="float-right date info"><i class="bi bi-eye"></i> ${a.uv!} ${content.publishDate?string("yyyy-MM-dd")!}</span>
+            <span class="float-right date info">${content.publishDate?string("yyyy-MM-dd")!} <i class="bi bi-eye"></i> ${a.uv!}</span>
             <a href="${content.url!}" class="exclude-translate" target="_blank">${(content.title)!}</a>
         </p>
     </#list>
