@@ -53,7 +53,7 @@
                     <a href="sysWorkflow/add.html?id=${a.id}" class="edit btnText blue" target="navTab" rel="sysWorkflow/edit"><i class="icon-edit"></i> <@t.page 'button.edit'/></a>
                 </#if>
                 <#if authorizedMap['sysWorkflow/batchParameters']>
-                    <a href="sysWorkflow/batchparameters.html?id=${a.id}" class="btnText blue" target="dialog" mask="true"><i class="bi bi-check-all"></i> <@t.page 'button.batch_use'/></a>
+                    <a href="sysWorkflow/batchParameters.html?id=${a.id}" class="btnText blue" target="dialog" mask="true"><i class="bi bi-check-all"></i> <@t.page 'button.batch_use'/></a>
                 </#if>
                 <#if authorizedMap['sysWorkflow/delete']>
                     <a href="sysWorkflow/delete?ids=${a.id}&_csrf=<@_csrfToken admin=true/>" class="btnText warn" title="<@t.page 'confirm.delete'/>"  target="ajaxTodo"><i class="icon-trash"></i> <@t.page 'button.delete'/></a>

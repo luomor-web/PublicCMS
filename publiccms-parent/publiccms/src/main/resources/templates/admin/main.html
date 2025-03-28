@@ -1,4 +1,4 @@
-<a class="button float" href="main.html" target="navTab" rel="main"><i class="icon-refresh"></i><@t.page 'button.refresh'/></a>
+<a class="button float" href="main.html" target="navTab" rel="main" title="<@t.page 'workgin_table'/>"><i class="icon-refresh"></i><@t.page 'button.refresh'/></a>
 <div class="pageFormContent" layoutH>
     <fieldset>
         <legend><@t.page 'my_account'/></legend>
@@ -79,6 +79,57 @@
                 </li>
             </ul>
         </div>
+    </fieldset>
+    <#assign today=.now?string("yyyy-MM-dd")/>
+    <#assign thisMonth=.now?string("yyyy-MM-01")/>
+    <fieldset>
+        <legend><@t.page 'content'/></legend>
+        <ul class="report clearfix">
+            <li>
+                <h2 class="contentTitle"><@t.page 'report.content.lastest'/></h2>
+                <div class="pageFormContent">
+                    <@cms.contentList orderField="publishDate" pageSize=5>
+                        <#list page.list as content>
+                            <@t.merge 'categoryIds' content.categoryId!/>
+                        </#list>
+                        <@cms.category ids=t.categoryIds!><#assign categoryMap=map!/></@cms.category>
+                        <#list page.list as content>
+                    <p class="ellipsis">
+                        <span class="float-right date info">${content.publishDate?string("yyyy-MM-dd")!} <i class="icon-star-empty"></i> ${content.collections!} <i class="icon-comment-alt"></i> ${content.comments!} <i class="bi bi-eye"></i> ${content.clicks!}</span>
+                        [<a href="${(categoryMap[content.categoryId?string].url)!}" class="exclude-translate" target="_blank">${(categoryMap[content.categoryId?string].name)!}</a>] 
+                        <a href="${content.url!}" class="exclude-translate" target="_blank">${(content.title)!}</a>
+                    </p>
+                        </#list>
+                    </@cms.contentList>
+                </div>
+            </li>
+            <li>
+                <div class="tabs chart">
+                    <div class="tabsHeader">
+                        <ul>
+                            <h2 class="float-right"><@t.page 'report.content.hot'/></h2>
+                            <li><a href="common/hotContent.html?startVisitDate=${today}" class="j-ajax"><@t.page 'report.today'/></a></li>
+                            <li><a href="common/hotContent.html?startVisitDate=${getDate('yesterday',getDate('yesterday',today))?date}&endVisitDate=${getDate('yesterday',today)?date}" class="j-ajax"><@t.page 'report.yesterday'/></a></li>
+                            <li><a href="common/hotContent.html?startVisitDate=${getDate('lastSunday',today)?date}&dayAnalytics=false" class="j-ajax"><@t.page 'report.this_week'/></a></li>
+                            <li><a href="common/hotContent.html?startVisitDate=${getDate('yesterday',getDate('lastMonday',today))?date}&endVisitDate=${getDate('lastSunday',today)?date}&dayAnalytics=false" class="j-ajax"><@t.page 'report.last_week'/></a></li>
+                            <li><a href="common/hotContent.html?startVisitDate=${getDate('yesterday',thisMonth)?date}&dayAnalytics=false" class="j-ajax"><@t.page 'report.this_month'/></a></li>
+                            <li><a href="common/hotContent.html?startVisitDate=${getDate('yesterday',getDate('lastMonth',thisMonth))?date}&endVisitDate=${getDate('yesterday',thisMonth)?date}&dayAnalytics=false" class="j-ajax"><@t.page 'report.last_month'/></a></li>
+                        </ul>
+                    </div>
+                    <div class="tabsContent unitBox">
+                        <div>
+                            <#assign startVisitDate=today/>
+                            <#include "common/hotContent.html"/>
+                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </fieldset>
 <@sys.authorized roleIds=admin.roles url='cmsComment/list'>
     <fieldset>

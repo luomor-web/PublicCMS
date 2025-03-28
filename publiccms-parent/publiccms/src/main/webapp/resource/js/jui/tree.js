@@ -238,6 +238,10 @@
                 ckbox.removeClass("unchecked").addClass("checked");
                 $(node)._checkParent(op.excludeParent);
             }
+            var cAttr = $input.attr("disabled") || false;
+            if (cAttr ) {
+                ckbox.find("input").prop("disabled", true);
+            }
         }, _checkParent: function(excludeParent) {
             if ($(this).parent().hasClass("tree") ) {
                 return;
