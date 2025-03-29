@@ -211,10 +211,10 @@
             </dl>
         </#if>
         <#if fieldList?seq_contains('content')>
-            <p>${(model.fieldTextMap['content'])!} (<@t.page "word_count"/>:${(attribute.wordCount)!}):</p>
             <div class="unit" id="content" class="exclude-translate">
+                <h3>${(model.fieldTextMap['content'])!} (<@t.page "word_count"/>:${(attribute.wordCount)!}):</h3>
                 ${(attribute.text?no_esc)!}
-            </dd>
+            </div>
         </#if>
     </#if>
     <@cms.contentRelatedList contentId=a.id>

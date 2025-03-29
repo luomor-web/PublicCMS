@@ -88,18 +88,6 @@ function initUI(_box) {
     if ($.fn.combox ){
         $("select.combox", $p).combox();
     }
-    if ($.fn.uploadify ) {
-        $(":file[uploaderOption]", $p).each(function() {
-            var $this = $(this);
-            var options = {
-                fileObjName: $this.attr("name") || "file", auto: true, multi: true, onUploadError: uploadifyError
-            };
-            var uploaderOption = JUI.jsonEval($this.attr("uploaderOption"));
-            $.extend(options, uploaderOption);
-            JUI.debug("uploaderOption: " + JUI.obj2str(uploaderOption));
-            $this.uploadify(options);
-        });
-    }
 
     // validate form
     $("form.required-validate", $p).each(function() {

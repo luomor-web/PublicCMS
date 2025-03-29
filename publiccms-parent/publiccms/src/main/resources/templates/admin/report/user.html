@@ -3,8 +3,8 @@
     <fieldset>
         <legend><@t.page 'report.user'/></legend>
         <div class="unit clearfix">
-            <div id="register" class="chart w"></div>
-            <div class="chart w">
+            <div id="register" class="chart w"  data-resize-object="registerChart"></div>
+            <div class="box w">
                 <div class="pageFormContent">
                     <@sys.userList pageSize=10>
                         <#list page.list as user>
@@ -16,8 +16,8 @@
                     </@sys.userList>
                 </div>
             </div>
-            <div id="login" class="chart w"></div>
-            <div class="chart w">
+            <div id="login" class="chart w"  data-resize-object="loginChart"></div>
+            <div class="box w">
                 <div class="pageFormContent">
                     <@log.loginList pageSize=10>
                         <#list page.list as a>
@@ -30,8 +30,8 @@
                     </@log.loginList>
                 </div>
             </div>
-            <div id="operate" class="chart w"></div>
-            <div class="chart w">
+            <div id="operate" class="chart w" data-resize-object="operateChart"></div>
+            <div class="box w">
                 <div class="pageFormContent">
                     <@log.operateList pageSize=10>
                         <#list page.list as a>
@@ -47,8 +47,8 @@
                     </@log.operateList>
                 </div>
             </div>
-            <div id="userComment" class="chart w"></div>
-            <div class="chart w">
+            <div id="userComment" class="chart w"data-resize-object="userCommentChart"></div>
+            <div class="box w">
                 <div class="pageFormContent">
                     <@cms.commentList advanced=true pageSize=10>
                         <#list page.list as a>
