@@ -94,7 +94,7 @@
                         <#list page.list as content>
                     <p class="ellipsis">
                         <span class="float-right date info">${content.publishDate?string("yyyy-MM-dd")!} <i class="icon-star-empty"></i> ${content.collections!} <i class="icon-comment-alt"></i> ${content.comments!} <i class="bi bi-eye"></i> ${content.clicks!}</span>
-                        [<a href="${(categoryMap[content.categoryId?string].url)!}" class="exclude-translate" target="_blank">${(categoryMap[content.categoryId?string].name)!}</a>] 
+                        [<a href="${(categoryMap[content.categoryId?string].url)!}" class="exclude-translate" target="_blank">${(categoryMap[content.categoryId?string].name)!}</a>]
                         <a href="${content.url!}" class="exclude-translate" target="_blank">${(content.title)!}</a>
                     </p>
                         </#list>
@@ -102,7 +102,7 @@
                 </div>
             </li>
             <li>
-                <div class="tabs chart">
+                <div class="tabs box">
                     <div class="tabsHeader">
                         <ul class="right">
                             <h2 class="float-left"><@t.page 'report.content.hot'/></h2>
@@ -135,7 +135,7 @@
     <fieldset>
         <legend><@t.page 'comment.management'/></legend>
         <div class="unit">
-            <div id="comment" class="chart" data-id="commentChart"></div>
+            <div id="comment" class="chart" data-resize-object="commentChart"></div>
             <ul class="clearfix">
                 <li>
                     <div class="card">
@@ -203,7 +203,7 @@ commentChart.setOption({
     <fieldset>
         <legend><@t.page 'order'/></legend>
         <div class="unit">
-            <div id="order" class="chart" data-id="orderChart"></div>
+            <div id="order" class="chart" data-resize-object="orderChart"></div>
             <ul class="clearfix">
                 <li>
                     <div class="card">
@@ -297,7 +297,7 @@ orderChart.setOption({
     <fieldset>
         <legend><@t.page 'report.user'/></legend>
         <div class="unit">
-            <#if visitAuthorized><div id="visit" class="chart" data-id="visitChart"></div></#if>
+            <#if visitAuthorized><div id="visit" class="chart"  data-resize-object="visitChart"></div></#if>
             <ul>
                 <li>
                     <div class="card">
@@ -408,42 +408,60 @@ visitChart.setOption({
     <fieldset>
         <legend><@t.page 'system'/></legend>
         <div class="unit">
-            <p class="cmsVersion">
-                <label><@t.page 'publiccms'/>:</label>
-                <a href="//www.publiccms.com/" target="navTab" rel="publiccms.com" title="<@t.page 'publiccms_website'/>">${cms}.${revision}</a> <span class="new hide" style="color:green">[<@t.page 'version.new'/>]</span><span class="old hide" style="color:red">[<@t.page 'version.old'/>]</span>
-            </p>
+            <ul>
+                <li>
+                    <p class="cmsVersion">
+                        <label><@t.page 'publiccms'/>:</label>
+                        <a href="//www.publiccms.com/" target="navTab" rel="publiccms.com" title="<@t.page 'publiccms_website'/>">${cms}.${revision}</a> <span class="new hide" style="color:green">[<@t.page 'version.new'/>]</span><span class="old hide" style="color:red">[<@t.page 'version.old'/>]</span>
+                    </p>
+                </li>
     <@tools.systemProperties>
-            <p>
-                <label><@t.page 'os.timezone'/>:</label>${.vars['user.timezone']!}
-            </p>
+                <li>
+                    <p>
+                        <label><@t.page 'os.timezone'/>:</label>${.vars['user.timezone']!}
+                    </p>
+                </li>
     </@tools.systemProperties>
     <@tools.masterSite>
-            <p>
-                <label>${t.pageMessage(master?then('cluster.master','cluster.normal'))}:</label>
-                <a href="sysCluster/list.html" title="<@t.menu 'cluster'/>" target="navTab" rel="sysCluster/list">${cluster}</a>
-            </p>
+                <li>
+                    <p>
+                        <label>${t.pageMessage(master?then('cluster.master','cluster.normal'))}:</label>
+                        <a href="sysCluster/list.html" title="<@t.menu 'cluster'/>" target="navTab" rel="sysCluster/list">${cluster}</a>
+                    </p>
+                </li>
         <@tools.disk>
-            <p>
-                <label><@t.page 'data.directory'/>:</label>
-                <a href="sysSite/monitor.html" title="<@t.page 'system_monitor'/>" target="navTab" rel="sysSite/monitor">${(rootPath)!}</a>
-            </p>
-            <p>
-                <label><@t.page 'disk_space'/>:</label><@t.fileSize totalSpace/>
-            </p>
+                <li>
+                    <p>
+                        <label><@t.page 'data.directory'/>:</label>
+                        <a href="sysSite/monitor.html" title="<@t.page 'system_monitor'/>" target="navTab" rel="sysSite/monitor">${(rootPath)!}</a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <label><@t.page 'disk_space'/>:</label><@t.fileSize totalSpace/>
+                    </p>
+                </li>
+            </ul>
         </@tools.disk>
     </@tools.masterSite>
         </div>
     <@tools.masterSite>
         <div class="divider"></div>
         <div class="unit">
-            <p>
-                <label><@t.page 'site.count'/>:</label>
-                <a href="sysSite/list.html" title="<@t.menu 'site_list'/>" target="navTab" rel="sysSite/list"><@sys.siteList pageSize=0>${page.totalCount}</@sys.siteList></a>
-            </p>
-            <p>
-                <label><@t.page 'domain.count'/>:</label>
-                <a href="sysDomain/list.html" title="<@t.menu 'site_domain_list'/>" target="navTab" rel="sysDomain/list"><@sys.domainList advanced=true pageSize=0>${page.totalCount}</@sys.domainList></a>
-            </p>
+            <ul>
+                <li>
+                    <p>
+                        <label><@t.page 'site.count'/>:</label>
+                        <a href="sysSite/list.html" title="<@t.menu 'site_list'/>" target="navTab" rel="sysSite/list"><@sys.siteList pageSize=0>${page.totalCount}</@sys.siteList></a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <label><@t.page 'domain.count'/>:</label>
+                        <a href="sysDomain/list.html" title="<@t.menu 'site_domain_list'/>" target="navTab" rel="sysDomain/list"><@sys.domainList advanced=true pageSize=0>${page.totalCount}</@sys.domainList></a>
+                    </p>
+                </li>
+            </ul>
         </div>
     </@tools.masterSite>
     </fieldset>

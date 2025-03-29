@@ -182,8 +182,8 @@ var JUI = {
             $(window).on(JUI.eventType.resizeChart, null, null, function() {
                 $(".chart").each(function() {
                     $chart=$(this);
-                    if($chart.data("id") && window[$chart.data("id")] && "function" == typeof window[$chart.data("id")].resize){
-                        window[$chart.data("id")].resize();
+                    if($chart.data("resize-object") && window[$chart.data("resize-object")] && "function" == typeof window[$chart.data("resize-object")].resize){
+                        window[$chart.data("resize-object")].resize();
                     }
                 });
             });
