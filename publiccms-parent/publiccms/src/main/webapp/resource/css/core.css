@@ -49,7 +49,7 @@ header .nav{display:block;position:absolute;right:0px;z-index:2;}
 header .nav>li{float:left;padding:0 10px;line-height:48px;position:relative;}
 header .nav>li a{font-size:12px;}
 header .nav>li>ul{display:none;background-color:#fff;position:absolute;line-height:20px;z-index:99;border-style:solid;border-width:1px;border-radius:3px;overflow:hidden;top:45px;right:5px;}
-header .nav>li>ul>li{padding:8px;white-space: nowrap;}
+header .nav>li>ul>li{padding:3px 10px;white-space:nowrap;}
 header .nav>li:hover>ul{display:block;}
 header .nav>li>a [class*=" icon-"].icon-large{line-height:1.6em;font-size:1.6em;vertical-align:middle;}
 
@@ -122,7 +122,7 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .tabs .tabsHeader{border-radius:5px;display:block;overflow:hidden;height:35px;padding-left:5px;}
 .tabs .tabsHeader ul{display:block;height:100%;border-bottom-width:1px;border-bottom-style:solid;box-sizing:border-box;line-height:34px;}
 .tabs .tabsHeader li{float:left;display:block;height:100%;margin-right:2px;}
-.tabs .tabsHeader .right li{float:right;} 
+.tabs .tabsHeader .right li{float:right;}
 .tabs .tabsHeader li a{display:block;height:100%;padding:0 15px;}
 .tabs .tabsHeader li a:hover{text-decoration:none;}
 .tabs .tabsHeader li.selected{position:relative;}
