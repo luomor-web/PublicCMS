@@ -38,9 +38,9 @@ import com.publiccms.views.pojo.entities.CmsPlaceMetadata;
 import freemarker.template.TemplateException;
 
 /**
- * 元数据组件
+ * DIY数据组件
  *
- * MetaData Component
+ * Diy Component
  *
  */
 @Component

@@ -1,6 +1,6 @@
 -- 2024-09-25 --
 UPDATE sys_module SET authorized_url= 'cmsPlace/push,cmsPlace/add,cmsPlace/save,cmsContent/push_content,cmsContent/push_content_list,cmsContent/push_to_content,cmsContent/push_to_relation,cmsContent/related,cmsContent/unrelated,cmsPlace/delete' WHERE id ='content_push';
-UPDATE sys_module SET authorized_url= 'cmsTemplate/save,cmsTemplate/saveMetaData,cmsWebFile/lookup,cmsTemplate/help' WHERE id ='template_content';
+UPDATE sys_module SET authorized_url= 'cmsTemplate/save,cmsTemplate/saveMetadata,cmsWebFile/lookup,cmsTemplate/help' WHERE id ='template_content';
 DROP TABLE IF EXISTS `sys_user_attribute`;
 CREATE TABLE `sys_user_attribute` (
   `user_id` bigint(20) NOT NULL,
@@ -302,3 +302,4 @@ INSERT INTO sys_module VALUES ('system_workflow_use', 'sysWorkflow/batchParamete
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'en', 'Batch use');
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'ja', 'バッチ使用');
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'zh', '批量应用');
+UPDATE sys_module SET authorized_url='cmsTemplate/savePlaceMetadata,cmsTemplate/deletePlace,cmsTemplate/createDirectory' WHERE id = 'place_template_metadata';

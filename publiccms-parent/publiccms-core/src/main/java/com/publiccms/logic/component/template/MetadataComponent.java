@@ -22,7 +22,7 @@ import com.publiccms.views.pojo.entities.CmsPlaceMetadata;
 /**
  * 元数据组件
  *
- * MetaData Component
+ * Metadata Component
  *
  */
 @Component
