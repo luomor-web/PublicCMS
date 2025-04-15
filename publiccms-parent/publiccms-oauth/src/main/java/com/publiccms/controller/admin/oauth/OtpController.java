@@ -35,7 +35,6 @@ import com.publiccms.entities.sys.SysUserSettingId;
 import com.publiccms.entities.sys.SysUserToken;
 import com.publiccms.logic.component.config.ConfigDataComponent;
 import com.publiccms.logic.component.config.SafeConfigComponent;
-import com.publiccms.logic.component.config.SiteConfigComponent;
 import com.publiccms.logic.service.log.LogLoginService;
 import com.publiccms.logic.service.sys.SysUserService;
 import com.publiccms.logic.service.sys.SysUserSettingService;
@@ -103,7 +102,7 @@ public class OtpController {
         TOTPGenerator totp = new TOTPGenerator.Builder(secret.getBytes()).build();
         if (totp.verify(code)) {
             settingService.getOrCreateOrUpdate(otpadmin.getId(), SysUserSettingService.OPTSECRET_SETTINGS_CODE, secret);
-            Map<String, String> config = configDataComponent.getConfigData(site.getId(), SiteConfigComponent.CONFIG_CODE);
+            Map<String, String> config = configDataComponent.getConfigData(site.getId(), SafeConfigComponent.CONFIG_CODE);
             String safeReturnUrl = config.get(SafeConfigComponent.CONFIG_RETURN_URL);
             if (SafeConfigComponent.isUnSafeUrl(returnUrl, site, safeReturnUrl, request.getContextPath())) {
                 returnUrl = CommonConstants.getDefaultPage();
@@ -150,7 +149,7 @@ public class OtpController {
                     LoginAdminController.addLoginStatus(otpadmin, authToken, request, response, expiryMinutes);
                     sysUserTokenService.save(new SysUserToken(authToken, site.getId(), otpadmin.getId(),
                             LogLoginService.CHANNEL_WEB_MANAGER, now, DateUtils.addMinutes(now, expiryMinutes), ip));
-                    Map<String, String> config = configDataComponent.getConfigData(site.getId(), SiteConfigComponent.CONFIG_CODE);
+                    Map<String, String> config = configDataComponent.getConfigData(site.getId(), SafeConfigComponent.CONFIG_CODE);
                     String safeReturnUrl = config.get(SafeConfigComponent.CONFIG_RETURN_URL);
                     if (SafeConfigComponent.isUnSafeUrl(returnUrl, site, safeReturnUrl, request.getContextPath())) {
                         returnUrl = CommonUtils.joinString("../", CommonConstants.getDefaultPage());
