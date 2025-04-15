@@ -1,6 +1,6 @@
 -- 2024-09-25 --
 UPDATE sys_module SET authorized_url= 'cmsPlace/push,cmsPlace/add,cmsPlace/save,cmsContent/push_content,cmsContent/push_content_list,cmsContent/push_to_content,cmsContent/push_to_relation,cmsContent/related,cmsContent/unrelated,cmsPlace/delete' WHERE id ='content_push';
-UPDATE sys_module SET authorized_url= 'cmsTemplate/save,cmsTemplate/saveMetaData,cmsWebFile/lookup,cmsTemplate/help' WHERE id ='template_content';
+UPDATE sys_module SET authorized_url= 'cmsTemplate/save,cmsTemplate/saveMetadata,cmsWebFile/lookup,cmsTemplate/help' WHERE id ='template_content';
 DROP TABLE IF EXISTS `sys_user_attribute`;
 CREATE TABLE `sys_user_attribute` (
   `user_id` bigint(20) NOT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE `trade_coupon` (
   `starting_amount` decimal(10,2) DEFAULT NULL COMMENT '起始金额',
   `discount` decimal(10,1) DEFAULT NULL COMMENT '折扣优惠',
   `price` decimal(10,2) DEFAULT NULL COMMENT '优惠券价格',
-  `type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
+  `coupon_type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
   `redeem_code` varchar(255) DEFAULT NULL COMMENT '兑换码',
   `duration` int(11) NOT NULL COMMENT '有效天数',
   `quantity` int(11) NOT NULL COMMENT '优惠券数量',
@@ -302,3 +302,9 @@ INSERT INTO sys_module VALUES ('system_workflow_use', 'sysWorkflow/batchParamete
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'en', 'Batch use');
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'ja', 'バッチ使用');
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'zh', '批量应用');
+UPDATE sys_module SET authorized_url='cmsTemplate/savePlaceMetadata,cmsTemplate/deletePlace,cmsTemplate/createDirectory' WHERE id = 'place_template_metadata';
+-- 2025-04-15 --
+ALTER TABLE `sys_module` 
+    ADD COLUMN `login_type` varchar(50) NOT NULL COMMENT '登录方式' default 'password' AFTER `channel`,
+    DROP INDEX `log_login_channel`,
+    ADD INDEX `log_login_channel` (`site_id`, `channel`, `login_type`, `create_date`);

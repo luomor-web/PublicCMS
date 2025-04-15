@@ -1,6 +1,6 @@
 <@tools.placeMetadata path=path><#assign a=object/></@tools.placeMetadata>
 <@tools.fileExist path='/include'+(path!)><#assign exists=object&&path?has_content></@tools.fileExist>
-<form method="post" autocomplete="off" action="cmsTemplate/savePlaceMetaData?navTabId=placeTemplate/list" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+<form method="post" autocomplete="off" action="cmsTemplate/savePlaceMetadata?navTabId=placeTemplate/list" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
     <input type="hidden" name="_csrf" value="<@tools.csrfToken admin=true/>"/>
     <div class="formBar card">
         <ul>

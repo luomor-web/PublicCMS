@@ -24,6 +24,7 @@ import com.publiccms.common.tools.CommonUtils;
 import com.publiccms.common.tools.ControllerUtils;
 import com.publiccms.common.tools.RequestUtils;
 import com.publiccms.controller.admin.LoginAdminController;
+import com.publiccms.entities.log.LogLogin;
 import com.publiccms.entities.sys.SysSite;
 import com.publiccms.entities.sys.SysUser;
 import com.publiccms.entities.sys.SysUserSetting;
@@ -31,7 +32,6 @@ import com.publiccms.entities.sys.SysUserSettingId;
 import com.publiccms.entities.sys.SysUserToken;
 import com.publiccms.logic.component.config.ConfigDataComponent;
 import com.publiccms.logic.component.config.SafeConfigComponent;
-import com.publiccms.logic.component.config.SiteConfigComponent;
 import com.publiccms.logic.service.log.LogLoginService;
 import com.publiccms.logic.service.sys.SysUserService;
 import com.publiccms.logic.service.sys.SysUserSettingService;
@@ -49,6 +49,8 @@ public class OtpController {
     private ConfigDataComponent configDataComponent;
     @Resource
     private SysUserTokenService sysUserTokenService;
+    @Resource
+    private LogLoginService logLoginService;
     @Resource
     private SysUserService service;
     @Resource
@@ -103,7 +105,7 @@ public class OtpController {
         TOTPGenerator totp = new TOTPGenerator.Builder(secret.getBytes()).build();
         if (totp.verify(code)) {
             settingService.getOrCreateOrUpdate(otpadmin.getId(), SysUserSettingService.OPTSECRET_SETTINGS_CODE, secret);
-            Map<String, String> config = configDataComponent.getConfigData(site.getId(), SiteConfigComponent.CONFIG_CODE);
+            Map<String, String> config = configDataComponent.getConfigData(site.getId(), SafeConfigComponent.CONFIG_CODE);
             String safeReturnUrl = config.get(SafeConfigComponent.CONFIG_RETURN_URL);
             if (SafeConfigComponent.isUnSafeUrl(returnUrl, site, safeReturnUrl, request.getContextPath())) {
                 returnUrl = CommonConstants.getDefaultPage();
@@ -150,7 +152,9 @@ public class OtpController {
                     LoginAdminController.addLoginStatus(otpadmin, authToken, request, response, expiryMinutes);
                     sysUserTokenService.save(new SysUserToken(authToken, site.getId(), otpadmin.getId(),
                             LogLoginService.CHANNEL_WEB_MANAGER, now, DateUtils.addMinutes(now, expiryMinutes), ip));
-                    Map<String, String> config = configDataComponent.getConfigData(site.getId(), SiteConfigComponent.CONFIG_CODE);
+                    logLoginService.save(new LogLogin(site.getId(), otpadmin.getName(), otpadmin.getId(), ip,
+                            LogLoginService.CHANNEL_WEB_MANAGER, LogLoginService.TYPE_OTP, true, now, null));
+                    Map<String, String> config = configDataComponent.getConfigData(site.getId(), SafeConfigComponent.CONFIG_CODE);
                     String safeReturnUrl = config.get(SafeConfigComponent.CONFIG_RETURN_URL);
                     if (SafeConfigComponent.isUnSafeUrl(returnUrl, site, safeReturnUrl, request.getContextPath())) {
                         returnUrl = CommonUtils.joinString("../", CommonConstants.getDefaultPage());

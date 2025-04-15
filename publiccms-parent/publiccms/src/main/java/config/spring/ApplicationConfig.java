@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -188,7 +188,7 @@ public class ApplicationConfig implements EnvironmentAware{
      */
     @Bean
     public MessageSource messageSource(MenuMessageComponent menuMessageComponent) {
-        ResourceBundleMessageSource bean = new ResourceBundleMessageSource();
+        ReloadableResourceBundleMessageSource bean = new ReloadableResourceBundleMessageSource();
         bean.setBasenames(StringUtils.split(env.getProperty("cms.language"), Constants.COMMA));
         bean.setCacheSeconds(300);
         bean.setUseCodeAsDefaultMessage(true);

@@ -37,7 +37,6 @@ import com.publiccms.entities.sys.SysUserToken;
 import com.publiccms.logic.component.cache.CacheComponent;
 import com.publiccms.logic.component.config.ConfigDataComponent;
 import com.publiccms.logic.component.config.SafeConfigComponent;
-import com.publiccms.logic.component.config.SiteConfigComponent;
 import com.publiccms.logic.component.site.LockComponent;
 import com.publiccms.logic.component.site.SiteComponent;
 import com.publiccms.logic.service.log.LogLoginService;
@@ -118,7 +117,8 @@ public class LoginAdminController {
                 }
                 lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_IP_LOGIN, ip, null, true);
                 logLoginService.save(new LogLogin(site.getId(), username, null == user ? null : user.getId(), ip,
-                        LogLoginService.CHANNEL_WEB_MANAGER, false, CommonUtils.getDate(), password));
+                        LogLoginService.CHANNEL_WEB_MANAGER, LogLoginService.TYPE_PASSWORD, false, CommonUtils.getDate(),
+                        password));
                 return "login";
             }
         }
@@ -129,9 +129,9 @@ public class LoginAdminController {
             model.addAttribute("username", username);
             model.addAttribute("returnUrl", returnUrl);
             lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_IP_LOGIN, ip, null, true);
-            logLoginService.save(new LogLogin(site.getId(), username, null, ip, LogLoginService.CHANNEL_WEB_MANAGER, false,
-                    CommonUtils.getDate(), password));
-            return "login";
+            logLoginService.save(new LogLogin(site.getId(), username, null, ip, LogLoginService.CHANNEL_WEB_MANAGER,
+                    LogLoginService.TYPE_PASSWORD, false, CommonUtils.getDate(), password));
+            return "redirect:login";
         }
         locked = lockComponent.isLocked(site.getId(), LockComponent.ITEM_TYPE_LOGIN, String.valueOf(user.getId()), null);
         if (ControllerUtils.errorCustom("locked.user", locked, model)
@@ -143,9 +143,9 @@ public class LoginAdminController {
             Long userId = user.getId();
             lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_LOGIN, String.valueOf(user.getId()), null, true);
             lockComponent.lock(site.getId(), LockComponent.ITEM_TYPE_IP_LOGIN, ip, null, true);
-            logLoginService.save(new LogLogin(site.getId(), username, userId, ip, LogLoginService.CHANNEL_WEB_MANAGER, false,
-                    CommonUtils.getDate(), password));
-            return "login";
+            logLoginService.save(new LogLogin(site.getId(), username, userId, ip, LogLoginService.CHANNEL_WEB_MANAGER,
+                    LogLoginService.TYPE_PASSWORD, false, CommonUtils.getDate(), password));
+            return "redirect:login";
         }
 
         lockComponent.unLock(site.getId(), LockComponent.ITEM_TYPE_IP_LOGIN, ip, user.getId());
@@ -158,9 +158,8 @@ public class LoginAdminController {
                 .getEntity(new SysUserSettingId(user.getId(), SysUserSettingService.OPTSECRET_SETTINGS_CODE));
         if (safeConfigComponent.enableOtpLogin(site.getId()) || null != userSetting) {
             ControllerUtils.setOtpAdminToSession(request.getSession(), user);
-            logLoginService.save(new LogLogin(site.getId(), username, user.getId(), ip, LogLoginService.CHANNEL_WEB_MANAGER, true,
-                    CommonUtils.getDate(), null));
-            return CommonUtils.joinString("redirect:otp/login?returnUrl=", returnUrl);
+            model.addAttribute("returnUrl", returnUrl);
+            return "redirect:otp/login";
         } else {
             service.updateLoginStatus(user.getId(), ip);
             String authToken = UUID.randomUUID().toString();
@@ -172,10 +171,9 @@ public class LoginAdminController {
 
             sysUserTokenService.save(new SysUserToken(authToken, site.getId(), user.getId(), LogLoginService.CHANNEL_WEB_MANAGER,
                     now, DateUtils.addMinutes(now, expiryMinutes), ip));
-            logLoginService.save(new LogLogin(site.getId(), username, user.getId(), ip, LogLoginService.CHANNEL_WEB_MANAGER, true,
-                    CommonUtils.getDate(), null));
-            Map<String, String> config = configDataComponent.getConfigData(site.getId(), SiteConfigComponent.CONFIG_CODE);
-            String safeReturnUrl = config.get(SafeConfigComponent.CONFIG_RETURN_URL);
+            logLoginService.save(new LogLogin(site.getId(), username, user.getId(), ip, LogLoginService.CHANNEL_WEB_MANAGER,
+                    LogLoginService.TYPE_PASSWORD, true, CommonUtils.getDate(), null));
+            String safeReturnUrl = safeConfig.get(SafeConfigComponent.CONFIG_RETURN_URL);
             if (SafeConfigComponent.isUnSafeUrl(returnUrl, site, safeReturnUrl, request.getContextPath())) {
                 returnUrl = CommonConstants.getDefaultPage();
             }

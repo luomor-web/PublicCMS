@@ -9,6 +9,7 @@ new feature:
 1. add user setting
 1. add todo number
 1. add my dept
+1. add markdown file import
 
 ## 202406.f
 
