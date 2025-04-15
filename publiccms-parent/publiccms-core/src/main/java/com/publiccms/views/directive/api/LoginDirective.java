@@ -34,27 +34,36 @@ import freemarker.template.TemplateException;
 /**
  *
  * login 登录接口
- * <p lang="zh">参数列表
- * <p lang="en">parameter list
- * <p lang="ja">パラメータリスト
+ * <p lang="zh">
+ * 参数列表
+ * <p lang="en">
+ * parameter list
+ * <p lang="ja">
+ * パラメータリスト
  * <ul>
  * <li><code>username</code>:设备唯一id
  * <li><code>password</code>:用户名
  * <li><code>encoding</code>:密码加密方式
  * <li><code>channel</code>:登录渠道
  * </ul>
- * <p lang="zh">返回结果
- * <p lang="en">return result
- * <p lang="ja">戻り値
+ * <p lang="zh">
+ * 返回结果
+ * <p lang="en">
+ * return result
+ * <p lang="ja">
+ * 戻り値
  * <ul>
  * <li><code>result</code>:登录结果,【true,false】
  * <li><code>authToken</code>:用户登录授权
  * <li><code>expiryDate</code>:过期日期
  * <li><code>user</code>:用户信息 {@link com.publiccms.entities.sys.SysUser}
  * </ul>
- * <p lang="zh">使用示例
- * <p lang="en">usage example
- * <p lang="ja">使用例
+ * <p lang="zh">
+ * 使用示例
+ * <p lang="en">
+ * usage example
+ * <p lang="ja">
+ * 使用例
  * <p>
  *
  * <pre>
@@ -111,8 +120,8 @@ public class LoginDirective extends AbstractAppDirective {
                 SysUserToken userToken = new SysUserToken(UUID.randomUUID().toString(), site.getId(), user.getId(), channel, now,
                         expiryDate, ip);
                 sysUserTokenService.save(userToken);
-                logLoginService
-                        .save(new LogLogin(site.getId(), username, user.getId(), ip, channel, true, CommonUtils.getDate(), null));
+                logLoginService.save(new LogLogin(site.getId(), username, user.getId(), ip, channel,
+                        LogLoginService.TYPE_PASSWORD, true, CommonUtils.getDate(), null));
                 user.setPassword(null);
                 result = true;
                 handler.put("authToken", userToken.getAuthToken()).put("expiryDate", userToken.getExpiryDate()).put("user", user);

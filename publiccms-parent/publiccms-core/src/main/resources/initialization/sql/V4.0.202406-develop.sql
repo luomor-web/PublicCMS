@@ -185,7 +185,7 @@ CREATE TABLE `trade_coupon` (
   `starting_amount` decimal(10,2) DEFAULT NULL COMMENT '起始金额',
   `discount` decimal(10,1) DEFAULT NULL COMMENT '折扣优惠',
   `price` decimal(10,2) DEFAULT NULL COMMENT '优惠券价格',
-  `type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
+  `coupon_type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
   `redeem_code` varchar(255) DEFAULT NULL COMMENT '兑换码',
   `duration` int(11) NOT NULL COMMENT '有效天数',
   `quantity` int(11) NOT NULL COMMENT '优惠券数量',
@@ -303,3 +303,8 @@ INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'en', 'Batch use');
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'ja', 'バッチ使用');
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'zh', '批量应用');
 UPDATE sys_module SET authorized_url='cmsTemplate/savePlaceMetadata,cmsTemplate/deletePlace,cmsTemplate/createDirectory' WHERE id = 'place_template_metadata';
+-- 2025-04-15 --
+ALTER TABLE `sys_module` 
+    ADD COLUMN `login_type` varchar(50) NOT NULL COMMENT '登录方式' default 'password' AFTER `channel`,
+    DROP INDEX `log_login_channel`,
+    ADD INDEX `log_login_channel` (`site_id`, `channel`, `login_type`, `create_date`);

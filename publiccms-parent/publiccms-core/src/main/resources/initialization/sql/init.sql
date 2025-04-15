@@ -561,6 +561,7 @@ CREATE TABLE `log_login` (
   `user_id` bigint(20) default NULL COMMENT '用户',
   `ip` varchar(130) NOT NULL COMMENT 'IP',
   `channel` varchar(50) NOT NULL COMMENT '登录渠道',
+  `login_type` varchar(50) NOT NULL COMMENT '登录方式',
   `result` tinyint(1) NOT NULL COMMENT '结果',
   `create_date` datetime NOT NULL COMMENT '创建日期',
   `error_password` varchar(255) default NULL COMMENT '错误密码',
@@ -568,7 +569,7 @@ CREATE TABLE `log_login` (
   KEY `log_login_result` (`site_id`, `result`, `create_date`),
   KEY `log_login_user_id` (`site_id`, `user_id`, `create_date`),
   KEY `log_login_ip` (`site_id`, `ip`, `create_date`),
-  KEY `log_login_channel` (`site_id`, `channel`, `create_date`)
+  KEY `log_login_channel` (`site_id`, `channel`, `login_type`, `create_date`)
 ) COMMENT='登录日志';
 
 -- ----------------------------
@@ -2216,7 +2217,7 @@ CREATE TABLE `trade_coupon` (
   `starting_amount` decimal(10,2) DEFAULT NULL COMMENT '起始金额',
   `discount` decimal(10,1) DEFAULT NULL COMMENT '折扣优惠',
   `price` decimal(10,2) DEFAULT NULL COMMENT '优惠券价格',
-  `type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
+  `coupon_type` int(11) NOT NULL COMMENT '类型(1折扣,2免运费,3满减)',
   `redeem_code` varchar(255) DEFAULT NULL COMMENT '兑换码',
   `duration` int(11) NOT NULL COMMENT '有效天数',
   `quantity` int(11) NOT NULL COMMENT '优惠券数量',
