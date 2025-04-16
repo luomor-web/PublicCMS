@@ -121,7 +121,7 @@ public class LoginDirective extends AbstractAppDirective {
                         expiryDate, ip);
                 sysUserTokenService.save(userToken);
                 logLoginService.save(new LogLogin(site.getId(), username, user.getId(), ip, channel,
-                        LogLoginService.TYPE_PASSWORD, true, CommonUtils.getDate(), null));
+                        LogLoginService.METHOD_PASSWORD, true, CommonUtils.getDate(), null));
                 user.setPassword(null);
                 result = true;
                 handler.put("authToken", userToken.getAuthToken()).put("expiryDate", userToken.getExpiryDate()).put("user", user);

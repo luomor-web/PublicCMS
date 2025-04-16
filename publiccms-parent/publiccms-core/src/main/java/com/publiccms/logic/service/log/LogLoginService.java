@@ -32,19 +32,19 @@ public class LogLoginService extends BaseService<LogLogin> {
     /**
      * 
      */
-    public static final String TYPE_PASSWORD = "password";
+    public static final String METHOD_PASSWORD = "password";
     /**
      * 
      */
-    public static final String TYPE_OTP = "opt";
+    public static final String METHOD_OTP = "opt";
     /**
      * 
      */
-    public static final String TYPE_CLIENT_AUTO_LOGIN = "clientAutoLogin";
+    public static final String METHOD_CLIENT_AUTO_LOGIN = "clientAutoLogin";
     /**
      * 
      */
-    public static final String TYPE_FINGERPRINT = "fingerprint";
+    public static final String METHOD_FINGERPRINT = "fingerprint";
 
     /**
      * @param siteId
