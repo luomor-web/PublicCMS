@@ -6,5 +6,6 @@ ENV CONTEXTPATH=""
 ENV FILEPATH="/data/publiccms"
 ENV TZ=Asia/Shanghai
 VOLUME $FILEPATH
-ENTRYPOINT ["/bin/sh" "-c" "java -jar -Dcms.port=$PORT -Dcms.contextPath=$CONTEXTPATH -Dcms.filePath=$FILEPATH /opt/publiccms.war > /var/log/publiccms.log"]
+CMD ["-Dcms.port=$PORT -Dcms.contextPath=$CONTEXTPATH -Dcms.filePath=$FILEPATH"]
+ENTRYPOINT ["java","-jar","/opt/publiccms.war"]
 EXPOSE $PORT
