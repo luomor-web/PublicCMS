@@ -16,10 +16,63 @@
             pagebreak_split_block: true,
             image_advtab: true,
             importcss_append: true,
-            images_upload_url: base + '/tinymce/upload',
+            //images_upload_url: base + '/tinymce/upload',
             images_reuse_filename: true,
             images_upload_base_path: window.TIMYMCE_RESOURCE_PREFIX,
-            image_list: base + '/tinymce/imageList',
+            images_upload_handler : (blobInfo, progress) => new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', 'postAcceptor.php');
+                xhr.upload.onprogress = (e) => {
+                    progress(e.loaded / e.total * 100);
+                };
+                xhr.onload = () => {
+                    if (xhr.status === 403) {
+                        reject({ message: 'HTTP Error: ' + xhr.status, remove: true });
+                        return;
+                    }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        reject('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+                    const json = JSON.parse(xhr.responseText);
+                    if (!json || typeof json.location != 'string') {
+                        reject('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+                    resolve(json.location);
+                };
+
+                xhr.onerror = () => {
+                    reject('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+                };
+
+                const formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+                xhr.send(formData);
+            }),
+            image_list: function (success) {
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', base + '/tinymce/imageList');
+                xhr.setRequestHeader( 'test', 'test' );
+                xhr.onload = function() {
+                    if (xhr.status === 403 || xhr.status < 200 || xhr.status >= 300) {
+                        success([]);
+                        return;
+                    }
+                    var json = JSON.parse(xhr.responseText);
+                    if (!json) {
+                        success([]);
+                        return;
+                    }
+                    success(json);
+                };
+                xhr.onerror = function(){
+                    success([]);
+                };
+                xhr.send(null);
+            }),// base + '/tinymce/imageList',
             image_prepend_url:window.TIMYMCE_RESOURCE_PREFIX,
             file_picker_callback: function (callback, value, meta) {
                 var filetype=window.TIMYMCE_FILETYPES;
@@ -43,6 +96,7 @@
                     xhr = new XMLHttpRequest();
                     xhr.withCredentials = false;
                     xhr.open('POST', base + '/tinymce/upload');
+                    xhr.setRequestHeader( 'test', 'test' );
                     xhr.onload = function() {
                         var json;
                         if (xhr.status != 200) {
