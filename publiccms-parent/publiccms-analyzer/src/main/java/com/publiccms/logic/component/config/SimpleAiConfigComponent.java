@@ -9,17 +9,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.google.typography.font.sfntly.Font;
 import com.publiccms.common.api.Config;
-import com.publiccms.common.api.SiteCache;
-import com.publiccms.common.cache.CacheEntity;
-import com.publiccms.common.cache.CacheEntityFactory;
 import com.publiccms.common.constants.Constants;
 import com.publiccms.common.tools.CommonUtils;
 import com.publiccms.common.tools.JsonUtils;
 import com.publiccms.entities.sys.SysExtendField;
 import com.publiccms.entities.sys.SysSite;
-import com.publiccms.logic.component.site.SiteComponent;
 import com.publiccms.views.pojo.model.SimpleAiMessage;
 
 import jakarta.annotation.Resource;
@@ -30,7 +25,7 @@ import jakarta.annotation.Resource;
  *
  */
 @Component
-public class SimpleAiConfigComponent implements Config, SiteCache {
+public class SimpleAiConfigComponent implements Config {
 
     /**
      * config code
@@ -54,11 +49,8 @@ public class SimpleAiConfigComponent implements Config, SiteCache {
      */
     public static final String CONFIG_MODEL = "model";
 
-    private CacheEntity<Short, Font> cache;
     @Resource
     protected ConfigDataComponent configDataComponent;
-    @Resource
-    protected SiteComponent siteComponent;
 
     /**
      * @param siteId
@@ -105,28 +97,6 @@ public class SimpleAiConfigComponent implements Config, SiteCache {
             return request;
         }
         return null;
-    }
-
-    @Override
-    public void clear(short siteId) {
-        cache.remove(siteId);
-    }
-
-    @Override
-    public void clear() {
-        cache.clear(false);
-    }
-
-    /**
-     * @param cacheEntityFactory
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws ClassNotFoundException
-     */
-    @Resource
-    public void initCache(CacheEntityFactory cacheEntityFactory)
-            throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        cache = cacheEntityFactory.createCacheEntity(CONFIG_CODE, CacheEntityFactory.MEMORY_CACHE_ENTITY);
     }
 
     @Override
