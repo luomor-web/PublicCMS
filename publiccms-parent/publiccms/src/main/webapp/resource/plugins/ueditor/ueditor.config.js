@@ -38,6 +38,8 @@
         // 服务器统一请求接口路径
         , serverUrl: base+"/ueditor"
 
+        , headers:{"test":"test"}
+
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
 //        , toolbars: [[
 //            'fullscreen', 'source', '|', 'undo', 'redo', '|',
@@ -252,7 +254,7 @@
         //]
 
         //快捷菜单
-        //,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline", "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
+        ,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline", "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
 
         //elementPathEnabled
         //是否启用元素路径，默认是显示

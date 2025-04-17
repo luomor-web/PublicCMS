@@ -78,8 +78,8 @@
                 <td class="exclude-translate">
                     ${a.channel!}
                 </td>
-                <td class="exclude-translate">
-                    ${a.loginMethod!}
+                <td>
+                    <#if a.loginMethod?has_content><@t.page a.loginMethod?switch('otp','login.2fa','password','password','login.'+a.loginMethod)/></#if>
                 </td>
                 <td>
                     <div class="box">

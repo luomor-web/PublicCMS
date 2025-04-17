@@ -2101,8 +2101,8 @@ CREATE TABLE `sys_workflow_process_history` (
   `reason` varchar(255) DEFAULT NULL COMMENT '理由',
   `create_date` datetime NOT NULL COMMENT '创建日期',
   PRIMARY KEY (`id`),
-  KEY `sys_workflow_process_content_id` (`process_id`),
-  KEY `sys_workflow_process_user_id` (`user_id`)
+  KEY `sys_workflow_process_history_content_id` (`process_id`),
+  KEY `sys_workflow_process_history_user_id` (`user_id`)
 ) COMMENT='工作流流程步骤';
 
 -- ----------------------------
