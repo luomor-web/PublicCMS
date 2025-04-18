@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.AbstractCachingViewResolver;
 
@@ -25,8 +24,6 @@ public class CacheComponent {
     @Resource
     private HqlService hqlService;
     private List<AbstractCachingViewResolver> cachingViewResolverList = new ArrayList<>();
-    @Resource
-    private ReloadableResourceBundleMessageSource resourceBundleMessageSource;
 
     /**
      * 
@@ -38,7 +35,6 @@ public class CacheComponent {
         }
         clearViewCache();
         hqlService.clear();
-        resourceBundleMessageSource.clearCache();
     }
 
     /**

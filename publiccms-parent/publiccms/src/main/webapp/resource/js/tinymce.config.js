@@ -72,7 +72,7 @@
                     success([]);
                 };
                 xhr.send(null);
-            }),// base + '/tinymce/imageList',
+            },// base + '/tinymce/imageList',
             image_prepend_url:window.TIMYMCE_RESOURCE_PREFIX,
             file_picker_callback: function (callback, value, meta) {
                 var filetype=window.TIMYMCE_FILETYPES;
