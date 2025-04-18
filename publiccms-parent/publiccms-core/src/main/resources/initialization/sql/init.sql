@@ -561,7 +561,7 @@ CREATE TABLE `log_login` (
   `user_id` bigint(20) default NULL COMMENT '用户',
   `ip` varchar(130) NOT NULL COMMENT 'IP',
   `channel` varchar(50) NOT NULL COMMENT '登录渠道',
-  `login_type` varchar(50) NOT NULL COMMENT '登录方式',
+  `login_method` varchar(50) NOT NULL COMMENT '登录方式',
   `result` tinyint(1) NOT NULL COMMENT '结果',
   `create_date` datetime NOT NULL COMMENT '创建日期',
   `error_password` varchar(255) default NULL COMMENT '错误密码',
@@ -569,7 +569,7 @@ CREATE TABLE `log_login` (
   KEY `log_login_result` (`site_id`, `result`, `create_date`),
   KEY `log_login_user_id` (`site_id`, `user_id`, `create_date`),
   KEY `log_login_ip` (`site_id`, `ip`, `create_date`),
-  KEY `log_login_channel` (`site_id`, `channel`, `login_type`, `create_date`)
+  KEY `log_login_channel` (`site_id`, `channel`, `login_method`, `create_date`)
 ) COMMENT='登录日志';
 
 -- ----------------------------

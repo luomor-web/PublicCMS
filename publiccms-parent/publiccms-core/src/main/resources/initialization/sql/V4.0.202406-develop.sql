@@ -304,7 +304,7 @@ INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'ja', 'バッチ使�
 INSERT INTO sys_module_lang VALUES ('system_workflow_use', 'zh', '批量应用');
 UPDATE sys_module SET authorized_url='cmsTemplate/savePlaceMetadata,cmsTemplate/deletePlace,cmsTemplate/createDirectory' WHERE id = 'place_template_metadata';
 -- 2025-04-15 --
-ALTER TABLE `sys_module` 
-    ADD COLUMN `login_type` varchar(50) NOT NULL COMMENT '登录方式' default 'password' AFTER `channel`,
+ALTER TABLE `log_login` 
+    ADD COLUMN `login_method` varchar(50) NOT NULL COMMENT '登录方式' default 'password' AFTER `channel`,
     DROP INDEX `log_login_channel`,
-    ADD INDEX `log_login_channel` (`site_id`, `channel`, `login_type`, `create_date`);
+    ADD INDEX `log_login_channel` (`site_id`, `channel`, `login_method`, `create_date`);
