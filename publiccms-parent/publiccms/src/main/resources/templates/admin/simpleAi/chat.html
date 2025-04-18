@@ -71,9 +71,16 @@ $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
                         return;
                     }
                     var json = decoder.decode(value);
-                    var jsonObj = JSON.parse(json);
-                    if(jsonObj && jsonObj.choices && jsonObj.choices[0] && jsonObj.choices[0].delta && jsonObj.choices[0].delta.content){
-                        result += jsonObj.choices[0].delta.content;
+                    if(json){
+                        var lines = json.split("\n");
+                        for (var line of lines) {
+                            if(line){
+                                var jsonObj = JSON.parse(line);
+                                if(jsonObj && jsonObj.choices && 0 < jsonObj.choices.length && jsonObj.choices[0] && jsonObj.choices[0].delta && jsonObj.choices[0].delta.content){
+                                    result += jsonObj.choices[0].delta.content;
+                                }
+                            }
+                        }
                         $("textarea.result",$.pdialog.getCurrent()).val(result);
                         $("textarea.result",$.pdialog.getCurrent()).scrollTop($("textarea.result",$.pdialog.getCurrent())[0].scrollHeight);
                     }

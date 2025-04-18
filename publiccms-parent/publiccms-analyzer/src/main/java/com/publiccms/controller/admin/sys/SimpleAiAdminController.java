@@ -52,7 +52,7 @@ public class SimpleAiAdminController {
             ResponseBodyEmitter emitter = new ResponseBodyEmitter(0L);
             HttpResponse.BodySubscriber<String> subscriber = HttpResponse.BodySubscribers
                     .fromSubscriber(new ResultSender(emitter), ResultSender::getEnd);
-            client.sendAsync(httpRequest, response -> subscriber).thenAccept(HttpResponse::body).thenAccept(log::info);
+            client.sendAsync(httpRequest, response -> subscriber).thenApply(HttpResponse::body);
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(emitter);
         } else {
             return ResponseEntity.notFound().build();
@@ -61,6 +61,7 @@ public class SimpleAiAdminController {
 
     class ResultSender implements Flow.Subscriber<List<ByteBuffer>> {
         private ResponseBodyEmitter emitter;
+        private Subscription subscription;
 
         public ResultSender(ResponseBodyEmitter emitter) {
             this.emitter = emitter;
@@ -72,6 +73,7 @@ public class SimpleAiAdminController {
 
         @Override
         public void onSubscribe(Subscription subscription) {
+            this.subscription = subscription;
             subscription.request(1);
         }
 
@@ -85,19 +87,21 @@ public class SimpleAiAdminController {
                 offset += remain;
             }
             String response = new String(data);
-            String result = response.trim().replaceAll("data: ", "").replaceAll("\n", "");
-            if (CommonUtils.notEmpty(result) && !"[]".equals(result) && !"[DONE]".equalsIgnoreCase(result)) {
+            String result = response.replaceAll("data: ", "").replaceAll("[DONE]", "");
+            if (CommonUtils.notEmpty(result)) {
                 try {
-                    emitter.send(result, MediaType.APPLICATION_JSON);
+                    emitter.send(result, MediaType.TEXT_PLAIN);
                 } catch (IOException e) {
                     log.error(e.getMessage());
                 }
             }
+            subscription.request(1);
         }
 
         @Override
         public void onError(Throwable throwable) {
             emitter.completeWithError(throwable);
+            subscription.cancel();
         }
 
         @Override
