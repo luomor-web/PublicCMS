@@ -14,11 +14,11 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import com.bastiaanjansen.otp.SecretGenerator;
@@ -67,7 +67,7 @@ public class OtpController {
      * @return view name
      */
     @RequestMapping(value = "login")
-    public String login(@SessionAttribute(required = false) SysUser otpadmin, String returnUrl, ModelMap model) {
+    public String login(@SessionAttribute(required = false) SysUser otpadmin, String returnUrl, RedirectAttributes model) {
         model.addAttribute("returnUrl", returnUrl);
         if (null == otpadmin) {
             return "redirect:../login";
@@ -101,7 +101,7 @@ public class OtpController {
      */
     @PostMapping(value = "doRegister")
     public String doRegister(@RequestAttribute SysSite site, @SessionAttribute SysUser otpadmin, String secret, String code,
-            String returnUrl, HttpServletRequest request, ModelMap model) {
+            String returnUrl, HttpServletRequest request, RedirectAttributes model) {
         TOTPGenerator totp = new TOTPGenerator.Builder(secret.getBytes()).build();
         if (totp.verify(code)) {
             settingService.getOrCreateOrUpdate(otpadmin.getId(), SysUserSettingService.OPTSECRET_SETTINGS_CODE, secret);
@@ -129,7 +129,7 @@ public class OtpController {
      */
     @PostMapping(value = "doLogin")
     public String doLogin(@RequestAttribute(required = true) SysSite site, @SessionAttribute SysUser otpadmin, String returnUrl,
-            String code, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+            String code, HttpServletRequest request, HttpServletResponse response, RedirectAttributes model) {
         model.addAttribute("returnUrl", returnUrl);
         if (null == otpadmin) {
             return "redirect:../login";
