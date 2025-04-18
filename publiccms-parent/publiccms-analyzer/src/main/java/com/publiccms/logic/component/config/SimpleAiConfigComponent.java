@@ -75,7 +75,9 @@ public class SimpleAiConfigComponent implements Config {
     public List<SysExtendField> getExtendFieldList(SysSite site, Locale locale) {
         List<SysExtendField> extendFieldList = new ArrayList<>();
         extendFieldList.add(new SysExtendField(CONFIG_CHAT_API_URL, INPUTTYPE_TEXT, false,
-                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, CONFIG_CHAT_API_URL)), null,
+                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, CONFIG_CHAT_API_URL)),
+                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, CONFIG_CHAT_API_URL,
+                        CONFIG_CODE_DESCRIPTION_SUFFIX)),
                 null));
         extendFieldList.add(new SysExtendField(CONFIG_CHAT_API_KEY, INPUTTYPE_TEXT, false,
                 getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, CONFIG_CHAT_API_KEY)), null,
