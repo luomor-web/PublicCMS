@@ -4,8 +4,6 @@
         editorType={'css':'css','js':'javascript','xml':'xml'}
         fileType=path?keep_after_last('.')?lower_case
     />
-<#else>
-    <#assign fileType='html'/>
 </#if>
 <form method="post" autocomplete="off" action="cmsWebFile/save<#if !exists>?callbackType=closeCurrent&navTabId=cmsWebFile/list</#if>" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
     <input type="hidden" name="_csrf" value="<@tools.csrfToken admin=true/>"/>
@@ -34,7 +32,7 @@
                 <label><@t.page 'path'/>:</label>
                 <input name="path" class="required" type="text" maxlength="500" size="50" value="${(path)!}<#if !exists>/filename.html</#if>"/>
                 <@sys.configData code="safe"><#assign safeFileTypes=(object.allow_files?split(','))![]/></@sys.configData>
-                <span class="info warning<#if safeFileTypes?has_content && safeFileTypes?seq_contains('.'+fileType)> hide</#if>">
+                <span class="info warning<#if !fileType?has_content || safeFileTypes?has_content && safeFileTypes?seq_contains('.'+fileType)> hide</#if>">
                     <@t.message "verify.custom.fileType"/>
                     <a href="sysConfigData/edit.html?code=safe" target="navTab" rel="sysConfigData/edit"><i class="icon-edit"></i><@t.page 'config_data.edit'/></a>
                 </span>
