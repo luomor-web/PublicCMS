@@ -14,8 +14,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -29,7 +29,6 @@ import com.publiccms.logic.component.config.SimpleAiConfigComponent;
 import com.publiccms.views.pojo.model.SimpleAiMessageParameters;
 
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -44,13 +43,12 @@ public class SimpleAiAdminController {
     private SimpleAiConfigComponent simpleAiConfigComponent;
     private static HttpClient client = HttpClient.newHttpClient();
 
-    @RequestMapping("chat")
+    @PostMapping("chat")
     @Csrf
     public ResponseEntity<ResponseBodyEmitter> chat(@RequestAttribute SysSite site, @SessionAttribute SysUser admin,
-            @ModelAttribute SimpleAiMessageParameters simpleAiMessageParameters, String skipWord, HttpServletRequest request,
-            ModelMap model) {
-        HttpRequest httpRequest = simpleAiConfigComponent.getHttpRequest(site.getId(), simpleAiMessageParameters.getMessages());
-        if (null != request) {
+            @ModelAttribute SimpleAiMessageParameters simpleAiMessageParameters) {
+        HttpRequest httpRequest = simpleAiConfigComponent.getChatRequest(site.getId(), simpleAiMessageParameters.getMessages());
+        if (null != httpRequest) {
             ResponseBodyEmitter emitter = new ResponseBodyEmitter(0L);
             HttpResponse.BodySubscriber<String> subscriber = HttpResponse.BodySubscribers
                     .fromSubscriber(new ResultSender(emitter), ResultSender::getEnd);

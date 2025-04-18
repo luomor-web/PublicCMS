@@ -39,15 +39,15 @@ public class SimpleAiConfigComponent implements Config {
     /**
      * url
      */
-    public static final String CONFIG_URL = "url";
+    public static final String CONFIG_CHAT_API_URL = "chat.api.url";
     /**
      * token
      */
-    public static final String CONFIG_TOKEN = "token";
-    /**
-     * model
+    public static final String CONFIG_CHAT_API_KEY = "chat.api.key";
+    /*
+     * m * model
      */
-    public static final String CONFIG_MODEL = "model";
+    public static final String CONFIG_CHAT_API_MODEL = "chat.api.model";
 
     @Resource
     protected ConfigDataComponent configDataComponent;
@@ -74,25 +74,38 @@ public class SimpleAiConfigComponent implements Config {
     @Override
     public List<SysExtendField> getExtendFieldList(SysSite site, Locale locale) {
         List<SysExtendField> extendFieldList = new ArrayList<>();
-        extendFieldList.add(new SysExtendField(CONFIG_URL, INPUTTYPE_TEXT, false,
-                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, INPUTTYPE_TEXT)), null, null));
-        extendFieldList.add(new SysExtendField(CONFIG_TOKEN, INPUTTYPE_TEXT, false,
-                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, INPUTTYPE_TEXT)), null, null));
-        extendFieldList.add(new SysExtendField(CONFIG_MODEL, INPUTTYPE_TEXT, false,
-                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, INPUTTYPE_TEXT)), null, null));
+        extendFieldList.add(new SysExtendField(CONFIG_CHAT_API_URL, INPUTTYPE_TEXT, false,
+                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, CONFIG_CHAT_API_URL)), null,
+                null));
+        extendFieldList.add(new SysExtendField(CONFIG_CHAT_API_KEY, INPUTTYPE_TEXT, false,
+                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, CONFIG_CHAT_API_KEY)), null,
+                null));
+        extendFieldList.add(new SysExtendField(CONFIG_CHAT_API_MODEL, INPUTTYPE_TEXT, false,
+                getMessage(locale, CommonUtils.joinString(CONFIG_CODE_DESCRIPTION, Constants.DOT, CONFIG_CHAT_API_MODEL)), null,
+                null));
         return extendFieldList;
     }
 
-    public HttpRequest getHttpRequest(short siteId, List<SimpleAiMessage> messageList) {
+    public boolean isChatEnable(short siteId) {
         Map<String, String> configData = configDataComponent.getConfigData(siteId, CONFIG_CODE);
-        if (CommonUtils.notEmpty(messageList) && CommonUtils.notEmpty(configData.get(CONFIG_URL))
-                && CommonUtils.notEmpty(configData.get(CONFIG_TOKEN)) && CommonUtils.notEmpty(configData.get(CONFIG_MODEL))) {
-            HttpRequest request = HttpRequest.newBuilder(URI.create(configData.get(CONFIG_URL)))
-                    .header("Authorization", CommonUtils.joinString("Bearer ", configData.get(CONFIG_TOKEN)))
+        if (CommonUtils.notEmpty(configData.get(CONFIG_CHAT_API_URL)) && CommonUtils.notEmpty(configData.get(CONFIG_CHAT_API_KEY))
+                && CommonUtils.notEmpty(configData.get(CONFIG_CHAT_API_MODEL))) {
+            return true;
+        }
+        return false;
+    }
+
+    public HttpRequest getChatRequest(short siteId, List<SimpleAiMessage> messageList) {
+        Map<String, String> configData = configDataComponent.getConfigData(siteId, CONFIG_CODE);
+        if (CommonUtils.notEmpty(messageList) && CommonUtils.notEmpty(configData.get(CONFIG_CHAT_API_URL))
+                && CommonUtils.notEmpty(configData.get(CONFIG_CHAT_API_KEY))
+                && CommonUtils.notEmpty(configData.get(CONFIG_CHAT_API_MODEL))) {
+            HttpRequest request = HttpRequest.newBuilder(URI.create(configData.get(CONFIG_CHAT_API_URL)))
+                    .header("Authorization", CommonUtils.joinString("Bearer ", configData.get(CONFIG_CHAT_API_KEY)))
                     .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(
-                            CommonUtils.joinString("{\"model\":\"deepseek-r1\",\"messages\":[", JsonUtils.getString(messageList),
-                                    "],\"stream\":true,\"stream_options\": {\"include_usage\": true}}")))
+                    .POST(HttpRequest.BodyPublishers.ofString(CommonUtils.joinString("{\"model\":\"",
+                            configData.get(CONFIG_CHAT_API_MODEL), "\",\"messages\":", JsonUtils.getString(messageList),
+                            ",\"stream\":true,\"stream_options\": {\"include_usage\": true}}")))
                     .build();
             return request;
         }
