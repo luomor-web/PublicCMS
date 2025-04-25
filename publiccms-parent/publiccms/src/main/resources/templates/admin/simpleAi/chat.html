@@ -68,6 +68,7 @@ $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
             var reader = body.getReader();
             var decoder = new TextDecoder('utf-8');
             var result = "";
+            var tempResult = null;
             function read() {
                 return reader.read().then(({done, value}) => {
                     if (done) {
@@ -75,9 +76,17 @@ $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
                         $(".buttonActive",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
                         return;
                     }
-                    var json = decoder.decode(value);
-                    if(json){
-                        var lines = json.split("\n");
+                    var body = decoder.decode(value);
+                    if(body){
+                        if(tempResult){
+                            body = tempResult+body;
+                            tempResult = null;
+                        }
+                        if(!body.endsWith("\n")){
+                            tempResult = body.substring(body.lastIndexOf("\n"));
+                            body = body.substring(0, body.lastIndexOf("\n"));
+                        }
+                        var lines = body.split("\n");
                         for (var line of lines) {
                             if(line){
                                 try{
@@ -97,10 +106,10 @@ $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
                 });
             }
             return read();
-        }).catch(error){
+        }).catch(error  => {
              alertMsg.error(error);
              $(".mdImport",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
              $(".buttonActive",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
-         );
+        });
 });
 </script>

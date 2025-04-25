@@ -110,7 +110,10 @@ public class SimpleAiAdminController {
                     result.append(temp);
                     emitter.send(temp, MediaType.TEXT_PLAIN);
                 } catch (IOException e) {
+                    emitter.completeWithError(e);
+                    subscription.cancel();
                     log.error(e.getMessage());
+                    return ;
                 }
             }
             subscription.request(1);
