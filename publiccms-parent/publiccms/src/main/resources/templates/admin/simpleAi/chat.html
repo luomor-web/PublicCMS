@@ -1,3 +1,4 @@
+<script src="${base}/resource/plugins/marked/marked.min.js"></script>
 <div class="pageFormContent" layoutH>
     <#assign index=0/>
     <form>
@@ -45,12 +46,12 @@ $(".html",$.pdialog.getCurrent()).val($(".html",$.pdialog.getCurrent()).val()+$(
 $(".input",$.pdialog.getCurrent()).val($("[name=${field!'text'}]",navTab.getCurrentPanel()).val());
 </#if>
 $(".mdImport",$.pdialog.getCurrent()).on("click", function(){
-    $.bringBack({"${field!'text'}":$("textarea.result",$.pdialog.getCurrent()).val()});
+    $.bringBack({"${field!'text'}":marked.parse($("textarea.result",$.pdialog.getCurrent()).val())});
 });
 $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
     $(".mdImport",$.pdialog.getCurrent()).prop("disabled",true).addClass("buttonDisabled");
     $(".buttonActive",$.pdialog.getCurrent()).prop("disabled",true).addClass("buttonDisabled");
-    fetch("simpleAi/chat?_csrf=<@tools.csrfToken admin=true/>",{
+    fetch("simpleAi/doChat?_csrf=<@tools.csrfToken admin=true/>",{
             "method":"POST",
             "headers":{
                 "content-type":"application/x-www-form-urlencoded"

@@ -23,12 +23,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter
 
 import com.publiccms.common.annotation.Csrf;
 import com.publiccms.common.tools.CommonUtils;
+import com.publiccms.common.tools.RequestUtils;
+import com.publiccms.entities.log.LogOperate;
 import com.publiccms.entities.sys.SysSite;
 import com.publiccms.entities.sys.SysUser;
 import com.publiccms.logic.component.config.SimpleAiConfigComponent;
+import com.publiccms.logic.service.log.LogLoginService;
+import com.publiccms.logic.service.log.LogOperateService;
 import com.publiccms.views.pojo.model.SimpleAiMessageParameters;
 
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -42,17 +47,28 @@ public class SimpleAiAdminController {
     @Resource
     private SimpleAiConfigComponent simpleAiConfigComponent;
     private static HttpClient client = HttpClient.newHttpClient();
+    @Resource
+    protected LogOperateService logOperateService;
 
-    @PostMapping("chat")
+    @PostMapping("doChat")
     @Csrf
     public ResponseEntity<ResponseBodyEmitter> chat(@RequestAttribute SysSite site, @SessionAttribute SysUser admin,
-            @ModelAttribute SimpleAiMessageParameters simpleAiMessageParameters) {
+            @ModelAttribute SimpleAiMessageParameters simpleAiMessageParameters, HttpServletRequest request) {
         HttpRequest httpRequest = simpleAiConfigComponent.getChatRequest(site.getId(), simpleAiMessageParameters.getMessages());
         if (null != httpRequest) {
             ResponseBodyEmitter emitter = new ResponseBodyEmitter(0L);
             HttpResponse.BodySubscriber<String> subscriber = HttpResponse.BodySubscribers
-                    .fromSubscriber(new ResultSender(emitter), ResultSender::getEnd);
-            client.sendAsync(httpRequest, response -> subscriber).thenApply(HttpResponse::body);
+                    .fromSubscriber(new ResultSender(emitter), ResultSender::getResult);
+            String ip = RequestUtils.getIpAddress(request);
+            client.sendAsync(httpRequest, response -> subscriber).thenApply(HttpResponse::body).thenAccept(result -> {
+                logOperateService
+                        .save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(), LogLoginService.CHANNEL_WEB_MANAGER,
+                                "ai.chat", ip, CommonUtils.getDate(),
+                                CommonUtils.joinString(
+                                        simpleAiMessageParameters.getMessages()
+                                                .get(simpleAiMessageParameters.getMessages().size() - 1).getContent(),
+                                        ":", result)));
+            });
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(emitter);
         } else {
             return ResponseEntity.notFound().build();
@@ -62,13 +78,14 @@ public class SimpleAiAdminController {
     class ResultSender implements Flow.Subscriber<List<ByteBuffer>> {
         private ResponseBodyEmitter emitter;
         private Subscription subscription;
+        private StringBuilder result = new StringBuilder();
 
         public ResultSender(ResponseBodyEmitter emitter) {
             this.emitter = emitter;
         }
 
-        public String getEnd() {
-            return "end";
+        public String getResult() {
+            return result.toString();
         }
 
         @Override
@@ -87,10 +104,11 @@ public class SimpleAiAdminController {
                 offset += remain;
             }
             String response = new String(data);
-            String result = response.replaceAll("data: ", "").replaceAll("[DONE]", "");
-            if (CommonUtils.notEmpty(result)) {
+            String temp = response.replaceAll("data: ", "").replaceAll("[DONE]", "");
+            if (CommonUtils.notEmpty(temp)) {
                 try {
-                    emitter.send(result, MediaType.TEXT_PLAIN);
+                    result.append(temp);
+                    emitter.send(temp, MediaType.TEXT_PLAIN);
                 } catch (IOException e) {
                     log.error(e.getMessage());
                 }
