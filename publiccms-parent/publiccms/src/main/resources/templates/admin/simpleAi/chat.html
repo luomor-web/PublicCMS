@@ -32,9 +32,10 @@
                 <#list page.list as a>
             <p class="ellipsis">
                 <span class="float-right date info">${a.createDate!}</span>
-                <a href="javascript:void(0)" class="exclude-translate"><@t.cut a.content 80 "..."/></a>
-                <textarea class="hide in">${(a.content?keep_before(":split:"))!}</textarea>
-                <textarea class="hide out">${(a.content?keep_after(":split:"))!}</textarea>
+                <#assign content=a.content?eval_json/>
+                <a href="javascript:void(0)" class="exclude-translate"><@t.cut content.input 80 "..."/></a>
+                <textarea class="hide in">${(content.input)!}</textarea>
+                <textarea class="hide out">${(content.output)!}</textarea>
             </p>
                 </#list>
             </@log.operateList>
@@ -49,9 +50,10 @@
 </div>
 <script>
 $(".input",$.pdialog.getCurrent()).on("change", function(){
-    $(".send",$.pdialog.getCurrent()).prop("disabled",true).addClass("buttonDisabled");
     if($(this).val()){
         $(".send",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
+    }else{
+        $(".send",$.pdialog.getCurrent()).prop("disabled",true).addClass("buttonDisabled");
     }
 });
 $("p a",$.pdialog.getCurrent()).on("click", function(){
@@ -131,7 +133,7 @@ $(".send",$.pdialog.getCurrent()).on("click",function(){
         }).catch(error  => {
              alertMsg.error(error);
              $(".mdImport",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
-             $(".buttonActive",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
+             $(".send",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
         });
 });
 </script>

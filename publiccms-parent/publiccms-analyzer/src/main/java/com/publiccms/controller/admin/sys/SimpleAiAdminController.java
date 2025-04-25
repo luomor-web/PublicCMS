@@ -5,6 +5,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter
 import com.publiccms.common.annotation.Csrf;
 import com.publiccms.common.constants.Constants;
 import com.publiccms.common.tools.CommonUtils;
+import com.publiccms.common.tools.JsonUtils;
 import com.publiccms.common.tools.RequestUtils;
 import com.publiccms.entities.log.LogOperate;
 import com.publiccms.entities.sys.SysSite;
@@ -65,13 +67,13 @@ public class SimpleAiAdminController {
                     .fromSubscriber(new ResultSender(emitter), ResultSender::getResult);
             String ip = RequestUtils.getIpAddress(request);
             client.sendAsync(httpRequest, response -> subscriber).thenApply(HttpResponse::body).thenAccept(result -> {
-                logOperateService
-                        .save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(), LogLoginService.CHANNEL_WEB_MANAGER,
-                                CommonUtils.joinString("ai.chat.", scene), ip, CommonUtils.getDate(),
-                                CommonUtils.joinString(
-                                        simpleAiMessageParameters.getMessages()
-                                                .get(simpleAiMessageParameters.getMessages().size() - 1).getContent(),
-                                        ":split:", result)));
+                Map<String, String> logContent = new HashMap<>();
+                logContent.put("input", simpleAiMessageParameters.getMessages()
+                        .get(simpleAiMessageParameters.getMessages().size() - 1).getContent());
+                logContent.put("output", result);
+                logOperateService.save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(),
+                        LogLoginService.CHANNEL_WEB_MANAGER, CommonUtils.joinString("ai.chat.", scene), ip, CommonUtils.getDate(),
+                        JsonUtils.getString(logContent)));
             });
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(emitter);
         } else {
