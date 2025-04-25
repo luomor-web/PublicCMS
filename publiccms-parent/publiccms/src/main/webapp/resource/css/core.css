@@ -271,6 +271,7 @@ a.button:hover{text-decoration:none;}
 .searchBar ul.searchContent:before{font-size:18px;position:absolute;right:0;top:0;line-height:32px;width:30px;text-align:right;}
 .searchBar ul.searchContent li{float:left;white-space:nowrap;display:block;overflow:hidden;height:28px;padding:2px 0;}
 .searchBar ul.searchContentHover,.searchBar ul.searchContentHover li{height:auto;}
+.searchBar ul.searchContentHover li{max-height:20em;overflow: auto;}
 .searchBar label{float:left;padding:0 10px;line-height:30px;}
 .searchBar .subBar{height:30px;position:absolute;top:11px;right:40px;}
 .searchBar .subBar ul{float:right;}
