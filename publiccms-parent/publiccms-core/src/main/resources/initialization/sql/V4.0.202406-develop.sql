@@ -308,3 +308,8 @@ ALTER TABLE `log_login`
     ADD COLUMN `login_method` varchar(50) NOT NULL COMMENT '登录方式' default 'password' AFTER `channel`,
     DROP INDEX `log_login_channel`,
     ADD INDEX `log_login_channel` (`site_id`, `channel`, `login_method`, `create_date`);
+-- 2025-04-25 --
+INSERT INTO `sys_module` VALUES ('ai_chat', 'simpleAi/chat', 'simpleAi/doChat', NULL, 'common', 0, 0, 0);
+INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'en', 'AI');
+INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'ja', 'AI');
+INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'zh', 'AI');

@@ -869,6 +869,7 @@ INSERT INTO `sys_module` VALUES ('account_add', 'tradeAccount/add', 'tradeAccoun
 INSERT INTO `sys_module` VALUES ('account_history_list', 'tradeAccountHistory/list', NULL, NULL, 'account_list', 1, 0, 0);
 INSERT INTO `sys_module` VALUES ('account_list', 'tradeAccount/list', NULL, 'icon-credit-card', 'trade', 1, 1, 6);
 INSERT INTO `sys_module` VALUES ('account_recharge', 'tradeAccount/rechargeParameters', 'tradeAccount/recharge', NULL, 'account_list', 0, 0, 2);
+INSERT INTO `sys_module` VALUES ('ai_chat', 'simpleAi/chat', 'simpleAi/doChat', NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('app_add', 'sysApp/add', 'sysApp/save', NULL, 'app_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('app_client_disable', NULL, 'sysAppClient/disable', NULL, 'app_client_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('app_client_enable', NULL, 'sysAppClient/enable', NULL, 'app_client_list', 0, 0, 0);
@@ -1134,6 +1135,9 @@ INSERT INTO `sys_module_lang` VALUES ('account_list', 'zh', '账户管理');
 INSERT INTO `sys_module_lang` VALUES ('account_recharge', 'en', 'Recharge');
 INSERT INTO `sys_module_lang` VALUES ('account_recharge', 'ja', 'チャージ');
 INSERT INTO `sys_module_lang` VALUES ('account_recharge', 'zh', '充值');
+INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'en', 'AI');
+INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'ja', 'AI');
+INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'zh', 'AI');
 INSERT INTO `sys_module_lang` VALUES ('app_add', 'en', 'Add/edit');
 INSERT INTO `sys_module_lang` VALUES ('app_add', 'ja', '追加/変更');
 INSERT INTO `sys_module_lang` VALUES ('app_add', 'zh', '增加/修改');
