@@ -15,6 +15,7 @@
                 <input name="messages[${index}].role" value="user" type="hidden"/>
                 <textarea name="messages[${index}].content" class="input" rows="3" cols="50"></textarea>
                 <button type="button" class="buttonActive"><@t.page 'button.send'/></button>
+                <button type="button" onclick="$('.input',$.pdialog.getCurrent()).val('')" class="button"><@t.page 'button.clear'/></button>
                 <#assign index++/>
             </dd>
         </dl>
@@ -60,6 +61,7 @@ $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
         }).then(response => {
             if (!response.ok) {
                 throw new Error('网络响应异常');
+                $(".buttonActive",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
             }
             return response.body;
         }).then(body => {
@@ -78,9 +80,13 @@ $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
                         var lines = json.split("\n");
                         for (var line of lines) {
                             if(line){
-                                var jsonObj = JSON.parse(line);
-                                if(jsonObj && jsonObj.choices && 0 < jsonObj.choices.length && jsonObj.choices[0] && jsonObj.choices[0].delta && jsonObj.choices[0].delta.content){
-                                    result += jsonObj.choices[0].delta.content;
+                                try{
+                                    var jsonObj = JSON.parse(line);
+                                    if(jsonObj && jsonObj.choices && 0 < jsonObj.choices.length && jsonObj.choices[0] && jsonObj.choices[0].delta && jsonObj.choices[0].delta.content){
+                                        result += jsonObj.choices[0].delta.content;
+                                    }
+                                }catch(e){
+                                    console.log(e+":"+line);
                                 }
                             }
                         }
@@ -91,6 +97,10 @@ $(".buttonActive",$.pdialog.getCurrent()).on("click",function(){
                 });
             }
             return read();
-        }).catch(error => alertMsg.error(error));
+        }).catch(error){
+             alertMsg.error(error);
+             $(".mdImport",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
+             $(".buttonActive",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
+         );
 });
 </script>
