@@ -5,10 +5,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.ByteBuffer;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Flow;
 import java.util.concurrent.Flow.Subscription;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.MediaType;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
 import com.publiccms.common.annotation.Csrf;
+import com.publiccms.common.constants.Constants;
 import com.publiccms.common.tools.CommonUtils;
 import com.publiccms.common.tools.RequestUtils;
 import com.publiccms.entities.log.LogOperate;
@@ -52,7 +56,7 @@ public class SimpleAiAdminController {
 
     @PostMapping("doChat")
     @Csrf
-    public ResponseEntity<ResponseBodyEmitter> chat(@RequestAttribute SysSite site, @SessionAttribute SysUser admin,
+    public ResponseEntity<ResponseBodyEmitter> chat(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, String scene,
             @ModelAttribute SimpleAiMessageParameters simpleAiMessageParameters, HttpServletRequest request) {
         HttpRequest httpRequest = simpleAiConfigComponent.getChatRequest(site.getId(), simpleAiMessageParameters.getMessages());
         if (null != httpRequest) {
@@ -63,11 +67,11 @@ public class SimpleAiAdminController {
             client.sendAsync(httpRequest, response -> subscriber).thenApply(HttpResponse::body).thenAccept(result -> {
                 logOperateService
                         .save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(), LogLoginService.CHANNEL_WEB_MANAGER,
-                                "ai.chat", ip, CommonUtils.getDate(),
+                                CommonUtils.joinString("ai.chat.", scene), ip, CommonUtils.getDate(),
                                 CommonUtils.joinString(
                                         simpleAiMessageParameters.getMessages()
                                                 .get(simpleAiMessageParameters.getMessages().size() - 1).getContent(),
-                                        ":", result)));
+                                        ":split:", result)));
             });
             return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(emitter);
         } else {
@@ -79,6 +83,7 @@ public class SimpleAiAdminController {
         private ResponseBodyEmitter emitter;
         private Subscription subscription;
         private StringBuilder result = new StringBuilder();
+        private String tempCache = null;
 
         public ResultSender(ResponseBodyEmitter emitter) {
             this.emitter = emitter;
@@ -107,13 +112,42 @@ public class SimpleAiAdminController {
             String temp = response.replaceAll("data: ", "").replaceAll("[DONE]", "");
             if (CommonUtils.notEmpty(temp)) {
                 try {
-                    result.append(temp);
+                    if (CommonUtils.notEmpty(tempCache)) {
+                        temp = tempCache + temp;
+                        tempCache = null;
+                    }
+                    if (!temp.endsWith("\n")) {
+                        tempCache = temp.substring(temp.lastIndexOf("\n"));
+                        temp = temp.substring(0, temp.lastIndexOf("\n"));
+                    }
+                    String[] lines = StringUtils.split(temp, "\n");
+                    for (String line : lines) {
+                        if (CommonUtils.notEmpty(line) && line.startsWith("{\"choices\":")) {
+                            try {
+                                Map<String, Object> map = Constants.objectMapper.readValue(line, Constants.objectMapper
+                                        .getTypeFactory().constructMapType(LinkedHashMap.class, String.class, Object.class));
+                                if (null != map.get("choices")) {
+                                    @SuppressWarnings("unchecked")
+                                    List<Map<String, Object>> choices = (List<Map<String, Object>>) map.get("choices");
+                                    if (!choices.isEmpty()) {
+                                        for (Map<String, Object> choice : choices) {
+                                            if (null != choice.get("delta")) {
+                                                @SuppressWarnings("unchecked")
+                                                Map<String, String> delta = (Map<String, String>) choice.get("delta");
+                                                if (CommonUtils.notEmpty(delta.get("content"))) {
+                                                    result.append(delta.get("content"));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (IOException | ClassCastException e) {
+                            }
+                        }
+                    }
                     emitter.send(temp, MediaType.TEXT_PLAIN);
                 } catch (IOException e) {
-                    emitter.completeWithError(e);
-                    subscription.cancel();
                     log.error(e.getMessage());
-                    return ;
                 }
             }
             subscription.request(1);
