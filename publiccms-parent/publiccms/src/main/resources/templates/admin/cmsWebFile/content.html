@@ -5,6 +5,7 @@
         fileType=path?keep_after_last('.')?lower_case
     />
 </#if>
+<#assign safeFileTypes=[]/>
 <form method="post" autocomplete="off" action="cmsWebFile/save<#if !exists>?callbackType=closeCurrent&navTabId=cmsWebFile/list</#if>" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
     <input type="hidden" name="_csrf" value="<@tools.csrfToken admin=true/>"/>
     <div class="formBar card">
@@ -30,7 +31,7 @@
         <div class="pageFormContent" layoutH>
             <div class="clearfix">
                 <label><@t.page 'path'/>:</label>
-                <input name="path" class="required" type="text" maxlength="500" size="50" value="${(path)!}<#if !exists>/filename.html</#if>"/>
+                <input name="path" class="required" type="text" maxlength="500" size="50" value="${(path)!}<#if !exists>/filename.html<#assign fileType='html'/></#if>"/>
                 <@sys.configData code="safe"><#assign safeFileTypes=(object.allow_files?split(','))![]/></@sys.configData>
                 <span class="info warning<#if !fileType?has_content || safeFileTypes?has_content && safeFileTypes?seq_contains('.'+fileType)> hide</#if>">
                     <@t.message "verify.custom.fileType"/>
