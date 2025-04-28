@@ -2,9 +2,9 @@ JUI.regPlugins.push(function($p){
     $(".searchBar .searchContent", $p).on("click", function(event){
         if($(event.target).is("ul")||$(event.target).is("li")){
             $content = $(this).closest(".pageHeader").next().find("[layouth]");
-            var height = $(this).height();
+            var height = $(this).outerHeight(true);
             $(this).toggleClass("searchContentHover");
-            $content.height($content.height()-$(this).height()+height);
+            $content.height($content.outerHeight(true)-$(this).outerHeight(true)+height);
         }
     });
 });
