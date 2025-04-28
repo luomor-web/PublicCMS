@@ -20,10 +20,11 @@ header .nav>li>ul a,header .nav>li>ul a:hover{color:#448af3;}
 .accordion .accordionContent{background-color:#19202f;}
 #splitBarProxy{border-color:#c0c0c0;background-color:#CCC;}
 
-#sidebar_s,.accordion .accordionHeader,.accordion .accordionContent,.accordionContent .tree a,
-.accordionContent .tree div:hover,.accordion .accordionHeader a{color:#9ab;}
-.accordionContent .tree div:hover a{background-color:#2A3042;color:#ddd;}
-.accordionContent .tree div.selected a{background-color:#667ea7;color:#fff;}
+#sidebar_s,.accordion .accordionHeader,.accordion .accordionContent,.accordionContent .tree a,.accordion .accordionHeader a{color:#9ab;}
+.accordionContent .tree div:hover{background-color:#2A3042;}
+.accordionContent .tree div:hover a{color:#ddd;}
+.accordionContent .tree div.selected{background-color:#667ea7;}
+.accordionContent .tree div.selected a,.accordionContent .tree div.selected a .todoNumber{background-color:#667ea7;color:#fff;}
 
 .tabsPage .tabsPageHeader{background-color:#e7ecf0;}
 .tabsPage .tabsLeft,.tabsPage .tabsMore,.tabsPage .tabsRight{color:#667ea7;}

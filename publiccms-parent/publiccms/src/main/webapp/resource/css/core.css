@@ -90,11 +90,6 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .accordion .accordionContent{display:block;overflow:auto;box-sizing: border-box;}
 .accordion .accordionContent h2{text-align:center;line-height:40px;display:none;}
 .accordion .accordionContent .tree a{line-height:34px;height:auto;}
-.accordion .accordionContent .tree div{height:auto;}
-.accordion .accordionContent .tree div div{background:0 0;width:25px;height:34px;}
-.accordion .accordionContent .tree a>i{margin-right:5px;width:16px;font-size:13px;display:inline-block;text-align:center;}
-.accordion .accordionContent .tree.treeFolder a{line-height:30px;}
-.accordion .accordionContent .tree.treeFolder div div{height:30px;}
 .todoNumber{padding:0 5px;color:red;}
 
 .panelBar{display:block;overflow:hidden;height:auto;line-height:30px;}
@@ -159,9 +154,12 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 
 /* Tree */
 .tree li{display:block;line-height:30px;cursor:pointer;clear:both;}
-.tree li:not(:has(ul)){width:200px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;float:left;clear:none;}
+.tree li:not(:has(ul)){min-width:185px;float:left;clear:none;}
+.tree ul:after{display:block;content:".";height:0;clear:both;visibility:hidden;}
+.accordion .accordionContent .tree li{width:auto;}
 .tree li a.disabled{color:#aaa;}
-.tree div, .tree a{display:inherit;height:30px;line-height:30px;font-size:13px;white-space:nowrap;}
+.tree a{height:30px;line-height:30px;font-size:13px;white-space:nowrap;}
+.tree a>i{margin-right:5px;}
 .tree div div{float:left;display:block;overflow:hidden;width:22px;height:30px;border:none;}
 .tree.treeFolder li>div>div:first-child{padding-left:10px;}
 .tree a, .tree a:hover{text-decoration:none;}
@@ -473,7 +471,7 @@ a.btnUp:before,a.btnDown:before{line-height:14px;}
 .miscSortDrag dt .dragItem.icon-move:before{float:right;color:#ccc;}
 .miscSortDrag dt:after{content:" ";display:block;clear:both;}
 .miscSortDrag dd{margin-left:195px;}
-.miscSortDrag dd .sortDrag{width:100%;min-height:100px;margin-bottom:10px;color:#ccc;text-align:center;box-sizing:border-box;border:1px dashed #d66;overflow-y:auto;}
+.miscSortDrag dd .sortDrag{width:100%;min-height:100px;margin-bottom:10px;color:#ccc;text-align:center;box-sizing:border-box;border:1px dashed #d66;}
 .miscSortDrag dd .sortDrag .dragItem{border:1px solid #B8D0D6;box-sizing:border-box;color:#666;padding:5px;margin:3px;line-height:20px;display:block;position:relative;text-align:left;cursor:move;}
 .miscSortDrag dd .sortDrag .sortDrag{min-height:50px;margin-bottom:0px;border:1px dashed #6d6;}
 .miscSortDrag dd .sortDrag .sortDrag .dragItem{color:#333;}
@@ -519,7 +517,7 @@ a.btnLook:before{content:"\e66a";font-family:iconfont;}
 .searchBar ul.searchContent:before{content:"\e631";font-family:iconfont;}
 .searchBar ul.searchContentHover:before{content:"\e6f8";}
 
-.ckbox{font-family:FontAwesome;vertical-align:-10%;font-size:1.3333333333333333em;text-decoration:inherit;display:inline-block;}
+.ckbox{font-family:FontAwesome;vertical-align:-10%;text-decoration:inherit;display:inline-block;}
 .unchecked:before{content:"\f096";}
 .ckbox.indeterminate:before{content:"\f147";}
 .ckbox.checked:before{content:"\f046";}
@@ -547,8 +545,8 @@ table.list tbody{background-color:#666;}
     header .logo img{height:25px;margin:0px 5px;}
     #navMenu{left:0px;}
     footer{text-align:left;}
-    .leftPageContent{width:175px;}
-    .rightPageContent{margin-left:175px;}
+    .leftPageContent{width:185px;}
+    .rightPageContent{margin-left:185px;}
 }
 
 @media (max-width:920px){

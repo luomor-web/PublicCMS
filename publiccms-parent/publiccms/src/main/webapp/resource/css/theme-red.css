@@ -24,8 +24,10 @@ header .nav>li>ul a,header .nav>li>ul a:hover{color:#8f0006;}
 
 #sidebar_s,.accordion .accordionHeader{color:#e3e3e3;}
 .accordion .accordionContent,.accordionContent .tree a,.accordionContent .tree div:hover,.accordion .accordionHeader a{color:#333;}
-.accordionContent .tree div:hover a{background-color:#FA5151;color:#eee;}
-.accordionContent .tree div.selected a,.accordionContent .tree div.selected a .todoNumber{background-color:#D8403D;color:#fff;}
+.accordionContent .tree div:hover{background-color:#FA5151;}
+.accordionContent .tree div:hover a{color:#eee;}
+.accordionContent .tree div.selected{background-color:#D8403D;}
+.accordionContent .tree div.selected a,.accordionContent .tree div.selected a .todoNumber{color:#fff;}
 
 .tabsPage .tabsPageHeader{background-color:#e7ecf0;}
 .tabsPage .tabsLeft,.tabsPage .tabsMore,.tabsPage .tabsRight{color:#333;}
