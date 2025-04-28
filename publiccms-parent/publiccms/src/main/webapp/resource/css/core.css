@@ -9,7 +9,7 @@ input[type="checkbox"].form-check-input{width:2em;height:1em;margin-top:0.25em;m
 input[type="checkbox"].form-check-input:focus{border-color:#86b7fe;outline:0;box-shadow:0 0 0 0.25rem rgba(13,110,253,.25);background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2386b7fe'/%3e%3c/svg%3e");}
 input[type="checkbox"].form-check-input:checked{background-color:#0d6efd;border-color:#0d6efd;background-position:right center;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");}
 input[type="number"]{width:80px;}
-.clearfix{*zoom:1;}
+.clearfix{zoom:1;}
 .clearfix:after{display:block;content:".";height:0;clear:both;visibility:hidden;}
 .text-center{text-align:center;}
 /* Remember to define focus styles! */
@@ -89,12 +89,8 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .accordion .accordionHeader a:hover{text-decoration:none;}
 .accordion .accordionContent{display:block;overflow:auto;box-sizing: border-box;}
 .accordion .accordionContent h2{text-align:center;line-height:40px;display:none;}
-.accordion .accordionContent .tree a{line-height:34px;height:auto;}
-.accordion .accordionContent .tree div{height:auto;}
-.accordion .accordionContent .tree div div{background:0 0;width:25px;height:34px;}
-.accordion .accordionContent .tree a>i{margin-right:5px;width:16px;font-size:13px;display:inline-block;text-align:center;}
-.accordion .accordionContent .tree.treeFolder a{line-height:30px;}
-.accordion .accordionContent .tree.treeFolder div div{height:30px;}
+.accordion .accordionContent a{padding-left:20px;display:block;line-height:34px;height:auto;font-size:13px;white-space:nowrap;}
+.accordion .accordionContent a, .accordion .accordionContent a:hover{text-decoration:none;}
 .todoNumber{padding:0 5px;color:red;}
 
 .panelBar{display:block;overflow:hidden;height:auto;line-height:30px;}
@@ -158,14 +154,18 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .tabsPage .tabsPageContent{display:block;overflow:hidden;position:relative;}
 
 /* Tree */
-.tree li{clear:both;display:block;line-height:30px;cursor:pointer;}
+.tree{margin-left:5px;}
+.tree li{line-height:30px;cursor:pointer;clear:both;}
+.tree li ul{margin-left:22px;}
+.tree li div{white-space:nowrap;}
+.tree li:not(:has(ul)){min-width:155px;float:left;clear:none;}
+.tree ul:after{display:block;content:".";height:0;clear:both;visibility:hidden;}
 .tree li a.disabled{color:#aaa;}
-.tree div, .tree a{display:inherit;height:30px;line-height:30px;font-size:13px;white-space:nowrap;}
-.tree div div{float:left;display:block;overflow:hidden;width:22px;height:30px;border:none;}
-.tree.treeFolder li>div>div:first-child{padding-left:10px;}
+.tree a{height:auto;line-height:30px;font-size:13px;}
+.tree a>i{margin-right:5px;}
 .tree a, .tree a:hover{text-decoration:none;}
-.tree .indent{background:none;}
-.tree .collapsable,.tree .end_collapsable,.tree .end_expandable,.tree .expandable,.tree .file,.tree .folder_collapsable,.tree .folder_expandable,.tree .last_collapsable,.tree .last_expandable, .tree .first_collapsable, .tree .first_expandable{font-family:iconfont;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:30px;width:22px;}
+.tree .collapsable,.tree .end_collapsable,.tree .end_expandable,.tree .expandable,.tree .file,.tree .folder_collapsable,.tree .folder_expandable,.tree .last_collapsable,.tree .last_expandable, .tree .first_collapsable, .tree .first_expandable,.tree .ckbox{font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;display: inline-block;line-height:30px;text-align:center;width:22px;}
+.tree .collapsable,.tree .end_collapsable,.tree .end_expandable,.tree .expandable,.tree .file,.tree .folder_collapsable,.tree .folder_expandable,.tree .last_collapsable,.tree .last_expandable, .tree .first_collapsable, .tree .first_expandable{font-family:iconfont;}
 .tree .folder_collapsable:before{content:"\e668";}
 .tree .collapsable:before,.tree .end_collapsable:before,.tree .last_collapsable:before, .tree .first_collapsable:before{content:"\e668";}
 .tree .folder_expandable:before{content:"\e603";}
@@ -263,7 +263,7 @@ a.button:hover{text-decoration:none;}
 /* Pages default */
 .page{display:block;overflow:hidden;width:100%;height:100%;-webkit-overflow-scrolling:touch;}
 .pageHeader{display:block;overflow:hidden;padding:10px;position:relative;}
-.card{margin:10px;border-radius:5px;background-color:#fff;box-shadow: 0 2px 4px 1px rgba(31, 38, 135, 0.37);}
+.card{margin:10px;border-radius:5px;background-color:#fff;overflow:hidden;box-shadow: 0 2px 4px 1px rgba(31, 38, 135, 0.37);}
 .searchBar .textInput,.searchBar span{float:left;}
 .searchBar span{line-height:28px;}
 .searchBar span.connect-string{font-size:16px;}
@@ -305,7 +305,7 @@ a.button:hover{text-decoration:none;}
 fieldset{border:none;margin-bottom:15px;position:relative;padding:40px 20px 20px 20px;border-radius:5px;box-shadow:0 3px 6px 1px rgba( 31, 38, 135, 0.37 );}
 fieldset>label, .pageFormContent>label{margin-bottom:10px;}
 fieldset legend{position:absolute;top:0;font-weight:400;font-size:14px;padding:0;line-height:40px;}
-fieldset:first-child .unit:first-of-type p:last-child{padding:0;}
+fieldset:last-child{margin-bottom:0px;}
 
 .formBar{clear:both;padding:10px;height:30px;}
 .formBar ul{float:right;}
@@ -472,7 +472,7 @@ a.btnUp:before,a.btnDown:before{line-height:14px;}
 .miscSortDrag dt .dragItem.icon-move:before{float:right;color:#ccc;}
 .miscSortDrag dt:after{content:" ";display:block;clear:both;}
 .miscSortDrag dd{margin-left:195px;}
-.miscSortDrag dd .sortDrag{width:100%;min-height:100px;margin-bottom:10px;color:#ccc;text-align:center;box-sizing:border-box;border:1px dashed #d66;overflow-y:auto;}
+.miscSortDrag dd .sortDrag{width:100%;min-height:100px;margin-bottom:10px;color:#ccc;text-align:center;box-sizing:border-box;border:1px dashed #d66;}
 .miscSortDrag dd .sortDrag .dragItem{border:1px solid #B8D0D6;box-sizing:border-box;color:#666;padding:5px;margin:3px;line-height:20px;display:block;position:relative;text-align:left;cursor:move;}
 .miscSortDrag dd .sortDrag .sortDrag{min-height:50px;margin-bottom:0px;border:1px dashed #6d6;}
 .miscSortDrag dd .sortDrag .sortDrag .dragItem{color:#333;}
@@ -518,10 +518,11 @@ a.btnLook:before{content:"\e66a";font-family:iconfont;}
 .searchBar ul.searchContent:before{content:"\e631";font-family:iconfont;}
 .searchBar ul.searchContentHover:before{content:"\e6f8";}
 
-.ckbox{font-family:FontAwesome;vertical-align:-10%;font-size:1.3333333333333333em;text-decoration:inherit;display:inline-block;}
-.unchecked:before{content:"\f096";}
-.ckbox.indeterminate:before{content:"\f147";}
-.ckbox.checked:before{content:"\f046";}
+.tree .ckbox{font-family:FontAwesome;text-decoration:inherit;display:inline-block;}
+.tree .unchecked:before{content:"\f096";}
+.tree .ckbox.indeterminate:before{content:"\f147";}
+.tree .ckbox.checked:before{content:"\f046";}
+.tree .ckbox.checked.indeterminate:before{content:"\f146";}
 
 .panelBar .toolBar li:hover .addMore .icon-double-angle-down:before{content:"\f102";}
 
@@ -545,6 +546,8 @@ table.list tbody{background-color:#666;}
     header .logo img{height:25px;margin:0px 5px;}
     #navMenu{left:0px;}
     footer{text-align:left;}
+    .leftPageContent{width:185px;}
+    .rightPageContent{margin-left:185px;}
 }
 
 @media (max-width:920px){

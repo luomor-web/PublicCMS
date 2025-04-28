@@ -21,8 +21,8 @@ header .nav>li>ul a,header .nav>li>ul a:hover{color:#95918e;}
 .accordion .accordionContent{background-color:#e3d1c3;}
 #splitBarProxy{border-color:#c0c0c0;background-color:#CCC;}
 
-.accordionContent .tree div:hover a{background-color:#8ebbd2;color:#eee;}
-.accordionContent .tree div.selected a,.accordionContent .tree div.selected a .todoNumber{background-color:#6b8e50;color:#fff;}
+.accordionContent a:hover{background-color:#8ebbd2;color:#eee;}
+.accordionContent a.selected,.accordionContent a.selected .todoNumber{background-color:#6b8e50;color:#fff;}
 
 .tabsPage .tabsPageHeader{background-color:#e3d1c3;}
 .tabsPage .tabsPageHeader li a{background-color:#fff;color:#5a3e2b;}
@@ -135,7 +135,6 @@ footer{background-color:#f2e8cc;}
 #calendar .tm .hh li:hover,#calendar .tm .mm li:hover,#calendar .tm .ss li:hover{background-color:#95918e;color:#fff;}
 #calendar .close:hover{color:#3587ef;}
 /* 树样式 */
-.accordionContent .tree div.selected div{color:#fff;}
 .tree a{color:#333;}
 .tree a:hover,.tree .selected a{color:#80c7c9;}
 .treeForm{border-color:#f2f6f9;}
