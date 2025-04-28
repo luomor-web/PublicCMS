@@ -556,3 +556,7 @@ table.list tbody{background-color:#666;}
     #navMenu{top:25px;}
     #navMenu li a{line-height:35px;}
 }
+@media print{
+    #splitBar,#splitBarProxy,#alertBackground,#dialogBackground,#background,.comboxop,.shadow,.panelBar{display:none;}
+    #printBox{display:block;}
+}
