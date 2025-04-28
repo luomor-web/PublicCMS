@@ -12,7 +12,7 @@
     </div>
     <div class="accordionContent">
         <h2><@t.menu a.id/></h2>
-        <ul class="tree">
+        <ul>
         <@sys.moduleList parentId=a.id>
             <#list page.list as a>
                 <@t.merge 'childModuleIds' a.id!/>
@@ -21,7 +21,7 @@
             <#list page.list as a>
                 <#if (childRoleModuleMap[a.id?string])?has_content&&childRoleModuleMap[a.id?string]>
             <li>
-                <a href="${(a.url)!}" target="navTab" rel="${(a.url)!}"><#if (a.attached)?has_content><i class="${a.attached} icon-large"></i></#if> <@t.menu a.id/><#if ['comment_list','order_list','refund_list','process_list']?seq_contains(a.id)><span class="todoNumber" data-type="${a.id}"></span></#if></a>
+                <a href="${(a.url)!}" target="navTab" rel="${(a.url)!}" title="<@t.menu a.id/>"><#if (a.attached)?has_content><i class="${a.attached} icon-large"></i></#if> <@t.menu a.id/><#if ['comment_list','order_list','refund_list','process_list']?seq_contains(a.id)><span class="todoNumber" data-type="${a.id}"></span></#if></a>
             </li>
                 </#if>
             </#list>
@@ -38,7 +38,7 @@
     </div>
     <div class="accordionContent">
         <h2><@t.menu 'site'/></h2>
-        <ul class="tree">
+        <ul>
             <li>
                 <a href="sysSite/list.html" target="navTab" rel="sysSite/list"><i class="icon-sitemap icon-large"></i><@t.menu 'site_list'/></a>
             </li>

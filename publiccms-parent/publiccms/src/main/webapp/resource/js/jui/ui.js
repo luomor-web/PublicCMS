@@ -174,6 +174,10 @@ function initLink($p) {
             if(title){
                 title = title.replace(/<[^>]*>/gi,"");
             }
+            var changeTitle = false;
+            if($this.data("change-title") && "true" == $this.data("change-title")){
+                changeTitle=true;
+            }
             var tabid = $this.attr("rel") || "_blank";
             var fresh = eval($this.attr("fresh") || "true");
             var external = eval($this.attr("external") || "false");
@@ -185,7 +189,7 @@ function initLink($p) {
                 return false;
             }
             navTab.openTab(tabid, url, {
-                title: title, fresh: fresh, external: external, focusNewWindow:newWindow
+                title: title, changeTitle:changeTitle, fresh: fresh, external: external, focusNewWindow:newWindow
             });
             return false;
         });

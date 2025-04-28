@@ -42,7 +42,7 @@
                 <td></td>
                 <td>
                     <span class="bi bi-folder2-open"></span>
-                    <a href="cmsWebFile/list.html?path=${path?contains('/')?then(path?keep_before_last('/'),'')?url}" target="navTab" rel="cmsWebFile/list">
+                    <a href="cmsWebFile/list.html?path=${path?contains('/')?then(path?keep_before_last('/'),'')?url}" data-change-title="false" target="navTab" rel="cmsWebFile/list">
                         <@t.page 'button.return'/>
                     </a>
                 </td>
@@ -69,7 +69,7 @@
                 <td>
                     <#if a.directory>
                         <span class="bi bi-folder"></span>
-                        <a href="cmsWebFile/list.html?path=${filePath?url}" target="navTab" rel="cmsWebFile/list">
+                        <a href="cmsWebFile/list.html?path=${filePath?url}" data-change-title="false" target="navTab" rel="cmsWebFile/list">
                             ${a.fileName}
                         </a>
                     <#else>
