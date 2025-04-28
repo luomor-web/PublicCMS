@@ -154,11 +154,11 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .tabsPage .tabsPageContent{display:block;overflow:hidden;position:relative;}
 
 /* Tree */
-.tree{margin-left:5px;}
-.tree li{line-height:30px;cursor:pointer;clear:both;}
-.tree li ul{margin-left:22px;}
+.tree li{line-height:30px;padding-left:22px;cursor:pointer;clear:both;}
+.tree>li{padding-left:5px;}
 .tree li div{white-space:nowrap;}
 .tree li:not(:has(ul)){min-width:155px;float:left;clear:none;}
+.leftPageContent .tree li:not(:has(ul)){min-width:auto;float:none;clear:both;}
 .tree ul:after{display:block;content:".";height:0;clear:both;visibility:hidden;}
 .tree li a.disabled{color:#aaa;}
 .tree a{height:auto;line-height:30px;font-size:13px;}
