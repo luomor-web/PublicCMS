@@ -72,7 +72,7 @@ server {
         proxy_pass http://cms;
     }
     
-    location ${dynamicLocation?has_content?then('/'+dynamicLocation,'/')}simpleAi/ {
+    location ${dynamicLocation?has_content?then('/'+dynamicLocation,'/')}admin/simpleAi/ {
         proxy_redirect off;
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;

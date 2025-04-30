@@ -8,7 +8,7 @@
                 <input name="scene" value="${scene!'text'}" type="hidden"/>
                 <#if scene?has_content && "html"=scene>
                     <input name="messages[0].role" value="system" type="hidden"/>
-                    <input name="messages[0].content" value="ONLY USE HTML, CSS AND JAVASCRIPT. If you want to use ICON make sure to import the library first. Try to create the best UI possible by using only HTML, CSS and JAVASCRIPT. Use as much as you can TailwindCSS for the CSS, if you can't do something with TailwindCSS, then use custom CSS (make sure to import &lt;script src=\"https://cdn.tailwindcss.com\"&gt;&lt;/script&gt; in the head). Also, try to ellaborate as much as you can, to create something unique. ALWAYS GIVE THE RESPONSE INTO A SINGLE HTML FILE" type="hidden"/>
+                    <input name="messages[0].content" value="ONLY USE HTML, CSS AND JAVASCRIPT. If you want to use ICON make sure to import the library first. Try to create the best UI possible by using only HTML, CSS and JAVASCRIPT. Use as much as you can TailwindCSS for the CSS, if you can't do something with TailwindCSS, then use custom CSS (make sure to import &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt; in the head). Also, try to ellaborate as much as you can, to create something unique. ALWAYS GIVE THE RESPONSE INTO A SINGLE HTML FILE" type="hidden"/>
                     <input name="messages[1].role" value="assistant" type="hidden"/>
                     <input name="messages[1].content" class="html" value="The current code is: " type="hidden"/>
                     <#assign index=2/>
