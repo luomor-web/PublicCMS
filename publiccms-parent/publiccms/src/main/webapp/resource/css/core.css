@@ -154,11 +154,11 @@ header .navbar-toggler.side-right{background-image:url(../images/side-right.png)
 .tabsPage .tabsPageContent{display:block;overflow:hidden;position:relative;}
 
 /* Tree */
-.tree{margin-left:5px;}
-.tree li{line-height:30px;cursor:pointer;clear:both;}
-.tree li ul{margin-left:22px;}
+.tree li{line-height:30px;padding-left:22px;cursor:pointer;clear:both;}
+.tree>li{padding-left:5px;}
 .tree li div{white-space:nowrap;}
 .tree li:not(:has(ul)){min-width:155px;float:left;clear:none;}
+.leftPageContent .tree li:not(:has(ul)){min-width:auto;float:none;clear:both;}
 .tree ul:after{display:block;content:".";height:0;clear:both;visibility:hidden;}
 .tree li a.disabled{color:#aaa;}
 .tree a{height:auto;line-height:30px;font-size:13px;}
@@ -540,14 +540,15 @@ table.list tbody{background-color:#666;}
 .page{background-color:#fff;color:#333;}
 .tagsBox span{background-color:#e0e0e0;}
 @media (max-width:1300px){
-    .pageFormContent dl{width:100%;height:auto;clear:both;}
+    .pageFormContent dt{float:none;padding:3px 0 0 0;}
+    .pageFormContent dd{margin-left:0px;}
 }
 @media (max-width:1100px){
     header .logo img{height:25px;margin:0px 5px;}
     #navMenu{left:0px;}
     footer{text-align:left;}
-    .leftPageContent{width:185px;}
-    .rightPageContent{margin-left:185px;}
+    .leftPageContent{width:165px;}
+    .rightPageContent{margin-left:165px;}
 }
 
 @media (max-width:920px){
@@ -555,4 +556,8 @@ table.list tbody{background-color:#666;}
     header .nav li a{line-height:25px;}
     #navMenu{top:25px;}
     #navMenu li a{line-height:35px;}
+}
+@media print{
+    #splitBar,#splitBarProxy,#alertBackground,#dialogBackground,#background,.comboxop,.shadow,.panelBar{display:none;}
+    #printBox{display:block;}
 }

@@ -313,3 +313,12 @@ INSERT INTO `sys_module` VALUES ('ai_chat', 'simpleAi/chat', 'simpleAi/doChat', 
 INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'en', 'AI');
 INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'ja', 'AI');
 INSERT INTO `sys_module_lang` VALUES ('ai_chat', 'zh', 'AI');
+-- 2025-04-29 --
+INSERT INTO `sys_module` VALUES ('select_directory', 'cmsWebFile/directoryLookup', NULL, NULL, 'common', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('select_template_directory', 'cmsTemplate/directoryLookup', NULL, NULL, 'common', 0, 0, 0);
+INSERT INTO `sys_module_lang` VALUES ('select_directory', 'en', 'Select website file directory');
+INSERT INTO `sys_module_lang` VALUES ('select_directory', 'ja', 'ウェブサイトのファイルディレクトリを選択する');
+INSERT INTO `sys_module_lang` VALUES ('select_directory', 'zh', '选择网站文件目录');
+INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'en', 'Select template directory');
+INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'ja', 'テンプレートディレクトリを選択する');
+INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'zh', '选择模板目录');

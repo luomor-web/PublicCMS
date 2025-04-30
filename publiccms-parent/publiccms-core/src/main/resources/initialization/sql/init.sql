@@ -1030,6 +1030,7 @@ INSERT INTO `sys_module` VALUES ('select_category_type', 'cmsCategoryType/lookup
 INSERT INTO `sys_module` VALUES ('select_content', 'cmsContent/lookup', 'cmsContent/lookup_list,cmsContent/contentImage', NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_dept', 'sysDept/lookup', NULL, NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_dictionary', 'cmsDictionary/lookup', NULL, NULL, 'common', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('select_directory', 'cmsWebFile/directoryLookup', NULL, NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_fragment', 'cmsTemplate/ftlLookup', NULL, NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_place', 'placeTemplate/lookup', 'placeTemplate/lookupPlace', NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_role', 'sysRole/lookup', NULL, NULL, 'common', 1, 0, 0);
@@ -1037,6 +1038,7 @@ INSERT INTO `sys_module` VALUES ('select_survey', 'cmsSurvey/lookup', NULL, NULL
 INSERT INTO `sys_module` VALUES ('select_tag', 'cmsTag/lookup', NULL, NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_tag_type', 'cmsTagType/lookup', NULL, NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_template', 'cmsTemplate/lookup', NULL, NULL, 'common', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('select_template_directory', 'cmsTemplate/directoryLookup', NULL, NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_user', 'sysUser/lookup', 'sysUser/lookup_list', NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_vote', 'cmsVote/lookup', NULL, NULL, 'common', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('select_workflow', 'sysWorkflow/lookup', NULL, NULL, 'common', 1, 0, 0);
@@ -1618,6 +1620,9 @@ INSERT INTO `sys_module_lang` VALUES ('select_dept', 'zh', '选择部门');
 INSERT INTO `sys_module_lang` VALUES ('select_dictionary', 'en', 'Select data dictionary');
 INSERT INTO `sys_module_lang` VALUES ('select_dictionary', 'ja', 'データ辞書を選択');
 INSERT INTO `sys_module_lang` VALUES ('select_dictionary', 'zh', '选择数据字典');
+INSERT INTO `sys_module_lang` VALUES ('select_directory', 'en', 'Select website file directory');
+INSERT INTO `sys_module_lang` VALUES ('select_directory', 'ja', 'ウェブサイトのファイルディレクトリを選択する');
+INSERT INTO `sys_module_lang` VALUES ('select_directory', 'zh', '选择网站文件目录');
 INSERT INTO `sys_module_lang` VALUES ('select_fragment', 'en', 'Template fragment');
 INSERT INTO `sys_module_lang` VALUES ('select_fragment', 'ja', 'テンプレートフラグメント');
 INSERT INTO `sys_module_lang` VALUES ('select_fragment', 'zh', '模板片段');
@@ -1639,6 +1644,9 @@ INSERT INTO `sys_module_lang` VALUES ('select_tag_type', 'zh', '选择标签类�
 INSERT INTO `sys_module_lang` VALUES ('select_template', 'en', 'Select template');
 INSERT INTO `sys_module_lang` VALUES ('select_template', 'ja', 'テンプレートを選択');
 INSERT INTO `sys_module_lang` VALUES ('select_template', 'zh', '选择模板');
+INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'en', 'Select template directory');
+INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'ja', 'テンプレートディレクトリを選択する');
+INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'zh', '选择模板目录');
 INSERT INTO `sys_module_lang` VALUES ('select_user', 'en', 'Select user');
 INSERT INTO `sys_module_lang` VALUES ('select_user', 'ja', 'ユーザーを選択');
 INSERT INTO `sys_module_lang` VALUES ('select_user', 'zh', '选择用户');
@@ -1941,6 +1949,7 @@ CREATE TABLE `sys_site` (
   `site_path` varchar(255) NOT NULL COMMENT '站点地址',
   `use_ssi` tinyint(1) NOT NULL COMMENT '启用服务器端包含',
   `dynamic_path` varchar(255) NOT NULL COMMENT '动态站点地址',
+  `has_child` tinyint(1) NOT NULL COMMENT '拥有子站点',
   `multiple` tinyint(1) NOT NULL COMMENT '站点群',
   `disabled` tinyint(1) NOT NULL COMMENT '禁用',
   PRIMARY KEY  (`id`),
@@ -1951,7 +1960,7 @@ CREATE TABLE `sys_site` (
 -- ----------------------------
 -- Records of sys_site
 -- ----------------------------
-INSERT INTO `sys_site` VALUES ('1', null ,null ,'PublicCMS', '0', '//dev.publiccms.com:8080/webfile/', '0', '//dev.publiccms.com:8080/', '0', '0');
+INSERT INTO `sys_site` VALUES ('1', null ,null ,'PublicCMS', '0', '//dev.publiccms.com:8080/webfile/', '0', '//dev.publiccms.com:8080/', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for sys_task

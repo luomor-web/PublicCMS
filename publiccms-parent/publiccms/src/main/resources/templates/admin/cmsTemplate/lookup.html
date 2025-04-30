@@ -9,7 +9,7 @@
                 <#else>
                     <@tools.metadata path=path>
                         <a href="javascript:;" data="${path!}" onclick="$.bringBack({'${field!'path'}':'${path}'});return false;">
-                            ${(object.alias)?has_content?then(object.alias+' ('+a.fileName+')',a.fileName)}
+                            ${(object.alias)?has_content?then(object.alias+' '+a.fileName,a.fileName)}
                         </a>
                     </@tools.metadata>
                 </#if>
