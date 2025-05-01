@@ -52,7 +52,7 @@
     <div class="panelBar">
         <ul class="toolBar">
             <#if parent?has_content>
-                <li><a href="myself/contentList.html?parentId=${(parent.parentId)!}" target="navTab" rel="myself/contentList"><i class="icon-circle-arrow-up icon-large"></i><@t.page 'button.return'/></a></li>
+                <li><a href="myself/contentList.html?parentId=${(parent.parentId)!}" target="navTab" data-change-title="false" rel="myself/contentList"><i class="icon-circle-arrow-up icon-large"></i><@t.page 'button.return'/></a></li>
                 <li class="line">line</li>
             </#if>
             <#if authorizedMap['cmsContent/uncheck']>
@@ -113,7 +113,7 @@
                         <p>
                             <label><@t.page 'model'/>:</label><span class="exclude-translate">${(modelMap[a.modelId].name)!}</span>
                             <#if modelMap[a.modelId]?has_content&&modelMap[a.modelId].hasChild>
-                                <label><a href="myself/contentList.html?parentId=${contentId}" class="btnText" target="navTab" rel="myself/contentList"><@t.page 'content.child_management'/></a></label>
+                                <label><a href="myself/contentList.html?parentId=${contentId}" class="btnText" target="navTab" data-change-title="false" rel="myself/contentList"><@t.page 'content.child_management'/></a></label>
                             </#if>
                             <#if a.expiryDate?has_content><label><@t.page 'expiry_date'/>:</label><span class="exclude-translate">${a.expiryDate!}</span></#if>
                         </p>
