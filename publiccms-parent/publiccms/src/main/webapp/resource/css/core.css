@@ -257,7 +257,7 @@ a.button:hover{text-decoration:none;}
 
 /* Layout */
 .leftPageContent{float:left;display:block;overflow:auto;width:205px;line-height:21px;}
-.leftPageContent .card{margin-right:0px;}
+.leftPageContent .card{margin-right:4px;}
 .rightPageContent{margin-left:205px;}
 .thumbnail,.image-list{position:relative;overflow:hidden;margin-top:5px;margin-right:5px;border:1px dashed #cacbcc;display:inline-block;text-align:center;line-height:0px;}
 /* Pages default */
