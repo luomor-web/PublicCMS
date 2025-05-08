@@ -5,6 +5,7 @@
         <dl class="nowrap">
             <dt><@t.page 'content'/>:</dt>
             <dd>
+                <audio id="audioCompletePlay" src="${base}/resource/sounds/jia.mp3" preload="auto" class="hide"></audio>
                 <input name="scene" value="${scene!'text'}" type="hidden"/>
                 <#if scene?has_content && "html"=scene>
                     <input name="messages[0].role" value="system" type="hidden"/>
@@ -85,7 +86,6 @@ $(".send",$.pdialog.getCurrent()).on("click",function(){
         }).then(response => {
             if (!response.ok) {
                 throw new Error('网络响应异常');
-                $(".send",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
             }
             return response.body;
         }).then(body => {
@@ -96,6 +96,7 @@ $(".send",$.pdialog.getCurrent()).on("click",function(){
             function read() {
                 return reader.read().then(({done, value}) => {
                     if (done) {
+                        $("#audioCompletePlay")[0].play();
                         $(".mdImport",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
                         $(".send",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
                         return;
@@ -132,6 +133,7 @@ $(".send",$.pdialog.getCurrent()).on("click",function(){
             return read();
         }).catch(error  => {
              alertMsg.error(error);
+             $("#audioCompletePlay")[0].play();
              $(".mdImport",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
              $(".send",$.pdialog.getCurrent()).prop("disabled",false).removeClass("buttonDisabled");
         });
