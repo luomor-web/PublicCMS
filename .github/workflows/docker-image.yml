@@ -15,15 +15,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    
-    - name: Setup JDK 11
-      uses: actions/setup-java@v3.14.1
-      with: 
-        java-version: '11'
-        distribution: 'temurin'
-        
-    - name: Build with Maven
-      run: mvn -Dbasedir=publiccms-parent clean package
       
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3.10.0
