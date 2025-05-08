@@ -283,26 +283,23 @@ public class CmsWebFileAdminController {
     @Csrf
     public String doZip(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, String path, HttpServletRequest request,
             ModelMap model) {
-        if (CommonUtils.notEmpty(path)) {
-            String filepath = siteComponent.getWebFilePath(site.getId(), path);
-            if (CmsFileUtils.isDirectory(filepath)) {
-                try {
-                    String zipFileName = null;
-                    if (path.endsWith("/") || path.endsWith("\\")) {
-                        zipFileName = CommonUtils.joinString(filepath, "files.zip");
-                    } else {
-                        zipFileName = CommonUtils.joinString(filepath, ".zip");
-                    }
-                    ZipUtils.zip(filepath, zipFileName);
-                } catch (IOException e) {
-                    model.addAttribute(CommonConstants.ERROR, e.getMessage());
-                    log.error(e.getMessage(), e);
+        String filepath = siteComponent.getWebFilePath(site.getId(), path);
+        if (CmsFileUtils.isDirectory(filepath)) {
+            try {
+                String zipFileName = null;
+                if (CommonUtils.empty(path) || path.endsWith("/") || path.endsWith("\\")) {
+                    zipFileName = CommonUtils.joinString(filepath, "files.zip");
+                } else {
+                    zipFileName = CommonUtils.joinString(filepath, ".zip");
                 }
+                ZipUtils.zip(filepath, zipFileName);
+            } catch (IOException e) {
+                model.addAttribute(CommonConstants.ERROR, e.getMessage());
+                log.error(e.getMessage(), e);
             }
-            logOperateService
-                    .save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(), LogLoginService.CHANNEL_WEB_MANAGER,
-                            "zip.web.webfile", RequestUtils.getIpAddress(request), CommonUtils.getDate(), path));
         }
+        logOperateService.save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(), LogLoginService.CHANNEL_WEB_MANAGER,
+                "zip.web.webfile", RequestUtils.getIpAddress(request), CommonUtils.getDate(), path));
         return CommonConstants.TEMPLATE_DONE;
     }
 

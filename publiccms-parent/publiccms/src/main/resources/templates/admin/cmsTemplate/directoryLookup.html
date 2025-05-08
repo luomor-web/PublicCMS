@@ -2,7 +2,7 @@
     <@tools.fileList path=filepath>
         <#list list as a>
         <li>
-            <#local path=filepath+'/'+a.fileName/>
+            <#local path=filepath?has_content?then(filepath+'/','')+a.fileName/>
         <#if a.directory>
             <a href="javascript:;" data="${path!}" onclick="$.bringBack({'${field}':'${path}'});return false;">${a.fileName}</a>
             <ul>
