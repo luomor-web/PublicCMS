@@ -2,9 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "V5" ]
-  pull_request:
-    branches: [ "V5" ]
+    tags:
+      - V*
 
 jobs:
   build:
@@ -31,12 +30,6 @@ jobs:
       with:
         username: ${{ vars.DOCKER_HUB_USERNAME}}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
-
-    - name: Extract metadata (tags, labels) for Docker
-      id: meta
-      uses: docker/metadata-action@v5.7.0
-      with:
-        images: sanluan/PublicCMS
           
     - name: Build and push Docker image
       uses: docker/build-push-action@v6.16.0
@@ -44,5 +37,6 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+        tags:
+          sanluan/PublicCMS:${{ github.ref }}
+          sanluan/PublicCMS:latest
