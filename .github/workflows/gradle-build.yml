@@ -30,4 +30,4 @@ jobs:
         cache: gradle
 
     - name: Build with Gradle Wrapper
-      run: publiccms-parent\gradlew -p publiccms-parent build
+      run: ./publiccms-parent/gradlew -p publiccms-parent build
