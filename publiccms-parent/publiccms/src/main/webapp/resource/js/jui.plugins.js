@@ -368,6 +368,7 @@ JUI.regPlugins.push(function($p){
     }
 });
 JUI.regPlugins.push(function($p){
+    var ajaxbg = $("#background,#progressBar");
     $("input.color", $p).each(function() {
         var $this = $(this);
         var opts = {
