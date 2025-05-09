@@ -31,6 +31,8 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
+      working-directory: ./publiccms-parent
 
     - name: Build with Gradle Wrapper
-      run: ./gradlew -p publiccms-parent build
+      run: ./gradlew build
+      working-directory: ./publiccms-parent
