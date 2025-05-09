@@ -35,8 +35,8 @@ jobs:
         username: ${{ vars.DOCKER_HUB_USERNAME}}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      if: ${{ startsWith(github.ref, 'refs/tags/') }}
-    - name: Build and push Docker image
+    - if: ${{ startsWith(github.ref, 'refs/tags/') }}
+      name: Build and push Docker image
       uses: docker/build-push-action@v6.16.0
       with:
         context: .
@@ -44,8 +44,8 @@ jobs:
         push: true
         tags: sanluan/publiccms:${{ github.ref_name }},sanluan/publiccms:latest
 
-      if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
-      - name: Build and push Docker image
+    - if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+      name: Build and push Docker image
       uses: docker/build-push-action@v6.16.0
       with:
         context: .
