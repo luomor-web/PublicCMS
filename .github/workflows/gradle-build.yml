@@ -29,5 +29,8 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+
     - name: Build with Gradle Wrapper
-      run: ./publiccms-parent/gradlew -p publiccms-parent build
+      run: ./gradlew -p publiccms-parent build

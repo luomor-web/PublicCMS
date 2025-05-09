@@ -1,10 +1,10 @@
+
 name: Docker Image CI
 
 on:
   push:
     tags:
       - V*
-  push:
     branches: [ "V5", "V4.0" ]
   pull_request:
     branches: [ "V5", "V4.0" ]
