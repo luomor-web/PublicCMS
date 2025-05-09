@@ -37,6 +37,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags:
-          sanluan/PublicCMS:${{ github.ref }}
-          sanluan/PublicCMS:latest
+        tags: sanluan/PublicCMS:${{ github.ref }},sanluan/PublicCMS:latest
