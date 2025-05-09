@@ -29,7 +29,5 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - run: cd publiccms-parent
-
     - name: Build with Gradle Wrapper
-      run: ./gradlew build
+      run: publiccms-parent\gradlew -p publiccms-parent build
