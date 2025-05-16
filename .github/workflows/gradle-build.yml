@@ -29,7 +29,10 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - run: cd publiccms-parent
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      working-directory: ./publiccms-parent
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+      working-directory: ./publiccms-parent

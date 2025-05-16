@@ -51,14 +51,14 @@
 //            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
 //            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo',  'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'pagebreak', 'template', 'background', '|',
 //            'horizontal', 'date', 'time', 'spechars', 'wordimage', 'catchremoteimage', '|',
-//            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+//            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
 //            'print', 'preview', 'searchreplace', 'drafts', 'help'
 //        ]]
     	, toolbars: [[
                   'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'blockquote', 'forecolor', 'backcolor','spechars', 'rowspacingtop', 'rowspacingbottom','lineheight', '|', 'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
                   'insertorderedlist', 'insertunorderedlist', 'directionalityltr', 'directionalityrtl', 'indent', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'touppercase', 'tolowercase', '|',  'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
                   'insertvideo', 'simpleupload', 'insertimage', 'wordimage', 'catchremoteimage', 'emotion', 'scrawl', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'background', 'date', 'time', '|',
-                  'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts'],
+                  'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols'],
               ['fullscreen','pagebreak', 'horizontal', 'searchreplace', 'selectall', '|',
                   'removeformat', 'formatmatch', 'autotypeset', 'pasteplain', 'template', 'preview','cleardoc', 'undo', 'redo', 'drafts','source', 'print', 'help']]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
@@ -161,10 +161,9 @@
         //有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
         //,'insertorderedlist':{
         //      //自定的样式
-        //        'num':'1,2,3...',
         //        'num1':'1),2),3)...',
         //        'num2':'(1),(2),(3)...',
-        //        'cn':'一,二,三....',
+        //        'cjk-ideographic':'一,二,三....',
         //        'cn1':'一),二),三)....',
         //        'cn2':'(一),(二),(三)....',
         //     //系统自带
@@ -430,7 +429,7 @@
 			sub:    ['class', 'style'],
 			sup:    ['class', 'style'],
 			strong: ['class', 'style'],
-			table:  ['width', 'border', 'align', 'valign', 'data-chart', 'class', 'style'],
+			table:  ['width', 'border', 'align', 'valign', 'class', 'style'],
 			tbody:  ['align', 'valign', 'class', 'style'],
 			td:     ['width', 'rowspan', 'colspan', 'align', 'valign', 'class', 'style'],
 			tfoot:  ['align', 'valign', 'class', 'style'],

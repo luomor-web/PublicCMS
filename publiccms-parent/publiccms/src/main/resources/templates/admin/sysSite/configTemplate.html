@@ -12,18 +12,18 @@
 </@tools.disk>
 <div class="pageFormContent" layoutH>
     <dl class="nowrap">
+        <dt><@t.page 'site'/>:</dt>
+        <dd>
+            ${(a.name)!}
+            <span class="info"><@t.page 'server_config.description'/></span>
+        </dd>
+    </dl>
+    <dl class="nowrap">
         <dt><@t.page 'server_config.tomcat'/>:</dt>
         <dd><textarea class="code" mode="xml">
         &lt;!-- this valve replaces the apparent client remote IP address and hostname and scheme for the request --&gt;
         &lt;Valve className="org.apache.catalina.valves.RemoteIpValve" protocolHeader="X-Forwarded-Proto" portHeader="X-Forwarded-Port"/&gt;</textarea>
             <span class="info"><@t.page 'server_config.tomcat_description'/></span>
-        </dd>
-    </dl>
-    <dl class="nowrap">
-        <dt><@t.page 'site'/>:</dt>
-        <dd>
-            ${(a.name)!}
-            <span class="info"><@t.page 'server_config.description'/></span>
         </dd>
     </dl>
     <div class="tabs">
@@ -174,7 +174,7 @@ server {
         </div>
     </div>
 </div>
-<div class="formBar card">
+<div class="formBar">
     <ul>
         <li><button type="button" class="button close"><@t.page 'button.close'/></button></li>
     </ul>
