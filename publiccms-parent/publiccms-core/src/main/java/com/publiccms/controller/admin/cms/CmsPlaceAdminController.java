@@ -38,11 +38,15 @@ import com.publiccms.entities.sys.SysDept;
 import com.publiccms.entities.sys.SysDeptItemId;
 import com.publiccms.entities.sys.SysSite;
 import com.publiccms.entities.sys.SysUser;
+import com.publiccms.entities.sys.SysWorkflowProcess;
+import com.publiccms.entities.sys.SysWorkflowProcessItem;
+import com.publiccms.entities.sys.SysWorkflowProcessItemId;
 import com.publiccms.logic.component.exchange.PlaceExchangeComponent;
 import com.publiccms.logic.component.exchange.PlaceExportComponent;
 import com.publiccms.logic.component.site.SiteComponent;
 import com.publiccms.logic.component.template.MetadataComponent;
 import com.publiccms.logic.component.template.TemplateComponent;
+import com.publiccms.logic.service.cms.CmsContentService;
 import com.publiccms.logic.service.cms.CmsEditorHistoryService;
 import com.publiccms.logic.service.cms.CmsPlaceAttributeService;
 import com.publiccms.logic.service.cms.CmsPlaceService;
@@ -50,6 +54,8 @@ import com.publiccms.logic.service.log.LogLoginService;
 import com.publiccms.logic.service.log.LogOperateService;
 import com.publiccms.logic.service.sys.SysDeptItemService;
 import com.publiccms.logic.service.sys.SysDeptService;
+import com.publiccms.logic.service.sys.SysWorkflowProcessItemService;
+import com.publiccms.logic.service.sys.SysWorkflowProcessService;
 import com.publiccms.views.pojo.entities.CmsPageData;
 import com.publiccms.views.pojo.entities.CmsPlaceMetadata;
 import com.publiccms.views.pojo.model.ExtendDataParameters;
@@ -87,6 +93,10 @@ public class CmsPlaceAdminController {
     private PlaceExchangeComponent exchangeComponent;
     @Resource
     private PlaceExportComponent exportComponent;
+    @Resource
+    private SysWorkflowProcessItemService workflowProcessItemService;
+    @Resource
+    private SysWorkflowProcessService workflowProcessService;
 
     private String[] ignoreProperties = new String[] { "id", "siteId", "status", "userId", "type", "clicks", "path", "createDate",
             "disabled" };
@@ -168,6 +178,21 @@ public class CmsPlaceAdminController {
                         String.valueOf(entity.getId()), oldMap, map, metadata.getExtendList());
             }
 
+            if (null != metadata.getWorkflowId()) {
+                SysWorkflowProcessItem item = workflowProcessItemService.getEntity(new SysWorkflowProcessItemId(
+                        SysWorkflowProcessService.ITEM_TYPE_PLACE, String.valueOf(entity.getId())));
+                if (null == item || null != oldEntity && CmsContentService.STATUS_NORMAL == oldEntity.getStatus()) {
+                    SysWorkflowProcess process = workflowProcessService.createProcess(site.getId(), metadata.getWorkflowId(),
+                            admin.getId(), entity.getTitle(), SysWorkflowProcessService.ITEM_TYPE_PLACE,
+                            String.valueOf(entity.getId()));
+                    if (null != process) {
+                        service.checking(site.getId(), entity.getId());
+                    }
+                } else if (null != item && CmsContentService.STATUS_REJECT == oldEntity.getStatus()) {
+                    workflowProcessService.reopenProcess(site.getId(), item.getProcessId());
+                }
+            }
+
             staticPlace(site, entity.getPath());
         }
         return CommonConstants.TEMPLATE_DONE;
@@ -233,6 +258,40 @@ public class CmsPlaceAdminController {
         }
         if (CommonUtils.notEmpty(ids)) {
             service.check(site.getId(), admin.getId(), ids, path);
+            logOperateService.save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(),
+                    LogLoginService.CHANNEL_WEB_MANAGER, "check.place", RequestUtils.getIpAddress(request), CommonUtils.getDate(),
+                    StringUtils.join(ids, Constants.COMMA)));
+            staticPlace(site, path);
+        }
+        return CommonConstants.TEMPLATE_DONE;
+    }
+
+    /**
+     * @param site
+     * @param admin
+     * @param path
+     * @param ids
+     * @param request
+     * @param model
+     * @return view name
+     */
+    @RequestMapping("reject")
+    @Csrf
+    public String reject(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, String path, Long[] ids,
+            HttpServletRequest request, ModelMap model) {
+        SysDept dept = sysDeptService.getEntity(admin.getDeptId());
+        if (ControllerUtils.errorNotEmpty("deptId", admin.getDeptId(), model)
+                || ControllerUtils.errorNotEmpty("deptId", dept, model)
+                || ControllerUtils
+                        .errorCustom("noright",
+                                !(dept.isOwnsAllPage() || null != sysDeptItemService.getEntity(new SysDeptItemId(
+                                        admin.getDeptId(), SysDeptItemService.ITEM_TYPE_PAGE,
+                                        CommonUtils.joinString(Constants.SEPARATOR, TemplateComponent.INCLUDE_DIRECTORY, path)))),
+                                model)) {
+            return CommonConstants.TEMPLATE_ERROR;
+        }
+        if (CommonUtils.notEmpty(ids)) {
+            service.reject(site.getId(), admin.getId(), ids, path);
             logOperateService.save(new LogOperate(site.getId(), admin.getId(), admin.getDeptId(),
                     LogLoginService.CHANNEL_WEB_MANAGER, "check.place", RequestUtils.getIpAddress(request), CommonUtils.getDate(),
                     StringUtils.join(ids, Constants.COMMA)));

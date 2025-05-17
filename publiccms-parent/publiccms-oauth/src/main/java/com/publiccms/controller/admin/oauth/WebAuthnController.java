@@ -142,9 +142,8 @@ public class WebAuthnController {
             @RequestBody String registrationResponseJSON, HttpServletRequest request) {
         Challenge challenge = new DefaultChallenge(admin.getName().getBytes());
         Origin origin = new Origin(RequestUtils.getOrigin(request));
-        byte[] tokenBindingId = null;
         RegistrationData registrationData = webAuthnManager.parseRegistrationResponseJSON(registrationResponseJSON);
-        ServerProperty serverProperty = new ServerProperty(origin, request.getServerName(), challenge, tokenBindingId);
+        ServerProperty serverProperty = new ServerProperty(origin, request.getServerName(), challenge);
         boolean userVerificationRequired = false;
         boolean userPresenceRequired = true;
         RegistrationParameters registrationParameters = new RegistrationParameters(serverProperty, pubKeyCredParams,
@@ -198,10 +197,9 @@ public class WebAuthnController {
             @SessionAttribute String webauthnuser, HttpServletRequest request, HttpServletResponse response,
             HttpSession session) {
         Origin origin = new Origin(RequestUtils.getOrigin(request));
-        byte[] tokenBindingId = null;
         AuthenticationData authenticationData = webAuthnManager.parseAuthenticationResponseJSON(authenticationResponseJSON);
         ServerProperty serverProperty = new ServerProperty(origin, request.getServerName(),
-                new DefaultChallenge(webauthnuser.getBytes()), tokenBindingId);
+                new DefaultChallenge(webauthnuser.getBytes()));
         List<byte[]> allowCredentials = null;
         boolean userVerificationRequired = true;
         boolean userPresenceRequired = true;
@@ -258,8 +256,9 @@ public class WebAuthnController {
                         LoginAdminController.addLoginStatus(user, authToken, request, response, expiryMinutes);
                         sysUserTokenService.save(new SysUserToken(authToken, site.getId(), user.getId(),
                                 LogLoginService.CHANNEL_WEB_MANAGER, now, DateUtils.addMinutes(now, expiryMinutes), ip));
-                        logLoginService.save(new LogLogin(site.getId(), webauthnuser, user.getId(), ip,
-                                LogLoginService.CHANNEL_WEB_MANAGER,LogLoginService.METHOD_FINGERPRINT, true, CommonUtils.getDate(), null));
+                        logLoginService.save(
+                                new LogLogin(site.getId(), webauthnuser, user.getId(), ip, LogLoginService.CHANNEL_WEB_MANAGER,
+                                        LogLoginService.METHOD_FINGERPRINT, true, CommonUtils.getDate(), null));
                         session.removeAttribute("webauthnuser");
 
                         if (0 < authenticationData.getAuthenticatorData().getSignCount() || 0 < credentialRecord.getCounter()) {

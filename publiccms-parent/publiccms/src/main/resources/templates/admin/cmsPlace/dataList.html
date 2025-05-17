@@ -122,8 +122,9 @@
                     <a href="cmsPlace/add.html?copyId=${a.id}" class="btnText blue" target="navTab" rel="cmsPlace/add" title="<@t.page 'place_data.add'/>"><@t.page 'button.copy'/></a>
                     <#if 2=a.status>
                         <a href="cmsPlace/check?ids=${a.id}&_csrf=<@tools.csrfToken admin=true/>&path=${(path?url)!}" class="btnText green" title="<@t.page 'confirm.check'/>" target="ajaxTodo"><i class="icon-check"></i><@t.page 'button.check'/></a>
+                        <a href="cmsPlace/reject?ids=${a.id}&_csrf=<@tools.csrfToken admin=true/>&path=${(path?url)!}" class="btnText red" title="<@t.page 'confirm.reject'/>" target="ajaxTodo"><i class="icon-exclamation"></i><@t.page 'button.reject'/></a>
                     <#elseif 1=a.status>
-                        <a href="cmsPlace/uncheck?ids=${a.id}&_csrf=<@tools.csrfToken admin=true/>&path=${(path?url)!}" class="btnText red" title="<@t.page 'confirm.check'/>" target="ajaxTodo"><i class="icon-eraser"></i><@t.page 'button.uncheck'/></a>
+                        <a href="cmsPlace/uncheck?ids=${a.id}&_csrf=<@tools.csrfToken admin=true/>&path=${(path?url)!}" class="btnText red" title="<@t.page 'confirm.uncheck'/>" target="ajaxTodo"><i class="icon-eraser"></i><@t.page 'button.uncheck'/></a>
                     </#if>
                     <a href="cmsPlace/delete?ids=${a.id}&_csrf=<@tools.csrfToken admin=true/>&path=${(path?url)!}" class="btnText warn" title="<@t.page 'confirm.delete'/>" target="ajaxTodo"><i class="icon-trash"></i><@t.page 'button.delete'/></a>
                 </td>

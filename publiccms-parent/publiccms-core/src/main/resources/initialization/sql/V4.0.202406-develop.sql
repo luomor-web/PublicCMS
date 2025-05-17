@@ -275,26 +275,14 @@ ALTER TABLE `sys_user`
     ADD COLUMN `update_date` datetime DEFAULT NULL COMMENT '更新日期' AFTER `registered_date`;
 -- 2025-03-18 --
 UPDATE sys_module SET sort=sort+1 WHERE id in ('content_search','comment_list','category_list','tag_list');
-INSERT INTO sys_module VALUES ('myself_content_view', 'cmsContent/view', NULL, NULL, 'myself_content', 1, 0, 0);
-INSERT INTO sys_module VALUES ('myself_process_view', 'sysWorkflowProcess/view', NULL, NULL, 'myself_content', 1, 0, 0);
 INSERT INTO sys_module VALUES ('process_handle', 'sysWorkflowProcess/processParameters', 'sysWorkflowProcess/handle', NULL, 'process_list', 1, 0, 0);
 INSERT INTO sys_module VALUES ('process_list', 'sysWorkflowProcess/list', NULL, 'bi bi-ui-checks', 'content', 1, 1, 2);
-INSERT INTO sys_module VALUES ('process_view', 'sysWorkflowProcess/view', NULL, NULL, 'process_list', 1, 0, 0);
-INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'en', 'View');
-INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'ja', '見る');
-INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'zh', '查看');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'en', 'Process view');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'ja', 'プロセスビューイング');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'zh', '流程查看');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'en', 'Handle');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'ja', 'ハンドル');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'zh', '处理');
 INSERT INTO `sys_module_lang` VALUES ('process_list', 'en', 'Review process');
 INSERT INTO `sys_module_lang` VALUES ('process_list', 'ja', 'レビュープロセス');
 INSERT INTO `sys_module_lang` VALUES ('process_list', 'zh', '审核流程');
-INSERT INTO `sys_module_lang` VALUES ('process_view', 'en', 'View');
-INSERT INTO `sys_module_lang` VALUES ('process_view', 'ja', '見る');
-INSERT INTO `sys_module_lang` VALUES ('process_view', 'zh', '流查看');
 -- 2025-03-19 --
 UPDATE sys_module SET parent_id = 'content_list',sort=0,attached=NULL WHERE id = 'content_check';
 -- 2025-03-25 --
@@ -322,3 +310,17 @@ INSERT INTO `sys_module_lang` VALUES ('select_directory', 'zh', '选择网站文
 INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'en', 'Select template directory');
 INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'ja', 'テンプレートディレクトリを選択する');
 INSERT INTO `sys_module_lang` VALUES ('select_template_directory', 'zh', '选择模板目录');
+-- 2025-05-17 --
+UPDATE sys_module SET authorized_url = 'sysUser/update,myself/otpsettings,otpSetting/bind,otpSetting/unbind,webauthn/attestation/options,webauthn/attestation/result,webauthn/getCredentials,webauthn/deleteCredential' WHERE id = 'myself_profile';
+UPDATE sys_module SET authorized_url = 'tradePayment/refund,tradePayment/refuse' WHERE id = 'payment_list';
+UPDATE sys_module SET authorized_url = 'cmsPlace/check,cmsPlace/uncheck,cmsPlace/reject' WHERE id = 'place_check';
+UPDATE sys_module SET authorized_url = NULL WHERE id = 'order_history_list';
+INSERT INTO sys_module VALUES ('process_view', 'sysWorkflowProcess/view', NULL, NULL, 'common', 1, 0, 0);
+INSERT INTO `sys_module_lang` VALUES ('process_view', 'en', 'View');
+INSERT INTO `sys_module_lang` VALUES ('process_view', 'ja', '見る');
+INSERT INTO `sys_module_lang` VALUES ('process_view', 'zh', '流查看');
+UPDATE sys_module SET parent_id = 'common',sort=0,attached=NULL WHERE id = 'content_view';
+INSERT INTO `sys_module` VALUES ('workflow_view', 'sysWorkflow/view', NULL, NULL, 'common', 1, 0, 0);
+INSERT INTO `sys_module_lang` VALUES ('workflow_view', 'en', 'View');
+INSERT INTO `sys_module_lang` VALUES ('workflow_view', 'ja', '見る');
+INSERT INTO `sys_module_lang` VALUES ('workflow_view', 'zh', '查看');

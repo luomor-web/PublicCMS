@@ -198,7 +198,7 @@ public class CmsContentAdminController {
         if (null != category.getWorkflowId()) {
             SysWorkflowProcessItem item = workflowProcessItemService.getEntity(
                     new SysWorkflowProcessItemId(SysWorkflowProcessService.ITEM_TYPE_CONTENT, String.valueOf(entity.getId())));
-            if (null == item || CmsContentService.STATUS_NORMAL == oldEntity.getStatus()) {
+            if (null == item || null!=oldEntity && CmsContentService.STATUS_NORMAL == oldEntity.getStatus()) {
                 SysWorkflowProcess process = workflowProcessService.createProcess(site.getId(), category.getWorkflowId(),
                         admin.getId(), entity.getTitle(), SysWorkflowProcessService.ITEM_TYPE_CONTENT,
                         String.valueOf(entity.getId()));
