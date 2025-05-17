@@ -26,7 +26,7 @@
         <version.servlet>6.1.0</version.servlet>
         <!-- http://mvnrepository.com/artifact/org.springframework/spring-core -->
         <!-- https://spring.io/projects/spring-framework -->
-        <version.spring>6.2.6</version.spring>
+        <version.spring>6.2.7</version.spring>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <!-- https://spring.io/projects/spring-boot -->
         <version.springBoot>3.4.5</version.springBoot>
@@ -34,9 +34,9 @@
         <version.juint>5.12.2</version.juint>
         <!-- http://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
         <!-- http://hibernate.org/orm/releases/ -->
-        <version.hibernate>6.6.13.Final</version.hibernate>
+        <version.hibernate>6.6.15.Final</version.hibernate>
         <!-- https://mvnrepository.com/artifact/org.hibernate.tool/hibernate-tools-orm -->
-        <version.hibernateTools>6.6.13.Final</version.hibernateTools>
+        <version.hibernateTools>6.6.15.Final</version.hibernateTools>
         <!-- https://mvnrepository.com/artifact/org.hibernate.search/hibernate-search-mapper-orm/ -->
         <!-- http://hibernate.org/search/releases/ -->
         <version.hibernateSearch>7.2.3.Final</version.hibernateSearch>
