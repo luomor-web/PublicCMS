@@ -169,10 +169,14 @@ function navTabAjaxDone(json) {
 function dialogAjaxDone(json) {
     JUI.ajaxDone(json);
     if (json[JUI.keys.statusCode] == JUI.statusCode.ok ) {
-        if (json.navTabId ) {
-            navTab.reload(json.forwardUrl, {
-                navTabId: json.navTabId
-            });
+        if ("forward" == json.callbackType ) {
+            if (json.navTabId ) {
+                navTab.reload(json.forwardUrl, {
+                    navTabId: json.navTabId
+                });
+            }else{
+                $.pdialog.reload(json.forwardUrl);
+            }
         } else {
             var $panel = navTab.getCurrentPanel();
             var $pagerForm = $(".pagerForm", navTab.getCurrentPanel());
