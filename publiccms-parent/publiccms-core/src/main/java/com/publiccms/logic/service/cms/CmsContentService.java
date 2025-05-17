@@ -483,16 +483,16 @@ public class CmsContentService extends BaseService<CmsContent> {
 
     /**
      * @param siteId
-     * @param user
+     * @param userId
      * @param id
      * @param checkPermissions
      * @return result
      */
-    public CmsContent checkInProcess(short siteId, SysUser user, Serializable id) {
+    public CmsContent checkInProcess(short siteId, Long userId, Serializable id) {
         CmsContent entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId() && STATUS_CHECKING == entity.getStatus()) {
             entity.setStatus(STATUS_NORMAL);
-            entity.setCheckUserId(user.getId());
+            entity.setCheckUserId(userId);
             entity.setCheckDate(CommonUtils.getDate());
         }
         return entity;
@@ -500,15 +500,15 @@ public class CmsContentService extends BaseService<CmsContent> {
 
     /**
      * @param siteId
-     * @param user
+     * @param userId
      * @param id
      * @return results list
      */
-    public CmsContent rejectInProcess(short siteId, SysUser user, Serializable id) {
+    public CmsContent rejectInProcess(short siteId, Long userId, Serializable id) {
         CmsContent entity = getEntity(id);
         if (null != entity && siteId == entity.getSiteId() && STATUS_CHECKING == entity.getStatus()) {
             entity.setStatus(STATUS_REJECT);
-            entity.setCheckUserId(user.getId());
+            entity.setCheckUserId(userId);
             entity.setCheckDate(CommonUtils.getDate());
         }
         return entity;

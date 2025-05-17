@@ -35,6 +35,10 @@ public class SysWorkflowProcessService extends BaseService<SysWorkflowProcess> {
      * 
      */
     public static final String ITEM_TYPE_CONTENT = "content";
+    /**
+     * 
+     */
+    public static final String ITEM_TYPE_PLACE = "place";
     @Resource
     private SysWorkflowService workflowService;
     @Resource

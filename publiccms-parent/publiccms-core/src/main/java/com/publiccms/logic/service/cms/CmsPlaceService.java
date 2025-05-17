@@ -50,6 +50,14 @@ public class CmsPlaceService extends BaseService<CmsPlace> {
     /**
      * 
      */
+    public static final int STATUS_REJECT = 4;
+    /**
+     * 
+     */
+    public static final int STATUS_CHECKING = 5;
+    /**
+     * 
+     */
     public static final String ITEM_TYPE_CONTENT = "content";
     /**
      * 
@@ -99,31 +107,94 @@ public class CmsPlaceService extends BaseService<CmsPlace> {
     }
 
     /**
+     * @param siteId
      * @param id
      * @param userId
      */
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public void check(Serializable id, Long userId) {
+    public void check(short siteId, Serializable id, Long userId) {
         CmsPlace entity = getEntity(id);
-        if (null != entity && STATUS_PEND == entity.getStatus()) {
+        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()) {
             entity.setStatus(STATUS_NORMAL);
             entity.setCheckUserId(userId);
         }
     }
 
     /**
+     * @param siteId
+     * @param user
+     * @param id
+     * @param checkPermissions
+     * @return result
+     */
+    public CmsPlace checking(short siteId, Serializable id) {
+        CmsPlace entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()) {
+            entity.setStatus(STATUS_CHECKING);
+        }
+        return entity;
+    }
+    
+    /**
+     * @param siteId
+     * @param userId
+     * @param id
+     * @param checkPermissions
+     * @return result
+     */
+    public CmsPlace checkInProcess(short siteId, Long userId, Serializable id) {
+        CmsPlace entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_CHECKING == entity.getStatus()) {
+            entity.setStatus(STATUS_NORMAL);
+            entity.setCheckUserId(userId);
+        }
+        return entity;
+    }
+
+    /**
+     * @param siteId
+     * @param userId 
+     * @param id
+     * @return results list
+     */
+    public CmsPlace rejectInProcess(short siteId, Long userId, Serializable id) {
+        CmsPlace entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_CHECKING == entity.getStatus()) {
+            entity.setStatus(STATUS_REJECT);
+            entity.setCheckUserId(userId);
+        }
+        return entity;
+    }
+
+    /**
+     * @param siteId
      * @param id
      */
-    public void uncheck(Serializable id) {
+    public void uncheck(short siteId, Serializable id) {
         CmsPlace entity = getEntity(id);
-        if (null != entity && STATUS_NORMAL == entity.getStatus()) {
+        if (null != entity && siteId == entity.getSiteId() && STATUS_NORMAL == entity.getStatus()) {
             entity.setStatus(STATUS_PEND);
         }
     }
 
     /**
+     * @param siteId
+     * @param userId
      * @param id
-     * @param on 
+     * @return results list
+     */
+    public CmsPlace reject(short siteId, Long userId, Serializable id) {
+        CmsPlace entity = getEntity(id);
+        if (null != entity && siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus()) {
+            entity.setStatus(STATUS_REJECT);
+            entity.setCheckUserId(userId);
+        }
+        return entity;
+    }
+
+    /**
+     * @param id
+     * @param on
      */
     public void shelf(Serializable id, boolean on) {
         CmsPlace entity = getEntity(id);
@@ -146,6 +217,21 @@ public class CmsPlaceService extends BaseService<CmsPlace> {
         for (CmsPlace entity : getEntitys(ids)) {
             if (siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus() && path.equals(entity.getPath())) {
                 entity.setStatus(STATUS_NORMAL);
+                entity.setCheckUserId(userId);
+            }
+        }
+    }
+
+    /**
+     * @param siteId
+     * @param userId
+     * @param ids 
+     * @param path 
+     */
+    public void reject(short siteId, Long userId, Serializable[] ids, String path) {
+        for (CmsPlace entity : getEntitys(ids)) {
+            if (siteId == entity.getSiteId() && STATUS_PEND == entity.getStatus() && path.equals(entity.getPath())) {
+                entity.setStatus(STATUS_REJECT);
                 entity.setCheckUserId(userId);
             }
         }
