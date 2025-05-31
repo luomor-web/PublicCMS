@@ -318,9 +318,9 @@ $('input[name$=\\.categoryModel\\.customContentPath]',navTab.getCurrentPanel()).
 checkCategoryModel();
 <#if showTab?has_content>
     <#if 'model'=showTab>
-    $('.tabs',navTab.getCurrentPanel()).attr('currentIndex',$('li.categoryModelControl').index('.tabsHeader ul li'));
+    $('.tabs',navTab.getCurrentPanel()).attr('currentIndex',$('li.categoryModelControl',navTab.getCurrentPanel()).index());
     <#elseif 'seo'=showTab>
-    $('.tabs',navTab.getCurrentPanel()).attr('currentIndex',$('li.seo').index('.tabsHeader ul li'));
+    $('.tabs',navTab.getCurrentPanel()).attr('currentIndex',$('li.seo',navTab.getCurrentPanel()).index());
     </#if>
 </#if>
 </script>
