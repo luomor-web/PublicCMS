@@ -333,3 +333,8 @@ UPDATE `sys_module_lang` SET value = 'ページ設定を保存' WHERE module_id 
 UPDATE `sys_module_lang` SET value = '保存页面配置' WHERE module_id = 'page_metadata' and lang = 'zh';
 DELETE FROM sys_module WHERE id = 'page_save';
 DELETE FROM sys_module_lang WHERE module_id = 'page_save';
+-- 2025-06-12 --
+INSERT INTO `sys_module` VALUES ('place_import', 'cmsPlace/import', 'cmsPlace/doImport', NULL, 'place_list', 0, 0, 0);
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'en', 'Import');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'ja', '導入');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'zh', '导入');

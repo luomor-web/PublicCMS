@@ -997,6 +997,7 @@ INSERT INTO `sys_module` VALUES ('place_clear', NULL, 'cmsPlace/clear', NULL, 'p
 INSERT INTO `sys_module` VALUES ('place_data_list', 'cmsPlace/dataList', 'cmsPlace/export', NULL, 'place_list', 0, 0, 1);
 INSERT INTO `sys_module` VALUES ('place_delete', NULL, 'cmsPlace/delete', NULL, 'place_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('place_form', 'placeTemplate/form', NULL, NULL, 'common', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('place_import', 'cmsPlace/import', 'cmsPlace/doImport', NULL, 'place_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('place_list', 'cmsPlace/list', NULL, 'icon-list-alt', 'page', 1, 1, 2);
 INSERT INTO `sys_module` VALUES ('place_publish', 'cmsPlace/metadata', 'cmsTemplate/publishPlace', NULL, 'place_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('place_refresh', NULL, 'cmsPlace/refresh', NULL, 'place_list', 0, 0, 0);
@@ -1525,6 +1526,9 @@ INSERT INTO `sys_module_lang` VALUES ('place_delete', 'zh', '删除推荐位数�
 INSERT INTO `sys_module_lang` VALUES ('place_form', 'en', 'Page fragment data contribute form');
 INSERT INTO `sys_module_lang` VALUES ('place_form', 'ja', 'ページフラグメント提出フォーム');
 INSERT INTO `sys_module_lang` VALUES ('place_form', 'zh', '页面片段投稿表单');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'en', 'Import');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'ja', '導入');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'zh', '导入');
 INSERT INTO `sys_module_lang` VALUES ('place_list', 'en', 'Page fragment management');
 INSERT INTO `sys_module_lang` VALUES ('place_list', 'ja', 'ページフラグメント管理');
 INSERT INTO `sys_module_lang` VALUES ('place_list', 'zh', '页面片段管理');

@@ -12,6 +12,7 @@ new feature:
 1. add markdown file import
 1. add AI (V5)
 1. add extend field type:template directory,webfile directory
+1. add place data import
 
 ## 202406.f
 
