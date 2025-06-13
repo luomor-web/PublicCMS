@@ -257,14 +257,14 @@ public class LoginAdminController {
     }
 
     /**
-     * @param admin
      * @param userId
      * @param request
      * @param response
      * @return view name
      */
     @GetMapping(value = "logout")
-    public String logout(@SessionAttribute SysUser admin, Long userId, HttpServletRequest request, HttpServletResponse response) {
+    public String logout(Long userId, HttpServletRequest request, HttpServletResponse response) {
+        SysUser admin = ControllerUtils.getAdminFromSession(request.getSession());
         if (null != userId && null != admin && userId.equals(admin.getId())) {
             Cookie userCookie = RequestUtils.getCookie(request.getCookies(), CommonConstants.getCookiesAdmin());
             if (null != userCookie && CommonUtils.notEmpty(userCookie.getValue())) {
