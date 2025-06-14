@@ -97,7 +97,7 @@ var webAuthnApp=new WebAuthnApp({
     loginResponseEndpoint : "${base+adminContextPath}/webauthn/assertion/result"
 });
 $(".btn-finger-login").on("click keydown",function(e){
-    if(e.originalEvent.type !== "keydown" || "Tab" !== e.originalEvent.code){
+    if(e.originalEvent.type !== "keydown" || "Space" === e.originalEvent.code || "Enter" === e.originalEvent.code){
         $(".error_msg").text("");
         if($('input[name=username]').val()){
             webAuthnApp.username = $("input[name=username]").val();
