@@ -40,7 +40,7 @@ subprojects {
         // 3.0,3.1 for Java 17
         springBootVersion = "2.7.18"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-        junitVersion = "5.12.1"
+        junitVersion = "5.13.1"
         // http://mvnrepository.com/artifact/org.hibernate/hibernate-core
         // http://hibernate.org/orm/downloads/
         // 6 for jakarta
@@ -68,7 +68,7 @@ subprojects {
         // https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql
         dynamicSqlVersion = "1.5.2"
         // http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-        jacksonVersion = "2.18.3"
+        jacksonVersion = "2.19.1"
         // http://mvnrepository.com/artifact/org.freemarker/freemarker
         freemarkerVersion = "2.3.34"
         // https://mvnrepository.com/artifact/org.apache.lucene/lucene-analyzers-smartcn
@@ -95,7 +95,7 @@ subprojects {
         // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
         poiVersion = "5.4.0"
         // http://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
-        fileuploadVersion = "1.5"
+        fileuploadVersion = "1.6.0"
         // http://mvnrepository.com/artifact/org.apache.commons/commons-collections4
         collectionsVersion = "4.5.0"
         // http://mvnrepository.com/artifact/org.apache.commons/commons-lang3
@@ -109,7 +109,7 @@ subprojects {
         // http://mvnrepository.com/artifact/commons-codec/commons-codec
         codecVersion = "1.18.0"
         // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-        log4jVersion = "2.24.3"
+        log4jVersion = "2.25.0"
         // https://mvnrepository.com/artifact/com.drewnoakes/metadata-extractor
         extractorVersion = "2.19.0"
         // https://mvnrepository.com/artifact/org.sejda.imageio/webp-imageio
@@ -123,7 +123,7 @@ subprojects {
         // https://mvnrepository.com/artifact/com.github.bgalek.security.svg/safe-svg
         safeSvgVersion = "1.1.8"
         // http://mvnrepository.com/artifact/com.blueconic/browscap-java
-        browscapVersion = "1.5.0"
+        browscapVersion = "1.5.1"
         // https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc
         therapiJavadocVersion = "0.15.0"
         // https://mvnrepository.com/artifact/org.jsoup/jsoup

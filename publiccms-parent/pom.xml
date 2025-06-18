@@ -34,7 +34,7 @@
         <!-- 3.0,3.1 for Java 17 -->
         <version.springBoot>2.7.18</version.springBoot>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
-        <version.juint>5.12.1</version.juint>
+        <version.juint>5.13.1</version.juint>
         <!-- http://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <!-- http://hibernate.org/orm/releases/ -->
         <!-- 6 for jakarta -->
@@ -63,7 +63,7 @@
         <!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
         <version.ehcache>3.10.8</version.ehcache>
         <!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <version.jackson>2.18.3</version.jackson>
+        <version.jackson>2.19.1</version.jackson>
         <!-- http://mvnrepository.com/artifact/org.freemarker/freemarker -->
         <version.freemarker>2.3.34</version.freemarker>
         <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
@@ -89,7 +89,7 @@
         <!-- 2.1.0 for Java 17+ -->
         <version.xhtmlConverter>2.0.6</version.xhtmlConverter>
         <!-- http://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-        <version.fileupload>1.5</version.fileupload>
+        <version.fileupload>1.6.0</version.fileupload>
         <!-- http://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
         <version.collections>4.5.0</version.collections>
         <!-- http://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -103,7 +103,7 @@
         <!-- http://mvnrepository.com/artifact/commons-codec/commons-codec -->
         <version.codec>1.18.0</version.codec>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-        <version.log4j>2.24.3</version.log4j>
+        <version.log4j>2.25.0</version.log4j>
         <!-- https://mvnrepository.com/artifact/com.drewnoakes/metadata-extractor -->
         <version.extractor>2.19.0</version.extractor>
         <!-- https://mvnrepository.com/artifact/org.sejda.imageio/webp-imageio -->
@@ -117,7 +117,7 @@
         <!-- https://mvnrepository.com/artifact/com.github.bgalek.security.svg/safe-svg -->
         <version.safeSvg>1.1.8</version.safeSvg>
         <!-- https://mvnrepository.com/artifact/com.blueconic/browscap-java -->
-        <version.browscap>1.5.0</version.browscap>
+        <version.browscap>1.5.1</version.browscap>
         <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc -->
         <version.therapiJavadoc>0.15.0</version.therapiJavadoc>
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
