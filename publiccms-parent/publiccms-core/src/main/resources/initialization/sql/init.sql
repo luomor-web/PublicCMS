@@ -2043,7 +2043,7 @@ CREATE TABLE `sys_user_setting` (
   `create_date` datetime(0) NULL COMMENT '创建日期',
   `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`user_id`,`code`)
-);
+) COMMENT='用户设置';
 
 -- ----------------------------
 -- Table structure for sys_user_token

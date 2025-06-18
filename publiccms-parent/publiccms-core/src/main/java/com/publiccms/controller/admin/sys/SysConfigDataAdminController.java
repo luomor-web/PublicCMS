@@ -186,25 +186,22 @@ public class SysConfigDataAdminController {
                                 .getEntity(new SysDeptItemId(admin.getDeptId(), SysDeptItemService.ITEM_TYPE_CONFIG, code))),
                         model)) {
         } else {
+            DateFormat dateFormat = DateFormatUtils.getDateFormat(DateFormatUtils.DOWNLOAD_FORMAT_STRING);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentDisposition(ContentDisposition.attachment()
+                    .filename(CommonUtils.joinString(site.getName(), dateFormat.format(new Date()), "-config.zip"),
+                            StandardCharsets.UTF_8)
+                    .build());
             SysConfigData entity = service.getEntity(new SysConfigDataId(site.getId(), code));
-            if (null != entity) {
-                DateFormat dateFormat = DateFormatUtils.getDateFormat(DateFormatUtils.DOWNLOAD_FORMAT_STRING);
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentDisposition(ContentDisposition.attachment()
-                        .filename(CommonUtils.joinString(site.getName(), dateFormat.format(new Date()), "-config.zip"),
-                                StandardCharsets.UTF_8)
-                        .build());
-                StreamingResponseBody body = new StreamingResponseBody() {
-                    @Override
-                    public void writeTo(OutputStream outputStream) throws IOException {
-                        try (ArchiveOutputStream<ZipArchiveEntry> archiveOutputStream = new ZipArchiveOutputStream(
-                                outputStream)) {
-                            exchangeComponent.exportEntity(site, entity, archiveOutputStream);
-                        }
+            StreamingResponseBody body = new StreamingResponseBody() {
+                @Override
+                public void writeTo(OutputStream outputStream) throws IOException {
+                    try (ArchiveOutputStream<ZipArchiveEntry> archiveOutputStream = new ZipArchiveOutputStream(outputStream)) {
+                        exchangeComponent.exportEntity(site, entity, archiveOutputStream);
                     }
-                };
-                return ResponseEntity.ok().headers(headers).body(body);
-            }
+                }
+            };
+            return ResponseEntity.ok().headers(headers).body(body);
         }
         return ResponseEntity.notFound().build();
     }

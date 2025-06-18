@@ -259,7 +259,7 @@ CREATE TABLE `sys_user_setting` (
   `create_date` datetime NOT NULL COMMENT '创建日期',
   `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`user_id`,`code`)
-);
+) COMMENT='用户设置';
 ALTER TABLE `sys_user_attribute`
     DROP COLUMN `settings`,
     ADD COLUMN `create_date` datetime DEFAULT NULL COMMENT '创建日期' AFTER `data`,
