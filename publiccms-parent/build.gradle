@@ -47,7 +47,7 @@ subprojects {
         // http://hibernate.org/search/downloads/
         hibernateSearchVersion = "8.0.0.Final"
         // https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
-        hibernateValidatorVersion = "8.0.2.Final"
+        hibernateValidatorVersion = "9.0.1.Final"
         // https://mvnrepository.com/artifact/org.ehcache/ehcache
         ehcacheVersion = "3.10.8"
         // http://mvnrepository.com/artifact/org.mybatis/mybatis
@@ -100,7 +100,7 @@ subprojects {
         // http://mvnrepository.com/artifact/commons-codec/commons-codec
         codecVersion = "1.18.0"
         // https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging
-        jbossLoggingVersion = "3.6.0.Final"
+        jbossLoggingVersion = "3.6.1.Final"
         // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
         log4jVersion = "2.25.0"
         // https://mvnrepository.com/artifact/com.drewnoakes/metadata-extractor
@@ -124,7 +124,7 @@ subprojects {
         // https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
         annotationVersion = "2.1.1"
         // https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api
-        mailApiVersion = "2.1.2"
+        mailApiVersion = "2.1.3"
         // https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail
         mailVersion = "2.0.1"
         // https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime
