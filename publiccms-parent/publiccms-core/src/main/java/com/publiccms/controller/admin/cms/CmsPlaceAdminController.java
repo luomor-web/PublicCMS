@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.publiccms.common.annotation.Csrf;
@@ -43,6 +44,7 @@ import com.publiccms.entities.sys.SysWorkflowProcessItem;
 import com.publiccms.entities.sys.SysWorkflowProcessItemId;
 import com.publiccms.logic.component.exchange.PlaceExchangeComponent;
 import com.publiccms.logic.component.exchange.PlaceExportComponent;
+import com.publiccms.logic.component.exchange.PlaceImportComponent;
 import com.publiccms.logic.component.site.SiteComponent;
 import com.publiccms.logic.component.template.MetadataComponent;
 import com.publiccms.logic.component.template.TemplateComponent;
@@ -93,6 +95,8 @@ public class CmsPlaceAdminController {
     private PlaceExchangeComponent exchangeComponent;
     @Resource
     private PlaceExportComponent exportComponent;
+    @Resource
+    private PlaceImportComponent importComponent;
     @Resource
     private SysWorkflowProcessItemService workflowProcessItemService;
     @Resource
@@ -179,8 +183,8 @@ public class CmsPlaceAdminController {
             }
 
             if (null != metadata.getWorkflowId()) {
-                SysWorkflowProcessItem item = workflowProcessItemService.getEntity(new SysWorkflowProcessItemId(
-                        SysWorkflowProcessService.ITEM_TYPE_PLACE, String.valueOf(entity.getId())));
+                SysWorkflowProcessItem item = workflowProcessItemService.getEntity(
+                        new SysWorkflowProcessItemId(SysWorkflowProcessService.ITEM_TYPE_PLACE, String.valueOf(entity.getId())));
                 if (null == item || null != oldEntity && CmsContentService.STATUS_NORMAL == oldEntity.getStatus()) {
                     SysWorkflowProcess process = workflowProcessService.createProcess(site.getId(), metadata.getWorkflowId(),
                             admin.getId(), entity.getTitle(), SysWorkflowProcessService.ITEM_TYPE_PLACE,
@@ -360,6 +364,24 @@ public class CmsPlaceAdminController {
         Locale locale = RequestContextUtils.getLocale(request);
         return exportComponent.exportExcelByQuery(site, path, userId, status, itemType, itemId, startPublishDate, endPublishDate,
                 orderField, orderType, locale);
+    }
+
+    /**
+     * @param site
+     * @param admin
+     * @param path
+     * @param file
+     * @param model
+     * @return view name
+     */
+    @RequestMapping("doImport")
+    @Csrf
+    public String doImport(@RequestAttribute SysSite site, @SessionAttribute SysUser admin, String path, MultipartFile file,
+            ModelMap model) {
+        if (CommonUtils.notEmpty(path)) {
+            path = path.replace("//", Constants.SEPARATOR);
+        }
+        return importComponent.importExcel(site, path, file, admin.getId(), model);
     }
 
     /**

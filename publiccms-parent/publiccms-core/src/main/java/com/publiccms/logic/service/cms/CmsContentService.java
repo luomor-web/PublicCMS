@@ -332,27 +332,31 @@ public class CmsContentService extends BaseService<CmsContent> {
     public void rebuildSearchText(SysSite site, CmsModel cmsModel, List<SysExtendField> categoryExtendList,
             List<CmsContent> list) {
         for (CmsContent entity : list) {
-            CmsContentAttribute attribute = attributeService.getEntity(entity.getId());
-            if (null == attribute) {
-                attribute = new CmsContentAttribute(entity.getId(), 0);
-            }
-            List<SysExtendField> modelExtendList = cmsModel.getExtendList();
-            List<CmsContentFile> files = null;
-            List<CmsContentFile> images = null;
-            List<CmsContentProduct> products = null;
-            if (entity.isHasFiles()) {
-                files = contentFileService.getList(entity.getId(), CmsFileUtils.OTHER_FILETYPES);
-            }
-            if (entity.isHasImages()) {
-                images = contentFileService.getList(entity.getId(), CmsFileUtils.IMAGE_FILETYPES);
-            }
-            if (entity.isHasProducts()) {
-                products = contentProductService.getList(site.getId(), entity.getId());
-            }
-            dealAttribute(entity, site, modelExtendList, categoryExtendList, ExtendUtils.getExtendMap(attribute.getData()),
-                    cmsModel, files, images, products, attribute);
-            attributeService.updateAttribute(entity.getId(), attribute);
+            rebuildSearchText(site, cmsModel, categoryExtendList, entity);
         }
+    }
+
+    public void rebuildSearchText(SysSite site, CmsModel cmsModel, List<SysExtendField> categoryExtendList, CmsContent entity) {
+        CmsContentAttribute attribute = attributeService.getEntity(entity.getId());
+        if (null == attribute) {
+            attribute = new CmsContentAttribute(entity.getId(), 0);
+        }
+        List<SysExtendField> modelExtendList = cmsModel.getExtendList();
+        List<CmsContentFile> files = null;
+        List<CmsContentFile> images = null;
+        List<CmsContentProduct> products = null;
+        if (entity.isHasFiles()) {
+            files = contentFileService.getList(entity.getId(), CmsFileUtils.OTHER_FILETYPES);
+        }
+        if (entity.isHasImages()) {
+            images = contentFileService.getList(entity.getId(), CmsFileUtils.IMAGE_FILETYPES);
+        }
+        if (entity.isHasProducts()) {
+            products = contentProductService.getList(site.getId(), entity.getId());
+        }
+        dealAttribute(entity, site, modelExtendList, categoryExtendList, ExtendUtils.getExtendMap(attribute.getData()),
+                cmsModel, files, images, products, attribute);
+        attributeService.updateAttribute(entity.getId(), attribute);
     }
 
     private void dealAttribute(CmsContent entity, SysSite site, List<SysExtendField> modelExtendList,

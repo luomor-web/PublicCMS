@@ -55,10 +55,12 @@
     </#if>
     <#if authorizedMap['cmsContent/list']>
         <li>
-            <a href="cmsContent/list?categoryId=${(category.id)!}" target="navTab" rel="cmsContent/list" <#if content?has_content || authorizedMap['cmsContent/addMore'] && itemType?has_content && 'category'=itemType>class="addMore" </#if>data-diy="content"><#if content?has_content || authorizedMap['cmsContent/addMore'] && itemType?has_content && 'category'=itemType><i class="icon-double-angle-down icon-large"></i></#if><@t.page 'content.management'/></a>
+            <a href="cmsContent/list?categoryId=${(category.id)!}" target="navTab" rel="cmsContent/list"<#if content?has_content || authorizedMap['cmsContent/addMore'] && itemType?has_content && 'category'=itemType> class="addMore" data-diy="content"><i class="icon-double-angle-down icon-large"></i><#else>></#if><@t.page 'content.management'/></a>
             <a href="cmsContent/list?categoryId={itemId}" target="navTab" rel="cmsContent/list" class="hide" data-diy="category" data-diy-item="itemId"><@t.page 'content.management'/></a>
             <a href="cmsContent/list?categoryId={itemId}" target="navTab" rel="cmsContent/list" class="hide" data-diy="child-category" data-diy-item="itemId"><@t.page 'content.management'/></a>
             <#if authorizedMap['cmsContent/add']>
+                <a href="cmsContent/addMore.html?categoryId={itemId}" target="dialog" mask="true" class="hide" data-diy="category" data-diy-item="itemId"><i class="bi bi-plus-circle-dotted"></i><@t.page 'content.add'/></a>
+                <a href="cmsContent/addMore.html?categoryId={itemId}" target="dialog" mask="true" class="hide" data-diy="child-category" data-diy-item="itemId"><i class="bi bi-plus-circle-dotted"></i><@t.page 'content.add'/></a>
                 <a href="cmsContent/add.html?id={itemId}" target="navTab" rel="cmsContent/edit" class="hide" data-diy="content" data-diy-item="itemId"><i class="icon-edit"></i><@t.page 'content.edit'/></a>
             </#if>
             <#if content?has_content || authorizedMap['cmsContent/addMore'] && itemType?has_content && 'category'=itemType>

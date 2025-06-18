@@ -985,11 +985,10 @@ INSERT INTO `sys_module` VALUES ('page', NULL, NULL, 'icon-tablet', NULL, 1, 1, 
 INSERT INTO `sys_module` VALUES ('page_diy', 'cmsPage/diy', 'cmsPage/region,cmsDiy/save', 'bi bi-palette', 'page', 1, 1, 3);
 INSERT INTO `sys_module` VALUES ('page_diy_buttons', 'cmsDiy/buttons', NULL, NULL, 'page_diy', 0, 0, 3);
 INSERT INTO `sys_module` VALUES ('page_diy_region', 'cmsPage/region', NULL, NULL, 'page_diy', 0, 0, 1);
-INSERT INTO `sys_module` VALUES ('page_list', 'cmsPage/list', 'cmsPage/metadata', 'icon-globe', 'page', 1, 1, 1);
-INSERT INTO `sys_module` VALUES ('page_metadata', 'cmsPage/metadata', 'cmsPage/save', NULL, 'page_list', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('page_list', 'cmsPage/list', NULL, 'icon-globe', 'page', 1, 1, 1);
+INSERT INTO `sys_module` VALUES ('page_metadata', 'cmsPage/metadata', 'cmsPage/save,cmsPage/clearCache', NULL, 'page_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('page_preview', 'cmsDiy/preview', NULL, 'bi bi-palette2', 'page', 1, 0, 0);
 INSERT INTO `sys_module` VALUES ('page_publish', NULL, 'cmsTemplate/publish', NULL, 'page_list', 0, 0, 0);
-INSERT INTO `sys_module` VALUES ('page_save', NULL, 'cmsPage/save,cmsPage/clearCache', NULL, 'page_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('payment_history_list', 'tradePaymentHistory/list', 'tradePaymentHistory/view', NULL, 'trade_payment', 1, 0, 0);
 INSERT INTO `sys_module` VALUES ('payment_list', 'tradePayment/list', 'tradePayment/refund,tradePayment/refuse', 'icon-money', 'trade', 1, 0, 3);
 INSERT INTO `sys_module` VALUES ('place_add', 'cmsPlace/add', 'cmsPlace/lookup,cmsPlace/lookup_content_list,cmsPlace/save', NULL, 'place_list', 0, 0, 0);
@@ -998,6 +997,7 @@ INSERT INTO `sys_module` VALUES ('place_clear', NULL, 'cmsPlace/clear', NULL, 'p
 INSERT INTO `sys_module` VALUES ('place_data_list', 'cmsPlace/dataList', 'cmsPlace/export', NULL, 'place_list', 0, 0, 1);
 INSERT INTO `sys_module` VALUES ('place_delete', NULL, 'cmsPlace/delete', NULL, 'place_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('place_form', 'placeTemplate/form', NULL, NULL, 'common', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('place_import', 'cmsPlace/import', 'cmsPlace/doImport', NULL, 'place_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('place_list', 'cmsPlace/list', NULL, 'icon-list-alt', 'page', 1, 1, 2);
 INSERT INTO `sys_module` VALUES ('place_publish', 'cmsPlace/metadata', 'cmsTemplate/publishPlace', NULL, 'place_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('place_refresh', NULL, 'cmsPlace/refresh', NULL, 'place_list', 0, 0, 0);
@@ -1104,7 +1104,7 @@ INSERT INTO `sys_module` VALUES ('webfile_content', 'cmsWebFile/content', 'cmsWe
 INSERT INTO `sys_module` VALUES ('webfile_directory', 'cmsWebFile/directory', 'cmsWebFile/createDirectory', NULL, 'webfile_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('webfile_list', 'cmsWebFile/list', NULL, 'icon-globe', 'file', 1, 1, 5);
 INSERT INTO `sys_module` VALUES ('webfile_unzip', 'cmsWebFile/unzipParameters', 'cmsWebFile/unzip', NULL, 'webfile_list', 0, 0, 0);
-INSERT INTO `sys_module` VALUES ('webfile_upload', 'cmsWebFile/upload', 'cmsWebFile/doUpload,cmsWebFile/uploadIco,cmsWebFile/doUpload,cmsWebFile/doUploadIco,cmsWebFile/check', NULL, 'webfile_list', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('webfile_upload', 'cmsWebFile/upload', 'cmsWebFile/doUpload,cmsWebFile/uploadIco,cmsWebFile/doUploadIco,cmsWebFile/check', NULL, 'webfile_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('webfile_zip', NULL, 'cmsWebFile/zip', NULL, 'webfile_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('word_list', 'cmsWord/list', 'cmsWord/hidden,cmsWord/delete,cmsWord/show,cmsWord/add,cmsWord/save', 'bi bi-search-heart', 'content', 1, 0, 10);
 INSERT INTO `sys_module` VALUES ('workflow_view', 'sysWorkflow/view', NULL, NULL, 'common', 1, 0, 0);
@@ -1493,18 +1493,15 @@ INSERT INTO `sys_module_lang` VALUES ('page_diy_region', 'zh', '区域');
 INSERT INTO `sys_module_lang` VALUES ('page_list', 'en', 'Page management');
 INSERT INTO `sys_module_lang` VALUES ('page_list', 'ja', 'ページ管理');
 INSERT INTO `sys_module_lang` VALUES ('page_list', 'zh', '页面管理');
-INSERT INTO `sys_module_lang` VALUES ('page_metadata', 'en', 'Metadata management');
-INSERT INTO `sys_module_lang` VALUES ('page_metadata', 'ja', 'メタデータ管理');
-INSERT INTO `sys_module_lang` VALUES ('page_metadata', 'zh', '元数据管理');
+INSERT INTO `sys_module_lang` VALUES ('page_metadata', 'en', 'Save configuration');
+INSERT INTO `sys_module_lang` VALUES ('page_metadata', 'ja', 'ページ設定を保存');
+INSERT INTO `sys_module_lang` VALUES ('page_metadata', 'zh', '保存页面配置');
 INSERT INTO `sys_module_lang` VALUES ('page_preview', 'en', 'Quick Maintenance');
 INSERT INTO `sys_module_lang` VALUES ('page_preview', 'ja', 'クイックメンテナンス');
 INSERT INTO `sys_module_lang` VALUES ('page_preview', 'zh', '快捷维护');
 INSERT INTO `sys_module_lang` VALUES ('page_publish', 'en', 'Publish');
 INSERT INTO `sys_module_lang` VALUES ('page_publish', 'ja', 'ページを生成する');
 INSERT INTO `sys_module_lang` VALUES ('page_publish', 'zh', '生成页面');
-INSERT INTO `sys_module_lang` VALUES ('page_save', 'en', 'Save configuration');
-INSERT INTO `sys_module_lang` VALUES ('page_save', 'ja', 'ページ設定を保存');
-INSERT INTO `sys_module_lang` VALUES ('page_save', 'zh', '保存页面配置');
 INSERT INTO `sys_module_lang` VALUES ('payment_history_list', 'en', 'Payment history');
 INSERT INTO `sys_module_lang` VALUES ('payment_history_list', 'ja', '支払歴');
 INSERT INTO `sys_module_lang` VALUES ('payment_history_list', 'zh', '支付历史');
@@ -1529,6 +1526,9 @@ INSERT INTO `sys_module_lang` VALUES ('place_delete', 'zh', '删除推荐位数�
 INSERT INTO `sys_module_lang` VALUES ('place_form', 'en', 'Page fragment data contribute form');
 INSERT INTO `sys_module_lang` VALUES ('place_form', 'ja', 'ページフラグメント提出フォーム');
 INSERT INTO `sys_module_lang` VALUES ('place_form', 'zh', '页面片段投稿表单');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'en', 'Import');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'ja', '導入');
+INSERT INTO `sys_module_lang` VALUES ('place_import', 'zh', '导入');
 INSERT INTO `sys_module_lang` VALUES ('place_list', 'en', 'Page fragment management');
 INSERT INTO `sys_module_lang` VALUES ('place_list', 'ja', 'ページフラグメント管理');
 INSERT INTO `sys_module_lang` VALUES ('place_list', 'zh', '页面片段管理');
@@ -2043,7 +2043,7 @@ CREATE TABLE `sys_user_setting` (
   `create_date` datetime(0) NULL COMMENT '创建日期',
   `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`user_id`,`code`)
-);
+) COMMENT='用户设置';
 
 -- ----------------------------
 -- Table structure for sys_user_token
