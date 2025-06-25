@@ -40,7 +40,7 @@ subprojects {
         // 3.0,3.1 for Java 17
         springBootVersion = "2.7.18"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-        junitVersion = "5.13.1"
+        junitVersion = "5.13.2"
         // http://mvnrepository.com/artifact/org.hibernate/hibernate-core
         // http://hibernate.org/orm/downloads/
         // 6 for jakarta
@@ -64,7 +64,7 @@ subprojects {
         // http://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core
         mybatisGenerator = "1.4.2"
         // https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper
-        pageHelperVersion = "6.1.0"
+        pageHelperVersion = "6.1.1"
         // https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql
         dynamicSqlVersion = "1.5.2"
         // http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
@@ -127,7 +127,7 @@ subprojects {
         // https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc
         therapiJavadocVersion = "0.15.0"
         // https://mvnrepository.com/artifact/org.jsoup/jsoup
-        jsoupVersion = "1.20.1"
+        jsoupVersion = "1.21.1"
         // https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
         annotationVersion = "1.3.5"
         // https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api
