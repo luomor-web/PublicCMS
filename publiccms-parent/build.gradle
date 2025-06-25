@@ -128,7 +128,7 @@ subprojects {
         // https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail
         mailVersion = "2.0.1"
         // https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime
-        jaxbVersion = "4.0.5"
+        jaxbVersion = "2.3.9"
     }
     sourceCompatibility = 17
     targetCompatibility = 17
