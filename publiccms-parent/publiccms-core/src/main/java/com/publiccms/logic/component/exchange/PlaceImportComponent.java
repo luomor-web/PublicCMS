@@ -75,6 +75,7 @@ public class PlaceImportComponent {
             for (int rowNum = sheet.getFirstRowNum() + 1; rowNum <= lastRowNum; rowNum++) {
                 j = 1;
                 CmsPlace entity = new CmsPlace();
+                entity.setPath(path);
                 CmsPlaceAttribute attribute = new CmsPlaceAttribute();
                 row = sheet.getRow(rowNum);
                 entity.setTitle(XSSFWorkbookUtils.getCellValue(row.getCell(j++)));
