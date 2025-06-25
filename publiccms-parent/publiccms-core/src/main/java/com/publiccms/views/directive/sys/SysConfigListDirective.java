@@ -19,16 +19,12 @@ import freemarker.template.TemplateException;
 /**
  *
  * sysConfigList 配置列表查询指令
- * <p lang="zh">返回结果
- * <p lang="en">return result
- * <p lang="ja">戻り値
+ * <p>返回结果
  * <ul>
  * <li><code>list</code>:List类型 查询结果实体列表
  * {@link com.publiccms.views.pojo.entities.ConfigInfo}
  * </ul>
- * <p lang="zh">使用示例
- * <p lang="en">usage example
- * <p lang="ja">使用例
+ * <p>使用示例
  * <p>
  * &lt;@sys.configList&gt;&lt;#list list as
  * a&gt;${a.code}&lt;#sep&gt;,&lt;/#list&gt;&lt;/@sys.configList&gt;
