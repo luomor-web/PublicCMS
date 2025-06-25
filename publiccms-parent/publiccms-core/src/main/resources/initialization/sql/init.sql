@@ -912,7 +912,7 @@ INSERT INTO `sys_module` VALUES ('config_list', 'sysConfig/list', NULL, 'icon-co
 INSERT INTO `sys_module` VALUES ('content', NULL, NULL, 'bi bi-file-post', NULL, 1, 1, 2);
 INSERT INTO `sys_module` VALUES ('content_add', 'cmsContent/add', 'cmsContent/addMore,cmsContent/save', NULL, 'content_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('content_change_model', 'cmsContent/changeModelParameters', 'cmsContent/changeModel', NULL, 'content_list', 0, 0, 0);
-INSERT INTO `sys_module` VALUES ('content_check', 'cmsContent/uncheck_list', 'cmsContent/check,cmsContent/reject', NULL, 'content_list', 0, 0, 1);
+INSERT INTO `sys_module` VALUES ('content_check', 'cmsContent/uncheck_list', 'cmsContent/check,cmsContent/reject', NULL, 'content_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('content_delete', NULL, 'cmsContent/delete', NULL, 'content_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('content_distribute', 'cmsCategory/lookupBySiteId', 'cmsContent/distribute', NULL, 'content_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('content_export', 'cmsContent/export', 'cmsContent/exportExcel,cmsContent/exportData', NULL, 'content_list', 0, 0, 0);
@@ -1070,7 +1070,7 @@ INSERT INTO `sys_module` VALUES ('task_template_fragment', 'taskTemplate/chipLoo
 INSERT INTO `sys_module` VALUES ('task_template_help', 'cmsTemplate/help', NULL, NULL, 'task_template_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('task_template_list', 'taskTemplate/list', NULL, 'icon-time', 'file', 1, 1, 4);
 INSERT INTO `sys_module` VALUES ('task_template_list_export', NULL, 'taskTemplate/export', NULL, 'task_template_list', 0, 0, 0);
-INSERT INTO `sys_module` VALUES ('template_content', 'cmsTemplate/content', 'cmsTemplate/save,cmsTemplate/saveMetaData,cmsWebFile/lookup,cmsTemplate/help', NULL, 'template_list', 0, 0, 0);
+INSERT INTO `sys_module` VALUES ('template_content', 'cmsTemplate/content', 'cmsTemplate/save,cmsTemplate/saveMetadata,cmsWebFile/lookup,cmsTemplate/help', NULL, 'template_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('template_content-type', 'cmsTemplate/contentTypeLookup', NULL, NULL, 'template_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('template_delete', NULL, 'cmsTemplate/delete', NULL, 'template_list', 0, 0, 0);
 INSERT INTO `sys_module` VALUES ('template_demo', 'cmsTemplate/demo', NULL, NULL, 'template_list', 0, 0, 0);
@@ -1427,9 +1427,6 @@ INSERT INTO `sys_module_lang` VALUES ('myself_content_push', 'zh', '推荐');
 INSERT INTO `sys_module_lang` VALUES ('myself_content_refresh', 'en', 'Refresh');
 INSERT INTO `sys_module_lang` VALUES ('myself_content_refresh', 'ja', 'リフレッシュ');
 INSERT INTO `sys_module_lang` VALUES ('myself_content_refresh', 'zh', '刷新');
-INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'en', 'View');
-INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'ja', '見る');
-INSERT INTO `sys_module_lang` VALUES ('myself_content_view', 'zh', '查看');
 INSERT INTO `sys_module_lang` VALUES ('myself_dept', 'en', 'My department');
 INSERT INTO `sys_module_lang` VALUES ('myself_dept', 'ja', '私の部署');
 INSERT INTO `sys_module_lang` VALUES ('myself_dept', 'zh', '我的部门');
@@ -1451,9 +1448,6 @@ INSERT INTO `sys_module_lang` VALUES ('myself_log_operate', 'zh', '我的操作�
 INSERT INTO `sys_module_lang` VALUES ('myself_password', 'en', 'Change password');
 INSERT INTO `sys_module_lang` VALUES ('myself_password', 'ja', 'パスワードを変更');
 INSERT INTO `sys_module_lang` VALUES ('myself_password', 'zh', '修改密码');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'en', 'Process view');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'ja', 'プロセスビューイング');
-INSERT INTO `sys_module_lang` VALUES ('myself_process_view', 'zh', '流程查看');
 INSERT INTO `sys_module_lang` VALUES ('myself_profile', 'en', 'Modify personal information');
 INSERT INTO `sys_module_lang` VALUES ('myself_profile', 'ja', '個人情報を変更する');
 INSERT INTO `sys_module_lang` VALUES ('myself_profile', 'zh', '修改个人信息');
@@ -1556,7 +1550,7 @@ INSERT INTO `sys_module_lang` VALUES ('place_view', 'zh', '查看推荐位数据
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'en', 'Handle');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'ja', 'ハンドル');
 INSERT INTO `sys_module_lang` VALUES ('process_handle', 'zh', '处理');
-INSERT INTO `sys_module_lang` VALUES ('process_list', 'en', 'Review Process');
+INSERT INTO `sys_module_lang` VALUES ('process_list', 'en', 'Review process');
 INSERT INTO `sys_module_lang` VALUES ('process_list', 'ja', 'レビュープロセス');
 INSERT INTO `sys_module_lang` VALUES ('process_list', 'zh', '审核流程');
 INSERT INTO `sys_module_lang` VALUES ('process_view', 'en', 'View');
@@ -2040,7 +2034,7 @@ CREATE TABLE `sys_user_setting` (
   `user_id` bigint(20) NOT NULL COMMENT '用户',
   `code` varchar(50) NOT NULL COMMENT '编码',
   `data` longblob NOT NULL COMMENT '值',
-  `create_date` datetime(0) NULL COMMENT '创建日期',
+  `create_date` datetime(0) NOT NULL COMMENT '创建日期',
   `update_date` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`user_id`,`code`)
 ) COMMENT='用户设置';
