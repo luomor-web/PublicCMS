@@ -773,7 +773,7 @@ CREATE TABLE `sys_domain` (
 -- ----------------------------
 -- Records of sys_domain
 -- ----------------------------
-INSERT INTO `sys_domain` VALUES ('dev.publiccms.com', '1', '1',  '');
+INSERT INTO `sys_domain` VALUES ('dev.publiccms.com', '1', '1', '');
 INSERT INTO `sys_domain` VALUES ('localhost', '1', '1', '');
 
 
