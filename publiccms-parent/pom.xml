@@ -29,14 +29,14 @@
         <version.spring>6.2.8</version.spring>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <!-- https://spring.io/projects/spring-boot -->
-        <version.springBoot>3.5.0</version.springBoot>
+        <version.springBoot>3.5.3</version.springBoot>
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
-        <version.juint>5.13.1</version.juint>
+        <version.juint>5.13.2</version.juint>
         <!-- http://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
         <!-- http://hibernate.org/orm/releases/ -->
-        <version.hibernate>7.0.2.Final</version.hibernate>
+        <version.hibernate>7.0.3.Final</version.hibernate>
         <!-- https://mvnrepository.com/artifact/org.hibernate.tool/hibernate-tools-orm -->
-        <version.hibernateTools>7.0.2.Final</version.hibernateTools>
+        <version.hibernateTools>7.0.3.Final</version.hibernateTools>
         <!-- https://mvnrepository.com/artifact/org.hibernate.search/hibernate-search-mapper-orm/ -->
         <!-- http://hibernate.org/search/releases/ -->
         <version.hibernateSearch>8.0.0.Final</version.hibernateSearch>
@@ -49,7 +49,7 @@
         <!-- http://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core -->
         <version.mybatisGenerator>1.4.2</version.mybatisGenerator>
         <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
-        <version.pagehelper>6.1.0</version.pagehelper>
+        <version.pagehelper>6.1.1</version.pagehelper>
         <!-- https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql -->
         <version.dynamicSql>1.5.2</version.dynamicSql>
         <!-- https://mvnrepository.com/artifact/org.ehcache/ehcache -->
@@ -60,7 +60,7 @@
         <version.freemarker>2.3.34</version.freemarker>
         <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
         <!-- 10 for java 21 https://lucene.apache.org/core/10_0_0/SYSTEM_REQUIREMENTS.html -->
-        <version.lucene>9.12.1</version.lucene>
+        <version.lucene>9.12.2</version.lucene>
         <!-- http://mvnrepository.com/artifact/redis.clients/jedis -->
         <!-- https://github.com/redis/jedis -->
         <version.jedis>6.0.0</version.jedis>
@@ -113,7 +113,7 @@
         <!-- https://mvnrepository.com/artifact/com.github.therapi/therapi-runtime-javadoc -->
         <version.therapiJavadoc>0.15.0</version.therapiJavadoc>
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
-        <version.jsoup>1.20.1</version.jsoup>
+        <version.jsoup>1.21.1</version.jsoup>
         <!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
         <version.annotation>2.1.1</version.annotation>
         <!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
