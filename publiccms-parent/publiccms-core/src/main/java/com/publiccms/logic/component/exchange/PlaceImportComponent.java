@@ -76,6 +76,7 @@ public class PlaceImportComponent {
                 j = 1;
                 CmsPlace entity = new CmsPlace();
                 entity.setPath(path);
+                entity.setSiteId(site.getId());
                 CmsPlaceAttribute attribute = new CmsPlaceAttribute();
                 row = sheet.getRow(rowNum);
                 entity.setTitle(XSSFWorkbookUtils.getCellValue(row.getCell(j++)));
@@ -102,7 +103,7 @@ public class PlaceImportComponent {
                 }
                 j++;
                 entity.setStatus(CmsPlaceService.STATUS_PEND);
-                service.save(entity);
+                j++;
                 if (CommonUtils.notEmpty(metadata.getExtendList())) {
                     Map<String, String> map = new HashMap<>();
                     for (SysExtendField extend : metadata.getExtendList()) {
@@ -112,6 +113,13 @@ public class PlaceImportComponent {
                     attribute.setPlaceId(entity.getId());
                     attributeService.save(attribute);
                 }
+                if (row.getLastCellNum() > j) {
+                    entity.setItemType(XSSFWorkbookUtils.getCellValue(row.getCell(j++)));
+                    if (!CmsPlaceService.ITEM_TYPE_CUSTOM.equalsIgnoreCase(entity.getItemType())) {
+                        entity.setItemId(Long.valueOf(XSSFWorkbookUtils.getCellValue(row.getCell(j++))));
+                    }
+                }
+                service.save(entity);
             }
             return CommonConstants.TEMPLATE_DONE;
         } catch (EncryptedDocumentException | IOException e) {
