@@ -23,9 +23,7 @@ import freemarker.template.TemplateException;
  * </ul>
  * <p>
  * 打印执行结果
- * <p lang="zh">使用示例
- * <p lang="en">usage example
- * <p lang="ja">使用例
+ * <p>使用示例
  * <p>
  * &lt;@tools.executeScript command='backupdb.bat'/&gt;
  *
