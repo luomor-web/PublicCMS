@@ -323,7 +323,9 @@ public class CmsWebFileAdminController {
         if (CmsFileUtils.isDirectory(filepath)) {
             try {
                 String zipFileName = null;
-                if (CommonUtils.empty(path) || path.endsWith("/") || path.endsWith("\\")) {
+                if (CommonUtils.empty(path)) {
+                    zipFileName = CommonUtils.joinString(filepath, Constants.SEPARATOR, "files.zip");
+                } else if (path.endsWith("/") || path.endsWith("\\")) {
                     zipFileName = CommonUtils.joinString(filepath, "files.zip");
                 } else {
                     zipFileName = CommonUtils.joinString(filepath, ".zip");
