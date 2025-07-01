@@ -208,6 +208,7 @@ public class CmsContentAdminController {
                     service.checking(site.getId(), entity.getId());
                 }
             } else if (null != item && CmsContentService.STATUS_REJECT == oldEntity.getStatus()) {
+                checked = null;
                 workflowProcessService.reopenProcess(site.getId(), item.getProcessId());
             }
         }
