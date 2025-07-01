@@ -48,7 +48,6 @@ import com.publiccms.logic.component.exchange.PlaceImportComponent;
 import com.publiccms.logic.component.site.SiteComponent;
 import com.publiccms.logic.component.template.MetadataComponent;
 import com.publiccms.logic.component.template.TemplateComponent;
-import com.publiccms.logic.service.cms.CmsContentService;
 import com.publiccms.logic.service.cms.CmsEditorHistoryService;
 import com.publiccms.logic.service.cms.CmsPlaceAttributeService;
 import com.publiccms.logic.service.cms.CmsPlaceService;
@@ -185,15 +184,16 @@ public class CmsPlaceAdminController {
             if (null != metadata.getWorkflowId()) {
                 SysWorkflowProcessItem item = workflowProcessItemService.getEntity(
                         new SysWorkflowProcessItemId(SysWorkflowProcessService.ITEM_TYPE_PLACE, String.valueOf(entity.getId())));
-                if (null == item || null != oldEntity && CmsContentService.STATUS_NORMAL == oldEntity.getStatus()) {
+                if (null == item || null != oldEntity && CmsPlaceService.STATUS_NORMAL == oldEntity.getStatus()) {
                     SysWorkflowProcess process = workflowProcessService.createProcess(site.getId(), metadata.getWorkflowId(),
                             admin.getId(), entity.getTitle(), SysWorkflowProcessService.ITEM_TYPE_PLACE,
                             String.valueOf(entity.getId()));
                     if (null != process) {
                         service.checking(site.getId(), entity.getId());
                     }
-                } else if (null != item && CmsContentService.STATUS_REJECT == oldEntity.getStatus()) {
+                } else if (null != item && CmsPlaceService.STATUS_REJECT == oldEntity.getStatus()) {
                     workflowProcessService.reopenProcess(site.getId(), item.getProcessId());
+                    service.checking(site.getId(), entity.getId());
                 }
             }
 
