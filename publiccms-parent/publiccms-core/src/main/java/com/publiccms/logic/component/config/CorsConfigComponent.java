@@ -68,6 +68,9 @@ public class CorsConfigComponent implements SiteCache, Config {
         ConfigableCacheEntity<CorsConfiguration> configableCacheEntity = cache.get(site.getId());
         Map<String, String> configData = configDataComponent.getConfigData(site.getId(), CONFIG_CODE);
         if (null == configData) {
+            if (null != configableCacheEntity) {
+                cache.remove(site.getId());
+            }
             return null;
         } else if (null == configableCacheEntity || !configData.equals(configableCacheEntity.getConfig())) {
             synchronized (cache) {
