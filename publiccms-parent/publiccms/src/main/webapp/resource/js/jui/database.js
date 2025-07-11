@@ -98,8 +98,8 @@
         lookup: function() {
             return this.each(function() {
                 var $this = $(this), options = {
-                    mask: true, width: $this.attr("width") || 820, height: $this.attr("height") || 500, maxable: eval($this.attr("maxable") || "true") ,
-                    resizable: eval($this.attr("resizable") || "true")
+                    mask: true, width: $this.attr("width") || 820, height: $this.attr("height") || 500, maxable: "true" == ($this.attr("maxable") || "true") ,
+                    resizable: "true" == ($this.attr("resizable") || "true")
                 };
                 $this.on("click", function(event) {
                     _lookup = $.extend(_lookup, {
