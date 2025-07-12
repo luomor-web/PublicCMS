@@ -145,6 +145,9 @@ public class CmsPlaceAdminController {
                 if (ControllerUtils.errorNotEquals("siteId", site.getId(), oldEntity.getSiteId(), model)) {
                     return CommonConstants.TEMPLATE_ERROR;
                 }
+                if (ControllerUtils.errorCustom("statusError", CmsPlaceService.STATUS_CHECKING == oldEntity.getStatus(), model)) {
+                    return CommonConstants.TEMPLATE_ERROR;
+                }
                 entity.setUpdateDate(CommonUtils.getDate());
                 entity = service.update(entity.getId(), entity, ignoreProperties);
                 if (null != entity) {
@@ -191,7 +194,7 @@ public class CmsPlaceAdminController {
                     if (null != process) {
                         service.checking(site.getId(), entity.getId());
                     }
-                } else if (null != item && CmsPlaceService.STATUS_REJECT == oldEntity.getStatus()) {
+                } else if (null != item) {
                     workflowProcessService.reopenProcess(site.getId(), item.getProcessId());
                     service.checking(site.getId(), entity.getId());
                 }
