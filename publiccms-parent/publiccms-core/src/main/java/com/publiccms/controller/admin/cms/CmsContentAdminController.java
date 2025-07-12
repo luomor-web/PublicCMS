@@ -196,7 +196,7 @@ public class CmsContentAdminController {
                 operate, RequestUtils.getIpAddress(request), now,
                 JsonUtils.getString(new Object[] { entity, contentParameters })));
 
-        if (null != category.getWorkflowId()) {
+        if (null != category.getWorkflowId() && CmsContentService.STATUS_PEND == entity.getStatus()) {
             SysWorkflowProcessItem item = workflowProcessItemService.getEntity(
                     new SysWorkflowProcessItemId(SysWorkflowProcessService.ITEM_TYPE_CONTENT, String.valueOf(entity.getId())));
             if (null == item || null!=oldEntity && CmsContentService.STATUS_NORMAL == oldEntity.getStatus()) {
@@ -207,9 +207,10 @@ public class CmsContentAdminController {
                     checked = null;
                     service.checking(site.getId(), entity.getId());
                 }
-            } else if (null != item && CmsContentService.STATUS_REJECT == oldEntity.getStatus()) {
+            } else if (null != item) {
                 checked = null;
                 workflowProcessService.reopenProcess(site.getId(), item.getProcessId());
+                service.checking(site.getId(), entity.getId());
             }
         }
 
