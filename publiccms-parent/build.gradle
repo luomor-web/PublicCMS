@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:3.5.3"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:3.5.4"
     }
 }
 
@@ -32,17 +32,17 @@ subprojects {
         servletVersion = "6.1.0"
         // http://mvnrepository.com/artifact/org.springframework/spring-core
         // https://spring.io/projects/spring-framework
-        springVersion = "6.2.8"
+        springVersion = "6.2.9"
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
         // https://spring.io/projects/spring-boot
-        springBootVersion = "3.5.3"
+        springBootVersion = "3.5.4"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-        junitVersion = "5.13.2"
+        junitVersion = "5.13.4"
         // http://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
         // http://hibernate.org/orm/downloads/
-        hibernateVersion = "7.0.3.Final"
+        hibernateVersion = "7.0.8.Final"
         // http://mvnrepository.com/artifact/org.hibernate.tool/hibernate-tools-orm
-        hibernateToolsVersion = "7.0.2.Final"
+        hibernateToolsVersion = "7.0.8.Final"
         // https://mvnrepository.com/artifact/org.hibernate.search/hibernate-search-mapper-orm
         // http://hibernate.org/search/downloads/
         hibernateSearchVersion = "8.0.0.Final"
@@ -61,7 +61,7 @@ subprojects {
         // https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql
         dynamicSqlVersion = "1.5.2"
         // http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-        jacksonVersion = "2.19.1"
+        jacksonVersion = "2.19.2"
         // http://mvnrepository.com/artifact/org.freemarker/freemarker
         freemarkerVersion = "2.3.34"
         // https://mvnrepository.com/artifact/org.apache.lucene/lucene-core
@@ -75,7 +75,7 @@ subprojects {
         quartzVersion = "2.5.0"
         // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
         // https://github.com/brettwooldridge/HikariCP
-        hikariCPVersion = "6.3.0"
+        hikariCPVersion = "6.3.2"
         // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
         mysqlVersion = "9.3.0"
         // http://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
@@ -90,19 +90,19 @@ subprojects {
         // http://mvnrepository.com/artifact/org.apache.commons/commons-collections4
         collectionsVersion = "4.5.0"
         // http://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-        langVersion = "3.17.0"
+        langVersion = "3.18.0"
         // http://mvnrepository.com/artifact/commons-io/commons-io
-        ioVersion = "2.19.0"
+        ioVersion = "2.20.0"
         // https://mvnrepository.com/artifact/org.apache.commons/commons-text
-        textVersion = "1.13.1"
+        textVersion = "1.14.0"
         // https://mvnrepository.com/artifact/org.apache.commons/commons-compress
         compressVersion = "1.27.1"
         // http://mvnrepository.com/artifact/commons-codec/commons-codec
-        codecVersion = "1.18.0"
+        codecVersion = "1.19.0"
         // https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging
         jbossLoggingVersion = "3.6.1.Final"
         // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-        log4jVersion = "2.25.0"
+        log4jVersion = "2.25.1"
         // https://mvnrepository.com/artifact/com.drewnoakes/metadata-extractor
         extractorVersion = "2.19.0"
         // https://mvnrepository.com/artifact/org.sejda.imageio/webp-imageio
