@@ -40,7 +40,7 @@ subprojects {
         // 3.0,3.1 for Java 17
         springBootVersion = "2.7.18"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-        junitVersion = "5.13.2"
+        junitVersion = "5.13.4"
         // http://mvnrepository.com/artifact/org.hibernate/hibernate-core
         // http://hibernate.org/orm/downloads/
         // 6 for jakarta
