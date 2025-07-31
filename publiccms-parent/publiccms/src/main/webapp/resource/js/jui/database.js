@@ -113,6 +113,9 @@
                     $.pdialog.open(url, "_blank", $this.attr("title") || $this.text(), options);
                     return false;
                 });
+                $this.on("contextmenu", function() {
+                    return false;
+                });
             });
         } ,
         multLookup: function() {
@@ -551,6 +554,9 @@
                     } else {
                         _doPost();
                     }
+                    return false;
+                });
+                $this.on("contextmenu", function() {
                     return false;
                 });
             });

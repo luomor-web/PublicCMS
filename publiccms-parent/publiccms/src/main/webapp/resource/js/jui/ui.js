@@ -193,6 +193,9 @@ function initLink($p) {
             });
             return false;
         });
+        $(this).on("contextmenu", function() {
+            return false;
+        });
     });
 
     // dialogs
@@ -229,6 +232,9 @@ function initLink($p) {
             $.pdialog.open(url, rel, title, options);
             return false;
         });
+        $(this).on("contextmenu", function() {
+            return false;
+        });
     });
     $("a[target=ajax]", $p).each(function() {
         $(this).on("click", function() {
@@ -240,6 +246,9 @@ function initLink($p) {
                     $rel.find("[layoutH]").layoutH();
                 });
             }
+            return false;
+        });
+        $(this).on("contextmenu", function() {
             return false;
         });
     });
