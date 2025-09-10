@@ -94,7 +94,7 @@ public class GetHtmlMethod extends BaseMethod {
         Map<?, ?> headers = getMap(2, arguments);
         String html = null;
         if (CommonUtils.notEmpty(url)) {
-            if (Strings.CI.startsWithAny(url, safeConfigComponent.getAllowUrls(site))) {
+            if (Strings.CS.startsWithAny(url, safeConfigComponent.getAllowUrls(site))) {
                 try (CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(Constants.defaultRequestConfig)
                         .build()) {
                     HttpUriRequest request;
