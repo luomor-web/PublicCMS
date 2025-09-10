@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Component;
 
 import com.publiccms.common.base.AbstractDataExchange;
@@ -187,16 +187,16 @@ public class ContentExchangeComponent extends AbstractDataExchange<CmsContent, C
             if (null != data.getAttribute()) {
                 data.getAttribute().setContentId(entity.getId());
                 if (needReplace(data.getAttribute().getText(), site.getDynamicPath())) {
-                    data.getAttribute().setText(StringUtils.replace(data.getAttribute().getText(), "#DYNAMICPATH#", site.getDynamicPath()));
+                    data.getAttribute().setText(Strings.CS.replace(data.getAttribute().getText(), "#DYNAMICPATH#", site.getDynamicPath()));
                 }
                 if (needReplace(data.getAttribute().getText(), site.getSitePath())) {
-                    data.getAttribute().setText(StringUtils.replace(data.getAttribute().getText(), "#SITEPATH#", site.getSitePath()));
+                    data.getAttribute().setText(Strings.CS.replace(data.getAttribute().getText(), "#SITEPATH#", site.getSitePath()));
                 }
                 if (needReplace(data.getAttribute().getData(), site.getDynamicPath())) {
-                    data.getAttribute().setData(StringUtils.replace(data.getAttribute().getData(), "#DYNAMICPATH#", site.getDynamicPath()));
+                    data.getAttribute().setData(Strings.CS.replace(data.getAttribute().getData(), "#DYNAMICPATH#", site.getDynamicPath()));
                 }
                 if (needReplace(data.getAttribute().getData(), site.getSitePath())) {
-                    data.getAttribute().setData(StringUtils.replace(data.getAttribute().getData(), "#SITEPATH#", site.getSitePath()));
+                    data.getAttribute().setData(Strings.CS.replace(data.getAttribute().getData(), "#SITEPATH#", site.getSitePath()));
                 }
                 if (null == attributeService.update(data.getAttribute().getContentId(), data.getAttribute())) {
                     attributeService.save(data.getAttribute());
@@ -259,16 +259,16 @@ public class ContentExchangeComponent extends AbstractDataExchange<CmsContent, C
                 if (null != webfileList) {
                     HtmlUtils.getFileList(data.getAttribute().getText(), webfileList);
                 }
-                data.getAttribute().setText(StringUtils.replace(data.getAttribute().getText(), site.getSitePath(), "#SITEPATH#"));
-                data.getAttribute().setText(StringUtils.replace(data.getAttribute().getText(), site.getDynamicPath(), "#DYNAMICPATH#"));
+                data.getAttribute().setText(Strings.CS.replace(data.getAttribute().getText(), site.getSitePath(), "#SITEPATH#"));
+                data.getAttribute().setText(Strings.CS.replace(data.getAttribute().getText(), site.getDynamicPath(), "#DYNAMICPATH#"));
             }
             if (CommonUtils.notEmpty(data.getAttribute().getData())) {
                 if (null != webfileList || null != privateFileList) {
                     Map<String, String> extendMap = ExtendUtils.getExtendMap(data.getAttribute().getData());
                     exportFileList(extendMap, model.getExtendList(), webfileList, privateFileList);
                 }
-                data.getAttribute().setData(StringUtils.replace(data.getAttribute().getData(), site.getSitePath(), "#SITEPATH#"));
-                data.getAttribute().setData(StringUtils.replace(data.getAttribute().getData(), site.getDynamicPath(), "#DYNAMICPATH#"));
+                data.getAttribute().setData(Strings.CS.replace(data.getAttribute().getData(), site.getSitePath(), "#SITEPATH#"));
+                data.getAttribute().setData(Strings.CS.replace(data.getAttribute().getData(), site.getDynamicPath(), "#DYNAMICPATH#"));
             }
         }
         if (entity.isHasFiles() || entity.isHasImages()) {

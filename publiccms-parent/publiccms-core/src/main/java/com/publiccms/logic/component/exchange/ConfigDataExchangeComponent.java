@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Component;
 
 import com.publiccms.common.base.AbstractDataExchange;
@@ -56,10 +56,10 @@ public class ConfigDataExchangeComponent extends AbstractDataExchange<SysConfigD
     public void exportEntity(SysSite site, String directory, SysConfigData entity, ByteArrayOutputStream outputStream,
             ArchiveOutputStream<ZipArchiveEntry> archiveOutputStream) {
         if (needReplace(entity.getData(), site.getDynamicPath())) {
-            entity.setData(StringUtils.replace(entity.getData(), site.getDynamicPath(), "#DYNAMICPATH#"));
+            entity.setData(Strings.CS.replace(entity.getData(), site.getDynamicPath(), "#DYNAMICPATH#"));
         }
         if (needReplace(entity.getData(), site.getSitePath())) {
-            entity.setData(StringUtils.replace(entity.getData(), site.getSitePath(), "#SITEPATH#"));
+            entity.setData(Strings.CS.replace(entity.getData(), site.getSitePath(), "#SITEPATH#"));
         }
         export(directory, outputStream, archiveOutputStream, entity, CommonUtils.joinString(entity.getId().getCode(), ".json"));
     }
@@ -71,10 +71,10 @@ public class ConfigDataExchangeComponent extends AbstractDataExchange<SysConfigD
             SysConfigData oldEntity = service.getEntity(data.getId());
             if (overwrite || null == oldEntity) {
                 if (CommonUtils.notEmpty(data.getData())) {
-                    data.setData(StringUtils.replace(data.getData(), "#DYNAMICPATH#", site.getDynamicPath()));
+                    data.setData(Strings.CS.replace(data.getData(), "#DYNAMICPATH#", site.getDynamicPath()));
                 }
                 if (CommonUtils.notEmpty(data.getData())) {
-                    data.setData(StringUtils.replace(data.getData(), "#SITEPATH#", site.getSitePath()));
+                    data.setData(Strings.CS.replace(data.getData(), "#SITEPATH#", site.getSitePath()));
                 }
                 if (null == oldEntity) {
                     service.save(data);

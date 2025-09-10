@@ -16,6 +16,7 @@ import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.stereotype.Component;
 
 import com.publiccms.common.base.AbstractDataExchange;
@@ -119,9 +120,9 @@ public class CategoryExchangeComponent extends AbstractDataExchange<CmsCategory,
                     exportAttachment(site, webfileList, privateFileList, archiveOutputStream);
                 }
             }
-            data.getAttribute().setData(StringUtils.replace(data.getAttribute().getData(), site.getSitePath(), "#SITEPATH#"));
+            data.getAttribute().setData(Strings.CS.replace(data.getAttribute().getData(), site.getSitePath(), "#SITEPATH#"));
             data.getAttribute()
-                    .setData(StringUtils.replace(data.getAttribute().getData(), site.getDynamicPath(), "#DYNAMICPATH#"));
+                    .setData(Strings.CS.replace(data.getAttribute().getData(), site.getDynamicPath(), "#DYNAMICPATH#"));
 
         }
         data.setModelList(categoryModelService.getList(site.getId(), null, categoryId));
@@ -237,11 +238,11 @@ public class CategoryExchangeComponent extends AbstractDataExchange<CmsCategory,
                 data.getAttribute().setCategoryId(entity.getId());
                 if (needReplace(data.getAttribute().getData(), site.getDynamicPath())) {
                     data.getAttribute()
-                            .setData(StringUtils.replace(data.getAttribute().getData(), "#DYNAMICPATH#", site.getDynamicPath()));
+                            .setData(Strings.CS.replace(data.getAttribute().getData(), "#DYNAMICPATH#", site.getDynamicPath()));
                 }
                 if (needReplace(data.getAttribute().getData(), site.getSitePath())) {
                     data.getAttribute()
-                            .setData(StringUtils.replace(data.getAttribute().getData(), "#SITEPATH#", site.getSitePath()));
+                            .setData(Strings.CS.replace(data.getAttribute().getData(), "#SITEPATH#", site.getSitePath()));
                 }
                 if (null == attributeService.update(data.getAttribute().getCategoryId(), data.getAttribute())) {
                     attributeService.save(data.getAttribute());
