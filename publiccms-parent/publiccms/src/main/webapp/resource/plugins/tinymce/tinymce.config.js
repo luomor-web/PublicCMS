@@ -22,7 +22,8 @@
             images_upload_handler : (blobInfo, progress) => new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
-                xhr.open('POST', 'postAcceptor.php');
+                xhr.open('POST', base + '/tinymce/upload');
+                xhr.setRequestHeader( 'test', 'test' );
                 xhr.upload.onprogress = (e) => {
                     progress(e.loaded / e.total * 100);
                 };
