@@ -41,7 +41,7 @@
                         reject('Invalid JSON: ' + xhr.responseText);
                         return;
                     }
-                    resolve(json.location);
+                    resolve(window.TIMYMCE_RESOURCE_PREFIX+json.location);
                 };
 
                 xhr.onerror = () => {
