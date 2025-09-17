@@ -90,7 +90,7 @@
                 var input = document.createElement('input');
                     input.setAttribute('type', 'file');
                     input.setAttribute('accept', filetype);
-                input.trigger("click");
+                input.click();
                 input.onchange = function() {
                     var file = this.files[0];
                     var xhr, formData;
